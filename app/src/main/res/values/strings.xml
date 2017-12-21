@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SeniorProject</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

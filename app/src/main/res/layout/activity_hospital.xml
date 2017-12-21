@@ -6,4 +6,13 @@
     android:layout_height="match_parent"
     tools:context="com.example.uefi.seniorproject.HospitalActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/hospital_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
