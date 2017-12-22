@@ -16,10 +16,11 @@ public class HospitalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hospital);
 
         hospitalView = (ListView) findViewById(R.id.hospital_list);
-        DBHelperDAO dbHelperDAO = new DBHelperDAO(getApplicationContext());
+//        DBHelperDAO dbHelperDAO = new DBHelperDAO(getApplicationContext());
+        DBHelperDAO dbHelperDAO = DBHelperDAO.getInstance(this);
         dbHelperDAO.open();
         ArrayList<String> list = dbHelperDAO.getAllList();
-
+        dbHelperDAO.close();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),
                 android.R.layout.simple_list_item_1,list);
         hospitalView.setAdapter(adapter);
