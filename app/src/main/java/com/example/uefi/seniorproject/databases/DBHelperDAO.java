@@ -84,6 +84,18 @@ public class DBHelperDAO {
         cursor.close();
         return list;
     }
+
+    public ArrayList<Pair<String,String>> getAddrPhone() {
+        ArrayList<Pair<String,String>> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT address,phone FROM hospital", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            list.add(new Pair<String, String>(cursor.getString(cursor.getColumnIndex("address")),cursor.getString(cursor.getColumnIndex("phone"))));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
 }
 
 //public class DBHelperDAO {

@@ -21,8 +21,8 @@ public class HospitalItem extends AppCompatActivity implements OnMapReadyCallbac
     SupportMapFragment mapFragment;
     private GoogleMap mMap;
     LatLng location;
-    String name;
-    TextView textView1;
+    String name,address,phone;
+    TextView textName,textAddress,textPhone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +38,16 @@ public class HospitalItem extends AppCompatActivity implements OnMapReadyCallbac
         if(!extraBundle.isEmpty()){
             name = extraBundle.getString("itemHospital");
             location = new LatLng(extraBundle.getDouble("lat"),extraBundle.getDouble("lng"));
+            address = extraBundle.getString("address");
+            phone = extraBundle.getString("phone");
         }
 
-        textView1 = (TextView) findViewById(R.id.textItem);
-        textView1.setText(name);
+        textName = (TextView) findViewById(R.id.textName);
+        textAddress = (TextView)findViewById((R.id.textAddress));
+        textPhone = (TextView)findViewById(R.id.textPhone) ;
+        textName.setText(name);
+        textAddress.setText(address);
+        textPhone.setText(phone);
     }
 
     @Override

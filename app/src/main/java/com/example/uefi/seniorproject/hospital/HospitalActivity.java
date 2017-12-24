@@ -19,7 +19,7 @@ public class HospitalActivity extends AppCompatActivity {
     ListView hospitalView;
     ArrayList<String> nameList;
     ArrayList<Pair<Double,Double>> latlngList;
-//    ArrayList<>
+    ArrayList<Pair<String,String>> addrPhone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,7 @@ public class HospitalActivity extends AppCompatActivity {
 
         nameList = dbHelperDAO.getNameHospital();
         latlngList = dbHelperDAO.getLatLng();
+        addrPhone = dbHelperDAO.getAddrPhone();
 
         dbHelperDAO.close();
 
@@ -48,6 +49,8 @@ public class HospitalActivity extends AppCompatActivity {
                 bundle.putString("itemHospital", nameList.get(i));
                 bundle.putDouble("lat",latlngList.get(i).first);
                 bundle.putDouble("lng",latlngList.get(i).second);
+                bundle.putString("address",addrPhone.get(i).first);
+                bundle.putString("phone",addrPhone.get(i).second);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

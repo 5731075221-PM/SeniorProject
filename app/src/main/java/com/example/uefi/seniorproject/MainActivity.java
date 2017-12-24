@@ -7,7 +7,6 @@ import android.os.Bundle;
 import com.example.uefi.seniorproject.hospital.HospitalActivity;
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
