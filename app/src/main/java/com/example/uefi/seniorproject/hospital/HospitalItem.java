@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.example.uefi.seniorproject.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -21,9 +20,8 @@ import org.w3c.dom.Text;
 public class HospitalItem extends AppCompatActivity implements OnMapReadyCallback {
     SupportMapFragment mapFragment;
     private GoogleMap mMap;
-    LatLng sydney = new LatLng(13.741163702, 100.534331196);
-    LatLng myHome = new LatLng(13.7373388, 100.56059759999994);
-    String text;
+    LatLng location;
+    String name;
     TextView textView1;
 
     @Override
@@ -38,22 +36,21 @@ public class HospitalItem extends AppCompatActivity implements OnMapReadyCallbac
         Intent intentExtra = getIntent();
         Bundle extraBundle = intentExtra.getExtras();
         if(!extraBundle.isEmpty()){
-            text = extraBundle.getString("itemHospital");
+            name = extraBundle.getString("itemHospital");
+            location = new LatLng(extraBundle.getDouble("lat"),extraBundle.getDouble("lng"));
         }
 
         textView1 = (TextView) findViewById(R.id.textItem);
-        textView1.setText(text);
+        textView1.setText(name);
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        mMap.addMarker(new MarkerOptions().position(location).title(name).snippet(null));
 
-        LatLng myHome = new LatLng(13.7373388, 100.56059759999994);
-        mMap.addMarker(new MarkerOptions().position(myHome).title("My Home").snippet("Hello my home"));
-
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myHome, 100));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 18));
 
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
             @Override

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+import android.util.Pair;
 
 import java.util.ArrayList;
 
@@ -59,12 +61,24 @@ public class DBHelperDAO {
      *
      * @return a List of quotes
      */
-    public ArrayList<String> getAllList() {
+    public ArrayList<String> getNameHospital() {
         ArrayList<String> list = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT * FROM hospital", null);
+        Cursor cursor = database.rawQuery("SELECT name FROM hospital", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            list.add(cursor.getString(1));
+            list.add(cursor.getString(0));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
+
+    public ArrayList<Pair<Double,Double>> getLatLng() {
+        ArrayList<Pair<Double,Double>> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT lat,lng FROM hospital", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            list.add(new Pair<Double, Double>(cursor.getDouble(cursor.getColumnIndex("lat")),cursor.getDouble(cursor.getColumnIndex("lng"))));
             cursor.moveToNext();
         }
         cursor.close();

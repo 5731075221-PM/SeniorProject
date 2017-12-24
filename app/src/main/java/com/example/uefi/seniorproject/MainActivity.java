@@ -4,14 +4,10 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.uefi.seniorproject.databases.DBHelperDAO;
-import com.example.uefi.seniorproject.hospital.CustomAdapter;
 import com.example.uefi.seniorproject.hospital.HospitalActivity;
-import com.example.uefi.seniorproject.hospital.MapsActivity;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
