@@ -39,7 +39,7 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="391dp"
-        tools:context="com.example.uefi.seniorproject.MapsActivity" />
+        tools:context="com.example.uefi.seniorproject.hospital.MapsActivity" />
 
     <Button
         android:id="@+id/buttonNavigate"
