@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.example.uefi.seniorproject.databases.DBHelperDAO;
 import com.example.uefi.seniorproject.hospital.CustomAdapter;
 import com.example.uefi.seniorproject.hospital.HospitalActivity;
+import com.example.uefi.seniorproject.hospital.MapsActivity;
 
 import java.util.ArrayList;
 
