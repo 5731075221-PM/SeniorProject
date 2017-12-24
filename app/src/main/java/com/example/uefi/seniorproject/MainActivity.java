@@ -3,36 +3,14 @@ package com.example.uefi.seniorproject;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.example.uefi.seniorproject.databases.DBHelperDAO;
+import com.example.uefi.seniorproject.hospital.CustomAdapter;
+import com.example.uefi.seniorproject.hospital.HospitalActivity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-class Hospital {
-
-    public String address;
-    public String phone;
-
-    public Hospital() {
-    }
-
-    public Hospital(String address, String phone) {
-        this.address = address;
-        this.phone = phone;
-    }
-}
 
 public class MainActivity extends AppCompatActivity {
-    ArrayList<Hospital> hos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

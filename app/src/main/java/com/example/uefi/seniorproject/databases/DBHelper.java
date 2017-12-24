@@ -1,4 +1,4 @@
-package com.example.uefi.seniorproject;
+package com.example.uefi.seniorproject.databases;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
