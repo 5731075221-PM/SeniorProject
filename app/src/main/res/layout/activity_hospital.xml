@@ -6,13 +6,14 @@
     android:layout_height="match_parent"
     tools:context="com.example.uefi.seniorproject.hospital.HospitalActivity">
 
-    <RelativeLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_margin="8dp"
+        app:layoutManager="LinearLayoutManager"
+        tools:listitem="@layout/activity_hospital_list">
 
-        <ListView
-            android:id="@+id/hospital_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </RelativeLayout>
+    </android.support.v7.widget.RecyclerView>
+
 </android.support.constraint.ConstraintLayout>
