@@ -4,14 +4,17 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Pair;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.uefi.seniorproject.MainActivity;
 import com.example.uefi.seniorproject.R;
 import com.example.uefi.seniorproject.databases.DBHelperDAO;
 
@@ -28,6 +31,13 @@ public class HospitalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hospital);
+
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
 
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
         recyclerView.setAdapter(new RecyclerViewAdapter());
@@ -131,5 +141,11 @@ public class HospitalActivity extends AppCompatActivity {
         public int getItemCount() {
             return nameList.size();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home) finish();
+            return super.onOptionsItemSelected(item);
     }
 }
