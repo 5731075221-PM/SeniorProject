@@ -18,7 +18,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,8 +43,8 @@
         <activity
             android:name=".hospital.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".hospital.HospitalActivity" />
-        <activity android:name=".hospital.HospitalItem" />
+        <!--<activity android:name=".hospital.HospitalActivity" />-->
+        <!--<activity android:name=".hospital.HospitalItem" />-->
     </application>
 
 </manifest>
