@@ -47,7 +47,7 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
 
         Bundle extraBundle = getArguments();
         if(!extraBundle.isEmpty()){
-            name = extraBundle.getString("itemHospital");
+            name = extraBundle.getString("name");
             location = new LatLng(extraBundle.getDouble("lat"),extraBundle.getDouble("lng"));
             address = extraBundle.getString("address");
             phone = extraBundle.getString("phone");

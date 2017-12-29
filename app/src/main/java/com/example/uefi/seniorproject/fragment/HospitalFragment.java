@@ -30,7 +30,7 @@ import java.util.ArrayList;
 
 public class HospitalFragment extends Fragment {
     private boolean mToolBarNavigationListenerIsRegistered = true;
-    ArrayList<String> nameList;
+    ArrayList<Hospital> hospitalList;
     ArrayList<Pair<Double,Double>> latlngList;
     ArrayList<Pair<String,String>> addrPhone;
 
@@ -55,9 +55,9 @@ public class HospitalFragment extends Fragment {
         DBHelperDAO dbHelperDAO = DBHelperDAO.getInstance(getActivity());
         dbHelperDAO.open();
 
-        nameList = dbHelperDAO.getNameHospital();
-        latlngList = dbHelperDAO.getLatLng();
-        addrPhone = dbHelperDAO.getAddrPhone();
+        hospitalList = dbHelperDAO.getHospital();
+//        latlngList = dbHelperDAO.getLatLng();
+//        addrPhone = dbHelperDAO.getAddrPhone();
 
         dbHelperDAO.close();
 
@@ -107,7 +107,7 @@ public class HospitalFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            holder.name.setText(nameList.get(position));
+            holder.name.setText(hospitalList.get(position).getName());
 //            if(holder.name.getTag()==null){
 //                holder.name.setTag(""+position);
 //                Log.d("View No.1 = ",holder.name.getTag().toString());
@@ -123,11 +123,11 @@ public class HospitalFragment extends Fragment {
 //                        intent = new Intent(getContext(), HospitalItemFragment.class);
                         HospitalItemFragment fragment = new HospitalItemFragment();
                         Bundle bundle = new Bundle();
-                        bundle.putString("itemHospital", nameList.get(position));
-                        bundle.putDouble("lat",latlngList.get(position).first);
-                        bundle.putDouble("lng",latlngList.get(position).second);
-                        bundle.putString("address",addrPhone.get(position).first);
-                        bundle.putString("phone",addrPhone.get(position).second);
+                        bundle.putString("name", hospitalList.get(position).getName());
+                        bundle.putDouble("lat",hospitalList.get(position).getLat());
+                        bundle.putDouble("lng",hospitalList.get(position).getLng());
+                        bundle.putString("address",hospitalList.get(position).getAddress());
+                        bundle.putString("phone",hospitalList.get(position).getPhone());
                         fragment.setArguments(bundle);
                         getFragmentManager().beginTransaction()
                                 .replace(R.id.container_fragment, fragment)
@@ -143,7 +143,7 @@ public class HospitalFragment extends Fragment {
 
         @Override
         public int getItemCount() {
-            return nameList.size();
+            return hospitalList.size();
         }
     }
 }

@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.util.Pair;
 
+import com.example.uefi.seniorproject.fragment.Hospital;
+
 import java.util.ArrayList;
 
 /**
@@ -61,12 +63,18 @@ public class DBHelperDAO {
      *
      * @return a List of quotes
      */
-    public ArrayList<String> getNameHospital() {
-        ArrayList<String> list = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT name FROM hospital", null);
+    public ArrayList<Hospital> getHospital() {
+        ArrayList<Hospital> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT * FROM hospital", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            list.add(cursor.getString(0));
+            String[] tmp = (cursor.getString(cursor.getColumnIndex("location"))).split(", ");
+            list.add(new Hospital(cursor.getString(cursor.getColumnIndex("name")),
+                    Double.parseDouble(tmp[0]),Double.parseDouble(tmp[1]),
+                    cursor.getString(cursor.getColumnIndex("address")),
+                    cursor.getString(cursor.getColumnIndex("phone"))
+                                )
+                    );
             cursor.moveToNext();
         }
         cursor.close();
