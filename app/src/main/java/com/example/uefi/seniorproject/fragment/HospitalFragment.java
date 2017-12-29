@@ -108,6 +108,12 @@ public class HospitalFragment extends Fragment {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             holder.name.setText(nameList.get(position));
+//            if(holder.name.getTag()==null){
+//                holder.name.setTag(""+position);
+//                Log.d("View No.1 = ",holder.name.getTag().toString());
+//            }else{
+//                Log.d("View No.2 = ",holder.name.getTag().toString());
+//            }
             holder.setOnClickListener(new ItemClickListener() {
                 @Override
                 public void onClick(View view, int position, boolean isLongClick, MotionEvent motionEvent) {

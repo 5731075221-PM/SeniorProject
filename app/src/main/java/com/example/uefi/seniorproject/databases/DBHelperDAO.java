@@ -75,10 +75,15 @@ public class DBHelperDAO {
 
     public ArrayList<Pair<Double,Double>> getLatLng() {
         ArrayList<Pair<Double,Double>> list = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT lat,lng FROM hospital", null);
+        Cursor cursor = database.rawQuery("SELECT location FROM hospital", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            list.add(new Pair<Double, Double>(cursor.getDouble(cursor.getColumnIndex("lat")),cursor.getDouble(cursor.getColumnIndex("lng"))));
+            String[] tmp = (cursor.getString(0)).split(", ");
+//            Log.d("tmp = ",tmp.toString());
+            Log.d("tmp[0] = ",Double.parseDouble(tmp[0])+"");
+            Log.d("tmp[1] = ",Double.parseDouble(tmp[1])+"");
+            list.add(new Pair<Double, Double>(Double.parseDouble(tmp[0]),Double.parseDouble(tmp[1])));
+//            list.add(new Pair<Double, Double>(cursor.getDouble(cursor.getColumnIndex("lat")),cursor.getDouble(cursor.getColumnIndex("lng"))));
             cursor.moveToNext();
         }
         cursor.close();
