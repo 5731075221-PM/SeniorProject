@@ -1,15 +1,17 @@
 package com.example.uefi.seniorproject.fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,16 +32,14 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
     SupportMapFragment mapFragment;
     private GoogleMap mMap;
     LatLng location;
-    String name,address,phone;
+    String name,address,phone,website;
     TextView textName,textAddress,textPhone;
+    Button buttonPhone, buttonWeb;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_hospital_item, container, false);
-
-//        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mapFragment = (SupportMapFragment) this.getChildFragmentManager()
                 .findFragmentById(R.id.itemMap);
@@ -51,6 +51,7 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
             location = new LatLng(extraBundle.getDouble("lat"),extraBundle.getDouble("lng"));
             address = extraBundle.getString("address");
             phone = extraBundle.getString("phone");
+            website = extraBundle.getString("website");
         }
 
         textName = (TextView) view.findViewById(R.id.textName);
@@ -60,6 +61,40 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
         textAddress.setText(address);
         textPhone.setText(phone);
 
+        buttonPhone = (Button)view.findViewById(R.id.callPhone);
+        buttonWeb = (Button)view.findViewById(R.id.linkWebsite);
+        buttonPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String[] tmp = textPhone.getText().toString().split("-");
+                AlertDialog.Builder builder =
+                        new AlertDialog.Builder(getActivity());
+                builder.setMessage("ยืนยันการโทรออก?");
+                builder.setPositiveButton("ยืนยัน", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Intent callActivity = new Intent(Intent.ACTION_CALL);
+                        callActivity.setData(Uri.parse("tel:0876739362"));
+//                        callActivity.setData(Uri.parse("tel:"+tmp[0]+tmp[1]+tmp[2]));
+                        startActivity(callActivity);
+                    }
+                });
+                builder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                builder.show();
+            }
+        });
+        buttonWeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Web = ",website);
+                Intent linkActivity = new Intent(Intent.ACTION_VIEW);
+                linkActivity.setData(Uri.parse("http://"+website));
+                startActivity(linkActivity);
+            }
+        });
         return view;
     }
 
