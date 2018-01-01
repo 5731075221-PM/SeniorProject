@@ -180,6 +180,7 @@ public class HospitalFragment extends Fragment implements SearchView.OnQueryText
                         bundle.putDouble("lng",hospitalList.get(position).getLng());
                         bundle.putString("address",hospitalList.get(position).getAddress());
                         bundle.putString("phone",hospitalList.get(position).getPhone());
+                        bundle.putString("website",hospitalList.get(position).getWebsite());
                         fragment.setArguments(bundle);
                         getFragmentManager().beginTransaction()
                                 .replace(R.id.container_fragment, fragment)

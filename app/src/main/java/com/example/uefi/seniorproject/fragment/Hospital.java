@@ -9,13 +9,16 @@ public class Hospital{
     private  Double lng;
     private String address;
     private String phone;
+    private String website;
 
-    public Hospital(String name, Double lat, Double lng, String address, String phone) {
+    public Hospital(String name, Double lat, Double lng, String address, String phone, String website) {
         this.name = name;
         this.lat = lat;
         this.lng = lng;
         this.address = address;
         this.phone = phone;
+        this.website = website;
+
     }
 
     public String getName() {
@@ -56,5 +59,13 @@ public class Hospital{
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
     }
 }

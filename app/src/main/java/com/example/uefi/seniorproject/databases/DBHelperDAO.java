@@ -72,7 +72,8 @@ public class DBHelperDAO {
             list.add(new Hospital(cursor.getString(cursor.getColumnIndex("name")),
                     Double.parseDouble(tmp[0]),Double.parseDouble(tmp[1]),
                     cursor.getString(cursor.getColumnIndex("address")),
-                    cursor.getString(cursor.getColumnIndex("phone"))
+                    cursor.getString(cursor.getColumnIndex("phone")),
+                    cursor.getString(cursor.getColumnIndex("website"))
                                 )
                     );
             cursor.moveToNext();

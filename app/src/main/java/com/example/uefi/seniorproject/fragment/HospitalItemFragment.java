@@ -32,9 +32,9 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
     SupportMapFragment mapFragment;
     private GoogleMap mMap;
     LatLng location;
-    String name,address,phone;
+    String name,address,phone,website;
     TextView textName,textAddress,textPhone;
-    Button buttonPhone;
+    Button buttonPhone, buttonWeb;
 
     @Nullable
     @Override
@@ -51,6 +51,7 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
             location = new LatLng(extraBundle.getDouble("lat"),extraBundle.getDouble("lng"));
             address = extraBundle.getString("address");
             phone = extraBundle.getString("phone");
+            website = extraBundle.getString("website");
         }
 
         textName = (TextView) view.findViewById(R.id.textName);
@@ -61,6 +62,7 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
         textPhone.setText(phone);
 
         buttonPhone = (Button)view.findViewById(R.id.callPhone);
+        buttonWeb = (Button)view.findViewById(R.id.linkWebsite);
         buttonPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,6 +84,15 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
                     }
                 });
                 builder.show();
+            }
+        });
+        buttonWeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Web = ",website);
+                Intent linkActivity = new Intent(Intent.ACTION_VIEW);
+                linkActivity.setData(Uri.parse("http://"+website));
+                startActivity(linkActivity);
             }
         });
         return view;

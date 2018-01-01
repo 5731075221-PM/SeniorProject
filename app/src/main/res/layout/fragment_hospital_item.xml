@@ -90,6 +90,12 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textPhone" />
 
+                <Button
+                    android:id="@+id/linkWebsite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Website" />
+
             </LinearLayout>
 
         </android.support.constraint.ConstraintLayout>
