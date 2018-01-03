@@ -73,12 +73,37 @@ public class DBHelperDAO {
                     Double.parseDouble(tmp[0]),Double.parseDouble(tmp[1]),
                     cursor.getString(cursor.getColumnIndex("address")),
                     cursor.getString(cursor.getColumnIndex("phone")),
-                    cursor.getString(cursor.getColumnIndex("website"))
+                    cursor.getString(cursor.getColumnIndex("website")),
+                    cursor.getString(cursor.getColumnIndex("zone"))
                                 )
                     );
             cursor.moveToNext();
         }
         cursor.close();
+        return list;
+    }
+
+    public ArrayList<Hospital> selectHospital(String p, String z) {
+        ArrayList<Hospital> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT * FROM hospital", null);
+        if(p != "" && z != "") cursor = database.rawQuery("SELECT * FROM hospital WHERE province='"+p+"' and zone='"+z+"'", null);
+        else if(p == "" && z != "") cursor = database.rawQuery("SELECT * FROM hospital WHERE zone='"+z+"'", null);
+        else if(p != "" && z == "") cursor = database.rawQuery("SELECT * FROM hospital WHERE province='"+p+"' ORDER BY name", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            String[] tmp = (cursor.getString(cursor.getColumnIndex("location"))).split(", ");
+            list.add(new Hospital(cursor.getString(cursor.getColumnIndex("name")),
+                            Double.parseDouble(tmp[0]),Double.parseDouble(tmp[1]),
+                            cursor.getString(cursor.getColumnIndex("address")),
+                            cursor.getString(cursor.getColumnIndex("phone")),
+                            cursor.getString(cursor.getColumnIndex("website")),
+                            cursor.getString(cursor.getColumnIndex("zone"))
+                    )
+            );
+            cursor.moveToNext();
+        }
+        cursor.close();
+        Log.d("ProvName = ",list.size()+"");
         return list;
     }
 
