@@ -19,6 +19,7 @@ import android.view.MenuItem;
 
 import com.example.uefi.seniorproject.fragment.HospitalFragment;
 import com.example.uefi.seniorproject.fragment.MainFragment;
+import com.example.uefi.seniorproject.fragment.HospitalSelectFragment;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -145,7 +146,7 @@ public class MainActivity extends AppCompatActivity
                 mToolBarNavigationListenerIsRegistered = true;
             }
             fragmentManager.beginTransaction()
-                    .replace(R.id.container_fragment, new HospitalFragment())
+                    .replace(R.id.container_fragment, new HospitalSelectFragment())
                     .addToBackStack(null)
                     .commit();
         } else if (id == R.id.nav_gallery) {
