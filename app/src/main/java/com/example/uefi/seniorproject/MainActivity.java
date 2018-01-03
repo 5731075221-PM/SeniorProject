@@ -1,5 +1,6 @@
 package com.example.uefi.seniorproject;
 
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -19,12 +20,19 @@ import android.view.MenuItem;
 import com.example.uefi.seniorproject.fragment.HospitalFragment;
 import com.example.uefi.seniorproject.fragment.MainFragment;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     ActionBarDrawerToggle toggle;
     FragmentManager fragmentManager;
     private boolean mToolBarNavigationListenerIsRegistered = false;
+
+//    @Override
+//    protected void attachBaseContext(Context newBase) {
+//        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

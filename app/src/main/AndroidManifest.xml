@@ -18,6 +18,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".InitailFont"
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
@@ -44,8 +45,9 @@
         <activity
             android:name=".hospital.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <!--<activity android:name=".hospital.HospitalActivity" />-->
-        <!--<activity android:name=".hospital.HospitalItem" />-->
+        <!-- <activity android:name=".hospital.HospitalActivity" /> -->
+        <!-- <activity android:name=".hospital.HospitalItem" /> -->
+        <activity android:name=".InitailFont"></activity>
     </application>
 
 </manifest>
