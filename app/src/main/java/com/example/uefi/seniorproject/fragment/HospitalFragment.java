@@ -112,6 +112,24 @@ public class HospitalFragment extends Fragment implements SearchView.OnQueryText
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_map) {
+            HospitalMapFragment fragment = new HospitalMapFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("type","0");
+            fragment.setArguments(bundle);
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.container_fragment, fragment)
+                    .addToBackStack(null)
+                    .commit();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public boolean onMenuItemActionExpand(MenuItem menuItem) {
         return true;
     }
