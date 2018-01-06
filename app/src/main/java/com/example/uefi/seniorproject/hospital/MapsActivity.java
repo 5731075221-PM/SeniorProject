@@ -121,14 +121,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 title.setText(marker.getTitle());
 
 
-                TextView snippet = ((TextView) infoWindow.findViewById(R.id.textViewSnippet));
-                snippet.setText(marker.getSnippet());
-
-                ImageView imageView = (ImageView) infoWindow.findViewById(R.id.imageView);
-                imageView.setImageResource(R.drawable.ic_city);
-                if ("My Home".equals(marker.getTitle())) {
-                    imageView.setImageResource(R.drawable.ic_home);
-                }
+//                TextView snippet = ((TextView) infoWindow.findViewById(R.id.textViewSnippet));
+//                snippet.setText(marker.getSnippet());
+//
+//                ImageView imageView = (ImageView) infoWindow.findViewById(R.id.imageView);
+//                imageView.setImageResource(R.drawable.ic_city);
+//                if ("My Home".equals(marker.getTitle())) {
+//                    imageView.setImageResource(R.drawable.ic_home);
+//                }
 
                 return infoWindow;
             }
