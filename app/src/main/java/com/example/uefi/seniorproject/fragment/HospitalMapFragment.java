@@ -27,8 +27,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -196,7 +200,7 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback 
                 canvas.drawBitmap(icon, 0, 0, paint);
 
                 mMap.addMarker(new MarkerOptions().position(new LatLng(hospitalList.get(i).getLat(), hospitalList.get(i).getLng()))
-                        .title(hospitalList.get(i).getName()).snippet(null)).setIcon(BitmapDescriptorFactory.fromBitmap(icon));
+                        .title(hospitalList.get(i).getName()).snippet(i+"")).setIcon(BitmapDescriptorFactory.fromBitmap(icon));
             }
             avgLat = avgLat / hospitalList.size();
             avgLng = avgLng / hospitalList.size();
@@ -204,6 +208,25 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback 
 //                    .title("You're here").snippet(null));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(avgLat, avgLng), 12));
         }
+
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                HospitalItemFragment fragment = new HospitalItemFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("name", hospitalList.get(Integer.parseInt(marker.getSnippet())).getName());
+                bundle.putDouble("lat", hospitalList.get(Integer.parseInt(marker.getSnippet())).getLat());
+                bundle.putDouble("lng", hospitalList.get(Integer.parseInt(marker.getSnippet())).getLng());
+                bundle.putString("address", hospitalList.get(Integer.parseInt(marker.getSnippet())).getAddress());
+                bundle.putString("phone", hospitalList.get(Integer.parseInt(marker.getSnippet())).getPhone());
+                bundle.putString("website", hospitalList.get(Integer.parseInt(marker.getSnippet())).getWebsite());
+                fragment.setArguments(bundle);
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.container_fragment, fragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
 
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
             @Override
@@ -217,14 +240,6 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback 
 
                 TextView title = ((TextView) infoWindow.findViewById(R.id.textViewName));
                 title.setText(marker.getTitle());
-
-                Button navigationButton = (Button) infoWindow.findViewById(R.id.navigationButton);
-                navigationButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Log.d("ClickButton = ","Yes");
-                    }
-                });
 
 //                TextView snippet = ((TextView) infoWindow.findViewById(R.id.textViewSnippet));
 //                snippet.setText(marker.getSnippet());
