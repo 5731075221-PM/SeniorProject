@@ -1,5 +1,7 @@
 package com.example.uefi.seniorproject.fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -32,17 +34,16 @@ import java.util.ArrayList;
  */
 
 public class HospitalFragment extends Fragment implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener, AdapterView.OnItemSelectedListener {
-    ArrayList<Hospital> defaultList;
-    ArrayList<Hospital> hospitalList;
+    ArrayList<Hospital> defaultList, hospitalList;
     String search = "";
-    boolean touchProvince = false;
-    boolean touchZone = false;
+    boolean isProvince = false, isZone = false;
+    int provincePos = -1, zonePos = -1;
     RecyclerView recyclerView;
     SearchableSpinner province, zone;
     SearchView searchView;
     private RecyclerViewAdapter adapter = new RecyclerViewAdapter();
     private ArrayAdapter<String> adapterProvince, adapterZone;
-    private TextView headProvince,headZone;
+    private TextView headProvince, headZone;
     String[] arrayProvince, arrayZone;
     String selectProvince, selectZone;
     DBHelperDAO dbHelperDAO;
@@ -54,7 +55,6 @@ public class HospitalFragment extends Fragment implements SearchView.OnQueryText
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.i("Step = ","onCreateView");
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_hospital, container, false);
 
@@ -90,8 +90,8 @@ public class HospitalFragment extends Fragment implements SearchView.OnQueryText
         zone.setAdapter(adapterZone);
         zone.setOnItemSelectedListener(this);
 
-        headProvince = (TextView)view.findViewById(R.id.textViewProvince);
-        headZone = (TextView)view.findViewById(R.id.textViewZone);
+        headProvince = (TextView) view.findViewById(R.id.textViewProvince);
+        headZone = (TextView) view.findViewById(R.id.textViewZone);
         headProvince.setTypeface(tf);
         headZone.setTypeface(tf);
 
@@ -101,14 +101,12 @@ public class HospitalFragment extends Fragment implements SearchView.OnQueryText
     // Search
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.i("Step = ","onCreate");
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        Log.i("Step = ","onCreateOptionsMenu");
         inflater.inflate(R.menu.main, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
         searchView = (SearchView) searchItem.getActionView();
@@ -120,14 +118,18 @@ public class HospitalFragment extends Fragment implements SearchView.OnQueryText
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Log.i("Step = ","onOptionItemSelected");
         int id = item.getItemId();
 
         if (id == R.id.action_map) {
+            isProvince = true;
+            isZone = true;
+            provincePos = province.getSelectedItemPosition();
+            zonePos = zone.getSelectedItemPosition();
             search = "";
+            
             HospitalMapFragment fragment = new HospitalMapFragment();
             Bundle bundle = new Bundle();
-            bundle.putString("type","0");
+            bundle.putString("type", "0");
             fragment.setArguments(bundle);
             getFragmentManager().beginTransaction()
                     .replace(R.id.container_fragment, fragment)
@@ -155,7 +157,6 @@ public class HospitalFragment extends Fragment implements SearchView.OnQueryText
 
     @Override
     public boolean onQueryTextChange(String s) {
-        Log.i("Step = ","onQueryTextChange");
         if (s == null || s.trim().isEmpty()) {
             resetSearch();
             return false;
@@ -186,7 +187,6 @@ public class HospitalFragment extends Fragment implements SearchView.OnQueryText
     }
 
     public void resetSearch() {
-        Log.i("Step = ","resetSearch");
         hospitalList = defaultList;
         adapter = new RecyclerViewAdapter();
         recyclerView.setAdapter(adapter);
@@ -194,58 +194,68 @@ public class HospitalFragment extends Fragment implements SearchView.OnQueryText
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        Log.i("Step = ","onItemSelected");
-        Log.i("Step = select = ",selectProvince+""+selectZone);
 //    if(adapterView.getChildAt(0) != null) ((TextView) adapterView.getChildAt(0)).setTextColor(Color.BLUE);
-        if (adapterView.getId() == province.getId()) {
-            Log.i("Step = ","province");
-            if (i == 0) {
-                selectProvince = "";
-                adapterZone = new ArrayAdapter<String>(getActivity(),
-                        android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.Zone1All));
-                        arrayZone = getResources().getStringArray(R.array.Zone1All);
-                zone.setAdapter(adapterZone);
-            } else selectProvince = arrayProvince[i];
-            if (i == 1) {
-                adapterZone = new ArrayAdapter<String>(getActivity(),
-                        android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.Zone1Bangkok));
-                        arrayZone = getResources().getStringArray(R.array.Zone1Bangkok);
-                zone.setAdapter(adapterZone);
-            } else if (i == 2) {
-                adapterZone = new ArrayAdapter<String>(getActivity(),
-                        android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.Zone1Nonthaburi));
-                        arrayZone = getResources().getStringArray(R.array.Zone1Nonthaburi);
-                zone.setAdapter(adapterZone);
-            } else if (i == 3) {
-                adapterZone = new ArrayAdapter<String>(getActivity(),
-                        android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.Zone1Patumthani));
-                        arrayZone = getResources().getStringArray(R.array.Zone1Patumthani);
-                zone.setAdapter(adapterZone);
-            } else if (i == 4) {
-                adapterZone = new ArrayAdapter<String>(getActivity(),
-                        android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.Zone1SamutPrakarn));
-                arrayZone = getResources().getStringArray(R.array.Zone1SamutPrakarn);
-                zone.setAdapter(adapterZone);
+        if (isProvince) {
+            if (adapterView.getId() == province.getId() && i == provincePos) {
+                isProvince = false;
+                province.setSelection(provincePos);
             }
-        } else {
-            Log.i("Step = ","zone");
-            if (i == 0) selectZone = "";
-            else selectZone = arrayZone[i];
         }
-        defaultList = dbHelperDAO.selectHospital(selectProvince, selectZone);
-        hospitalList = defaultList;
-
-        if (search != "") {
-            ArrayList<Hospital> filteredValues = new ArrayList<Hospital>(defaultList);
-            for (Hospital value : defaultList) {
-                if (!value.getName().toLowerCase().contains(search.toLowerCase())) {
-                    filteredValues.remove(value);
+        if (isZone) {
+            if (adapterView.getId() == zone.getId() && i == zonePos) {
+                isZone = false;
+                zone.setSelection(zonePos);
+            }
+        }
+        if (!isProvince && !isZone) {
+            if (adapterView.getId() == province.getId()) {
+                if (i == 0) {
+                    selectProvince = "";
+                    adapterZone = new ArrayAdapter<String>(getActivity(),
+                            android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.Zone1All));
+                    arrayZone = getResources().getStringArray(R.array.Zone1All);
+                    zone.setAdapter(adapterZone);
+                } else selectProvince = arrayProvince[i];
+                if (i == 1) {
+                    adapterZone = new ArrayAdapter<String>(getActivity(),
+                            android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.Zone1Bangkok));
+                    arrayZone = getResources().getStringArray(R.array.Zone1Bangkok);
+                    zone.setAdapter(adapterZone);
+                } else if (i == 2) {
+                    adapterZone = new ArrayAdapter<String>(getActivity(),
+                            android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.Zone1Nonthaburi));
+                    arrayZone = getResources().getStringArray(R.array.Zone1Nonthaburi);
+                    zone.setAdapter(adapterZone);
+                } else if (i == 3) {
+                    adapterZone = new ArrayAdapter<String>(getActivity(),
+                            android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.Zone1Patumthani));
+                    arrayZone = getResources().getStringArray(R.array.Zone1Patumthani);
+                    zone.setAdapter(adapterZone);
+                } else if (i == 4) {
+                    adapterZone = new ArrayAdapter<String>(getActivity(),
+                            android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.Zone1SamutPrakarn));
+                    arrayZone = getResources().getStringArray(R.array.Zone1SamutPrakarn);
+                    zone.setAdapter(adapterZone);
                 }
+            } else {
+                if (i == 0) selectZone = "";
+                else selectZone = arrayZone[i];
             }
-            hospitalList = filteredValues;
+            defaultList = dbHelperDAO.selectHospital(selectProvince, selectZone);
+            hospitalList = defaultList;
+
+            if (search != "") {
+                ArrayList<Hospital> filteredValues = new ArrayList<Hospital>(defaultList);
+                for (Hospital value : defaultList) {
+                    if (!value.getName().toLowerCase().contains(search.toLowerCase())) {
+                        filteredValues.remove(value);
+                    }
+                }
+                hospitalList = filteredValues;
+            }
+            adapter = new RecyclerViewAdapter();
+            recyclerView.setAdapter(adapter);
         }
-        adapter = new RecyclerViewAdapter();
-        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -299,12 +309,10 @@ public class HospitalFragment extends Fragment implements SearchView.OnQueryText
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            Log.d("position = ", +position + "");
             holder.name.setText(hospitalList.get(position).getName());
             holder.setOnClickListener(new ItemClickListener() {
                 @Override
                 public void onClick(View view, int position, boolean isLongClick, MotionEvent motionEvent) {
-                    Log.d("position = ", position + "");
                     if (!isLongClick) {
                         HospitalItemFragment fragment = new HospitalItemFragment();
                         Bundle bundle = new Bundle();
