@@ -9,4 +9,182 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <string-array name="Area">
+        <item>กรุงเทพฯ – ปริมณฑล</item>
+        <item>ภาคกลาง</item>
+        <item>ภาคตะวันออกเฉียงเหนือ</item>
+        <item>ภาคเหนือ</item>
+        <item>ภาคใต้</item>
+        <item>ภาคตะวันออก</item>
+    </string-array>
+
+    <string-array name="Province1">
+        <item>เลือกทั้งหมด</item>
+        <item>กรุงเทพมหานคร</item>
+        <item>นนทบุรี</item>
+        <item>ปทุมธานี</item>
+        <item>สมุทรปราการ</item>
+    </string-array>
+
+    <string-array name="Zone1Bangkok">
+        <item>เลือกทั้งหมด</item>
+        <item>คลองสาน</item>
+        <item>คลองสามวา</item>
+        <item>คลองเตย</item>
+        <item>คันนายาว</item>
+        <item>จตุจักร</item>
+        <item>จอมทอง</item>
+        <item>ดอนเมือง</item>
+        <item>ดินแดง</item>
+        <item>ดุสิต</item>
+        <item>ตลิ่งชัน</item>
+        <item>ทวีวัฒนา</item>
+        <item>ทุ่มครุ</item>
+        <item>ธนบุรี</item>
+        <item>บางกอกน้อย</item>
+        <item>บางกอกใหญ่</item>
+        <item>บางกะปิ</item>
+        <item>บางขุนเทียน</item>
+        <item>บางคอแหลม</item>
+        <item>บางซื่อ</item>
+        <item>บางนา</item>
+        <item>บางบอน</item>
+        <item>บางพลัด</item>
+        <item>บางรัก</item>
+        <item>บางเขน</item>
+        <item>บางแค</item>
+        <item>บึ่งกุ่ม</item>
+        <item>ปทุมวัน</item>
+        <item>ประเวศ</item>
+        <item>ป้อมปราบศัตรูพ่าย</item>
+        <item>พญาไท</item>
+        <item>พระนคร</item>
+        <item>พระโขนง</item>
+        <item>ภาษีเจริญ</item>
+        <item>มีนบุรี</item>
+        <item>ยานนาวา</item>
+        <item>ราชเทวี</item>
+        <item>ราชฎร์บูรณะ</item>
+        <item>ลาดกระบัง</item>
+        <item>ลาดพร้าว</item>
+        <item>วังทองหลาง</item>
+        <item>วัฒนา</item>
+        <item>สวนหลวง</item>
+        <item>สะพานสูง</item>
+        <item>สัมพันธสงศ์</item>
+        <item>สาทร</item>
+        <item>สายไหม</item>
+        <item>หนองจอก</item>
+        <item>หนองแขม</item>
+        <item>หลักสี่</item>
+        <item>ห้วยขวาง</item>
+    </string-array>
+
+    <string-array name="Zone1Nonthaburi">
+        <item>เลือกทั้งหมด</item>
+        <item>บางกรวย</item>
+        <item>บางบัวทอง</item>
+        <item>บางใหญ่</item>
+        <item>ปากเกร็ด</item>
+        <item>เมือง</item>
+        <item>ไทรน้อย</item>
+    </string-array>
+
+    <string-array name="Zone1Patumthani">
+        <item>เลือกทั้งหมด</item>
+        <item>ตลองหลวง</item>
+        <item>ธัญบุรี</item>
+        <item>ฃาดหลุมแก้ว</item>
+        <item>ลำลูกกา</item>
+        <item>สามโคก</item>
+        <item>หนองเสือ</item>
+        <item>เมืองปทุมธานี</item>
+    </string-array>
+
+    <string-array name="Zone1SamutPrakarn">
+        <item>เลือกทั้งหมด</item>
+        <item>บางบ่อ</item>
+        <item>บางพลี</item>
+        <item>บางเสาธง</item>
+        <item>พระประแดง</item>
+        <item>พระสมุทรเจดีย์</item>
+        <item>สำโรงเหนือ</item>
+        <item>เเมือง</item>
+    </string-array>
+
+    <string-array name="Zone1All">
+        <item>เลือกทั้งหมด</item>
+        <item>คลองสาน</item>
+        <item>คลองสามวา</item>
+        <item>คลองเตย</item>
+        <item>คันนายาว</item>
+        <item>จตุจักร</item>
+        <item>จอมทอง</item>
+        <item>ดอนเมือง</item>
+        <item>ดินแดง</item>
+        <item>ดุสิต</item>
+        <item>ตลิ่งชัน</item>
+        <item>ทวีวัฒนา</item>
+        <item>ทุ่มครุ</item>
+        <item>ธนบุรี</item>
+        <item>บางกอกน้อย</item>
+        <item>บางกอกใหญ่</item>
+        <item>บางกะปิ</item>
+        <item>บางขุนเทียน</item>
+        <item>บางคอแหลม</item>
+        <item>บางซื่อ</item>
+        <item>บางนา</item>
+        <item>บางบอน</item>
+        <item>บางพลัด</item>
+        <item>บางรัก</item>
+        <item>บางเขน</item>
+        <item>บางแค</item>
+        <item>บึ่งกุ่ม</item>
+        <item>ปทุมวัน</item>
+        <item>ประเวศ</item>
+        <item>ป้อมปราบศัตรูพ่าย</item>
+        <item>พญาไท</item>
+        <item>พระนคร</item>
+        <item>พระโขนง</item>
+        <item>ภาษีเจริญ</item>
+        <item>มีนบุรี</item>
+        <item>ยานนาวา</item>
+        <item>ราชเทวี</item>
+        <item>ราชฎร์บูรณะ</item>
+        <item>ลาดกระบัง</item>
+        <item>ลาดพร้าว</item>
+        <item>วังทองหลาง</item>
+        <item>วัฒนา</item>
+        <item>สวนหลวง</item>
+        <item>สะพานสูง</item>
+        <item>สัมพันธสงศ์</item>
+        <item>สาทร</item>
+        <item>สายไหม</item>
+        <item>หนองจอก</item>
+        <item>หนองแขม</item>
+        <item>หลักสี่</item>
+        <item>ห้วยขวาง</item>
+        <item>บางกรวย</item>
+        <item>บางบัวทอง</item>
+        <item>บางใหญ่</item>
+        <item>ปากเกร็ด</item>
+        <item>เมือง</item>
+        <item>ไทรน้อย</item>
+        <item>ตลองหลวง</item>
+        <item>ธัญบุรี</item>
+        <item>ฃาดหลุมแก้ว</item>
+        <item>ลำลูกกา</item>
+        <item>สามโคก</item>
+        <item>หนองเสือ</item>
+        <item>เมืองปทุมธานี</item>
+        <item>บางบ่อ</item>
+        <item>บางพลี</item>
+        <item>บางเสาธง</item>
+        <item>พระประแดง</item>
+        <item>พระสมุทรเจดีย์</item>
+        <item>สำโรงเหนือ</item>
+        <item>เมือง</item>
+    </string-array>
+
 </resources>

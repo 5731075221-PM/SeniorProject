@@ -104,7 +104,7 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mMap.addMarker(new MarkerOptions().position(location).title(name).snippet(null));
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 18));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 12));
 
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
             @Override
@@ -119,14 +119,14 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
                 TextView title = ((TextView) infoWindow.findViewById(R.id.textViewName));
                 title.setText(marker.getTitle());
 
-                TextView snippet = ((TextView) infoWindow.findViewById(R.id.textViewSnippet));
-                snippet.setText(marker.getSnippet());
+//                TextView snippet = ((TextView) infoWindow.findViewById(R.id.textViewSnippet));
+//                snippet.setText(marker.getSnippet());
 
-                ImageView imageView = (ImageView) infoWindow.findViewById(R.id.imageView);
-                imageView.setImageResource(R.drawable.ic_city);
-                if ("My Home".equals(marker.getTitle())) {
-                    imageView.setImageResource(R.drawable.ic_home);
-                }
+//                ImageView imageView = (ImageView) infoWindow.findViewById(R.id.imageView);
+//                imageView.setImageResource(R.drawable.ic_city);
+//                if ("My Home".equals(marker.getTitle())) {
+//                    imageView.setImageResource(R.drawable.ic_home);
+//                }
                 return infoWindow;
             }
         });

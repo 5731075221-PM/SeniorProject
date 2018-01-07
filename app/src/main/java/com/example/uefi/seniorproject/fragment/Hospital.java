@@ -7,17 +7,16 @@ public class Hospital{
     private String name;
     private Double lat;
     private  Double lng;
-    private String address;
-    private String phone;
-    private String website;
+    private String address,phone,website,zone;
 
-    public Hospital(String name, Double lat, Double lng, String address, String phone, String website) {
+    public Hospital(String name, Double lat, Double lng, String address, String phone, String website, String zone) {
         this.name = name;
         this.lat = lat;
         this.lng = lng;
         this.address = address;
         this.phone = phone;
         this.website = website;
+        this.zone = zone;
 
     }
 
@@ -68,4 +67,13 @@ public class Hospital{
     public void setWebsite(String website) {
         this.website = website;
     }
+
+    public String getZone() {
+        return zone;
+    }
+
+    public void setZone(String zone) {
+        this.zone = zone;
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.example.uefi.seniorproject;
 
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +19,9 @@ import android.view.MenuItem;
 
 import com.example.uefi.seniorproject.fragment.HospitalFragment;
 import com.example.uefi.seniorproject.fragment.MainFragment;
+import com.example.uefi.seniorproject.fragment.HospitalSelectFragment;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -25,6 +29,11 @@ public class MainActivity extends AppCompatActivity
     ActionBarDrawerToggle toggle;
     FragmentManager fragmentManager;
     private boolean mToolBarNavigationListenerIsRegistered = false;
+
+//    @Override
+//    protected void attachBaseContext(Context newBase) {
+//        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,7 +146,7 @@ public class MainActivity extends AppCompatActivity
                 mToolBarNavigationListenerIsRegistered = true;
             }
             fragmentManager.beginTransaction()
-                    .replace(R.id.container_fragment, new HospitalFragment())
+                    .replace(R.id.container_fragment, new HospitalSelectFragment())
                     .addToBackStack(null)
                     .commit();
         } else if (id == R.id.nav_gallery) {
