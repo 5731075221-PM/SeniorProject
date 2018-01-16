@@ -9,9 +9,9 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="Hospital" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_firstaid"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:title="ปฐมพยาบาล" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
