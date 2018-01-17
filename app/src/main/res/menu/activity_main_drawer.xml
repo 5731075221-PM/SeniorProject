@@ -5,17 +5,20 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_hospital"
-            android:title="Hospital" />
+            android:id="@+id/nav_disease"
+            android:title="โรค" />
         <item
             android:id="@+id/nav_firstaid"
             android:title="ปฐมพยาบาล" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:title="Slideshow" />
+            android:id="@+id/nav_hospital"
+            android:title="สถานพยาบาล" />
         <item
-            android:id="@+id/nav_manage"
-            android:title="Tools" />
+            android:id="@+id/nav_reminder"
+            android:title="บันทึกและแจ้งเตือน" />
+        <item
+            android:id="@+id/nav_food"
+            android:title="ค้นหารายการอาหาร" />
     </group>
 
 </menu>

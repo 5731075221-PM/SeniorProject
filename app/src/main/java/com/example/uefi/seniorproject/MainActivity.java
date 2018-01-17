@@ -125,24 +125,8 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_hospital) {
-            toggle.setDrawerIndicatorEnabled(false);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            if(!mToolBarNavigationListenerIsRegistered) {
-                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // Doesn't have to be onBackPressed
-                        onBackPressed();
-                    }
-                });
+        if (id == R.id.nav_disease) {
 
-                mToolBarNavigationListenerIsRegistered = true;
-            }
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container_fragment, new HospitalSelectFragment())
-                    .addToBackStack(null)
-                    .commit();
         } else if (id == R.id.nav_firstaid) {
             toggle.setDrawerIndicatorEnabled(false);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -161,9 +145,27 @@ public class MainActivity extends AppCompatActivity
                     .replace(R.id.container_fragment, new FirstaidFragment())
                     .addToBackStack(null)
                     .commit();
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_hospital) {
+            toggle.setDrawerIndicatorEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            if(!mToolBarNavigationListenerIsRegistered) {
+                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Doesn't have to be onBackPressed
+                        onBackPressed();
+                    }
+                });
 
-        } else if (id == R.id.nav_manage) {
+                mToolBarNavigationListenerIsRegistered = true;
+            }
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container_fragment, new HospitalSelectFragment())
+                    .addToBackStack(null)
+                    .commit();
+        } else if (id == R.id.nav_reminder) {
+
+        } else if (id == R.id.nav_food) {
 
         }
 

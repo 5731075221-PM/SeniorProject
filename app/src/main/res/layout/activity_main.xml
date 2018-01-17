@@ -19,7 +19,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@color/colorMainGreen"
-        android:fitsSystemWindows="true"
+        android:fitsSystemWindows="false"
         app:headerLayout="@layout/nav_header_main"
         app:itemTextColor="@color/cardview_light_background"
         app:menu="@menu/activity_main_drawer" />
