@@ -5,4 +5,6 @@
     <color name="colorAccent">#FF4081</color>\
     <color name="colorRubyRed">#F62217</color>
     <color name="colorMacawBlueGreen">#43BFC7</color>
+
+    <color name="colorMainGreen">#429f46</color>
 </resources>
