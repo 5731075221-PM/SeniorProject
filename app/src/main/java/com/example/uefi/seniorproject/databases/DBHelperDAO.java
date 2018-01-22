@@ -8,6 +8,7 @@ import android.util.Log;
 import android.util.Pair;
 
 import com.example.uefi.seniorproject.fragment.Hospital;
+import com.example.uefi.seniorproject.fragment.Symptom;
 
 import java.util.ArrayList;
 
@@ -103,9 +104,108 @@ public class DBHelperDAO {
             cursor.moveToNext();
         }
         cursor.close();
-        Log.d("ProvName = ",list.size()+"");
         return list;
     }
+
+    public ArrayList<String> getLexitron(){
+        ArrayList<String> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT * FROM lexitron", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            list.add(cursor.getString(0));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
+
+    public ArrayList<String> getStopword(){
+        ArrayList<String> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT * FROM stopword", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            list.add(cursor.getString(0));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
+
+    public ArrayList<Symptom> getAllSymptoms(){
+        ArrayList<Symptom> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT * FROM allsymptoms", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            list.add(new Symptom(cursor.getInt(cursor.getColumnIndex("id")),
+                    cursor.getString(cursor.getColumnIndex("word")),
+                    cursor.getString(cursor.getColumnIndex("parent"))
+            ));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
+
+    public ArrayList<Symptom> getMainSymptoms(){
+        ArrayList<Symptom> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT * FROM mainsymptoms", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            list.add(new Symptom(cursor.getInt(cursor.getColumnIndex("id")),
+                    cursor.getString(cursor.getColumnIndex("word")),
+                    null
+            ));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
+
+    public ArrayList<ArrayList<String>> getVectorData(){
+        ArrayList<ArrayList<String>> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT * FROM vectordata", null);
+        cursor.moveToFirst();
+        int size = cursor.getColumnCount()-1, n = 0;
+
+        for(int i = 0; i<cursor.getCount() ;i++){
+            list.add(new ArrayList<String>());
+        }
+
+        while (!cursor.isAfterLast()) {
+            for(int i = 1; i<=size; i++){
+                list.get(n).add(cursor.getString(cursor.getColumnIndex(i+"")));
+            }
+            n++;
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
+
+    public ArrayList<String> getFreq(){
+        ArrayList<String> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT * FROM idfdoc", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            list.add(cursor.getString(0));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
+
+    public ArrayList<String> getDocLength(){
+        ArrayList<String> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT * FROM vectorlength", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            list.add(cursor.getString(cursor.getColumnIndex("length")));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
+
 
 //    public ArrayList<Pair<Double,Double>> getLatLng() {
 //        ArrayList<Pair<Double,Double>> list = new ArrayList<>();
