@@ -206,6 +206,18 @@ public class DBHelperDAO {
         return list;
     }
 
+    public ArrayList<String> getDiseaseName(){
+        ArrayList<String> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT * FROM diseasesandsymptoms", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            list.add(cursor.getString(cursor.getColumnIndex("name")));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
+
 
 //    public ArrayList<Pair<Double,Double>> getLatLng() {
 //        ArrayList<Pair<Double,Double>> list = new ArrayList<>();
