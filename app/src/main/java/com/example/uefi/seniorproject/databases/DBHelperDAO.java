@@ -11,6 +11,10 @@ import com.example.uefi.seniorproject.fragment.Hospital;
 import com.example.uefi.seniorproject.fragment.Symptom;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * Created by UEFI on 20/12/2560.
@@ -187,7 +191,7 @@ public class DBHelperDAO {
         Cursor cursor = database.rawQuery("SELECT * FROM idfdoc", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            list.add(cursor.getString(0));
+            list.add(cursor.getString(1));
             cursor.moveToNext();
         }
         cursor.close();
@@ -224,6 +228,37 @@ public class DBHelperDAO {
         if(cursor.getCount() == 1) return cursor.getInt(cursor.getColumnIndex("id"));
         return -1;
     }
+
+    public ArrayList<String> checkKeyword2(String w){
+        System.out.println("Setdatabase = "+w);
+        Set<String> set = new LinkedHashSet<>();
+        ArrayList<String> list;
+        String parent = "";
+        Cursor cursor = database.rawQuery("SELECT * FROM allsymptoms WHERE word like '%"+w+"%'", null);
+        cursor.moveToFirst();
+        System.out.println("Setdatabase = "+cursor.getCount());
+        while (!cursor.isAfterLast()) {
+            parent = cursor.getString(cursor.getColumnIndex("parent"));
+            System.out.println("Setdatabase = "+parent);
+            if(parent != null && parent != ""){
+                set.add(parent);
+            }else set.add(cursor.getString(cursor.getColumnIndex("word")));
+            cursor.moveToNext();
+        }
+        list = new ArrayList<>(set);
+        return list;
+    }
+
+    public ArrayList<Integer> getIndexSymptom(ArrayList<String> arr){
+        ArrayList list =  new ArrayList();
+        for(int i = 0; i<arr.size();i++){
+            Cursor cursor = database.rawQuery("SELECT * FROM mainsymptoms WHERE word='"+arr.get(i)+"'", null);
+            cursor.moveToFirst();
+            list.add(cursor.getInt(cursor.getColumnIndex("id")));
+        }
+        return list;
+    }
+
 
 
 //    public ArrayList<Pair<Double,Double>> getLatLng() {
