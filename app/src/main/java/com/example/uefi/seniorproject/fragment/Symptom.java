@@ -9,6 +9,9 @@ public class Symptom {
     private String word;
     private String parent;
 
+    public Symptom() {
+    }
+
     public Symptom(int id, String word, String parent) {
         this.id = id;
         this.word = word;

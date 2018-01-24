@@ -194,17 +194,25 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
                 initialQueryVector();
 
                 // check freq of query vector with mainsymptoms
+                int index = 0;
                 for (int i = 0; i < keyword.length; i++) {
-                    for (int j = 0; j < mainSymptoms.size(); j++) {
-                        System.out.println("keyword[i] = "+keyword[i]);
-                        System.out.println("mainSymptoms.get(j).getWord() = "+mainSymptoms.get(j).getWord());
-                        if (keyword[i].equals(mainSymptoms.get(j).getWord()) || (mainSymptoms.get(j).getWord().contains(keyword[i]))) {
-                            System.out.println("Match");
-                            keywordSymptom.set(j, keywordSymptom.get(j) + 1);
-                            //                                Log.d("keyword = ",keywordSymptom.get(j)+"");
-                        }
+                    System.out.println("keyword[i] = "+keyword[i]);
+                    if((index = dbHelperDAO.checkKeyword(keyword[i])) != -1){
+                        System.out.println("Index = "+(index-1));
+                        keywordSymptom.set(index-1,keywordSymptom.get(index-1) + 1);
                     }
                 }
+//                for (int i = 0; i < keyword.length; i++) {
+//                    for (int j = 0; j < mainSymptoms.size(); j++) {
+//                        System.out.println("keyword[i] = "+keyword[i]);
+//                        System.out.println("mainSymptoms.get(j).getWord() = "+mainSymptoms.get(j).getWord());
+//                        if (keyword[i].equals(mainSymptoms.get(j).getWord()) || (mainSymptoms.get(j).getWord().contains(keyword[i]))) {
+//                            System.out.println("Match");
+//                            keywordSymptom.set(j, keywordSymptom.get(j) + 1);
+//                            //                                Log.d("keyword = ",keywordSymptom.get(j)+"");
+//                        }
+//                    }
+//                }
                 System.out.println("keywordSymptom = " + keywordSymptom.toString());
 
                 //normalize query and calculate weight of terms

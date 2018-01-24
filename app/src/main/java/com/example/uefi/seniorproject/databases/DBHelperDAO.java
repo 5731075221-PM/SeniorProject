@@ -218,6 +218,13 @@ public class DBHelperDAO {
         return list;
     }
 
+    public int checkKeyword(String w){
+        Cursor cursor = database.rawQuery("SELECT * FROM mainsymptoms WHERE word='"+w+"'", null);
+        cursor.moveToFirst();
+        if(cursor.getCount() == 1) return cursor.getInt(cursor.getColumnIndex("id"));
+        return -1;
+    }
+
 
 //    public ArrayList<Pair<Double,Double>> getLatLng() {
 //        ArrayList<Pair<Double,Double>> list = new ArrayList<>();
