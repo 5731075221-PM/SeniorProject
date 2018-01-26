@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -16,7 +15,6 @@ import android.widget.TextView;
 import com.example.uefi.seniorproject.R;
 import com.example.uefi.seniorproject.breakiterator.LongLexTo;
 import com.example.uefi.seniorproject.databases.DBHelperDAO;
-import com.example.uefi.seniorproject.hospital.ItemClickListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -134,7 +132,7 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
                 int index = 0;
                 for (int i = 0; i < keyword.length; i++) {
                     System.out.println("keyword[i] = " + keyword[i]);
-                    indexList = dbHelperDAO.getIndexSymptom(dbHelperDAO.checkKeyword2(keyword[i]));
+                    indexList = dbHelperDAO.getIndexSymptom(dbHelperDAO.checkKeyword(keyword[i]));
                     for(int j = 0; j< indexList.size(); j++){
                         System.out.println("Index = "+index);
                         keywordSymptom.set(indexList.get(j),keywordSymptom.get(indexList.get(j)) + 1);

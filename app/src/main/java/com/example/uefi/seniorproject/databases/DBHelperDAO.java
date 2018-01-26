@@ -151,6 +151,7 @@ public class DBHelperDAO {
     }
 
     public ArrayList<Symptom> getMainSymptoms(){
+//        System.out.println("CheckDB = Main");
         ArrayList<Symptom> list = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT * FROM mainsymptoms", null);
         cursor.moveToFirst();
@@ -166,6 +167,7 @@ public class DBHelperDAO {
     }
 
     public ArrayList<ArrayList<String>> getVectorData(){
+//        System.out.println("CheckDB = Vectordata");
         ArrayList<ArrayList<String>> list = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT * FROM vectordata", null);
         cursor.moveToFirst();
@@ -176,7 +178,8 @@ public class DBHelperDAO {
         }
 
         while (!cursor.isAfterLast()) {
-            for(int i = 1; i<=size; i++){
+            for(int i = 0; i < size; i++){
+//                System.out.println("CheckDB = i "+i);
                 list.get(n).add(cursor.getString(cursor.getColumnIndex(i+"")));
             }
             n++;
@@ -187,11 +190,12 @@ public class DBHelperDAO {
     }
 
     public ArrayList<String> getFreq(){
+//        System.out.println("CheckDB = Freq");
         ArrayList<String> list = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT * FROM idfdoc", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            list.add(cursor.getString(1));
+            list.add(cursor.getString(0));
             cursor.moveToNext();
         }
         cursor.close();
@@ -199,6 +203,7 @@ public class DBHelperDAO {
     }
 
     public ArrayList<String> getDocLength(){
+//        System.out.println("CheckDB = Doclength");
         ArrayList<String> list = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT * FROM vectorlength", null);
         cursor.moveToFirst();
@@ -211,6 +216,7 @@ public class DBHelperDAO {
     }
 
     public ArrayList<String> getDiseaseName(){
+//        System.out.println("CheckDB = Name");
         ArrayList<String> list = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT * FROM diseasesandsymptoms", null);
         cursor.moveToFirst();
@@ -222,14 +228,14 @@ public class DBHelperDAO {
         return list;
     }
 
-    public int checkKeyword(String w){
-        Cursor cursor = database.rawQuery("SELECT * FROM mainsymptoms WHERE word='"+w+"'", null);
-        cursor.moveToFirst();
-        if(cursor.getCount() == 1) return cursor.getInt(cursor.getColumnIndex("id"));
-        return -1;
-    }
+//    public int checkKeyword(String w){
+//        Cursor cursor = database.rawQuery("SELECT * FROM mainsymptoms WHERE word='"+w+"'", null);
+//        cursor.moveToFirst();
+//        if(cursor.getCount() == 1) return cursor.getInt(cursor.getColumnIndex("id"));
+//        return -1;
+//    }
 
-    public ArrayList<String> checkKeyword2(String w){
+    public ArrayList<String> checkKeyword(String w){
         System.out.println("Setdatabase = "+w);
         Set<String> set = new LinkedHashSet<>();
         ArrayList<String> list;
