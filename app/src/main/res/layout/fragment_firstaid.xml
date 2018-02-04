@@ -6,15 +6,25 @@
     tools:context="com.example.uefi.seniorproject.firstaid.FirstaidFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout
+        android:id="@+id/frame_firstaid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/navigation">
+
+    </RelativeLayout>
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_gravity="start"
-        app:menu="@menu/bottom_nav_firstaid"
         app:itemIconTint="@drawable/selector_firstaid"
         app:itemTextColor="@drawable/selector_firstaid"
-        />
+        app:menu="@menu/bottom_nav_firstaid">
+
+    </android.support.design.widget.BottomNavigationView>
 
 </RelativeLayout>

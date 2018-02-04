@@ -68,6 +68,9 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
+
+            getSupportActionBar().setTitle("Cares");
+
 //            Log.d("CASE1 = ",getSupportFragmentManager().getBackStackEntryCount()+"");
             getSupportFragmentManager().popBackStack();
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
