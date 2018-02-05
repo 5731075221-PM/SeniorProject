@@ -235,30 +235,32 @@ public class DBHelperDAO {
 //        return -1;
 //    }
 
-    public ArrayList<String> checkKeyword(String w){
-        System.out.println("Setdatabase = "+w);
+    public ArrayList<String> checkKeyword(String[] w){
+        System.out.println("Setdatabase = "+w.toString());
         Set<String> set = new LinkedHashSet<>();
         ArrayList<String> list;
         String parent = "";
-        Cursor cursor = database.rawQuery("SELECT * FROM allsymptoms WHERE word like '%"+w+"%'", null);
-        cursor.moveToFirst();
-        System.out.println("Setdatabase = "+cursor.getCount());
-        while (!cursor.isAfterLast()) {
-            parent = cursor.getString(cursor.getColumnIndex("parent"));
-            System.out.println("Setdatabase = "+parent);
-            if(parent != null && parent != ""){
-                set.add(parent);
-            }else set.add(cursor.getString(cursor.getColumnIndex("word")));
-            cursor.moveToNext();
+        for(int i = 0; i<w.length;i++) {
+            Cursor cursor = database.rawQuery("SELECT * FROM allsymptoms WHERE word like '%" + w[i] + "%' ORDER BY word ASC", null);
+            cursor.moveToFirst();
+            System.out.println("Setdatabase = " + cursor.getCount());
+            while (!cursor.isAfterLast()) {
+                parent = cursor.getString(cursor.getColumnIndex("parent"));
+                System.out.println("Setdatabase = " + parent);
+                if (parent != null && parent != "") {
+                    set.add(parent);
+                } else set.add(cursor.getString(cursor.getColumnIndex("word")));
+                cursor.moveToNext();
+            }
         }
-        list = new ArrayList<>(set);
-        return list;
+            list = new ArrayList<>(set);
+            return list;
     }
 
     public ArrayList<Integer> getIndexSymptom(ArrayList<String> arr){
         ArrayList list =  new ArrayList();
         for(int i = 0; i<arr.size();i++){
-            Cursor cursor = database.rawQuery("SELECT * FROM mainsymptoms WHERE word='"+arr.get(i)+"'", null);
+            Cursor cursor = database.rawQuery("SELECT * FROM mainsymptoms WHERE word='"+arr.get(i)+"' ORDER BY word ASC", null);
             cursor.moveToFirst();
             list.add(cursor.getInt(cursor.getColumnIndex("id")));
         }
