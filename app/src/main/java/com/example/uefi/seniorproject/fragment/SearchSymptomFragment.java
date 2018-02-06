@@ -261,19 +261,20 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
                 @Override
                 public void onClick(View view, int position, boolean isLongClick, MotionEvent motionEvent) {
                     if (!isLongClick) {
-//                        HospitalItemFragment fragment = new HospitalItemFragment();
-//                        Bundle bundle = new Bundle();
+                        SelectItemFragment fragment = new SelectItemFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("name",diseaseName.get(position));
 //                        bundle.putString("name", hospitalList.get(position).getName());
 //                        bundle.putDouble("lat", hospitalList.get(position).getLat());
 //                        bundle.putDouble("lng", hospitalList.get(position).getLng());
 //                        bundle.putString("address", hospitalList.get(position).getAddress());
 //                        bundle.putString("phone", hospitalList.get(position).getPhone());
 //                        bundle.putString("website", hospitalList.get(position).getWebsite());
-//                        fragment.setArguments(bundle);
-//                        getFragmentManager().beginTransaction()
-//                                .replace(R.id.container_fragment, fragment)
-//                                .addToBackStack(null)
-//                                .commit();
+                        fragment.setArguments(bundle);
+                        getFragmentManager().beginTransaction()
+                                .replace(R.id.container_fragment, fragment)
+                                .addToBackStack(null)
+                                .commit();
                     }
                 }
             });
