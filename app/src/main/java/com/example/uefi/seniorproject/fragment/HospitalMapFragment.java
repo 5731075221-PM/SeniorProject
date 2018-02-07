@@ -75,7 +75,7 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback 
 
         listener = new LocationListener() {
             public void onLocationChanged(Location loc) {
-                Log.d("ChangeLo = ",loc+"");
+                System.out.println("ChangeLo0000 = "+loc+"");
                 LatLng coordinate = new LatLng(loc.getLatitude(), loc.getLongitude());
                 lat = loc.getLatitude();
                 lng = loc.getLongitude();
@@ -121,6 +121,12 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback 
         return view;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        System.out.println("onCreate1 = ");
+        super.onCreate(savedInstanceState);
+    }
+
     protected void buildAlertMessageNoGps() {
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -141,6 +147,7 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback 
     }
 
     public void onResume() {
+        System.out.println("Resume1 = ");
         super.onResume();
 
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
@@ -152,8 +159,8 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback 
         boolean isNetwork = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
         boolean isGPS = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
-        Log.d("isNetwork",isNetwork+"");
-        Log.d("isNetworkGPS",isGPS+"");
+        System.out.println("isNetwork"+isNetwork+"");
+        System.out.println("isNetworkGPS"+isGPS+"");
 
 
 //        if (isNetwork) {
@@ -178,12 +185,14 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback 
     }
 
     public void onPause() {
+        System.out.println("Pause1 = ");
         super.onPause();
         locationManager.removeUpdates(listener);
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        System.out.println("onMapReady1 = ");
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 

@@ -6,8 +6,8 @@ package com.example.uefi.seniorproject.fragment;
 public class Hospital{
     private String name;
     private Double lat;
-    private  Double lng;
-    private String address,phone,website,zone;
+    private Double lng;
+    private String address,phone,website,zone, distance, duration;
 
     public Hospital(String name, Double lat, Double lng, String address, String phone, String website, String zone) {
         this.name = name;
@@ -17,7 +17,8 @@ public class Hospital{
         this.phone = phone;
         this.website = website;
         this.zone = zone;
-
+        this.distance = "";
+        this.duration = "";
     }
 
     public String getName() {
@@ -76,4 +77,26 @@ public class Hospital{
         this.zone = zone;
     }
 
+    public Double getDistanceValue() {
+        String[] tmp = distance.split(" ");
+        System.out.println(tmp.toString());
+        System.out.println(tmp[0]+" "+tmp[1]);
+        return Double.parseDouble(tmp[0]);
+    }
+
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
 }

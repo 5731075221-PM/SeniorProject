@@ -1,6 +1,8 @@
 package com.example.uefi.seniorproject.fragment;
 
 import android.graphics.Typeface;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -26,7 +28,7 @@ import java.util.ArrayList;
  * Created by UEFI on 27/12/2560.
  */
 
-public class HospitalFragment extends Fragment implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener, AdapterView.OnItemSelectedListener {
+public class HospitalAreaFragment extends Fragment implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener, AdapterView.OnItemSelectedListener {
     ArrayList<Hospital> defaultList, hospitalList;
     String search = "";
     boolean isProvince = false, isZone = false;
@@ -41,7 +43,7 @@ public class HospitalFragment extends Fragment implements SearchView.OnQueryText
     String selectProvince, selectZone;
     DBHelperDAO dbHelperDAO;
 
-    public HospitalFragment() {
+    public HospitalAreaFragment() {
         // Required empty public constructor
     }
 
@@ -52,14 +54,6 @@ public class HospitalFragment extends Fragment implements SearchView.OnQueryText
         View view = inflater.inflate(R.layout.fragment_hospital, container, false);
 
         final Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/JasmineUPC.ttf");
-
-        dbHelperDAO = DBHelperDAO.getInstance(getActivity());
-        dbHelperDAO.open();
-
-        hospitalList = dbHelperDAO.getHospital();
-        defaultList = hospitalList;
-
-//        dbHelperDAO.close();
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setAdapter(adapter);
@@ -91,11 +85,22 @@ public class HospitalFragment extends Fragment implements SearchView.OnQueryText
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
     // Search
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+        dbHelperDAO = DBHelperDAO.getInstance(getActivity());
+        dbHelperDAO.open();
+
+        hospitalList = dbHelperDAO.getHospital();
+        defaultList = hospitalList;
     }
 
     @Override
@@ -119,7 +124,7 @@ public class HospitalFragment extends Fragment implements SearchView.OnQueryText
             provincePos = province.getSelectedItemPosition();
             zonePos = zone.getSelectedItemPosition();
             search = "";
-            
+
             HospitalMapFragment fragment = new HospitalMapFragment();
             Bundle bundle = new Bundle();
             bundle.putString("type", "0");
@@ -145,7 +150,7 @@ public class HospitalFragment extends Fragment implements SearchView.OnQueryText
 
     @Override
     public boolean onQueryTextSubmit(String s) {
-        return true;
+        return false;
     }
 
     @Override
@@ -259,7 +264,7 @@ public class HospitalFragment extends Fragment implements SearchView.OnQueryText
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
             , View.OnLongClickListener, View.OnTouchListener {
-        TextView name;
+        TextView name, distance;
         private ItemClickListener itemClickListener;
 
         public ViewHolder(View itemView) {
@@ -267,6 +272,7 @@ public class HospitalFragment extends Fragment implements SearchView.OnQueryText
             Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/JasmineUPC.ttf");
             name = (TextView) itemView.findViewById(R.id.textView1);
             name.setTypeface(tf);
+            distance = (TextView) itemView.findViewById(R.id.distanceHospital);
             itemView.setOnClickListener(this);
         }
 
@@ -292,17 +298,18 @@ public class HospitalFragment extends Fragment implements SearchView.OnQueryText
         }
     }
 
-    public class RecyclerViewAdapter extends RecyclerView.Adapter<HospitalFragment.ViewHolder> {
+    public class RecyclerViewAdapter extends RecyclerView.Adapter<HospitalAreaFragment.ViewHolder> {
 
         @Override
-        public HospitalFragment.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public HospitalAreaFragment.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(getActivity()).inflate(R.layout.activity_hospital_list, parent, false);
-            return new HospitalFragment.ViewHolder(view);
+            return new HospitalAreaFragment.ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             holder.name.setText(hospitalList.get(position).getName());
+            holder.distance.setText((hospitalList.get(position).getDistance()));
             holder.setOnClickListener(new ItemClickListener() {
                 @Override
                 public void onClick(View view, int position, boolean isLongClick, MotionEvent motionEvent) {
