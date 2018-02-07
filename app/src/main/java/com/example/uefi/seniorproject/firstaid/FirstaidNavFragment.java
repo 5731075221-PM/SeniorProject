@@ -46,7 +46,7 @@ public class FirstaidNavFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_firstaid_nav, container, false);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("การปฐมพยาบาล");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("การห้ามเลือด");
 
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());
         dbHelperDAO.open();

@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
@@ -37,36 +38,19 @@ public class FirstaidFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_firstaid, container, false);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("การปฐมพยาบาล");
 
-        BottomNavigationView bottomNavigationView = (BottomNavigationView)
-                view.findViewById(R.id.navigation);
+        LinearLayout app_layer = (LinearLayout) view.findViewById (R.id.blood);
+        app_layer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        bottomNavigationView.setOnNavigationItemSelectedListener
-                (new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        Fragment selectedFragment = null;
-                        switch (item.getItemId()) {
-                            case R.id.nav_firstaid2:
-                                selectedFragment = FirstaidNavFragment.newInstance();
-                                break;
-                            case R.id.nav_cpr:
-                                selectedFragment = CprNavFragment.newInstance();
-                                break;
-                            case R.id.nav_transit:
-                                selectedFragment = TransitNavFragment.newInstance();
-                                break;
-                        }
-                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame_firstaid, selectedFragment);
-                        transaction.commit();
-                        return true;
-                    }
-                });
+                // sent bundle ma duay na *********
 
-        FragmentTransaction transaction = getFragmentManager() .beginTransaction();
-        transaction.replace(R.id.frame_firstaid, FirstaidNavFragment.newInstance());
-        transaction.commit();
-
+                FragmentTransaction transaction = getFragmentManager() .beginTransaction();
+                transaction.replace(R.id.relaFirstaid, FirstaidNavFragment.newInstance());
+                transaction.addToBackStack("");
+                transaction.commit();
+            }
+        });
 
 
         return view;

@@ -20,15 +20,6 @@
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:title="@string/app_name">
 
-            <ImageButton
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="end"
-                android:background="@null"
-                android:padding="12dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/search" />
-
 
         </android.support.v7.widget.Toolbar>
 
