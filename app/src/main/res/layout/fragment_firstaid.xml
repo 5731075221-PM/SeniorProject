@@ -4,55 +4,44 @@
     android:id="@+id/relaFirstaid"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/try1"
+    android:background="@color/colorMainGreen"
     tools:context="com.example.uefi.seniorproject.firstaid.FirstaidFragment">
 
     <!-- TODO: Update blank fragment layout -->
-
-    <android.support.v7.widget.SearchView
-        android:id="@+id/searchFirstaid"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@color/cardview_light_background" />
 
     <LinearLayout
         android:id="@+id/all"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/searchFirstaid"
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/human"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:background="@android:color/background_light"
             android:weightSum="2">
 
-            <LinearLayout
-                android:id="@+id/head"
+            <ImageView
+                android:id="@+id/imageView7"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="220dp"
+                android:layout_gravity="bottom"
                 android:layout_weight="1"
-                android:clickable="true"
-                android:orientation="horizontal"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
+                android:scaleType="fitCenter"
+                android:src="@drawable/oo" />
 
-                <ImageView
-                    android:id="@+id/imageView7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:layout_gravity="bottom"
-                    android:layout_weight="1"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/head" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/head"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@color/pink"
                     android:gravity="center_vertical"
                     android:orientation="vertical">
 
@@ -77,30 +66,12 @@
                         android:textSize="15sp" />
                 </LinearLayout>
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/body"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:orientation="horizontal"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
-
-                <ImageView
-                    android:id="@+id/imageView8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:layout_weight="1"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/body3" />
-
                 <LinearLayout
+                    android:id="@+id/body"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@color/red"
                     android:gravity="center_vertical"
                     android:orientation="vertical">
 
@@ -130,7 +101,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="monospace"
                         android:gravity="center_horizontal"
-                        android:text="ท้องเดิน ท้องร่วง ท้องเสีย"
+                        android:text="ลำไส้"
                         android:textColor="@color/cardview_light_background"
                         android:textSize="15sp" />
                 </LinearLayout>
@@ -158,7 +129,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@color/colorBlue"
-                    android:clickable="true"
                     android:orientation="vertical">
 
                     <TextView
@@ -186,7 +156,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@color/colorYellow"
-                    android:clickable="true"
                     android:orientation="vertical">
 
                     <TextView
@@ -223,7 +192,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@color/colorBlue2"
-                    android:clickable="true"
                     android:orientation="vertical">
 
                     <TextView
@@ -252,7 +220,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@color/colorGreen"
-                    android:clickable="true"
+                    android:focusable="true"
                     android:orientation="vertical">
 
                     <TextView

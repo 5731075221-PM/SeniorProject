@@ -15,10 +15,10 @@
             android:title="สถานพยาบาล" />
         <item
             android:id="@+id/nav_reminder"
-            android:title="บันทึกและแจ้งเตือน" />
+            android:title="สุขภาพของฉัน" />
         <item
             android:id="@+id/nav_food"
-            android:title="ค้นหารายการอาหาร" />
+            android:title="อาหารกับโรค" />
     </group>
 
 </menu>
