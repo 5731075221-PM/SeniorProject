@@ -7,6 +7,8 @@ import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.Nullable;
@@ -44,17 +46,49 @@ import java.util.Comparator;
  */
 
 public class HospitalNearbyFragment extends Fragment implements SearchView.OnQueryTextListener{
-    private static final String API_KEY = "AIzaSyBXXxey1s3u4Vdz5VfWMik6DT_kcAprtCA";
+    private static final String API_KEY = "AIzaSyBdiEiSJsjfhGQYTOhf10kcHwsII_J3xJ8";
     ArrayList<Hospital> defaultList, hospitalList;
     RecyclerView recyclerView;
     SearchView searchView;
     private RecyclerViewAdapter adapter = new RecyclerViewAdapter();
     DBHelperDAO dbHelperDAO;
     LocationManager locationManager;
+    ConnectivityManager connectionManager;
     LocationListener listener;
-    double lat, lng;
+    double lat = 0.0, lng = 0.0;
     int index, indexSet;
     String search = "";
+    boolean isGPS, isNetwork;
+
+    class SortNearbyHospital extends AsyncTask<Void, Void, Void>{
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            System.out.println("doIn lat = "+lat+" lng = "+lng);
+            while(lat == 0.0 || lng == 0.0){
+                System.out.println("while lat = "+lat+" lng = "+lng);
+                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                }
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, listener);
+                Location loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                if (loc != null) {
+                    lat = loc.getLatitude();
+                    lng = loc.getLongitude();
+                    System.out.println("loc = "+lat+" "+lng);
+                }
+            }
+            sendRequest();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            adapter = new RecyclerViewAdapter();
+            recyclerView.setAdapter(adapter);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -70,30 +104,7 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
         recyclerView = (RecyclerView) view.findViewById(R.id.nearbyHospitalRecyclerView);
         adapter = new RecyclerViewAdapter();
         recyclerView.setAdapter(adapter);
-//        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-//        final boolean isGPS = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
-//        listener = new LocationListener() {
-//            public void onLocationChanged(Location loc) {
-//                lat = loc.getLatitude();
-//                lng = loc.getLongitude();
-//                System.out.println("loc = "+lat+" "+lng);
-//            }
-//
-//            public void onStatusChanged(String provider, int status, Bundle extras) {
-//            }
-//
-//            public void onProviderEnabled(String provider) {
-//            }
-//
-//            public void onProviderDisabled(String provider) {
-//            }
-//        };
-
-//        if (isGPS) sendRequest();
-//        System.out.println("isGPS = " + isGPS);
-//        System.out.println("default = " + defaultList.size());
-//        System.out.println("hospital = " + hospitalList.size());
         return view;
     }
 
@@ -200,11 +211,18 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
         defaultList = hospitalList;
 
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        connectionManager = (ConnectivityManager)getActivity().getSystemService(getActivity().getBaseContext().CONNECTIVITY_SERVICE);
+        if ( connectionManager.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTED ||
+                connectionManager.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTING ||
+                connectionManager.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTING ||
+                connectionManager.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTED ) {
+            isNetwork = true;
+        }else isNetwork = false;
+        isGPS = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
-        boolean isGPS = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
         listener = new LocationListener() {
             public void onLocationChanged(Location loc) {
@@ -224,6 +242,7 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
         };
 
         System.out.println("gps create = "+isGPS);
+        System.out.println("network create = "+isNetwork);
         if (isGPS) {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, listener);
             Location loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -233,9 +252,8 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
                 System.out.println("loc = "+lat+" "+lng);
             }
         }
-        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-        isGPS = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        if (isGPS) sendRequest();
+        System.out.println("location = "+lat+" "+lng);
+        if (isGPS && isNetwork) new SortNearbyHospital().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     @Override
