@@ -12,6 +12,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -49,11 +50,11 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
     String serverKey = "AIzaSyBfgUci7cUhr0q2jqFgvuLUPrdCDhDfsuU";
     SupportMapFragment mapFragment;
     private GoogleMap mMap;
-    Double lat, lng;
-    LatLng location;
+    Double lat = 0.0, lng = 0.0; //origin
+    LatLng location; //destination
     String name, address, phone, website;
     TextView textName, textAddress, textPhone, textDrivingDistance, textDrivingTime, topicTextAddress, topicTextPhone;
-    Button buttonPhone, buttonWeb;
+    Button buttonPhone, buttonWeb, buttonNavigate;
     LocationManager locationManager;
     LocationListener locationListener;
     String provider;
@@ -95,6 +96,7 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
 
         buttonPhone = (Button) view.findViewById(R.id.callPhone);
         buttonWeb = (Button) view.findViewById(R.id.linkWebsite);
+        buttonNavigate = (Button) view.findViewById(R.id.navigationButton);
         buttonPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,6 +129,18 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
                 startActivity(linkActivity);
             }
         });
+        buttonNavigate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final LocationManager manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+                if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    buildAlertMessageNoGps();
+                }else {
+                    openGoogleMap(new LatLng(lat,lng), location);
+                }
+            }
+        });
+
         if (isGPS) {
             System.out.println("GPS = " + isGPS);
             GoogleDirection.withServerKey(serverKey)
@@ -156,13 +170,30 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
         return view;
     }
 
+    protected void buildAlertMessageNoGps() {
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("Please Turn ON your GPS Connection")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, final int id) {
+                        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
+    }
+
     public void statusCheck() {
         if (ActivityCompat.checkSelfPermission(getActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // Check Permissions Now
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    0);
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
         }
 
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
@@ -207,6 +238,14 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
                     Toast.LENGTH_SHORT).show();
         }
         System.out.println("isGPS = " + isGPS);
+    }
+
+    private void openGoogleMap(LatLng src, LatLng dest) {
+        String url = "http://maps.google.com/maps?saddr="+src.latitude+","+src.longitude+"&daddr="+dest.latitude+","+dest.longitude+"&mode=driving";
+        Uri gmmIntentUri = Uri.parse(url);
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        startActivity(mapIntent);
     }
 
     @Override

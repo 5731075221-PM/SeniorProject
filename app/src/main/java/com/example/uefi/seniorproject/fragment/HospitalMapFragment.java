@@ -127,11 +127,9 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
                 getActivity().sendBroadcast(poke);
             }
 
-            Location location = locationManager
-                    .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
-            locationManager.requestLocationUpdates(
-                    LocationManager.NETWORK_PROVIDER, 500, 0, this);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 500, 0, this);
 
             if (location != null)
                 onLocationChanged(location);
@@ -140,10 +138,8 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
             if (location != null)
                 onLocationChanged(location);
             else
-
                 Toast.makeText(getActivity().getBaseContext(), "Location can't be retrieved",
                         Toast.LENGTH_SHORT).show();
-
         } else {
             Toast.makeText(getActivity().getBaseContext(), "No Provider Found",
                     Toast.LENGTH_SHORT).show();
@@ -152,8 +148,7 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
 
     public void statusCheck() {
         System.out.println("statusCheck");
-        final LocationManager manager = (LocationManager) getActivity().getSystemService(
-                Context.LOCATION_SERVICE);
+        final LocationManager manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             buildAlertMessageNoGps();
         }
