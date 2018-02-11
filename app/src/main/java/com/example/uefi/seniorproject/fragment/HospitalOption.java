@@ -7,10 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.uefi.seniorproject.R;
-import com.example.uefi.seniorproject.databases.DBHelperDAO;
 
 /**
  * Created by UEFI on 7/2/2561.

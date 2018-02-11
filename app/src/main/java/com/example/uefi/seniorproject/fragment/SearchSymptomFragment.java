@@ -59,6 +59,7 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
         @Override
         protected Void doInBackground(Void... voids) {
             try {
+                dictList = dbHelperDAO.getLexitron();
                 tokenizer = new LongLexTo(dictList, stopwordList);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -97,7 +98,6 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
 
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());
         dbHelperDAO.open();
-        dictList = dbHelperDAO.getLexitron();
         stopwordList = dbHelperDAO.getStopword();
         mainSymptoms = dbHelperDAO.getMainSymptoms();
         allSymptoms = dbHelperDAO.getAllSymptoms();

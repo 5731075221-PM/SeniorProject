@@ -50,6 +50,7 @@ public class FirstaidNavFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_firstaid_nav, container, false);
+      
         Bundle bundle = getArguments();
         toolbar = bundle.getString("toolbar");
 //        indicator = bundle.getInt("indicator");
