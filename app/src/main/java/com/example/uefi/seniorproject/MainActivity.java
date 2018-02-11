@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.uefi.seniorproject.fragment.HospitalSelectFragment;
+import com.example.uefi.seniorproject.fragment.MainFragment;
 import com.example.uefi.seniorproject.fragment.SearchSymptomFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity
 
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .add(R.id.container_fragment, new SearchSymptomFragment())
+                .add(R.id.container_fragment, new MainFragment())
                 .commit();
     }
 
