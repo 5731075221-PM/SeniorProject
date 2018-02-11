@@ -70,7 +70,7 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
             if (mMarker != null)
                 mMarker.remove();
 
-            mMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)));
+            mMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).title("คุณอยู่ที่นี่"));
             mMarker.setIcon(BitmapDescriptorFactory.fromBitmap(icon));
 //                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(coordinate, 12));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 12));
@@ -101,12 +101,8 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
         canvas = new Canvas(icon);
         canvas.drawBitmap(icon, 0, 0, paint);
 
-        if (ActivityCompat.checkSelfPermission(getActivity(),
-                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // Check Permissions Now
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    0);
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
         }
 
         statusCheck();
@@ -128,7 +124,6 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
             }
 
             Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 500, 0, this);
 
             if (location != null)

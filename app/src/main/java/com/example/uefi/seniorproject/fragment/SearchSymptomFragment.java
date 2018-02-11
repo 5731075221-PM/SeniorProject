@@ -1,5 +1,7 @@
 package com.example.uefi.seniorproject.fragment;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -40,9 +42,35 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
     ArrayList<String> filteredValues;
     double queryLength, sum;
     LongLexTo tokenizer;
+    ProgressDialog progressBar;
 
-    public SearchSymptomFragment() {
-        // Required empty public constructor
+    class createTokenizer extends AsyncTask<Void, Integer, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar = new ProgressDialog(getContext());
+            progressBar.setMessage("กรุณารอสักครู่...");
+            progressBar.setIndeterminate(false);
+            progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressBar.setCancelable(false);
+            progressBar.show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                tokenizer = new LongLexTo(dictList, stopwordList);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            progressBar.dismiss();
+        }
     }
 
     @Nullable
@@ -65,6 +93,8 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());
         dbHelperDAO.open();
         dictList = dbHelperDAO.getLexitron();
@@ -77,12 +107,7 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
         diseaseName = dbHelperDAO.getDiseaseName();
         diseaseNameDefault = diseaseName;
 
-        try {
-            tokenizer = new LongLexTo(dictList, stopwordList);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        super.onCreate(savedInstanceState);
+        new createTokenizer().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     public void initialQueryVector() {
