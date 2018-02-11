@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:autofit="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="true"
@@ -12,8 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:clickable="false"
-        card_view:cardCornerRadius="8dp"
         card_view:cardUseCompatPadding="true">
+        <!--card_view:cardCornerRadius="8dp"-->
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
@@ -26,22 +27,45 @@
 
             <ImageView
                 android:id="@+id/imageView1"
-                android:layout_width="64dp"
-                android:layout_height="63dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_margin="10dp"
-                android:background="@drawable/icon_hospital" />
+                android:background="@drawable/ic_hospital" />
 
-            <TextView
+            <me.grantland.widget.AutofitTextView
                 android:id="@+id/textView1"
-                android:layout_width="match_parent"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="5dp"
-                android:text="Text"
-                android:textColor="#000000"
-                android:textSize="20sp" />
+                android:lineSpacingExtra="5dp"
+                android:maxLines="2"
+                android:textSize="20sp"
+                autofit:minTextSize="16sp"/>
+
+            <!--<TextView-->
+                <!--android:id="@+id/textView1"-->
+                <!--android:layout_width="152dp"-->
+                <!--android:autoSizeTextType="uniform"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="5dp"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_marginRight="20dp"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:text="Text"-->
+                <!--android:textColor="#000000"-->
+                <!--android:textSize="20sp" />-->
+
+            <TextView
+                android:id="@+id/distanceHospital"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:textSize="15sp" />
 
         </LinearLayout>
 

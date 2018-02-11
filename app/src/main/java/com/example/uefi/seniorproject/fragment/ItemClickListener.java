@@ -1,4 +1,4 @@
-package com.example.uefi.seniorproject.hospital;
+package com.example.uefi.seniorproject.fragment;
 
 import android.view.MotionEvent;
 import android.view.View;

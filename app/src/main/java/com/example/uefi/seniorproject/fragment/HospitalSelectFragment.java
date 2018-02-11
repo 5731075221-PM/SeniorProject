@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -35,7 +34,7 @@ public class HospitalSelectFragment extends Fragment{
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                HospitalFragment fragment = new HospitalFragment();
+                HospitalOption fragment = new HospitalOption();
                 Bundle bundle = new Bundle();
                 bundle.putString("type","0");
                 fragment.setArguments(bundle);

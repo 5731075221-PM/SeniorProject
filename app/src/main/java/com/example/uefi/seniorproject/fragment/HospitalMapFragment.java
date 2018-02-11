@@ -8,18 +8,15 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.ColorFilter;
-import android.graphics.ColorSpace;
-import android.graphics.LightingColorFilter;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -27,16 +24,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,61 +40,41 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
 import java.util.ArrayList;
 
 /**
  * Created by UEFI on 4/1/2561.
  */
 
-public class HospitalMapFragment extends Fragment implements OnMapReadyCallback {
+public class HospitalMapFragment extends Fragment implements OnMapReadyCallback, LocationListener {
     SupportMapFragment mapFragment;
     DBHelperDAO dbHelperDAO;
     ArrayList<Hospital> hospitalList;
     private GoogleMap mMap;
     LocationManager locationManager;
-    LocationListener listener;
+    String provider;
     Marker mMarker;
-    double lat, lng;
-    double avgLat = 0;
-    double avgLng = 0;
+    double lat, lng, avgLat = 0, avgLng = 0;
+    Bitmap icon;
+    Paint paint = new Paint();
+    ColorFilter filter;
+    Canvas canvas;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_hospital_map, container, false);
 
-        listener = new LocationListener() {
-            public void onLocationChanged(Location loc) {
-                Log.d("ChangeLo = ",loc+"");
-                LatLng coordinate = new LatLng(loc.getLatitude(), loc.getLongitude());
-                lat = loc.getLatitude();
-                lng = loc.getLongitude();
+        if (mMap != null) {
+            if (mMarker != null)
+                mMarker.remove();
 
-                if (mMarker != null)
-                    mMarker.remove();
-
-                Bitmap icon = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.ic_location_on_white).copy(Bitmap.Config.ARGB_8888, true);;
-                Paint paint = new Paint();
-                ColorFilter filter = new PorterDuffColorFilter(ContextCompat.getColor(getActivity(), R.color.colorRubyRed), PorterDuff.Mode.SRC_IN);
-                paint.setColorFilter(filter);
-                Canvas canvas = new Canvas(icon);
-                canvas.drawBitmap(icon, 0, 0, paint);
-
-                mMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)));
-                mMarker.setIcon(BitmapDescriptorFactory.fromBitmap(icon));
+            mMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).title("คุณอยู่ที่นี่"));
+            mMarker.setIcon(BitmapDescriptorFactory.fromBitmap(icon));
 //                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(coordinate, 12));
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinate, 12));
-            }
-
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-            }
-
-            public void onProviderEnabled(String provider) {
-            }
-
-            public void onProviderDisabled(String provider) {
-            }
-        };
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 12));
+        }
 
         mapFragment = (SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.hospitalMap);
         mapFragment.getMapAsync(this);
@@ -119,6 +89,64 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback 
             }
         }
         return view;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        icon = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.ic_location_on_white).copy(Bitmap.Config.ARGB_8888, true);
+        filter = new PorterDuffColorFilter(ContextCompat.getColor(getActivity(), R.color.colorRubyRed), PorterDuff.Mode.SRC_IN);
+        paint.setColorFilter(filter);
+        canvas = new Canvas(icon);
+        canvas.drawBitmap(icon, 0, 0, paint);
+
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+        }
+
+        statusCheck();
+
+        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+
+        Criteria criteria = new Criteria();
+
+        provider = locationManager.getBestProvider(criteria, false);
+
+        if (provider != null && !provider.equals("")) {
+            if (!provider.contains("gps")) { // if gps is disabled
+                final Intent poke = new Intent();
+                poke.setClassName("com.android.settings",
+                        "com.android.settings.widget.SettingsAppWidgetProvider");
+                poke.addCategory(Intent.CATEGORY_ALTERNATIVE);
+                poke.setData(Uri.parse("3"));
+                getActivity().sendBroadcast(poke);
+            }
+
+            Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 500, 0, this);
+
+            if (location != null)
+                onLocationChanged(location);
+            else
+                location = locationManager.getLastKnownLocation(provider);
+            if (location != null)
+                onLocationChanged(location);
+            else
+                Toast.makeText(getActivity().getBaseContext(), "Location can't be retrieved",
+                        Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getActivity().getBaseContext(), "No Provider Found",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void statusCheck() {
+        System.out.println("statusCheck");
+        final LocationManager manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            buildAlertMessageNoGps();
+        }
     }
 
     protected void buildAlertMessageNoGps() {
@@ -140,48 +168,6 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback 
         alert.show();
     }
 
-    public void onResume() {
-        super.onResume();
-
-        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-
-        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-        }
-
-        boolean isNetwork = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        boolean isGPS = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-
-        Log.d("isNetwork",isNetwork+"");
-        Log.d("isNetworkGPS",isGPS+"");
-
-
-//        if (isNetwork) {
-//            lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER
-//                    , 5000, 10, listener);
-//            Location loc = lm.getLastKnownLocation(
-//                    LocationManager.NETWORK_PROVIDER);
-//            if (loc != null) {
-//                lat = loc.getLatitude();
-//                lng = loc.getLongitude();
-//            }
-//        }
-
-        if (isGPS) {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, listener);
-            Location loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            if(loc != null) {
-                lat = loc.getLatitude();
-                lng = loc.getLongitude();
-            }
-        }else buildAlertMessageNoGps();
-    }
-
-    public void onPause() {
-        super.onPause();
-        locationManager.removeUpdates(listener);
-    }
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -192,7 +178,8 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback 
                 avgLat += hospitalList.get(i).getLat();
                 avgLng += hospitalList.get(i).getLng();
 
-                Bitmap icon = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.ic_local_hospital_white).copy(Bitmap.Config.ARGB_8888, true);;
+                Bitmap icon = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.ic_local_hospital_white).copy(Bitmap.Config.ARGB_8888, true);
+                ;
                 Paint paint = new Paint();
                 ColorFilter filter = new PorterDuffColorFilter(ContextCompat.getColor(getActivity(), R.color.colorMacawBlueGreen), PorterDuff.Mode.SRC_IN);
                 paint.setColorFilter(filter);
@@ -200,7 +187,7 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback 
                 canvas.drawBitmap(icon, 0, 0, paint);
 
                 mMap.addMarker(new MarkerOptions().position(new LatLng(hospitalList.get(i).getLat(), hospitalList.get(i).getLng()))
-                        .title(hospitalList.get(i).getName()).snippet(i+"")).setIcon(BitmapDescriptorFactory.fromBitmap(icon));
+                        .title(hospitalList.get(i).getName()).snippet(i + "")).setIcon(BitmapDescriptorFactory.fromBitmap(icon));
             }
             avgLat = avgLat / hospitalList.size();
             avgLng = avgLng / hospitalList.size();
@@ -241,16 +228,49 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback 
                 TextView title = ((TextView) infoWindow.findViewById(R.id.textViewName));
                 title.setText(marker.getTitle());
 
-//                TextView snippet = ((TextView) infoWindow.findViewById(R.id.textViewSnippet));
-//                snippet.setText(marker.getSnippet());
-
-//                ImageView imageView = (ImageView) infoWindow.findViewById(R.id.imageView);
-//                imageView.setImageResource(R.drawable.ic_city);
-//                if ("My Home".equals(marker.getTitle())) {
-//                    imageView.setImageResource(R.drawable.ic_home);
-//                }
                 return infoWindow;
             }
         });
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        LatLng coordinate = new LatLng(location.getLatitude(), location.getLongitude());
+        lat = location.getLatitude();
+        lng = location.getLongitude();
+        System.out.println("Lat = " + lat);
+        System.out.println("Lng = " + lng);
+
+        if (mMap != null) {
+            if (mMarker != null)
+                mMarker.remove();
+
+            mMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)));
+            mMarker.setIcon(BitmapDescriptorFactory.fromBitmap(icon));
+//                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(coordinate, 12));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 12));
+        }
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+        System.out.println("onProviderDis");
+//        if (ActivityCompat.checkSelfPermission(getActivity(),
+//                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//            // Check Permissions Now
+//            ActivityCompat.requestPermissions(getActivity(),
+//                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+//                    0);
+//        }
     }
 }

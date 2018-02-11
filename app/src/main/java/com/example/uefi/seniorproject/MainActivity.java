@@ -13,6 +13,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.uefi.seniorproject.fragment.HospitalSelectFragment;
+import com.example.uefi.seniorproject.fragment.MainFragment;
+import com.example.uefi.seniorproject.fragment.SearchSymptomFragment;
 import com.example.uefi.seniorproject.firstaid.FirstaidFragment;
 import com.example.uefi.seniorproject.fragment.MainFragment;
 import com.example.uefi.seniorproject.fragment.HospitalSelectFragment;
