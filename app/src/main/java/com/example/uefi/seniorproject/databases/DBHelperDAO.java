@@ -277,7 +277,7 @@ public class DBHelperDAO {
 
     public ArrayList<String> getFirstaidList(int indicator){
         ArrayList<String> list = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT * FROM firstaid WHERE id_subject='"+indicator+"' ORDER BY word ASC", null);
+        Cursor cursor = database.rawQuery("SELECT * FROM firstaid WHERE id_subject='"+indicator+"' ORDER BY subject ASC", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             list.add(cursor.getString(cursor.getColumnIndex("subject")));

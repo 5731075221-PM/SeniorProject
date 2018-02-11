@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.uefi.seniorproject.R;
 import com.example.uefi.seniorproject.databases.DBHelperDAO;
@@ -31,16 +32,17 @@ public class FirstaidNavFragment extends Fragment {
     public String toolbar;
     public int indicator;
     public ArrayList<String> list;
+    public TextView textTool;
 
     public FirstaidNavFragment() {
         // Required empty public constructor
     }
 
-    public static FirstaidNavFragment newInstance(String toolbar) {
+    public static FirstaidNavFragment newInstance(String toolbar,int indicator) {
         FirstaidNavFragment fragment = new FirstaidNavFragment();
         Bundle bundle = new Bundle();
         bundle.putString("toolbar",toolbar);
-//        bundle.putInt("indicator",indicator);
+        bundle.putInt("indicator",indicator);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -50,25 +52,29 @@ public class FirstaidNavFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_firstaid_nav, container, false);
-      
+
+        textTool = (TextView) getActivity().findViewById(R.id.textTool);
+        textTool.setText("การปฐมพยาบาล");
+
         Bundle bundle = getArguments();
         toolbar = bundle.getString("toolbar");
-//        indicator = bundle.getInt("indicator");
+        indicator = bundle.getInt("indicator");
 
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(toolbar);
+        TextView header = (TextView) view.findViewById(R.id.textView);
+        header.setText(toolbar);
 
-//        dbHelperDAO = DBHelperDAO.getInstance(getActivity());
-//        dbHelperDAO.open();
-//
-//        list = dbHelperDAO.getFirstaidList(indicator);
-//
-//        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_firstaid);
-//
-//        mLayoutManager = new LinearLayoutManager( getActivity());
-//        mRecyclerView.setLayoutManager(mLayoutManager);
-//
-//        mAdapter = new CustomAdapterFirstaid(list);
-//        mRecyclerView.setAdapter(mAdapter);
+
+        dbHelperDAO = DBHelperDAO.getInstance(getActivity());
+        dbHelperDAO.open();
+        list = dbHelperDAO.getFirstaidList(indicator);
+
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_firstaid);
+
+        mLayoutManager = new LinearLayoutManager( getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        mAdapter = new CustomAdapterFirstaid(list);
+        mRecyclerView.setAdapter(mAdapter);
 
 
 
