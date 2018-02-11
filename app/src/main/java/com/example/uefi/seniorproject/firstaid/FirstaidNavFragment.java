@@ -52,15 +52,15 @@ public class FirstaidNavFragment extends Fragment {
         dbHelperDAO.open();
 
         ArrayList<String>  name;
-        name = dbHelperDAO.getFirstaid1Name();
+//        name = dbHelperDAO.getFirstaid1Name();
 
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_firstaid);
-
-        mLayoutManager = new LinearLayoutManager( getActivity());
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        mAdapter = new CustomAdapterFirstaid(name);
-        mRecyclerView.setAdapter(mAdapter);
+//        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_firstaid);
+//
+//        mLayoutManager = new LinearLayoutManager( getActivity());
+//        mRecyclerView.setLayoutManager(mLayoutManager);
+//
+//        mAdapter = new CustomAdapterFirstaid(name);
+//        mRecyclerView.setAdapter(mAdapter);
 
 
 
