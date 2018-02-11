@@ -8,6 +8,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,10 +27,16 @@ import java.util.ArrayList;
  */
 public class FirstaidFragment extends Fragment {
 
+    public TextView head;
+    public TextView body;
+    public TextView fire;
+    public TextView poison;
+    public TextView normal;
+    public String toolbar;
+
     public FirstaidFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,6 +45,23 @@ public class FirstaidFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_firstaid, container, false);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("การปฐมพยาบาล");
 
+        head = (TextView) view.findViewById(R.id.head);
+        body = (TextView) view.findViewById(R.id.body);
+        fire = (TextView) view.findViewById(R.id.fire);
+        poison = (TextView) view.findViewById(R.id.poison);
+        normal = (TextView) view.findViewById(R.id.normal);
+
+        head.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toolbar = "ตา หู คอ";
+
+                FragmentTransaction transaction = getFragmentManager() .beginTransaction();
+                transaction.replace(R.id.relaFirstaid, FirstaidNavFragment.newInstance(toolbar));
+                transaction.addToBackStack("");
+                transaction.commit();
+            }
+        });
 
 
         return view;

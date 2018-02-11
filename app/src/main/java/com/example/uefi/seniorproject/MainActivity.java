@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager().popBackStack();
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             // Show hamburger
-//            toggle.setDrawerIndicatorEnabled(true);
+            toggle.setDrawerIndicatorEnabled(true);
             // Remove the/any drawer toggle listener
             toggle.setToolbarNavigationClickListener(null);
             mToolBarNavigationListenerIsRegistered = false;
@@ -134,8 +134,8 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_disease) {
 
         } else if (id == R.id.nav_firstaid) {
-//            toggle.setDrawerIndicatorEnabled(false);
-//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            toggle.setDrawerIndicatorEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             if(!mToolBarNavigationListenerIsRegistered) {
                 toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
                     @Override
@@ -152,8 +152,8 @@ public class MainActivity extends AppCompatActivity
                     .addToBackStack(null)
                     .commit();
         } else if (id == R.id.nav_hospital) {
-//            toggle.setDrawerIndicatorEnabled(false);
-//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            toggle.setDrawerIndicatorEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             if(!mToolBarNavigationListenerIsRegistered) {
                 toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
                     @Override
