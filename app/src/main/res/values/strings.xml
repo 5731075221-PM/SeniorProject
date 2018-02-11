@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Cares</string>
+    <string name="app_name">Mymor</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_item_hospital">ItemHospital</string>
     <string name="back">Back</string>

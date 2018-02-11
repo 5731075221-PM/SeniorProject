@@ -1,6 +1,7 @@
 package com.example.uefi.seniorproject;
 
 import android.content.res.Configuration;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.uefi.seniorproject.fragment.HospitalSelectFragment;
 import com.example.uefi.seniorproject.fragment.MainFragment;
@@ -22,7 +24,7 @@ import com.example.uefi.seniorproject.fragment.HospitalSelectFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    public TextView textTool;
     ActionBarDrawerToggle toggle;
     FragmentManager fragmentManager;
     private boolean mToolBarNavigationListenerIsRegistered = false;
@@ -38,15 +40,11 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+        textTool = (TextView) findViewById(R.id.textTool);
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Kanit-Regular.ttf");
+        textTool.setTypeface(font);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(
@@ -61,6 +59,7 @@ public class MainActivity extends AppCompatActivity
         fragmentManager.beginTransaction()
                 .add(R.id.container_fragment, new MainFragment())
                 .commit();
+
     }
 
     @Override
@@ -72,8 +71,8 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
 
-            getSupportActionBar().setTitle("Cares");
-
+//            getSupportActionBar().setTitle(R.string.app_name);
+            textTool.setText(R.string.app_name);
 //            Log.d("CASE1 = ",getSupportFragmentManager().getBackStackEntryCount()+"");
             getSupportFragmentManager().popBackStack();
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -107,6 +106,9 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
 //        getMenuInflater().inflate(R.menu.main, menu);
+
+
+
         return true;
     }
 

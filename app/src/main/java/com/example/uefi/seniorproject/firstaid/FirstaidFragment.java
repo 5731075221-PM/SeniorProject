@@ -1,6 +1,7 @@
 package com.example.uefi.seniorproject.firstaid;
 
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 //import android.app.Fragment;
 import android.support.annotation.NonNull;
@@ -32,6 +33,7 @@ public class FirstaidFragment extends Fragment {
     public TextView fire;
     public TextView poison;
     public TextView normal;
+    public TextView textTool;
     public String toolbar;
 
     public FirstaidFragment() {
@@ -43,21 +45,69 @@ public class FirstaidFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_firstaid, container, false);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("การปฐมพยาบาล");
+//        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("การปฐมพยาบาล");
 
         head = (TextView) view.findViewById(R.id.head);
         body = (TextView) view.findViewById(R.id.body);
         fire = (TextView) view.findViewById(R.id.fire);
         poison = (TextView) view.findViewById(R.id.poison);
         normal = (TextView) view.findViewById(R.id.normal);
+        textTool = (TextView) getActivity().findViewById(R.id.textTool);
+        textTool.setText("การปฐมพยาบาล");
+
+        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Kanit-Regular.ttf");
+        head.setTypeface(font);
+        body.setTypeface(font);
+        fire.setTypeface(font);
+        poison.setTypeface(font);
+        normal.setTypeface(font);
 
         head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 toolbar = "ตา หู คอ";
-
                 FragmentTransaction transaction = getFragmentManager() .beginTransaction();
-                transaction.replace(R.id.relaFirstaid, FirstaidNavFragment.newInstance(toolbar));
+                transaction.replace(R.id.relaFirstaid, FirstaidNavFragment.newInstance(toolbar,1));
+                transaction.addToBackStack("");
+                transaction.commit();
+            }
+        });
+        body.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toolbar = "กล้ามเนื้อ กระดูก ลำไส้";
+                FragmentTransaction transaction = getFragmentManager() .beginTransaction();
+                transaction.replace(R.id.relaFirstaid, FirstaidNavFragment.newInstance(toolbar,2));
+                transaction.addToBackStack("");
+                transaction.commit();
+            }
+        });
+        fire.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toolbar = "แผลไหม้ น้ำร้อนลวก";
+                FragmentTransaction transaction = getFragmentManager() .beginTransaction();
+                transaction.replace(R.id.relaFirstaid, FirstaidNavFragment.newInstance(toolbar,3));
+                transaction.addToBackStack("");
+                transaction.commit();
+            }
+        });
+        poison.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toolbar = "พิษ สารพิษ";
+                FragmentTransaction transaction = getFragmentManager() .beginTransaction();
+                transaction.replace(R.id.relaFirstaid, FirstaidNavFragment.newInstance(toolbar,4));
+                transaction.addToBackStack("");
+                transaction.commit();
+            }
+        });
+        normal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toolbar = "เบ็ดเตล็ด";
+                FragmentTransaction transaction = getFragmentManager() .beginTransaction();
+                transaction.replace(R.id.relaFirstaid, FirstaidNavFragment.newInstance(toolbar,5));
                 transaction.addToBackStack("");
                 transaction.commit();
             }
