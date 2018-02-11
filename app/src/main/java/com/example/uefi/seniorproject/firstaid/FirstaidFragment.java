@@ -38,19 +38,6 @@ public class FirstaidFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_firstaid, container, false);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("การปฐมพยาบาล");
 
-        LinearLayout app_layer = (LinearLayout) view.findViewById (R.id.blood);
-        app_layer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // sent bundle ma duay na *********
-
-                FragmentTransaction transaction = getFragmentManager() .beginTransaction();
-                transaction.replace(R.id.relaFirstaid, FirstaidNavFragment.newInstance());
-                transaction.addToBackStack("");
-                transaction.commit();
-            }
-        });
 
 
         return view;
