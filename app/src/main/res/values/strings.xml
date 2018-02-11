@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SeniorProject</string>
+    <string name="app_name">Cares</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_item_hospital">ItemHospital</string>
     <string name="back">Back</string>
@@ -186,5 +186,8 @@
         <item>สำโรงเหนือ</item>
         <item>เมือง</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -4,17 +4,24 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Pair;
 
+import com.example.uefi.seniorproject.firstaid.Firstaid;
 import com.example.uefi.seniorproject.fragment.Hospital;
 import com.example.uefi.seniorproject.fragment.Symptom;
 
 import java.util.ArrayList;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by UEFI on 20/12/2560.
@@ -267,7 +274,50 @@ public class DBHelperDAO {
         return list;
     }
 
+    public ArrayList<Firstaid> getFirstaid1() {
+        ArrayList<Firstaid> list = new ArrayList<Firstaid>();
 
+        Cursor cursor = database.rawQuery("SELECT * FROM firstaid", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Firstaid firstaid = new Firstaid();
+            Map<List<String>,Map<Integer,String>> mapSubject = new HashMap<List<String>,Map<Integer,String>>();
+            List<String> subject = new ArrayList<String>();
+            Map<Integer,String> mapDetail = new HashMap<Integer,String>();
+
+            firstaid.setFirstaid_id(cursor.getInt(cursor.getColumnIndex("firstaid_id")));
+            firstaid.setFirstaid_name(cursor.getString(cursor.getColumnIndex("firstaid_name")));
+            firstaid.setFirstaid_detail(cursor.getString(cursor.getColumnIndex("firstaid_detail")));
+
+            int idFirstaid = cursor.getInt(cursor.getColumnIndex("firstaid_id"));
+
+            Cursor cursor1 = database.rawQuery("SELECT * FROM firstaid_subject WHERE firstaid_id ='"+idFirstaid+"'", null);
+            cursor1.moveToFirst();
+            while (!cursor1.isAfterLast()) {
+
+                int idSubject = cursor1.getInt(cursor.getColumnIndex("firstaid_subject_id"));
+
+                Cursor cursor2 = database.rawQuery("SELECT * FROM firstaid_detail WHERE firstaid_subject_id ='"+idSubject+"'", null);
+                cursor2.moveToFirst();
+                while (!cursor2.isAfterLast()) {
+                    mapDetail.put(cursor2.getInt(cursor2.getColumnIndex("firstaid_detail_number")),cursor.getString(cursor.getColumnIndex("firstaid_detail_name")));
+                    cursor2.moveToNext();
+                }
+                cursor2.close();
+                subject.add(cursor1.getString(cursor.getColumnIndex("firstaid_subject_name")));
+                subject.add(cursor1.getString(cursor.getColumnIndex("firstaid_subject_detail")));
+                mapSubject.put(subject,mapDetail);
+                cursor1.moveToNext();
+            }
+            cursor1.close();
+            cursor.moveToNext();
+            firstaid.setDetail(mapSubject);
+            list.add(firstaid);
+        }
+        cursor.close();
+
+        return list;
+    }
 
 //    public ArrayList<Pair<Double,Double>> getLatLng() {
 //        ArrayList<Pair<Double,Double>> list = new ArrayList<>();

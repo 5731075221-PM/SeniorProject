@@ -2,8 +2,6 @@ package com.example.uefi.seniorproject;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -18,6 +16,9 @@ import android.view.MenuItem;
 import com.example.uefi.seniorproject.fragment.HospitalSelectFragment;
 import com.example.uefi.seniorproject.fragment.MainFragment;
 import com.example.uefi.seniorproject.fragment.SearchSymptomFragment;
+import com.example.uefi.seniorproject.firstaid.FirstaidFragment;
+import com.example.uefi.seniorproject.fragment.MainFragment;
+import com.example.uefi.seniorproject.fragment.HospitalSelectFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -70,6 +71,9 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
+
+            getSupportActionBar().setTitle("Cares");
+
 //            Log.d("CASE1 = ",getSupportFragmentManager().getBackStackEntryCount()+"");
             getSupportFragmentManager().popBackStack();
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -127,7 +131,27 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_hospital) {
+        if (id == R.id.nav_disease) {
+
+        } else if (id == R.id.nav_firstaid) {
+            toggle.setDrawerIndicatorEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            if(!mToolBarNavigationListenerIsRegistered) {
+                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Doesn't have to be onBackPressed
+                        onBackPressed();
+                    }
+                });
+
+                mToolBarNavigationListenerIsRegistered = true;
+            }
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container_fragment, new FirstaidFragment())
+                    .addToBackStack(null)
+                    .commit();
+        } else if (id == R.id.nav_hospital) {
             toggle.setDrawerIndicatorEnabled(false);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             if(!mToolBarNavigationListenerIsRegistered) {
@@ -145,15 +169,9 @@ public class MainActivity extends AppCompatActivity
                     .replace(R.id.container_fragment, new HospitalSelectFragment())
                     .addToBackStack(null)
                     .commit();
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_reminder) {
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_food) {
 
         }
 
