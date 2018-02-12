@@ -1,6 +1,7 @@
 package com.example.uefi.seniorproject.firstaid;
 
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 //import android.app.Fragment;
 import android.support.v4.app.Fragment;
@@ -59,9 +60,10 @@ public class FirstaidNavFragment extends Fragment {
         Bundle bundle = getArguments();
         toolbar = bundle.getString("toolbar");
         indicator = bundle.getInt("indicator");
-
+        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Kanit-Regular.ttf");
         TextView header = (TextView) view.findViewById(R.id.textView);
         header.setText(toolbar);
+        header.setTypeface(font);
 
 
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());

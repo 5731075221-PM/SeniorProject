@@ -33,6 +33,8 @@ public class FirstaidFragment extends Fragment {
     public TextView fire;
     public TextView poison;
     public TextView normal;
+    public TextView cpr;
+    public TextView transport;
     public TextView textTool;
     public String toolbar;
 
@@ -52,6 +54,8 @@ public class FirstaidFragment extends Fragment {
         fire = (TextView) view.findViewById(R.id.fire);
         poison = (TextView) view.findViewById(R.id.poison);
         normal = (TextView) view.findViewById(R.id.normal);
+        cpr = (TextView) view.findViewById(R.id.cpr);
+        transport = (TextView) view.findViewById(R.id.transport);
         textTool = (TextView) getActivity().findViewById(R.id.textTool);
         textTool.setText("การปฐมพยาบาล");
 
@@ -61,6 +65,8 @@ public class FirstaidFragment extends Fragment {
         fire.setTypeface(font);
         poison.setTypeface(font);
         normal.setTypeface(font);
+        cpr.setTypeface(font);
+        transport.setTypeface(font);
 
         head.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +112,26 @@ public class FirstaidFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 toolbar = "เบ็ดเตล็ด";
+                FragmentTransaction transaction = getFragmentManager() .beginTransaction();
+                transaction.replace(R.id.relaFirstaid, FirstaidNavFragment.newInstance(toolbar,5));
+                transaction.addToBackStack("");
+                transaction.commit();
+            }
+        });
+        cpr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toolbar = "การช่วยฟื้นคืนชีพขั้นพื้นฐาน";
+                FragmentTransaction transaction = getFragmentManager() .beginTransaction();
+                transaction.replace(R.id.relaFirstaid, FirstaidNavFragment.newInstance(toolbar,5));
+                transaction.addToBackStack("");
+                transaction.commit();
+            }
+        });
+        transport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toolbar = "การยกและเคลื่อนย้ายผู้ป่วย";
                 FragmentTransaction transaction = getFragmentManager() .beginTransaction();
                 transaction.replace(R.id.relaFirstaid, FirstaidNavFragment.newInstance(toolbar,5));
                 transaction.addToBackStack("");
