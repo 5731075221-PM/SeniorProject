@@ -235,12 +235,14 @@ public class DBHelperDAO {
         return list;
     }
 
-//    public int checkKeyword(String w){
-//        Cursor cursor = database.rawQuery("SELECT * FROM mainsymptoms WHERE word='"+w+"'", null);
-//        cursor.moveToFirst();
-//        if(cursor.getCount() == 1) return cursor.getInt(cursor.getColumnIndex("id"));
-//        return -1;
-//    }
+    public String getContent(String str,String type){
+        String list = "";
+        Cursor cursor = database.rawQuery("SELECT "+type+" FROM diseases WHERE name="+"'"+str+"'", null);
+        cursor.moveToFirst();
+        list = cursor.getString(0);
+        cursor.close();
+        return list;
+    }
 
     public ArrayList<String> checkKeyword(String[] w){
         System.out.println("Setdatabase = "+w.toString());

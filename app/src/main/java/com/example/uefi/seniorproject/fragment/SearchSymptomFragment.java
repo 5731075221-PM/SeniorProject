@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -88,6 +89,7 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
 
         recyclerView = (RecyclerView) view.findViewById(R.id.searchSymptomList);
         recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
 
         return view;
     }
@@ -289,12 +291,6 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
                         SelectItemFragment fragment = new SelectItemFragment();
                         Bundle bundle = new Bundle();
                         bundle.putString("name",diseaseName.get(position));
-//                        bundle.putString("name", hospitalList.get(position).getName());
-//                        bundle.putDouble("lat", hospitalList.get(position).getLat());
-//                        bundle.putDouble("lng", hospitalList.get(position).getLng());
-//                        bundle.putString("address", hospitalList.get(position).getAddress());
-//                        bundle.putString("phone", hospitalList.get(position).getPhone());
-//                        bundle.putString("website", hospitalList.get(position).getWebsite());
                         fragment.setArguments(bundle);
                         getFragmentManager().beginTransaction()
                                 .replace(R.id.container_fragment, fragment)

@@ -5,6 +5,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
@@ -57,6 +58,7 @@ public class HospitalAreaFragment extends Fragment implements SearchView.OnQuery
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
 
         arrayProvince = getResources().getStringArray(R.array.Province1);
         arrayZone = getResources().getStringArray(R.array.Zone1All);
@@ -77,10 +79,10 @@ public class HospitalAreaFragment extends Fragment implements SearchView.OnQuery
         zone.setAdapter(adapterZone);
         zone.setOnItemSelectedListener(this);
 
-        headProvince = (TextView) view.findViewById(R.id.textViewProvince);
-        headZone = (TextView) view.findViewById(R.id.textViewZone);
-        headProvince.setTypeface(tf);
-        headZone.setTypeface(tf);
+//        headProvince = (TextView) view.findViewById(R.id.textViewProvince);
+//        headZone = (TextView) view.findViewById(R.id.textViewZone);
+//        headProvince.setTypeface(tf);
+//        headZone.setTypeface(tf);
 
         return view;
     }

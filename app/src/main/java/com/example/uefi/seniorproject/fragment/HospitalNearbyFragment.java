@@ -14,6 +14,7 @@ import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -104,6 +105,7 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
         recyclerView = (RecyclerView) view.findViewById(R.id.nearbyHospitalRecyclerView);
         adapter = new RecyclerViewAdapter();
         recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
 
         return view;
     }

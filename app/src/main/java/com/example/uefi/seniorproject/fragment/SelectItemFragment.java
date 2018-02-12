@@ -2,8 +2,6 @@ package com.example.uefi.seniorproject.fragment;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -15,26 +13,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.uefi.seniorproject.R;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-
-import java.io.IOException;
-import java.util.ArrayList;
+import com.example.uefi.seniorproject.databases.DBHelperDAO;
 
 /**
  * Created by UEFI on 5/2/2561.
  */
 
 public class SelectItemFragment extends Fragment{
-    String name = "";
-    String list = "";
+    DBHelperDAO dbHelperDAO;
+    String name = "",cause,symptom,treat,protect;
     TextView t;
 
     TabLayout tabLayout;
     ViewPager viewPager;
-    private int mPage;
 
     @Nullable
     @Override
@@ -74,6 +65,19 @@ public class SelectItemFragment extends Fragment{
         return view;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        dbHelperDAO = DBHelperDAO.getInstance(getActivity());
+        dbHelperDAO.open();
+        name = getArguments().getString("name");
+        cause = dbHelperDAO.getContent(name,"cause");
+        symptom = dbHelperDAO.getContent(name, "symptom");
+        treat = dbHelperDAO.getContent(name, "treat");
+        protect = dbHelperDAO.getContent(name, "protect");
+    }
+
     private void setupTabIcons() {
         Drawable image = getActivity().getResources().getDrawable(R.drawable.image1_tab_select);
         image.setBounds(0, 0, 25, 25);
@@ -99,10 +103,10 @@ public class SelectItemFragment extends Fragment{
 
     private void setupViewPager(ViewPager viewPager) {
         PagerAdapterFragment adapter = new PagerAdapterFragment(getActivity().getSupportFragmentManager());
-        adapter.addFrag(new PageFragment(1), "AAAAAAAAA");
-        adapter.addFrag(new PageFragment(2), "BBBBBBBBB");
-        adapter.addFrag(new PageFragment(3), "CCCCCCCCC");
-        adapter.addFrag(new PageFragment(4), "DDDDDDDDD");
+        adapter.addFrag(new CausePageFragment(cause), "สาเหตุ");
+        adapter.addFrag(new SymptomPageFragment(symptom), "อาการ");
+        adapter.addFrag(new TreatPageFragment(treat), "วิธีรักษา");
+        adapter.addFrag(new ProtectPageFragment(protect), "วิธีป้องกัน");
         viewPager.setAdapter(adapter);
     }
 

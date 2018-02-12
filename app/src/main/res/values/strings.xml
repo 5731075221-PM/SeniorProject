@@ -20,7 +20,7 @@
     </string-array>
 
     <string-array name="Province1">
-        <item>เลือกทั้งหมด</item>
+        <item>เลือกจังหวัด</item>
         <item>กรุงเทพมหานคร</item>
         <item>นนทบุรี</item>
         <item>ปทุมธานี</item>
@@ -28,7 +28,7 @@
     </string-array>
 
     <string-array name="Zone1Bangkok">
-        <item>เลือกทั้งหมด</item>
+        <item>เลือกเขต</item>
         <item>คลองสาน</item>
         <item>คลองสามวา</item>
         <item>คลองเตย</item>
@@ -82,7 +82,7 @@
     </string-array>
 
     <string-array name="Zone1Nonthaburi">
-        <item>เลือกทั้งหมด</item>
+        <item>เลือกเขต</item>
         <item>บางกรวย</item>
         <item>บางบัวทอง</item>
         <item>บางใหญ่</item>
@@ -92,7 +92,7 @@
     </string-array>
 
     <string-array name="Zone1Patumthani">
-        <item>เลือกทั้งหมด</item>
+        <item>เลือกเขต</item>
         <item>ตลองหลวง</item>
         <item>ธัญบุรี</item>
         <item>ฃาดหลุมแก้ว</item>
@@ -103,18 +103,18 @@
     </string-array>
 
     <string-array name="Zone1SamutPrakarn">
-        <item>เลือกทั้งหมด</item>
+        <item>เลือกเขต</item>
         <item>บางบ่อ</item>
         <item>บางพลี</item>
         <item>บางเสาธง</item>
         <item>พระประแดง</item>
         <item>พระสมุทรเจดีย์</item>
         <item>สำโรงเหนือ</item>
-        <item>เเมือง</item>
+        <item>เมือง</item>
     </string-array>
 
     <string-array name="Zone1All">
-        <item>เลือกทั้งหมด</item>
+        <item>เลือกเขต</item>
         <item>คลองสาน</item>
         <item>คลองสามวา</item>
         <item>คลองเตย</item>
