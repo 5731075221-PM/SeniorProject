@@ -5,7 +5,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 //import android.app.Fragment;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,8 +17,6 @@ import com.example.uefi.seniorproject.R;
 import com.example.uefi.seniorproject.databases.DBHelperDAO;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -70,12 +68,21 @@ public class FirstaidNavFragment extends Fragment {
         dbHelperDAO.open();
         list = dbHelperDAO.getFirstaidList(indicator);
 
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_firstaid);
 
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_firstaid);
         mLayoutManager = new LinearLayoutManager( getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new CustomAdapterFirstaid(getActivity(),list);
+        mAdapter.setItemClickListener(new CustomAdapterFirstaid.OnItemClickListener() {
+            @Override
+            public void onItemClick(View item, int position) {
+                FragmentTransaction transaction = getFragmentManager() .beginTransaction();
+                transaction.replace(R.id.frameFirstaidNav, SubjectFragment.newInstance(list.get(position)));
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
 
-        mAdapter = new CustomAdapterFirstaid(list);
         mRecyclerView.setAdapter(mAdapter);
 
 

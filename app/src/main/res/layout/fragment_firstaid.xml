@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/firstaid"
+    android:clickable="true"
     tools:context="com.example.uefi.seniorproject.firstaid.FirstaidFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -131,7 +132,7 @@
                 android:id="@+id/cpr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/try1"
+                android:background="@color/nav_bar"
                 android:elevation="3dp"
                 android:gravity="center"
                 android:padding="7dp"
@@ -143,8 +144,8 @@
                 android:id="@+id/transport"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:background="@color/try1"
+                android:layout_marginTop="7dp"
+                android:background="@color/nav_bar"
                 android:elevation="5dp"
                 android:gravity="center"
                 android:padding="7dp"

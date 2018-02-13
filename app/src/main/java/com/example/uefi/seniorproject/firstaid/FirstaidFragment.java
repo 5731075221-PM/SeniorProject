@@ -41,6 +41,10 @@ public class FirstaidFragment extends Fragment {
     public FirstaidFragment() {
         // Required empty public constructor
     }
+    public static FirstaidFragment newInstance() {
+        FirstaidFragment fragment = new FirstaidFragment();
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,8 +77,8 @@ public class FirstaidFragment extends Fragment {
             public void onClick(View v) {
                 toolbar = "ตา หู คอ";
                 FragmentTransaction transaction = getFragmentManager() .beginTransaction();
-                transaction.replace(R.id.relaFirstaid, FirstaidNavFragment.newInstance(toolbar,1));
-                transaction.addToBackStack("");
+                transaction.replace(R.id.relaFirstaid, FirstaidNavFragment.newInstance(toolbar,1),"ตา หู คอ");
+                transaction.addToBackStack("ตา หู คอ");
                 transaction.commit();
             }
         });

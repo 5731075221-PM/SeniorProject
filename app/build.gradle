@@ -41,6 +41,7 @@ dependencies {
     compile 'com.github.myinnos:AlphabetIndex-Fast-Scroll-RecyclerView:1.0.8'
     implementation 'com.android.support:cardview-v7:26.1.0'
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.10'
+    compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
 }
 
 
