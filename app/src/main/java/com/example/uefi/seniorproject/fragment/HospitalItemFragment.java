@@ -14,9 +14,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,12 +70,6 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
 
         final Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/JasmineUPC.ttf");
         final Typeface tf2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
-
-        System.out.println("onCreateView");
-//        if (mMap != null) {
-//            mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)));
-//            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 12));
-//        }
 
         mapFragment = (SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.itemMap);
         mapFragment.getMapAsync(this);

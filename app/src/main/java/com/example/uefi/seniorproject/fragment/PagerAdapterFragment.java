@@ -52,7 +52,7 @@ public class PagerAdapterFragment extends FragmentPagerAdapter {
 //    }
 //    @Override
 //    public Fragment getItem(int position) {
-//        return PageFragment.newInstance(position + 1);
+//        return CausePageFragment.newInstance(position + 1);
 //    }
 //
 //    @Override

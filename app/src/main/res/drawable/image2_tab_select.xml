@@ -2,9 +2,9 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:state_selected="true"
-        android:drawable="@drawable/ic_car" />
+        android:drawable="@drawable/ic_symptom_selected" />
 
     <item
         android:state_selected="false"
-        android:drawable="@drawable/ic_phone_call" />
+        android:drawable="@drawable/ic_symptom_unselected" />
 </selector>

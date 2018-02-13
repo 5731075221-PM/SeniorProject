@@ -70,8 +70,10 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
             if (mMarker != null)
                 mMarker.remove();
 
-            mMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).title("คุณอยู่ที่นี่"));
+            mMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)));
             mMarker.setIcon(BitmapDescriptorFactory.fromBitmap(icon));
+            mMarker.setTitle("คุณอยู่ที่นี่");
+            mMarker.setSnippet("-1");
 //                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(coordinate, 12));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 12));
         }
@@ -179,7 +181,6 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
                 avgLng += hospitalList.get(i).getLng();
 
                 Bitmap icon = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.ic_local_hospital_white).copy(Bitmap.Config.ARGB_8888, true);
-                ;
                 Paint paint = new Paint();
                 ColorFilter filter = new PorterDuffColorFilter(ContextCompat.getColor(getActivity(), R.color.colorMacawBlueGreen), PorterDuff.Mode.SRC_IN);
                 paint.setColorFilter(filter);
@@ -199,6 +200,7 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
+                if(Integer.parseInt(marker.getSnippet()) == -1) return;
                 HospitalItemFragment fragment = new HospitalItemFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString("name", hospitalList.get(Integer.parseInt(marker.getSnippet())).getName());
@@ -247,6 +249,8 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
 
             mMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)));
             mMarker.setIcon(BitmapDescriptorFactory.fromBitmap(icon));
+            mMarker.setTitle("คุณอยู่ที่นี่");
+            mMarker.setSnippet("-1");
 //                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(coordinate, 12));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 12));
         }
