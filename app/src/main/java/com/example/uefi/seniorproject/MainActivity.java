@@ -15,13 +15,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.uefi.seniorproject.databases.DBHelperDAO;
 import com.example.uefi.seniorproject.fragment.HospitalSelectFragment;
 import com.example.uefi.seniorproject.fragment.MainFragment;
 import com.example.uefi.seniorproject.fragment.SearchSymptomFragment;
 import com.example.uefi.seniorproject.firstaid.FirstaidFragment;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    DBHelperDAO dbHelperDAO;
+    ArrayList<String> dictList, stopwordList;
     public TextView textTool;
     ActionBarDrawerToggle toggle;
     FragmentManager fragmentManager;
@@ -35,6 +39,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dbHelperDAO = DBHelperDAO.getInstance(this);
+        dbHelperDAO.open();
+        dictList = dbHelperDAO.getLexitron();
+        stopwordList = dbHelperDAO.getStopword();
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -145,8 +154,13 @@ public class MainActivity extends AppCompatActivity
 
                 mToolBarNavigationListenerIsRegistered = true;
             }
+            Bundle args = new Bundle();
+            args.putStringArrayList("dict",dictList);
+            args.putStringArrayList("stop",stopwordList);
+            SearchSymptomFragment fragment = new SearchSymptomFragment();
+            fragment.setArguments(args);
             fragmentManager.beginTransaction()
-                    .replace(R.id.container_fragment, new SearchSymptomFragment())
+                    .replace(R.id.container_fragment, fragment)
                     .addToBackStack(null)
                     .commit();
         } else if (id == R.id.nav_firstaid) {

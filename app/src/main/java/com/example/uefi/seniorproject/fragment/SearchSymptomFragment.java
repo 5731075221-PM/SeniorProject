@@ -69,8 +69,13 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                dictList = dbHelperDAO.getLexitron();
-                stopwordList = dbHelperDAO.getStopword();
+                mainSymptoms = dbHelperDAO.getMainSymptoms();
+                allSymptoms = dbHelperDAO.getAllSymptoms();
+                vectordata = dbHelperDAO.getVectorData();
+                docLength = dbHelperDAO.getDocLength();
+                idfDoc = dbHelperDAO.getFreq();
+                dictList = getArguments().getStringArrayList("dict");//dbHelperDAO.getLexitron();
+                stopwordList = getArguments().getStringArrayList("stop");//dbHelperDAO.getStopword();
                 tokenizer = new LongLexTo(dictList, stopwordList);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -114,11 +119,6 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
 
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());
         dbHelperDAO.open();
-        mainSymptoms = dbHelperDAO.getMainSymptoms();
-        allSymptoms = dbHelperDAO.getAllSymptoms();
-        vectordata = dbHelperDAO.getVectorData();
-        docLength = dbHelperDAO.getDocLength();
-        idfDoc = dbHelperDAO.getFreq();
         diseaseName = dbHelperDAO.getDiseaseName();
         diseaseNameDefault = diseaseName;
 
