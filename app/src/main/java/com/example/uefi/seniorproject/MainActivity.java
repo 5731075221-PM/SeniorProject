@@ -1,5 +1,7 @@
 package com.example.uefi.seniorproject;
 
+//import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -80,6 +82,11 @@ public class MainActivity extends AppCompatActivity
             toggle.setToolbarNavigationClickListener(null);
             mToolBarNavigationListenerIsRegistered = false;
         }else if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+
+            Fragment fragment = getSupportFragmentManager().findFragmentByTag("Firstaid");
+            if (fragment instanceof FirstaidFragment) {
+                textTool.setText("การปฐมพยาบาล");
+            }
 //            Log.d("CASE2 = ",getSupportFragmentManager().getBackStackEntryCount()+"");
             getSupportFragmentManager().popBackStack();
             toggle.setDrawerIndicatorEnabled(false);
@@ -164,8 +171,8 @@ public class MainActivity extends AppCompatActivity
                 mToolBarNavigationListenerIsRegistered = true;
             }
             fragmentManager.beginTransaction()
-                    .replace(R.id.container_fragment, new FirstaidFragment())
-                    .addToBackStack(null)
+                    .replace(R.id.container_fragment, new FirstaidFragment(),"Firstaid")
+                    .addToBackStack("Firstaid")
                     .commit();
         } else if (id == R.id.nav_hospital) {
             toggle.setDrawerIndicatorEnabled(false);

@@ -8,7 +8,10 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Pair;
 
-import com.example.uefi.seniorproject.firstaid.Firstaid;
+import com.example.uefi.seniorproject.firstaid.DetailItem;
+import com.example.uefi.seniorproject.firstaid.PicDetailItem;
+import com.example.uefi.seniorproject.firstaid.PicItem;
+import com.example.uefi.seniorproject.firstaid.SubjectItem;
 import com.example.uefi.seniorproject.fragment.Hospital;
 import com.example.uefi.seniorproject.fragment.Symptom;
 
@@ -285,6 +288,83 @@ public class DBHelperDAO {
         }
         cursor.close();
         return list;
+    }
+
+    public int getFirstaidId(String indicator){
+        int id = -1;
+        Cursor cursor = database.rawQuery("SELECT * FROM firstaid WHERE subject='"+indicator+"'", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            id=cursor.getInt(cursor.getColumnIndex("id"));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return id;
+    }
+
+    public ArrayList getFirstaidDetail(int indicator){
+        ArrayList list = new ArrayList();
+        Cursor cursor = database.rawQuery("SELECT * FROM firstaidDetail WHERE idFirstaid='"+indicator+"'", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            if(!cursor.isNull(2)) {
+                list.add(new SubjectItem(cursor.getString(cursor.getColumnIndex("subject"))));
+                if(!cursor.isNull(3)) {
+                    String[] check = {"2.","3.","4.","5.","6.","7.","8.","9."};
+                    String temp = cursor.getString(cursor.getColumnIndex("detail"));
+                    String add = "";
+                    for(int i =0;i<check.length;i++){
+                        if(temp.toLowerCase().contains(check[i].toLowerCase())){
+
+                            int index = temp.indexOf(check[i], 0);
+
+                            add = temp.substring(0, index);
+                            temp = temp.substring(index);
+
+                            list.add(new DetailItem(add));
+                        }
+                    }
+                    list.add(new DetailItem(temp+"\n"));
+                }
+            }else if(!cursor.isNull(3)) {
+                String[] check = {"2.","3.","4.","5.","6.","7.","8.","9."};
+                String temp = cursor.getString(cursor.getColumnIndex("detail"));
+                String add = "";
+                for(int i =0;i<check.length;i++){
+                    if(temp.toLowerCase().contains(check[i].toLowerCase())){
+
+                        int index = temp.indexOf(check[i], 0);
+
+                        add = temp.substring(0, index);
+                        temp = temp.substring(index);
+
+                        list.add(new DetailItem(add));
+                    }
+                }
+                list.add(new DetailItem(temp+"\n"));
+            }else if (!cursor.isNull(4)) {
+                list.add(new PicItem(cursor.getBlob(4)));
+                if (!cursor.isNull(5)) {
+                    list.add(new PicDetailItem(cursor.getString(cursor.getColumnIndex("pictureDetail"))));
+                }
+            }
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
+
+    public byte[] test(){
+//        byte[] img;
+        Cursor cursor = database.rawQuery("SELECT * FROM test WHERE id='"+2+"'", null);
+        cursor.moveToFirst();
+//        while (!cursor.isAfterLast()) {
+//            list.add(cursor.getString(cursor.getColumnIndex("subject")));
+            byte[] img = cursor.getBlob(1);
+            cursor.moveToNext();
+//        }
+        cursor.close();
+        return img;
     }
 
 //    public ArrayList<Pair<Double,Double>> getLatLng() {

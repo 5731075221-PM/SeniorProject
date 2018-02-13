@@ -3,7 +3,7 @@
     android:color="?android:colorButtonNormal">
     <item>
         <shape xmlns:android="http://schemas.android.com/apk/res/android">
-            <solid android:color="@color/try1"/>
+            <solid android:color="@color/nav_bar"/>
 
             <padding android:left="1dp"
                 android:top="1dp"
