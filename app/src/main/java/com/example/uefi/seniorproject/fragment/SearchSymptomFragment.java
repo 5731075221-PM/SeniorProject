@@ -1,6 +1,7 @@
 package com.example.uefi.seniorproject.fragment;
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
+import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import com.example.uefi.seniorproject.R;
@@ -20,9 +22,14 @@ import com.example.uefi.seniorproject.breakiterator.LongLexTo;
 import com.example.uefi.seniorproject.databases.DBHelperDAO;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
+
+import in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView;
 
 /**
  * Created by UEFI on 21/1/2561.
@@ -31,7 +38,7 @@ import java.util.Comparator;
 public class SearchSymptomFragment extends Fragment implements SearchView.OnQueryTextListener {
     DBHelperDAO dbHelperDAO;
     private RecyclerViewAdapter adapter = new RecyclerViewAdapter();
-    RecyclerView recyclerView;
+    IndexFastScrollRecyclerView recyclerView;
     SearchView searchView;
     ArrayList<String> dictList, stopwordList, idfDoc, docLength;
     ArrayList<Double> keywordSymptom;
@@ -44,6 +51,8 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
     double queryLength, sum;
     LongLexTo tokenizer;
     ProgressDialog progressBar;
+    private ArrayList<Integer> mSectionPositions;
+    private List<String> mDataArray;
 
     class createTokenizer extends AsyncTask<Void, Integer, Void> {
         @Override
@@ -61,6 +70,7 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
         protected Void doInBackground(Void... voids) {
             try {
                 dictList = dbHelperDAO.getLexitron();
+                stopwordList = dbHelperDAO.getStopword();
                 tokenizer = new LongLexTo(dictList, stopwordList);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -87,9 +97,13 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
         searchView.setQueryHint("ค้นหา");
         searchView.setOnQueryTextListener(this);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.searchSymptomList);
+        recyclerView = (IndexFastScrollRecyclerView) view.findViewById(R.id.searchSymptomList);
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
+        recyclerView.setIndexBarColor("#f9f9f9");
+        recyclerView.setIndexBarTextColor("#4d4d4d");
+        recyclerView.setIndexBarHighLateTextVisibility(true);
+        recyclerView.setIndexbarHighLateTextColor("#4cd29f");
 
         return view;
     }
@@ -100,7 +114,6 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
 
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());
         dbHelperDAO.open();
-        stopwordList = dbHelperDAO.getStopword();
         mainSymptoms = dbHelperDAO.getMainSymptoms();
         allSymptoms = dbHelperDAO.getAllSymptoms();
         vectordata = dbHelperDAO.getVectorData();
@@ -273,7 +286,7 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
         }
     }
 
-    public class RecyclerViewAdapter extends RecyclerView.Adapter<SearchSymptomFragment.ViewHolder> {
+    public class RecyclerViewAdapter extends RecyclerView.Adapter<SearchSymptomFragment.ViewHolder> implements SectionIndexer {
 
         @Override
         public SearchSymptomFragment.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -304,6 +317,35 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
         @Override
         public int getItemCount() {
             return diseaseName.size();
+        }
+
+        @Override
+        public Object[] getSections() {
+            String letters = "[ก-ฮ]";
+            mDataArray = diseaseName;
+            List<String> sections = new ArrayList<>(44);
+            mSectionPositions = new ArrayList<>(44);
+            for (int i = 0, size = mDataArray.size(); i < size; i++) {
+                String section = String.valueOf(mDataArray.get(i).charAt(0)).toUpperCase();
+                if(!section.matches(letters)){
+                    section = String.valueOf(mDataArray.get(i).charAt(1)).toUpperCase();
+                }
+                if (!sections.contains(section)) {
+                    sections.add(section);
+                    mSectionPositions.add(i);
+                }
+            }
+            return sections.toArray(new String[0]);
+        }
+
+        @Override
+        public int getPositionForSection(int i) {
+            return mSectionPositions.get(i);
+        }
+
+        @Override
+        public int getSectionForPosition(int i) {
+            return 0;
         }
     }
 }
