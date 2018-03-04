@@ -67,6 +67,9 @@ public class CustomAdapterFirstaid extends RecyclerView.Adapter{
 
         String name = mFirstaids.get(position);
         String letter = String.valueOf(name.charAt(0));
+        if(letter.equals("เ") ||letter.equals("ใ") ||letter.equals("ไ") ||letter.equals("โ") ||letter.equals("แ")){
+            letter = String.valueOf(name.charAt(1));
+        }
         ColorGenerator generator = ColorGenerator.MATERIAL;
         TextDrawable drawable = TextDrawable.builder()
                 .buildRound(letter,generator.getRandomColor());

@@ -48,31 +48,18 @@ public class SubjectFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_subject, container, false);
-//        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("ศรีษะ ตา หู คอ");
 
         Bundle bundle = getArguments();
         toolbar = bundle.getString("toolbar");
         textTool = (TextView) getActivity().findViewById(R.id.textTool);
         textTool.setText(toolbar);
-//        textTool = (TextView) view.findViewById(R.id.test);
-//        textTool.setText(toolbar);
 
 
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());
         dbHelperDAO.open();
-
         id = dbHelperDAO.getFirstaidId(toolbar);
-
-//        byte[] img = dbHelperDAO.test();
-//        ImageView gg = (ImageView) view.findViewById(R.id.imageView2);
-//        Bitmap bmp = BitmapFactory.decodeByteArray(img,0,img.length);
-//        gg.setImageBitmap(bmp);
         items = new ArrayList();
         items = dbHelperDAO.getFirstaidDetail(id);
-//        items.add(new DetailItem(id+""+toolbar));
-////        items.add(new PicItem(img));
-//        items.add(new PicDetailItem("ฮือๆ เทสๆ"));
-
 
 
         RecyclerView rcv = (RecyclerView) view.findViewById(R.id.recycler_firstaid);
@@ -80,9 +67,6 @@ public class SubjectFragment extends Fragment {
         rcv.setLayoutManager(mLayoutManager);
         CustomAdapterFirstaidDetail adapter = new CustomAdapterFirstaidDetail(getActivity(),items);
         rcv.setAdapter(adapter);
-
-
-
 
         return  view;
     }

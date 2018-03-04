@@ -29,7 +29,7 @@ public class FirstaidNavFragment extends Fragment {
     private CustomAdapterFirstaid mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     public String toolbar;
-    public int indicator;
+    public String indicator;
     public ArrayList<String> list;
     public TextView textTool;
 
@@ -37,11 +37,11 @@ public class FirstaidNavFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static FirstaidNavFragment newInstance(String toolbar,int indicator) {
+    public static FirstaidNavFragment newInstance(String toolbar,String indicator) {
         FirstaidNavFragment fragment = new FirstaidNavFragment();
         Bundle bundle = new Bundle();
         bundle.putString("toolbar",toolbar);
-        bundle.putInt("indicator",indicator);
+        bundle.putString("indicator",indicator);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -57,11 +57,11 @@ public class FirstaidNavFragment extends Fragment {
 
         Bundle bundle = getArguments();
         toolbar = bundle.getString("toolbar");
-        indicator = bundle.getInt("indicator");
-        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Kanit-Regular.ttf");
+        indicator = bundle.getString("indicator");
+//        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Kanit-Regular.ttf");
         TextView header = (TextView) view.findViewById(R.id.textView);
         header.setText(toolbar);
-        header.setTypeface(font);
+//        header.setTypeface(font);
 
 
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());
@@ -78,6 +78,7 @@ public class FirstaidNavFragment extends Fragment {
             public void onItemClick(View item, int position) {
                 FragmentTransaction transaction = getFragmentManager() .beginTransaction();
                 transaction.replace(R.id.frameFirstaidNav, SubjectFragment.newInstance(list.get(position)));
+//                transaction.replace(R.id.frameFirstaidNav, SelectFirstaidFragment.newInstance());
                 transaction.addToBackStack(null);
                 transaction.commit();
             }

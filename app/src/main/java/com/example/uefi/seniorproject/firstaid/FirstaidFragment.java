@@ -63,21 +63,21 @@ public class FirstaidFragment extends Fragment {
         textTool = (TextView) getActivity().findViewById(R.id.textTool);
         textTool.setText("การปฐมพยาบาล");
 
-        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Kanit-Regular.ttf");
-        head.setTypeface(font);
-        body.setTypeface(font);
-        fire.setTypeface(font);
-        poison.setTypeface(font);
-        normal.setTypeface(font);
-        cpr.setTypeface(font);
-        transport.setTypeface(font);
+//        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Kanit-Regular.ttf");
+//        head.setTypeface(font);
+//        body.setTypeface(font);
+//        fire.setTypeface(font);
+//        poison.setTypeface(font);
+//        normal.setTypeface(font);
+//        cpr.setTypeface(font);
+//        transport.setTypeface(font);
 
         head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 toolbar = "ตา หู คอ";
                 FragmentTransaction transaction = getFragmentManager() .beginTransaction();
-                transaction.replace(R.id.relaFirstaid, FirstaidNavFragment.newInstance(toolbar,1),"ตา หู คอ");
+                transaction.replace(R.id.relaFirstaid, FirstaidNavFragment.newInstance(toolbar,"ตา หู คอ"),"ตา หู คอ");
                 transaction.addToBackStack("ตา หู คอ");
                 transaction.commit();
             }
@@ -87,7 +87,7 @@ public class FirstaidFragment extends Fragment {
             public void onClick(View v) {
                 toolbar = "กล้ามเนื้อ กระดูก ลำไส้";
                 FragmentTransaction transaction = getFragmentManager() .beginTransaction();
-                transaction.replace(R.id.relaFirstaid, FirstaidNavFragment.newInstance(toolbar,2));
+                transaction.replace(R.id.relaFirstaid, FirstaidNavFragment.newInstance(toolbar,"กล้ามเนื้อ กระดูก ลำไส้"));
                 transaction.addToBackStack("");
                 transaction.commit();
             }
@@ -97,7 +97,7 @@ public class FirstaidFragment extends Fragment {
             public void onClick(View v) {
                 toolbar = "แผลไหม้ น้ำร้อนลวก";
                 FragmentTransaction transaction = getFragmentManager() .beginTransaction();
-                transaction.replace(R.id.relaFirstaid, FirstaidNavFragment.newInstance(toolbar,3));
+                transaction.replace(R.id.relaFirstaid, FirstaidNavFragment.newInstance(toolbar,"แผลไหม้ น้ำร้อนลวก"));
                 transaction.addToBackStack("");
                 transaction.commit();
             }
@@ -107,7 +107,7 @@ public class FirstaidFragment extends Fragment {
             public void onClick(View v) {
                 toolbar = "พิษ สารพิษ";
                 FragmentTransaction transaction = getFragmentManager() .beginTransaction();
-                transaction.replace(R.id.relaFirstaid, FirstaidNavFragment.newInstance(toolbar,4));
+                transaction.replace(R.id.relaFirstaid, FirstaidNavFragment.newInstance(toolbar,"พิษ สารพิษ"));
                 transaction.addToBackStack("");
                 transaction.commit();
             }
@@ -117,7 +117,7 @@ public class FirstaidFragment extends Fragment {
             public void onClick(View v) {
                 toolbar = "เบ็ดเตล็ด";
                 FragmentTransaction transaction = getFragmentManager() .beginTransaction();
-                transaction.replace(R.id.relaFirstaid, FirstaidNavFragment.newInstance(toolbar,5));
+                transaction.replace(R.id.relaFirstaid, FirstaidNavFragment.newInstance(toolbar,"เบ็ดเตล็ด"));
                 transaction.addToBackStack("");
                 transaction.commit();
             }
@@ -127,9 +127,10 @@ public class FirstaidFragment extends Fragment {
             public void onClick(View v) {
                 toolbar = "การช่วยฟื้นคืนชีพขั้นพื้นฐาน";
                 FragmentTransaction transaction = getFragmentManager() .beginTransaction();
-                transaction.replace(R.id.relaFirstaid, FirstaidNavFragment.newInstance(toolbar,5));
-                transaction.addToBackStack("");
+                transaction.replace(R.id.relaFirstaid, SubjectFragment.newInstance(toolbar));
+                transaction.addToBackStack(null);
                 transaction.commit();
+
             }
         });
         transport.setOnClickListener(new View.OnClickListener() {
@@ -137,7 +138,7 @@ public class FirstaidFragment extends Fragment {
             public void onClick(View v) {
                 toolbar = "การยกและเคลื่อนย้ายผู้ป่วย";
                 FragmentTransaction transaction = getFragmentManager() .beginTransaction();
-                transaction.replace(R.id.relaFirstaid, FirstaidNavFragment.newInstance(toolbar,5));
+                transaction.replace(R.id.relaFirstaid,  SubjectFragment.newInstance(toolbar));
                 transaction.addToBackStack("");
                 transaction.commit();
             }

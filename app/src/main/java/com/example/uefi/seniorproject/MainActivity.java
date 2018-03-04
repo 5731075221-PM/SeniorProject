@@ -22,6 +22,7 @@ import com.example.uefi.seniorproject.fragment.HospitalSelectFragment;
 import com.example.uefi.seniorproject.fragment.MainFragment;
 import com.example.uefi.seniorproject.fragment.SearchSymptomFragment;
 import com.example.uefi.seniorproject.firstaid.FirstaidFragment;
+import com.example.uefi.seniorproject.reminder.ReminderFragment;
 
 import java.util.ArrayList;
 
@@ -43,8 +44,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         dbHelperDAO = DBHelperDAO.getInstance(this);
         dbHelperDAO.open();
-        dictList = dbHelperDAO.getLexitron();
-        stopwordList = dbHelperDAO.getStopword();
+//        dictList = dbHelperDAO.getLexitron();
+//        stopwordList = dbHelperDAO.getStopword();
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -207,7 +208,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .addToBackStack(null)
                     .commit();
         } else if (id == R.id.nav_reminder) {
+            toggle.setDrawerIndicatorEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            if(!mToolBarNavigationListenerIsRegistered) {
+                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Doesn't have to be onBackPressed
+                        onBackPressed();
+                    }
+                });
 
+                mToolBarNavigationListenerIsRegistered = true;
+            }
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container_fragment, new ReminderFragment(),"Reminder")
+                    .addToBackStack("Reminder")
+                    .commit();
         } else if (id == R.id.nav_food) {
 
         }
