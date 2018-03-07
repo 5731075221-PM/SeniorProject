@@ -82,13 +82,35 @@ public class DBHelperDAO {
         while (!cursor.isAfterLast()) {
             String[] tmp = (cursor.getString(cursor.getColumnIndex("location"))).split(", ");
             list.add(new Hospital(cursor.getString(cursor.getColumnIndex("name")),
-                    Double.parseDouble(tmp[0]),Double.parseDouble(tmp[1]),
-                    cursor.getString(cursor.getColumnIndex("address")),
-                    cursor.getString(cursor.getColumnIndex("phone")),
-                    cursor.getString(cursor.getColumnIndex("website")),
-                    cursor.getString(cursor.getColumnIndex("zone"))
-                                )
-                    );
+                            Double.parseDouble(tmp[0]), Double.parseDouble(tmp[1]),
+                            cursor.getString(cursor.getColumnIndex("address")),
+                            cursor.getString(cursor.getColumnIndex("phone")),
+                            cursor.getString(cursor.getColumnIndex("website")),
+                            cursor.getString(cursor.getColumnIndex("zone")),
+                            cursor.getString(cursor.getColumnIndex("province"))
+                    )
+            );
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
+
+    public ArrayList<Hospital> getHospitalByOrder() {
+        ArrayList<Hospital> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT * FROM hospital ORDER BY province ASC", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            String[] tmp = (cursor.getString(cursor.getColumnIndex("location"))).split(", ");
+            list.add(new Hospital(cursor.getString(cursor.getColumnIndex("name")),
+                            Double.parseDouble(tmp[0]), Double.parseDouble(tmp[1]),
+                            cursor.getString(cursor.getColumnIndex("address")),
+                            cursor.getString(cursor.getColumnIndex("phone")),
+                            cursor.getString(cursor.getColumnIndex("website")),
+                            cursor.getString(cursor.getColumnIndex("zone")),
+                            cursor.getString(cursor.getColumnIndex("province"))
+                    )
+            );
             cursor.moveToNext();
         }
         cursor.close();
@@ -98,18 +120,22 @@ public class DBHelperDAO {
     public ArrayList<Hospital> selectHospital(String p, String z) {
         ArrayList<Hospital> list = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT * FROM hospital", null);
-        if(p != "" && z != "") cursor = database.rawQuery("SELECT * FROM hospital WHERE province='"+p+"' and zone='"+z+"'", null);
-        else if(p == "" && z != "") cursor = database.rawQuery("SELECT * FROM hospital WHERE zone='"+z+"'", null);
-        else if(p != "" && z == "") cursor = database.rawQuery("SELECT * FROM hospital WHERE province='"+p+"' ORDER BY name", null);
+        if (p != "" && z != "")
+            cursor = database.rawQuery("SELECT * FROM hospital WHERE province='" + p + "' and zone='" + z + "'", null);
+        else if (p == "" && z != "")
+            cursor = database.rawQuery("SELECT * FROM hospital WHERE zone='" + z + "'", null);
+        else if (p != "" && z == "")
+            cursor = database.rawQuery("SELECT * FROM hospital WHERE province='" + p + "' ORDER BY name", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             String[] tmp = (cursor.getString(cursor.getColumnIndex("location"))).split(", ");
             list.add(new Hospital(cursor.getString(cursor.getColumnIndex("name")),
-                            Double.parseDouble(tmp[0]),Double.parseDouble(tmp[1]),
+                            Double.parseDouble(tmp[0]), Double.parseDouble(tmp[1]),
                             cursor.getString(cursor.getColumnIndex("address")),
                             cursor.getString(cursor.getColumnIndex("phone")),
                             cursor.getString(cursor.getColumnIndex("website")),
-                            cursor.getString(cursor.getColumnIndex("zone"))
+                            cursor.getString(cursor.getColumnIndex("zone")),
+                            cursor.getString(cursor.getColumnIndex("province"))
                     )
             );
             cursor.moveToNext();
@@ -118,7 +144,7 @@ public class DBHelperDAO {
         return list;
     }
 
-    public ArrayList<String> getLexitron(){
+    public ArrayList<String> getLexitron() {
         ArrayList<String> list = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT * FROM lexitron", null);
         cursor.moveToFirst();
@@ -130,7 +156,7 @@ public class DBHelperDAO {
         return list;
     }
 
-    public ArrayList<String> getStopword(){
+    public ArrayList<String> getStopword() {
         ArrayList<String> list = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT * FROM stopword", null);
         cursor.moveToFirst();
@@ -142,7 +168,7 @@ public class DBHelperDAO {
         return list;
     }
 
-    public ArrayList<Symptom> getAllSymptoms(){
+    public ArrayList<Symptom> getAllSymptoms() {
         ArrayList<Symptom> list = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT * FROM allsymptoms", null);
         cursor.moveToFirst();
@@ -157,7 +183,7 @@ public class DBHelperDAO {
         return list;
     }
 
-    public ArrayList<Symptom> getMainSymptoms(){
+    public ArrayList<Symptom> getMainSymptoms() {
 //        System.out.println("CheckDB = Main");
         ArrayList<Symptom> list = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT * FROM mainsymptoms", null);
@@ -173,21 +199,21 @@ public class DBHelperDAO {
         return list;
     }
 
-    public ArrayList<ArrayList<String>> getVectorData(){
+    public ArrayList<ArrayList<String>> getVectorData() {
 //        System.out.println("CheckDB = Vectordata");
         ArrayList<ArrayList<String>> list = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT * FROM vectordata", null);
         cursor.moveToFirst();
-        int size = cursor.getColumnCount()-1, n = 0;
+        int size = cursor.getColumnCount() - 1, n = 0;
 
-        for(int i = 0; i<cursor.getCount() ;i++){
+        for (int i = 0; i < cursor.getCount(); i++) {
             list.add(new ArrayList<String>());
         }
 
         while (!cursor.isAfterLast()) {
-            for(int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
 //                System.out.println("CheckDB = i "+i);
-                list.get(n).add(cursor.getString(cursor.getColumnIndex(i+"")));
+                list.get(n).add(cursor.getString(cursor.getColumnIndex(i + "")));
             }
             n++;
             cursor.moveToNext();
@@ -196,7 +222,7 @@ public class DBHelperDAO {
         return list;
     }
 
-    public ArrayList<String> getFreq(){
+    public ArrayList<String> getFreq() {
 //        System.out.println("CheckDB = Freq");
         ArrayList<String> list = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT * FROM idfdoc", null);
@@ -209,7 +235,7 @@ public class DBHelperDAO {
         return list;
     }
 
-    public ArrayList<String> getDocLength(){
+    public ArrayList<String> getDocLength() {
 //        System.out.println("CheckDB = Doclength");
         ArrayList<String> list = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT * FROM vectorlength", null);
@@ -222,7 +248,7 @@ public class DBHelperDAO {
         return list;
     }
 
-    public ArrayList<String> getDiseaseName(){
+    public ArrayList<String> getDiseaseName() {
 //        System.out.println("CheckDB = Name");
         ArrayList<String> list = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT * FROM diseasesandsymptoms", null);
@@ -235,21 +261,21 @@ public class DBHelperDAO {
         return list;
     }
 
-    public String getContent(String str,String type){
+    public String getContent(String str, String type) {
         String list = "";
-        Cursor cursor = database.rawQuery("SELECT "+type+" FROM diseases WHERE name="+"'"+str+"'", null);
+        Cursor cursor = database.rawQuery("SELECT " + type + " FROM diseases WHERE name=" + "'" + str + "'", null);
         cursor.moveToFirst();
         list = cursor.getString(0);
         cursor.close();
         return list;
     }
 
-    public ArrayList<String> checkKeyword(String[] w){
-        System.out.println("Setdatabase = "+w.toString());
+    public ArrayList<String> checkKeyword(String[] w) {
+        System.out.println("Setdatabase = " + w.toString());
         Set<String> set = new LinkedHashSet<>();
         ArrayList<String> list;
         String parent = "";
-        for(int i = 0; i<w.length;i++) {
+        for (int i = 0; i < w.length; i++) {
             Cursor cursor = database.rawQuery("SELECT * FROM allsymptoms WHERE word like '%" + w[i] + "%' ORDER BY word ASC", null);
             cursor.moveToFirst();
             System.out.println("Setdatabase = " + cursor.getCount());
@@ -262,14 +288,14 @@ public class DBHelperDAO {
                 cursor.moveToNext();
             }
         }
-            list = new ArrayList<>(set);
-            return list;
+        list = new ArrayList<>(set);
+        return list;
     }
 
-    public ArrayList<Integer> getIndexSymptom(ArrayList<String> arr){
-        ArrayList list =  new ArrayList();
-        for(int i = 0; i<arr.size();i++){
-            Cursor cursor = database.rawQuery("SELECT * FROM mainsymptoms WHERE word='"+arr.get(i)+"' ORDER BY word ASC", null);
+    public ArrayList<Integer> getIndexSymptom(ArrayList<String> arr) {
+        ArrayList list = new ArrayList();
+        for (int i = 0; i < arr.size(); i++) {
+            Cursor cursor = database.rawQuery("SELECT * FROM mainsymptoms WHERE word='" + arr.get(i) + "' ORDER BY word ASC", null);
             cursor.moveToFirst();
             list.add(cursor.getInt(cursor.getColumnIndex("id")));
         }
@@ -277,9 +303,9 @@ public class DBHelperDAO {
     }
 
 
-    public ArrayList<String> getFirstaidList(int indicator){
+    public ArrayList<String> getFirstaidList(int indicator) {
         ArrayList<String> list = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT * FROM firstaid WHERE id_subject='"+indicator+"' ORDER BY subject ASC", null);
+        Cursor cursor = database.rawQuery("SELECT * FROM firstaid WHERE id_subject='" + indicator + "' ORDER BY subject ASC", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             list.add(cursor.getString(cursor.getColumnIndex("subject")));

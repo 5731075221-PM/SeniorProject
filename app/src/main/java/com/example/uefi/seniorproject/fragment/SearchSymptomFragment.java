@@ -21,6 +21,8 @@ import com.example.uefi.seniorproject.R;
 import com.example.uefi.seniorproject.breakiterator.LongLexTo;
 import com.example.uefi.seniorproject.databases.DBHelperDAO;
 
+import org.w3c.dom.Text;
+
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -121,8 +123,30 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
         dbHelperDAO.open();
         diseaseName = dbHelperDAO.getDiseaseName();
         diseaseNameDefault = diseaseName;
+        sortList();
 
         new createTokenizer().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    }
+
+    public void sortList(){
+        String letters = "[ก-ฮ]";
+        List<String> sect = new ArrayList<>(44);
+        ArrayList<String> temp = new ArrayList<>();
+        for (int i = 0; i < diseaseName.size(); i++) {
+            String section = String.valueOf(diseaseName.get(i).charAt(0)).toUpperCase();
+            if(!section.matches(letters)){
+                section = String.valueOf(diseaseName.get(i).charAt(1)).toUpperCase();
+            }
+            if (!sect.contains(section)) {
+                sect.add(section);
+                temp.add(section);
+            }
+            temp.add(diseaseName.get(i));
+        }
+        diseaseName = new ArrayList<>(temp);
+        for(int i = 0;i< diseaseName.size();i++){
+            System.out.println(diseaseName.get(i));
+        }
     }
 
     public void initialQueryVector() {
@@ -253,8 +277,15 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
         return false;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
-            , View.OnLongClickListener, View.OnTouchListener {
+    public class HeaderViewHolder extends RecyclerView.ViewHolder {
+        TextView name;
+        public HeaderViewHolder(View itemView) {
+            super(itemView);
+            name = (TextView) itemView.findViewById(R.id.headerItem);
+        }
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener, View.OnTouchListener {
         TextView name;
         private ItemClickListener itemClickListener;
 
@@ -286,32 +317,72 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
         }
     }
 
-    public class RecyclerViewAdapter extends RecyclerView.Adapter<SearchSymptomFragment.ViewHolder> implements SectionIndexer {
+    public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements SectionIndexer {
+        private final int VIEW_TYPE_HEADER = 0;
+        private final int VIEW_TYPE_ITEM = 1;
 
         @Override
-        public SearchSymptomFragment.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(getActivity()).inflate(R.layout.activity_hospital_list, parent, false);
-            return new SearchSymptomFragment.ViewHolder(view);
+        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            if(viewType == VIEW_TYPE_HEADER){
+                View view = LayoutInflater.from(getActivity()).inflate(R.layout.header_list, parent, false);
+                return new SearchSymptomFragment.HeaderViewHolder(view);
+            }else if(viewType == VIEW_TYPE_ITEM){
+                View view = LayoutInflater.from(getActivity()).inflate(R.layout.activity_hospital_list, parent, false);
+                return new SearchSymptomFragment.ViewHolder(view);
+            }
+            return null;
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
-            holder.name.setText(diseaseName.get(position));
-            holder.setOnClickListener(new ItemClickListener() {
-                @Override
-                public void onClick(View view, int position, boolean isLongClick, MotionEvent motionEvent) {
-                    if (!isLongClick) {
-                        SelectItemFragment fragment = new SelectItemFragment();
-                        Bundle bundle = new Bundle();
-                        bundle.putString("name",diseaseName.get(position));
-                        fragment.setArguments(bundle);
-                        getFragmentManager().beginTransaction()
-                                .replace(R.id.container_fragment, fragment)
-                                .addToBackStack(null)
-                                .commit();
+        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            if(holder instanceof ViewHolder){
+                ViewHolder viewHolder = (ViewHolder) holder;
+                viewHolder.name.setText(diseaseName.get(position));
+                viewHolder.setOnClickListener(new ItemClickListener() {
+                    @Override
+                    public void onClick(View view, int position, boolean isLongClick, MotionEvent motionEvent) {
+                        if (!isLongClick) {
+                            SelectItemFragment fragment = new SelectItemFragment();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("name",diseaseName.get(position));
+                            fragment.setArguments(bundle);
+                            getFragmentManager().beginTransaction()
+                                    .replace(R.id.container_fragment, fragment)
+                                    .addToBackStack(null)
+                                    .commit();
+                        }
                     }
-                }
-            });
+                });
+
+            }else if(holder instanceof  HeaderViewHolder){
+                HeaderViewHolder headerHolder = (HeaderViewHolder)holder;
+                headerHolder.name.setText(diseaseName.get(position));
+            }
+        }
+
+//        @Override
+//        public void onBindViewHolder(ViewHolder holder, int position) {
+//            holder.name.setText(diseaseName.get(position));
+//            holder.setOnClickListener(new ItemClickListener() {
+//                @Override
+//                public void onClick(View view, int position, boolean isLongClick, MotionEvent motionEvent) {
+//                    if (!isLongClick) {
+//                        SelectItemFragment fragment = new SelectItemFragment();
+//                        Bundle bundle = new Bundle();
+//                        bundle.putString("name",diseaseName.get(position));
+//                        fragment.setArguments(bundle);
+//                        getFragmentManager().beginTransaction()
+//                                .replace(R.id.container_fragment, fragment)
+//                                .addToBackStack(null)
+//                                .commit();
+//                    }
+//                }
+//            });
+//        }
+
+        @Override
+        public int getItemViewType(int position) {
+            return diseaseName.get(position).length() == 1 ? VIEW_TYPE_HEADER : VIEW_TYPE_ITEM;
         }
 
         @Override

@@ -14,7 +14,7 @@
         <!--tools:layout_editor_absoluteY="0dp">-->
 
         <!--<SearchView-->
-            <!--android:id="@+id/searchNearbyHospital"-->
+            <!--android:id="@+id/searchHospitalByOrder"-->
             <!--android:layout_width="300dp"-->
             <!--android:layout_height="wrap_content"-->
             <!--android:layout_marginBottom="8dp"-->
@@ -32,18 +32,16 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/nearbyHospitalRecyclerView"
+        <in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView
+            android:id="@+id/searchHospitalList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:layoutManager="LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:listitem="@layout/activity_hospital_list">
-
-        </android.support.v7.widget.RecyclerView>
+            tools:listitem="@layout/activity_hospital_list" />
     </android.support.constraint.ConstraintLayout>
 
 </LinearLayout>

@@ -177,8 +177,8 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
 
         if (!hospitalList.isEmpty()) {
             for (int i = 0; i < hospitalList.size(); i++) {
-                avgLat += hospitalList.get(i).getLat();
-                avgLng += hospitalList.get(i).getLng();
+//                avgLat += hospitalList.get(i).getLat();
+//                avgLng += hospitalList.get(i).getLng();
 
                 Bitmap icon = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.ic_local_hospital_white).copy(Bitmap.Config.ARGB_8888, true);
                 Paint paint = new Paint();
@@ -190,11 +190,11 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
                 mMap.addMarker(new MarkerOptions().position(new LatLng(hospitalList.get(i).getLat(), hospitalList.get(i).getLng()))
                         .title(hospitalList.get(i).getName()).snippet(i + "")).setIcon(BitmapDescriptorFactory.fromBitmap(icon));
             }
-            avgLat = avgLat / hospitalList.size();
-            avgLng = avgLng / hospitalList.size();
+//            avgLat = avgLat / hospitalList.size();
+//            avgLng = avgLng / hospitalList.size();
 //            mMap.addMarker(new MarkerOptions().position(new LatLng(avgLat,avgLng))
 //                    .title("You're here").snippet(null));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(avgLat, avgLng), 12));
+//            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(avgLat, avgLng), 12));
         }
 
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
@@ -268,13 +268,5 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
 
     @Override
     public void onProviderDisabled(String s) {
-        System.out.println("onProviderDis");
-//        if (ActivityCompat.checkSelfPermission(getActivity(),
-//                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//            // Check Permissions Now
-//            ActivityCompat.requestPermissions(getActivity(),
-//                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-//                    0);
-//        }
     }
 }

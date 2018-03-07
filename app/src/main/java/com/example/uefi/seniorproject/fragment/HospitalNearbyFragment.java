@@ -19,6 +19,9 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -117,12 +120,12 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_hospital_nearby, container, false);
 
-        searchView = (SearchView) view.findViewById(R.id.searchNearbyHospital);
-        searchView.setIconifiedByDefault(false);
-        searchView.setIconified(false);
-        searchView.clearFocus();
-        searchView.setQueryHint("ค้นหา");
-        searchView.setOnQueryTextListener(this);
+//        searchView = (SearchView) view.findViewById(R.id.searchNearbyHospital);
+//        searchView.setIconifiedByDefault(false);
+//        searchView.setIconified(false);
+//        searchView.clearFocus();
+//        searchView.setQueryHint("ค้นหา");
+//        searchView.setOnQueryTextListener(this);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.nearbyHospitalRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -397,6 +400,47 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.main_map, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_map:
+                    HospitalMapFragment fragment = new HospitalMapFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("type", "0");
+                    fragment.setArguments(bundle);
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.container_fragment, fragment)
+                            .addToBackStack(null)
+                            .commit();
+                return true;
+            case R.id.search_by_name:
+                Toast.makeText(getActivity(), "search_by_name", Toast.LENGTH_SHORT).show();
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.container_fragment, new SearchHospitalByName())
+                        .addToBackStack(null)
+                        .commit();
+                return true;
+//            case R.id.search_by_area:
+//                Toast.makeText(getActivity(), "search_by_area", Toast.LENGTH_SHORT).show();
+//                return true;
+            case R.id.sort_by_name:
+                Toast.makeText(getActivity(), "sort_by_name", Toast.LENGTH_SHORT).show();
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.container_fragment, new ShowHospitalByOrder())
+                        .addToBackStack(null)
+                        .commit();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
     public boolean onQueryTextSubmit(String s) {
         return false;
     }
@@ -447,8 +491,7 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
         }
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
-            , View.OnLongClickListener, View.OnTouchListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener, View.OnTouchListener {
         TextView name, distance;
         private ItemClickListener itemClickListener;
 

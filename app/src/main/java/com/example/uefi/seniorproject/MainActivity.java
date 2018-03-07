@@ -16,7 +16,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.uefi.seniorproject.databases.DBHelperDAO;
-import com.example.uefi.seniorproject.fragment.HospitalSelectFragment;
+import com.example.uefi.seniorproject.fragment.HospitalNearbyFragment;
 import com.example.uefi.seniorproject.fragment.MainFragment;
 import com.example.uefi.seniorproject.fragment.SearchSymptomFragment;
 import com.example.uefi.seniorproject.firstaid.FirstaidFragment;
@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 mToolBarNavigationListenerIsRegistered = true;
             }
             fragmentManager.beginTransaction()
-                    .replace(R.id.container_fragment, new HospitalSelectFragment())
+                    .replace(R.id.container_fragment, new HospitalNearbyFragment())
                     .addToBackStack(null)
                     .commit();
         } else if (id == R.id.nav_reminder) {
