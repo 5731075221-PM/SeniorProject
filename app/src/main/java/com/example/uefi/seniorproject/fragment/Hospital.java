@@ -8,6 +8,7 @@ public class Hospital{
     private Double lat;
     private Double lng;
     private String address,phone,website,zone, distance, duration;
+    private Float priority;
 
     public Hospital(String name, Double lat, Double lng, String address, String phone, String website, String zone) {
         this.name = name;
@@ -79,8 +80,8 @@ public class Hospital{
 
     public Double getDistanceValue() {
         String[] tmp = distance.split(" ");
-        System.out.println(tmp.toString());
-        System.out.println(tmp[0]+" "+tmp[1]);
+        System.out.println("TmpString = "+tmp.toString());
+        System.out.println("TmpString = "+tmp[0]+" "+tmp[1]);
         return Double.parseDouble(tmp[0]);
     }
 
@@ -98,5 +99,13 @@ public class Hospital{
 
     public void setDuration(String duration) {
         this.duration = duration;
+    }
+
+    public float getPriority() {
+        return priority;
+    }
+
+    public void setPriority(float priority) {
+        this.priority = priority;
     }
 }
