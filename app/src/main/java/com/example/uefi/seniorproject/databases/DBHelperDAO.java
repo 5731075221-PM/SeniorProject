@@ -31,7 +31,13 @@ public class DBHelperDAO {
     private SQLiteOpenHelper openHelper;
     private SQLiteDatabase database;
     private static DBHelperDAO instance;
-
+    private final String tables = "SELECT * FROM hospitalBangkok UNION ALL " +
+            "SELECT * FROM hospitalCentral UNION ALL " +
+            "SELECT * FROM hospitalEast UNION ALL " +
+            "SELECT * FROM hospitalNorth UNION ALL " +
+            "SELECT * FROM hospitalNorthEast UNION ALL " +
+            "SELECT * FROM hospitalSouth UNION ALL " +
+            "SELECT * FROM hospitalWest ORDER BY province ASC";
     /**
      * Private constructor to aboid object creation from outside classes.
      *
@@ -77,7 +83,7 @@ public class DBHelperDAO {
      */
     public ArrayList<Hospital> getHospital() {
         ArrayList<Hospital> list = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT * FROM hospital", null);
+        Cursor cursor = database.rawQuery(tables, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             String[] tmp = (cursor.getString(cursor.getColumnIndex("location"))).split(", ");
@@ -87,7 +93,8 @@ public class DBHelperDAO {
                             cursor.getString(cursor.getColumnIndex("phone")),
                             cursor.getString(cursor.getColumnIndex("website")),
                             cursor.getString(cursor.getColumnIndex("zone")),
-                            cursor.getString(cursor.getColumnIndex("province"))
+                            cursor.getString(cursor.getColumnIndex("province")),
+                            cursor.getString(cursor.getColumnIndex("type"))
                     )
             );
             cursor.moveToNext();
@@ -98,7 +105,7 @@ public class DBHelperDAO {
 
     public ArrayList<Hospital> getHospitalByOrder() {
         ArrayList<Hospital> list = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT * FROM hospital ORDER BY province ASC", null);
+        Cursor cursor = database.rawQuery(tables, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             String[] tmp = (cursor.getString(cursor.getColumnIndex("location"))).split(", ");
@@ -108,7 +115,8 @@ public class DBHelperDAO {
                             cursor.getString(cursor.getColumnIndex("phone")),
                             cursor.getString(cursor.getColumnIndex("website")),
                             cursor.getString(cursor.getColumnIndex("zone")),
-                            cursor.getString(cursor.getColumnIndex("province"))
+                            cursor.getString(cursor.getColumnIndex("province")),
+                            cursor.getString(cursor.getColumnIndex("type"))
                     )
             );
             cursor.moveToNext();
@@ -119,13 +127,38 @@ public class DBHelperDAO {
 
     public ArrayList<Hospital> selectHospital(String p, String z) {
         ArrayList<Hospital> list = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT * FROM hospital", null);
-        if (p != "" && z != "")
-            cursor = database.rawQuery("SELECT * FROM hospital WHERE province='" + p + "' and zone='" + z + "'", null);
-        else if (p == "" && z != "")
-            cursor = database.rawQuery("SELECT * FROM hospital WHERE zone='" + z + "'", null);
-        else if (p != "" && z == "")
-            cursor = database.rawQuery("SELECT * FROM hospital WHERE province='" + p + "' ORDER BY name", null);
+        Cursor cursor = database.rawQuery(tables, null);
+        if (p != "" && z != "") {
+            cursor = database.rawQuery(
+                    "SELECT * FROM hospitalBangkok WHERE province='" + p + "' and zone='" + z + "'UNION ALL " +
+                            "SELECT * FROM hospitalCentral WHERE province='" + p + "' and zone='" + z + "'UNION ALL " +
+                            "SELECT * FROM hospitalEast WHERE province='" + p + "' and zone='" + z + "'UNION ALL " +
+                            "SELECT * FROM hospitalNorth WHERE province='" + p + "' and zone='" + z + "'UNION ALL " +
+                            "SELECT * FROM hospitalNorthEast WHERE province='" + p + "' and zone='" + z + "'UNION ALL " +
+                            "SELECT * FROM hospitalSouth WHERE province='" + p + "' and zone='" + z + "'UNION ALL " +
+                            "SELECT * FROM hospitalWest WHERE province='" + p + "' and zone='" + z + "' ORDER BY province ASC"
+                    , null);
+        }else if (p == "" && z != "") {
+            cursor = database.rawQuery(
+                    "SELECT * FROM hospitalBangkok WHERE zone='" + z + "'UNION ALL " +
+                            "SELECT * FROM hospitalCentral WHERE zone='" + z + "'UNION ALL " +
+                            "SELECT * FROM hospitalEast WHERE zone='" + z + "'UNION ALL " +
+                            "SELECT * FROM hospitalNorth WHERE zone='" + z + "'UNION ALL " +
+                            "SELECT * FROM hospitalNorthEast WHERE zone='" + z + "'UNION ALL " +
+                            "SELECT * FROM hospitalSouth WHERE zone='" + z + "'UNION ALL " +
+                            "SELECT * FROM hospitalWest WHERE zone='" + z + "' ORDER BY province ASC"
+                    , null);
+        }else if (p != "" && z == "") {
+            cursor = database.rawQuery(
+                    "SELECT * FROM hospitalBangkok WHERE province='" + p + "'UNION ALL " +
+                            "SELECT * FROM hospitalCentral WHERE province='" + p + "'UNION ALL " +
+                            "SELECT * FROM hospitalEast WHERE province='" + p + "'UNION ALL " +
+                            "SELECT * FROM hospitalNorth WHERE province='" + p + "'UNION ALL " +
+                            "SELECT * FROM hospitalNorthEast WHERE province='" + p + "'UNION ALL " +
+                            "SELECT * FROM hospitalSouth WHERE province='" + p + "'UNION ALL " +
+                            "SELECT * FROM hospitalWest WHERE province='" + p + "' ORDER BY province ASC"
+                    , null);
+        }
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             String[] tmp = (cursor.getString(cursor.getColumnIndex("location"))).split(", ");
@@ -135,7 +168,8 @@ public class DBHelperDAO {
                             cursor.getString(cursor.getColumnIndex("phone")),
                             cursor.getString(cursor.getColumnIndex("website")),
                             cursor.getString(cursor.getColumnIndex("zone")),
-                            cursor.getString(cursor.getColumnIndex("province"))
+                            cursor.getString(cursor.getColumnIndex("province")),
+                            cursor.getString(cursor.getColumnIndex("type"))
                     )
             );
             cursor.moveToNext();

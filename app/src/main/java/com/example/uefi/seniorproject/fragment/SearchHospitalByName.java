@@ -22,6 +22,8 @@ import com.example.uefi.seniorproject.databases.DBHelperDAO;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by UEFI on 27/12/2560.
@@ -38,23 +40,33 @@ public class SearchHospitalByName extends Fragment implements SearchView.OnQuery
     private RecyclerViewAdapter adapter = new RecyclerViewAdapter();
     private ArrayAdapter<String> adapterProvince, adapterZone;
     private TextView headProvince, headZone;
-    String[] arrayProvince, arrayZone;
+    String[] arrayProvince, arrayZone, arrayZoneAll;
     String selectProvince, selectZone;
     DBHelperDAO dbHelperDAO;
+    int[] rid = {R.array.ZoneKrabi, R.array.ZoneBangkok, R.array.ZoneKanchanaburi, R.array.ZoneKalasin, R.array.ZoneKamphaengphet,
+    R.array.ZoneKhonkaen, R.array.ZoneChanthaburi, R.array.ZoneChachoengsao, R.array.ZoneChonburi, R.array.ZoneChainat, R.array.ZoneChaiyaphum,
+    R.array.ZoneChumphon, R.array.ZoneChiangrai, R.array.ZoneChiangmai, R.array.ZoneTrang, R.array.ZoneTrat, R.array.ZoneTak, R.array.ZoneNakhonnayok,
+    R.array.ZoneNakhonpathom, R.array.ZoneNakhonphanom, R.array.ZoneNakhonratchasima, R.array.ZoneNakhonsithammarat, R.array.ZoneNakhonsawan,
+    R.array.ZoneNonthaburi, R.array.ZoneNarathiwat, R.array.ZoneNan, R.array.ZoneBuengkan, R.array.ZoneBuriram, R.array.ZonePathumthani,
+    R.array.ZonePrachuapkirikhan, R.array.ZonePrachinburi, R.array.ZonePattani, R.array.ZonePhranakhonsiayutthaya, R.array.ZonePhangnga,
+    R.array.ZonePhatthalung, R.array.ZonePhichit, R.array.ZonePhitsanulok, R.array.ZonePhetchaburi, R.array.ZonePhetchabun, R.array.ZonePhrae,
+    R.array.ZonePhayao, R.array.ZonePhuket, R.array.ZoneMahasarakham, R.array.ZoneMukdahan, R.array.ZoneMaehongson, R.array.ZoneYala, R.array.ZoneYasothon,
+    R.array.ZoneRoiet, R.array.ZoneRanong, R.array.ZoneRayong, R.array.ZoneRatchaburi, R.array.ZoneLopburi, R.array.ZoneLampang, R.array.ZoneLamphun,
+    R.array.ZoneLoei, R.array.ZoneSisaket, R.array.ZoneSakonnakhon, R.array.ZoneSongkhla, R.array.ZoneSatun, R.array.ZoneSamutprakarn, R.array.ZoneSamutsongkhram,
+    R.array.ZoneSamutsakhon, R.array.ZoneSakaeo, R.array.ZoneSaraburi, R.array.ZoneSingburi, R.array.ZoneSukhothai, R.array.ZoneSuphanburi,
+    R.array.ZoneSuratthani, R.array.ZoneSurin, R.array.ZoneNongkhai, R.array.ZoneNongbualamphu, R.array.ZoneAngthong, R.array.ZoneUdonthani,
+    R.array.ZoneUthaithani, R.array.ZoneUttaradit, R.array.ZoneUbonratchathani, R.array.ZoneAmnartcharoen};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_hospital, container, false);
 
-        final Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/JasmineUPC.ttf");
+        final Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
-
-        arrayProvince = getResources().getStringArray(R.array.Province1);
-        arrayZone = getResources().getStringArray(R.array.Zone1All);
 
         province = (SearchableSpinner) view.findViewById(R.id.spinnerProvince);
         province.setTitle("กรุณาเลือกจังหวัด");
@@ -90,6 +102,12 @@ public class SearchHospitalByName extends Fragment implements SearchView.OnQuery
 
         hospitalList = dbHelperDAO.getHospital();
         defaultList = hospitalList;
+        selectProvince = "";
+        selectZone = "";
+
+        arrayProvince = getResources().getStringArray(R.array.ProvinceList);
+        arrayZone = getResources().getStringArray(R.array.ZoneAll);
+        arrayZoneAll = arrayZone;
     }
 
     @Override
@@ -195,34 +213,46 @@ public class SearchHospitalByName extends Fragment implements SearchView.OnQuery
         }
         if (!isProvince && !isZone) {
             if (adapterView.getId() == province.getId()) {
-                if (i == 0) {
+                if(i==0) {
                     selectProvince = "";
-                    adapterZone = new ArrayAdapter<String>(getActivity(),
-                            android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.Zone1All));
-                    arrayZone = getResources().getStringArray(R.array.Zone1All);
+                    adapterZone = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, arrayZoneAll);
+                    arrayZone = arrayZoneAll;
                     zone.setAdapter(adapterZone);
-                } else selectProvince = arrayProvince[i];
-                if (i == 1) {
+                }else {
+                    selectProvince = arrayProvince[i];
                     adapterZone = new ArrayAdapter<String>(getActivity(),
-                            android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.Zone1Bangkok));
-                    arrayZone = getResources().getStringArray(R.array.Zone1Bangkok);
-                    zone.setAdapter(adapterZone);
-                } else if (i == 2) {
-                    adapterZone = new ArrayAdapter<String>(getActivity(),
-                            android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.Zone1Nonthaburi));
-                    arrayZone = getResources().getStringArray(R.array.Zone1Nonthaburi);
-                    zone.setAdapter(adapterZone);
-                } else if (i == 3) {
-                    adapterZone = new ArrayAdapter<String>(getActivity(),
-                            android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.Zone1Patumthani));
-                    arrayZone = getResources().getStringArray(R.array.Zone1Patumthani);
-                    zone.setAdapter(adapterZone);
-                } else if (i == 4) {
-                    adapterZone = new ArrayAdapter<String>(getActivity(),
-                            android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.Zone1SamutPrakarn));
-                    arrayZone = getResources().getStringArray(R.array.Zone1SamutPrakarn);
+                            android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(rid[i-1]));
+                    arrayZone = getResources().getStringArray(rid[i-1]);
                     zone.setAdapter(adapterZone);
                 }
+//                if (i == 0) {
+//                    selectProvince = "";
+//                    adapterZone = new ArrayAdapter<String>(getActivity(),
+//                            android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.Zone1All));
+//                    arrayZone = getResources().getStringArray(R.array.Zone1All);
+//                    zone.setAdapter(adapterZone);
+//                } else selectProvince = arrayProvince[i];
+//                if (i == 1) {
+//                    adapterZone = new ArrayAdapter<String>(getActivity(),
+//                            android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.Zone1Bangkok));
+//                    arrayZone = getResources().getStringArray(R.array.Zone1Bangkok);
+//                    zone.setAdapter(adapterZone);
+//                } else if (i == 2) {
+//                    adapterZone = new ArrayAdapter<String>(getActivity(),
+//                            android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.Zone1Nonthaburi));
+//                    arrayZone = getResources().getStringArray(R.array.Zone1Nonthaburi);
+//                    zone.setAdapter(adapterZone);
+//                } else if (i == 3) {
+//                    adapterZone = new ArrayAdapter<String>(getActivity(),
+//                            android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.Zone1Patumthani));
+//                    arrayZone = getResources().getStringArray(R.array.Zone1Patumthani);
+//                    zone.setAdapter(adapterZone);
+//                } else if (i == 4) {
+//                    adapterZone = new ArrayAdapter<String>(getActivity(),
+//                            android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.Zone1SamutPrakarn));
+//                    arrayZone = getResources().getStringArray(R.array.Zone1SamutPrakarn);
+//                    zone.setAdapter(adapterZone);
+//                }
             } else {
                 if (i == 0) selectZone = "";
                 else selectZone = arrayZone[i];
@@ -248,14 +278,13 @@ public class SearchHospitalByName extends Fragment implements SearchView.OnQuery
     public void onNothingSelected(AdapterView<?> adapterView) {}
     // Search
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
-            , View.OnLongClickListener, View.OnTouchListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener, View.OnTouchListener {
         TextView name, distance;
         private ItemClickListener itemClickListener;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/JasmineUPC.ttf");
+            Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
             name = (TextView) itemView.findViewById(R.id.textView1);
             name.setTypeface(tf);
             distance = (TextView) itemView.findViewById(R.id.distanceHospital);

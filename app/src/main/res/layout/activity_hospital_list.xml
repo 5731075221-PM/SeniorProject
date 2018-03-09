@@ -28,34 +28,53 @@
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="0dp">
 
+    <LinearLayout
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/typeHospital"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical"
+            android:textSize="15dp" />
+
         <ImageView
             android:id="@+id/imageView1"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:gravity="center_horizontal|center_vertical"
             android:background="@drawable/ic_hospital" />
-
-        <me.grantland.widget.AutofitTextView
-            android:id="@+id/textView1"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="5dp"
-            android:lineSpacingExtra="5dp"
-            android:maxLines="2"
-            android:textSize="20sp"
-            autofit:minTextSize="16sp" />
 
         <TextView
             android:id="@+id/distanceHospital"
-            android:layout_width="75dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:textSize="15dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical">
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="5dp"
-            android:textSize="15sp" />
+            android:gravity="center_vertical"
+            android:textStyle="bold"
+            android:maxLines="2"
+            android:textSize="22sp"
+            autofit:minTextSize="18sp" />
+
+    </LinearLayout>
 
     </LinearLayout>
 

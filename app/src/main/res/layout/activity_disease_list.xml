@@ -31,18 +31,35 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/ic_hospital" />
 
-            <TextView
-                android:id="@+id/diseasetextView1"
-                android:layout_width="152dp"
-                android:autoSizeTextType="uniform"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="10dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="5dp"
-                android:text="Text"
-                android:textColor="#000000"
-                android:textSize="20sp" />
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/diseasetextView1"
+                    android:layout_width="152dp"
+                    android:autoSizeTextType="uniform"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Text"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/diseasetextView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:text="TextView" />
+            </LinearLayout>
 
         </LinearLayout>
 

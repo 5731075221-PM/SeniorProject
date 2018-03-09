@@ -4,7 +4,7 @@ package com.example.uefi.seniorproject.fragment;
  * Created by UEFI on 27/12/2560.
  */
 public class Hospital{
-    private String name,address,phone,website,zone, distance, duration,province;
+    private String name,address,phone,website,zone, distance, duration,province,type;
     private Double lat, lng;
     private Float priority;
 
@@ -13,7 +13,7 @@ public class Hospital{
         this.province = province;
     }
 
-    public Hospital(String name, Double lat, Double lng, String address, String phone, String website, String zone, String province) {
+    public Hospital(String name, Double lat, Double lng, String address, String phone, String website, String zone, String province, String type) {
         this.name = name;
         this.lat = lat;
         this.lng = lng;
@@ -24,6 +24,7 @@ public class Hospital{
         this.distance = "";
         this.duration = "";
         this.province = province;
+        this.type = type;
     }
 
     public String getName() {
@@ -119,5 +120,9 @@ public class Hospital{
 
     public void setProvince(String province) {
         this.province = province;
+    }
+
+    public String getType() {
+        return type;
     }
 }

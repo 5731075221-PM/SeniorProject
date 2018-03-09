@@ -45,6 +45,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 /**
  * Created by UEFI on 27/12/2560.
  */
@@ -56,12 +58,15 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
     Double lat = 0.0, lng = 0.0; //origin
     LatLng location; //destination
     String name, address, phone, website;
-    TextView textName, textAddress, textPhone, textDrivingDistance, textDrivingTime, topicTextAddress, topicTextPhone;
+    TextView textName, textAddress, /*textPhone, textPhone2,*/ textDrivingDistance, textDrivingTime, topicTextAddress, topicTextPhone;
     Button buttonPhone, buttonWeb, buttonNavigate;
     LocationManager locationManager;
     LocationListener locationListener;
     String provider;
     Boolean isGPS = false;
+    String[] phonenum;
+    int phoneno;
+    ArrayList<TextView> textPhone = new ArrayList<>();
 
     @Nullable
     @Override
@@ -78,7 +83,38 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
         topicTextPhone = (TextView) view.findViewById(R.id.topicTextPhone);
         textName = (TextView) view.findViewById(R.id.textName);
         textAddress = (TextView) view.findViewById((R.id.textAddress));
-        textPhone = (TextView) view.findViewById(R.id.textPhone);
+        int[] rid = {R.id.textPhone, R.id.textPhone2, R.id.textPhone3, R.id.textPhone4};
+        for(int i = 0 ; i<phoneno;i++){
+            final TextView phone = (TextView)view.findViewById(rid[i]);
+            phone.setTypeface(tf2);
+            phone.setText(phonenum[i]);
+            phone.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String[] tmp = phone.getText().toString().split("-");//textPhone.getText().toString().split("-");
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setTitle("ยืนยันการโทรออก?");
+                    builder.setMessage("ติดต่อ "+tmp[0]+tmp[1]+tmp[2]);
+                    builder.setPositiveButton("ยืนยัน", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Intent callActivity = new Intent(Intent.ACTION_CALL);
+                            callActivity.setData(Uri.parse("tel:0876739362"));
+//                        callActivity.setData(Uri.parse("tel:"+tmp[0]+tmp[1]+tmp[2]));
+                            startActivity(callActivity);
+                        }
+                    });
+                    builder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    builder.show();
+                }
+            });
+            textPhone.add(phone);
+        }
+//        textPhone = (TextView) view.findViewById(R.id.textPhone);
+//        textPhone2 = (TextView) view.findViewById(R.id.textPhone2);
         textDrivingDistance = (TextView) view.findViewById(R.id.drivingDistance);
         textDrivingTime = (TextView) view.findViewById(R.id.drivingTime);
 
@@ -87,36 +123,36 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
         textName.setText(name);
         textName.setTypeface(tf);
         textAddress.setText(address);
-        textPhone.setText(phone);
+//        textPhone.setText(phone);
         textAddress.setTypeface(tf2);
-        textPhone.setTypeface(tf2);
+//        textPhone.setTypeface(tf2);
 
         buttonPhone = (Button) view.findViewById(R.id.callPhone);
         buttonWeb = (Button) view.findViewById(R.id.linkWebsite);
         buttonNavigate = (Button) view.findViewById(R.id.navigationButton);
-        buttonPhone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String[] tmp = textPhone.getText().toString().split("-");
-                AlertDialog.Builder builder =
-                        new AlertDialog.Builder(getActivity());
-                builder.setMessage("ยืนยันการโทรออก?");
-                builder.setPositiveButton("ยืนยัน", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        Intent callActivity = new Intent(Intent.ACTION_CALL);
-                        callActivity.setData(Uri.parse("tel:0876739362"));
-//                        callActivity.setData(Uri.parse("tel:"+tmp[0]+tmp[1]+tmp[2]));
-                        startActivity(callActivity);
-                    }
-                });
-                builder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-                builder.show();
-            }
-        });
+//        buttonPhone.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                String[] tmp = textPhone.getText().toString().split("-");
+//                AlertDialog.Builder builder =
+//                        new AlertDialog.Builder(getActivity());
+//                builder.setMessage("ยืนยันการโทรออก?");
+//                builder.setPositiveButton("ยืนยัน", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int id) {
+//                        Intent callActivity = new Intent(Intent.ACTION_CALL);
+//                        callActivity.setData(Uri.parse("tel:0876739362"));
+////                        callActivity.setData(Uri.parse("tel:"+tmp[0]+tmp[1]+tmp[2]));
+//                        startActivity(callActivity);
+//                    }
+//                });
+//                builder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                    }
+//                });
+//                builder.show();
+//            }
+//        });
         buttonWeb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -256,6 +292,8 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
             phone = extraBundle.getString("phone");
             website = extraBundle.getString("website");
         }
+        phonenum = phone.split(", ");
+        phoneno = phonenum.length;
         statusCheck();
     }
 
