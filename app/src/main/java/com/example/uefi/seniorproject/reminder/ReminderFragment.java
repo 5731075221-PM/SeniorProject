@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -92,5 +93,12 @@ public class ReminderFragment extends Fragment {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void clickAdd(){
+//            FragmentTransaction transaction = getFragmentManager() .beginTransaction();
+//            transaction.replace(R.id.main_layout, AddNoteFragment.newInstance());
+//            transaction.addToBackStack("");
+//            transaction.commit();
     }
 }

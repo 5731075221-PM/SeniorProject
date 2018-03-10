@@ -78,7 +78,7 @@ public class FirstaidFragment extends Fragment {
                 toolbar = "ตา หู คอ";
                 FragmentTransaction transaction = getFragmentManager() .beginTransaction();
                 transaction.replace(R.id.relaFirstaid, FirstaidNavFragment.newInstance(toolbar,"ตา หู คอ"),"ตา หู คอ");
-                transaction.addToBackStack("ตา หู คอ");
+                transaction.addToBackStack("");
                 transaction.commit();
             }
         });
@@ -128,7 +128,7 @@ public class FirstaidFragment extends Fragment {
                 toolbar = "การช่วยฟื้นคืนชีพขั้นพื้นฐาน";
                 FragmentTransaction transaction = getFragmentManager() .beginTransaction();
                 transaction.replace(R.id.relaFirstaid, SubjectFragment.newInstance(toolbar));
-                transaction.addToBackStack(null);
+                transaction.addToBackStack("");
                 transaction.commit();
 
             }

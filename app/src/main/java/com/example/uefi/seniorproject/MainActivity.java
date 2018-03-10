@@ -93,9 +93,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mToolBarNavigationListenerIsRegistered = false;
         }else if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
 
-            Fragment fragment = getSupportFragmentManager().findFragmentByTag("Firstaid");
+            Fragment fragment = getSupportFragmentManager().findFragmentByTag("Title");
             if (fragment instanceof FirstaidFragment) {
                 textTool.setText("การปฐมพยาบาล");
+            }else if (fragment instanceof ReminderFragment) {
+                textTool.setText("สุขภาพของฉัน");
             }
 //            Log.d("CASE2 = ",getSupportFragmentManager().getBackStackEntryCount()+"");
             getSupportFragmentManager().popBackStack();
@@ -186,8 +188,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 mToolBarNavigationListenerIsRegistered = true;
             }
             fragmentManager.beginTransaction()
-                    .replace(R.id.container_fragment, new FirstaidFragment(),"Firstaid")
-                    .addToBackStack("Firstaid")
+                    .replace(R.id.container_fragment, new FirstaidFragment(),"Title")
+                    .addToBackStack("Title")
                     .commit();
         } else if (id == R.id.nav_hospital) {
             toggle.setDrawerIndicatorEnabled(false);
@@ -222,8 +224,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 mToolBarNavigationListenerIsRegistered = true;
             }
             fragmentManager.beginTransaction()
-                    .replace(R.id.container_fragment, new ReminderFragment(),"Reminder")
-                    .addToBackStack("Reminder")
+                    .replace(R.id.container_fragment, new ReminderFragment(),"Title")
+                    .addToBackStack("Title")
                     .commit();
         } else if (id == R.id.nav_food) {
 
