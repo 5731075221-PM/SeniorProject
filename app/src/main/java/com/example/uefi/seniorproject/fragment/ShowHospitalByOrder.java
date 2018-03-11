@@ -109,15 +109,18 @@ public class ShowHospitalByOrder extends Fragment {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener, View.OnTouchListener {
-        TextView name, distance;
+        TextView name, distance, type;
         private ItemClickListener itemClickListener;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/JasmineUPC.ttf");
+            Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
             name = (TextView) itemView.findViewById(R.id.textView1);
             name.setTypeface(tf);
             distance = (TextView) itemView.findViewById(R.id.distanceHospital);
+            distance.setTypeface(tf);
+            type = (TextView) itemView.findViewById(R.id.typeHospital);
+            type.setTypeface(tf);
             itemView.setOnClickListener(this);
         }
 
@@ -164,13 +167,20 @@ public class ShowHospitalByOrder extends Fragment {
             if(holder instanceof ViewHolder){
                 ViewHolder viewHolder = (ViewHolder) holder;
                 viewHolder.name.setText(hospitalList.get(position).getName());
+                viewHolder.type.setText(hospitalList.get(position).getType());
                 viewHolder.setOnClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick, MotionEvent motionEvent) {
                         if (!isLongClick) {
-                            SelectItemFragment fragment = new SelectItemFragment();
+                            HospitalItemFragment fragment = new HospitalItemFragment();
                             Bundle bundle = new Bundle();
-                            bundle.putString("name",hospitalList.get(position).getName());
+                            bundle.putString("name", hospitalList.get(position).getName());
+                            bundle.putDouble("lat", hospitalList.get(position).getLat());
+                            bundle.putDouble("lng", hospitalList.get(position).getLng());
+                            bundle.putString("address", hospitalList.get(position).getAddress());
+                            bundle.putString("phone", hospitalList.get(position).getPhone());
+                            bundle.putString("website", hospitalList.get(position).getWebsite());
+                            bundle.putString("type", hospitalList.get(position).getType());
                             fragment.setArguments(bundle);
                             getFragmentManager().beginTransaction()
                                     .replace(R.id.container_fragment, fragment)
@@ -179,7 +189,6 @@ public class ShowHospitalByOrder extends Fragment {
                         }
                     }
                 });
-
             }else if(holder instanceof  HeaderViewHolder){
                 HeaderViewHolder headerHolder = (HeaderViewHolder)holder;
                 headerHolder.name.setText(hospitalList.get(position).getProvince());

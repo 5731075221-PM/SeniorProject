@@ -57,8 +57,8 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
     private GoogleMap mMap;
     Double lat = 0.0, lng = 0.0; //origin
     LatLng location; //destination
-    String name, address, phone, website;
-    TextView textName, textAddress, /*textPhone, textPhone2,*/ textDrivingDistance, textDrivingTime, topicTextAddress, topicTextPhone;
+    String name, address, phone, website, type;
+    TextView textName, textAddress, textType, /*textPhone, textPhone2,*/ textDrivingDistance, textDrivingTime, topicTextAddress, topicTextPhone;
     Button buttonPhone, buttonWeb, buttonNavigate;
     LocationManager locationManager;
     LocationListener locationListener;
@@ -79,9 +79,20 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
         mapFragment = (SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.itemMap);
         mapFragment.getMapAsync(this);
 
-        topicTextAddress = (TextView) view.findViewById(R.id.topicTextAddress);
-        topicTextPhone = (TextView) view.findViewById(R.id.topicTextPhone);
+//        topicTextAddress = (TextView) view.findViewById(R.id.topicTextAddress);
+//        topicTextPhone = (TextView) view.findViewById(R.id.topicTextPhone);
+        textType = (TextView) view.findViewById(R.id.textType);
         textName = (TextView) view.findViewById(R.id.textName);
+        textName.requestFocus();
+        textName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Web = ", website);
+                Intent linkActivity = new Intent(Intent.ACTION_VIEW);
+                linkActivity.setData(Uri.parse("http://" + website));
+                startActivity(linkActivity);
+            }
+        });
         textAddress = (TextView) view.findViewById((R.id.textAddress));
         int[] rid = {R.id.textPhone, R.id.textPhone2, R.id.textPhone3, R.id.textPhone4};
         for(int i = 0 ; i<phoneno;i++){
@@ -118,18 +129,20 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
         textDrivingDistance = (TextView) view.findViewById(R.id.drivingDistance);
         textDrivingTime = (TextView) view.findViewById(R.id.drivingTime);
 
-        topicTextAddress.setTypeface(tf);
-        topicTextPhone.setTypeface(tf);
+//        topicTextAddress.setTypeface(tf);
+//        topicTextPhone.setTypeface(tf);
         textName.setText(name);
         textName.setTypeface(tf);
         textAddress.setText(address);
 //        textPhone.setText(phone);
         textAddress.setTypeface(tf2);
+        textType.setText(type);
+        textType.setTypeface(tf2);
 //        textPhone.setTypeface(tf2);
 
-        buttonPhone = (Button) view.findViewById(R.id.callPhone);
-        buttonWeb = (Button) view.findViewById(R.id.linkWebsite);
-        buttonNavigate = (Button) view.findViewById(R.id.navigationButton);
+//        buttonPhone = (Button) view.findViewById(R.id.callPhone);
+//        buttonWeb = (Button) view.findViewById(R.id.linkWebsite);
+//        buttonNavigate = (Button) view.findViewById(R.id.navigationButton);
 //        buttonPhone.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -153,26 +166,26 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
 //                builder.show();
 //            }
 //        });
-        buttonWeb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("Web = ", website);
-                Intent linkActivity = new Intent(Intent.ACTION_VIEW);
-                linkActivity.setData(Uri.parse("http://" + website));
-                startActivity(linkActivity);
-            }
-        });
-        buttonNavigate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final LocationManager manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-                if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                    buildAlertMessageNoGps();
-                }else {
-                    openGoogleMap(new LatLng(lat,lng), location);
-                }
-            }
-        });
+//        buttonWeb.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Log.d("Web = ", website);
+//                Intent linkActivity = new Intent(Intent.ACTION_VIEW);
+//                linkActivity.setData(Uri.parse("http://" + website));
+//                startActivity(linkActivity);
+//            }
+//        });
+//        buttonNavigate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                final LocationManager manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+//                if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+//                    buildAlertMessageNoGps();
+//                }else {
+//                    openGoogleMap(new LatLng(lat,lng), location);
+//                }
+//            }
+//        });
 
         if (isGPS) {
             System.out.println("GPS = " + isGPS);
@@ -291,6 +304,7 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
             address = extraBundle.getString("address");
             phone = extraBundle.getString("phone");
             website = extraBundle.getString("website");
+            type = extraBundle.getString("type");
         }
         phonenum = phone.split(", ");
         phoneno = phonenum.length;
@@ -303,7 +317,7 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mMap.addMarker(new MarkerOptions().position(new LatLng(location.latitude, location.longitude)).title(name).snippet(null));
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.latitude, location.longitude), 12));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.latitude, location.longitude), 14));
 
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
             @Override

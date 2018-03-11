@@ -1,6 +1,7 @@
 package com.example.uefi.seniorproject.fragment;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
@@ -69,6 +70,7 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
     int index, indexSet;
     String search = "";
     boolean isGPS, isNetwork;
+    ProgressDialog progressBar;
 
     class RequestData extends AsyncTask<Void, Void, Void> {
 
@@ -113,6 +115,36 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
             new RequestData().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             sortHospital();
             adapter.notifyDataSetChanged();
+        }
+    }
+
+    class GetHospitalList extends AsyncTask<Void, Integer, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar = new ProgressDialog(getContext());
+            progressBar.setMessage("กรุณารอสักครู่...");
+            progressBar.setIndeterminate(false);
+            progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressBar.setCancelable(false);
+            progressBar.show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            hospitalList = dbHelperDAO.getHospital();
+            defaultList = hospitalList;
+            hosList = new ArrayList<Hospital>(hospitalList.subList(0, 10));
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            progressBar.dismiss();
+            adapter = new RecyclerViewAdapter(hosList);
+            recyclerView.setAdapter(adapter);
         }
     }
 
@@ -349,9 +381,10 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());
         dbHelperDAO.open();
 
-        hospitalList = dbHelperDAO.getHospital();
-        defaultList = hospitalList;
-        hosList = new ArrayList<Hospital>(hospitalList.subList(0, 10));
+        new GetHospitalList().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//        hospitalList = dbHelperDAO.getHospital();
+//        defaultList = hospitalList;
+//        hosList = new ArrayList<Hospital>(hospitalList.subList(0, 10));
 
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         connectionManager = (ConnectivityManager) getActivity().getSystemService(getActivity().getBaseContext().CONNECTIVITY_SERVICE);

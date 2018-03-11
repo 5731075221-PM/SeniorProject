@@ -279,7 +279,7 @@ public class SearchHospitalByName extends Fragment implements SearchView.OnQuery
     // Search
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener, View.OnTouchListener {
-        TextView name, distance;
+        TextView name, distance, type;
         private ItemClickListener itemClickListener;
 
         public ViewHolder(View itemView) {
@@ -288,6 +288,9 @@ public class SearchHospitalByName extends Fragment implements SearchView.OnQuery
             name = (TextView) itemView.findViewById(R.id.textView1);
             name.setTypeface(tf);
             distance = (TextView) itemView.findViewById(R.id.distanceHospital);
+            distance.setTypeface(tf);
+            type = (TextView) itemView.findViewById(R.id.typeHospital);
+            type.setTypeface(tf);
             itemView.setOnClickListener(this);
         }
 
@@ -325,6 +328,7 @@ public class SearchHospitalByName extends Fragment implements SearchView.OnQuery
         public void onBindViewHolder(ViewHolder holder, int position) {
             holder.name.setText(hospitalList.get(position).getName());
             holder.distance.setText((hospitalList.get(position).getDistance()));
+            holder.type.setText(hospitalList.get(position).getType());
             holder.setOnClickListener(new ItemClickListener() {
                 @Override
                 public void onClick(View view, int position, boolean isLongClick, MotionEvent motionEvent) {
@@ -337,6 +341,7 @@ public class SearchHospitalByName extends Fragment implements SearchView.OnQuery
                         bundle.putString("address", hospitalList.get(position).getAddress());
                         bundle.putString("phone", hospitalList.get(position).getPhone());
                         bundle.putString("website", hospitalList.get(position).getWebsite());
+                        bundle.putString("key", hospitalList.get(position).getType());
                         fragment.setArguments(bundle);
                         getFragmentManager().beginTransaction()
                                 .replace(R.id.container_fragment, fragment)
