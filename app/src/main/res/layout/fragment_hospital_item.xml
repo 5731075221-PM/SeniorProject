@@ -128,7 +128,7 @@
 
                             <TextView
                                 android:id="@+id/drivingTime"
-                                android:layout_width="100dp"
+                                android:layout_width="120dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="left|center_vertical"
@@ -342,9 +342,9 @@
                             android:id="@+id/iconType"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:layout_marginTop="20dp"
+                            android:layout_gravity="center_vertical"
                             android:layout_weight="1"
-                            app:srcCompat="@drawable/ic_phone_call" />
+                            app:srcCompat="@drawable/ic_hospital_sign" />
 
                         <LinearLayout
                             android:layout_width="280dp"
@@ -379,9 +379,9 @@
                             android:id="@+id/iconAddress"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:layout_marginTop="20dp"
+                            android:layout_gravity="center_vertical"
                             android:layout_weight="1"
-                            app:srcCompat="@drawable/ic_phone_call" />
+                            app:srcCompat="@drawable/ic_map_pin" />
 
                         <LinearLayout
                             android:layout_width="280dp"
@@ -419,7 +419,7 @@
                             android:id="@+id/iconPhone"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:layout_marginTop="20dp"
+                            android:layout_gravity="center_vertical"
                             android:layout_weight="1"
                             app:srcCompat="@drawable/ic_phone_call" />
 
@@ -488,6 +488,30 @@
                         </LinearLayout>
 
                     </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/navigationButton"
+                        android:layout_width="150dp"
+                        android:layout_margin="10dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/colorBlue"
+                        android:text="นำทาง"/>
+
+                    <Button
+                        android:id="@+id/emergencyButton"
+                        android:layout_width="150dp"
+                        android:layout_margin="10dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/colorRubyRed"
+                        android:textColor="@android:color/white"
+                        android:text="ฉุกเฉิน"/>
+
+                </LinearLayout>
 
                 </LinearLayout>
 

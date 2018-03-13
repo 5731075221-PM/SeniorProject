@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.uefi.seniorproject.databases.DBHelperDAO;
+import com.example.uefi.seniorproject.fragment.DiseaseFragment;
 import com.example.uefi.seniorproject.fragment.Hospital;
 import com.example.uefi.seniorproject.fragment.HospitalNearbyFragment;
 import com.example.uefi.seniorproject.fragment.MainFragment;
@@ -67,7 +68,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .add(R.id.container_fragment, new MainFragment())
+//                .add(R.id.container_fragment, new MainFragment())
+                .add(R.id.container_fragment, new DiseaseFragment())
                 .commit();
 
     }
