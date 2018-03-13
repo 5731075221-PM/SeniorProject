@@ -13,13 +13,14 @@
     <ImageView
         android:id="@+id/gridview_image"
         android:src="@drawable/ic_disease1_select"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
 
     <TextView
         android:id="@+id/gridview_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:textSize="15sp"/>
+        android:textColor="@drawable/ic_disease_text_select"
+        android:textSize="22sp"/>
 </LinearLayout>

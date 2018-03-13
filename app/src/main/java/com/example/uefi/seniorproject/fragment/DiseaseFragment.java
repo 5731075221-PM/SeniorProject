@@ -1,6 +1,7 @@
 package com.example.uefi.seniorproject.fragment;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -29,19 +30,13 @@ public class DiseaseFragment extends Fragment {
 
     String[] gridViewString = {"ระบบกระดูกและข้อ", "ระบบทางเดินปัสสาวะ", "ระบบทางเดินอาหาร", "ระบบศีรษะและลำคอ", "ระบบทางเดินหายใจ ",
             "ระบบหูคอจมูก", "ระบบตา", "ระบบหัวใจและหลอดเลือด", "ระบบโรคไต", "ระบบโรคผิวหนัง", "ระบบอวัยวะสืบพันธุ์", "ระบบต่อมไร้ท่อ",
-            "ระบบประสาทวิทยา", "ระบบโรคติดเชื้อ", "ระบบมะเร็งวิทยา", "ระบบจิตเวช "
+            "ระบบประสาทวิทยา", "ระบบโรคติดเชื้อ", "ระบบมะเร็งวิทยา", "ระบบจิตเวช", "ระบบน้ำเหลือง", "อื่นๆ"
     } ;
     int[] gridViewImageId = {
-            R.drawable.ic_disease1_select, R.drawable.ic_disease2, R.drawable.ic_disease3, R.drawable.ic_disease4, R.drawable.ic_disease5,
-            R.drawable.ic_disease6, R.drawable.ic_disease7, R.drawable.ic_disease8, R.drawable.ic_disease9, R.drawable.ic_disease10,
-            R.drawable.ic_disease11, R.drawable.ic_disease12, R.drawable.ic_disease13, R.drawable.ic_disease14
-            , R.drawable.ic_disease15, R.drawable.ic_disease16
-    };
-    int[] gridViewBgId = {
-            R.color.colorMacawBlueGreen, R.color.colorGreen, R.color.colorMacawBlueGreen, R.color.colorGreen,
-            R.color.colorMacawBlueGreen, R.color.colorGreen, R.color.colorMacawBlueGreen, R.color.colorGreen,
-            R.color.colorMacawBlueGreen, R.color.colorGreen, R.color.colorMacawBlueGreen, R.color.colorGreen,
-            R.color.colorMacawBlueGreen, R.color.colorGreen, R.color.colorMacawBlueGreen, R.color.colorGreen,
+            R.drawable.ic_disease1_select, R.drawable.ic_disease2_select, R.drawable.ic_disease3_select, R.drawable.ic_disease4_select, R.drawable.ic_disease5_select,
+            R.drawable.ic_disease6_select, R.drawable.ic_disease7_select, R.drawable.ic_disease8_select, R.drawable.ic_disease9_select, R.drawable.ic_disease10_select,
+            R.drawable.ic_disease11_select, R.drawable.ic_disease12_select, R.drawable.ic_disease13_select, R.drawable.ic_disease14_select
+            , R.drawable.ic_disease15_select, R.drawable.ic_disease16_select, R.drawable.ic_disease17_select, R.drawable.ic_disease18_select
     };
 
     @Nullable
@@ -55,7 +50,7 @@ public class DiseaseFragment extends Fragment {
         //Change 2 to your choice because here 2 is the number of Grid layout Columns in each row.
         recyclerViewLayoutManager = new GridLayoutManager(context, 2);
         recyclerView.setLayoutManager(recyclerViewLayoutManager);
-        recyclerView_Adapter = new RecyclerViewAdapter(context,gridViewString,gridViewImageId,gridViewBgId);
+        recyclerView_Adapter = new RecyclerViewAdapter(context,gridViewString,gridViewImageId);
         recyclerView.setAdapter(recyclerView_Adapter);
 
         return view;
@@ -64,20 +59,18 @@ public class DiseaseFragment extends Fragment {
     public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
 
         String[] text;
-        int[] image, background;
+        int[] image;
         Context context1;
 
-        public RecyclerViewAdapter(Context context2,String[] str, int[] img, int[] bg){
+        public RecyclerViewAdapter(Context context2,String[] str, int[] img){
             text = str;
             image = img;
-            background = bg;
             context1 = context2;
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener, View.OnTouchListener{
             TextView textView;
             ImageView imageView;
-            LinearLayout linearLayout;
             private ItemClickListener itemClickListener;
 
             public void setOnClickListener(ItemClickListener itemClickListener) {
@@ -86,9 +79,10 @@ public class DiseaseFragment extends Fragment {
 
             public ViewHolder(View v){
                 super(v);
+                Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/JasmineUPC.ttf");
                 textView = (TextView) v.findViewById(R.id.gridview_text);
+                textView.setTypeface(tf);
                 imageView = (ImageView) v.findViewById(R.id.gridview_image);
-                linearLayout = (LinearLayout) v.findViewById(R.id.gridview_layout);
                 v.setOnClickListener(this);
             }
 
@@ -121,7 +115,6 @@ public class DiseaseFragment extends Fragment {
         public void onBindViewHolder(ViewHolder Vholder, int position){
             Vholder.textView.setText(text[position]);
             Vholder.imageView.setImageResource(image[position]);
-//            Vholder.linearLayout.setBackgroundResource(gridViewBgId[position]);
             Vholder.setOnClickListener(new ItemClickListener() {
                 @Override
                 public void onClick(View view, int position, boolean isLongClick, MotionEvent motionEvent) {

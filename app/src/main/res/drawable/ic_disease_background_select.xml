@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:enterFadeDuration="@android:integer/config_mediumAnimTime"
-    android:exitFadeDuration="@android:integer/config_mediumAnimTime">
+    android:enterFadeDuration="@android:integer/config_mediumAnimTime">
     <item
         android:state_window_focused="false"
         android:drawable="@android:color/white" />
@@ -10,11 +9,11 @@
         android:state_focused="true"
         android:state_enabled="false"
         android:state_pressed="true"
-        android:drawable="@color/colorMacawBlueGreen" />
+        android:drawable="@android:color/white" />
     <item
         android:state_focused="true"
         android:state_enabled="false"
-        android:drawable="@color/colorMacawBlueGreen" />
+        android:drawable="@android:color/white" />
     <item
         android:state_focused="true"
         android:state_pressed="true"
@@ -25,7 +24,7 @@
         android:drawable="@color/colorMacawBlueGreen" />
     <item
         android:state_focused="true"
-        android:drawable="@color/colorMacawBlueGreen" />
+        android:drawable="@android:color/white" />
     <item android:drawable="@android:color/white" />
 
 </selector>
