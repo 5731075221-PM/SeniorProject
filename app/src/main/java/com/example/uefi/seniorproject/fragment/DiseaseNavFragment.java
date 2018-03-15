@@ -6,14 +6,19 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.uefi.seniorproject.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by UEFI on 14/3/2561.
@@ -23,7 +28,7 @@ public class DiseaseNavFragment extends Fragment{
     final Fragment fragment1 = new DiseaseFragment();
     final Fragment fragment2 = new SearchSymptomFragment();
     final Fragment fragment3 = new DiseaseListFragment();
-    Fragment selectedFragment = fragment1;
+    Fragment selectedFragment;
 
     @Nullable
     @Override
@@ -39,25 +44,47 @@ public class DiseaseNavFragment extends Fragment{
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment selectedFragment = null;
                 switch (item.getItemId()) {
                     case R.id.item_recent:
-                        selectedFragment = fragment1;//new DiseaseFragment();
+                        if(getChildFragmentManager().findFragmentByTag("1") != null){
+                            getChildFragmentManager().beginTransaction().hide(selectedFragment)
+                                    .show(fragment1).commit();
+                            selectedFragment = fragment1;
+                        }
+                        //new DiseaseFragment();
                         break;
                     case R.id.item_favorite:
+                        if(getChildFragmentManager().findFragmentByTag("2") != null){
+                            System.out.println("AAA = "+getChildFragmentManager().getBackStackEntryCount());
+                            getChildFragmentManager().beginTransaction().hide(selectedFragment)
+                                    .show(fragment2).commit();
+                            selectedFragment = fragment2;
+                        }else {
+                            getChildFragmentManager().beginTransaction().add(R.id.frame_bottom_nav,fragment2,"2").commit();
+                            selectedFragment = fragment2;
+                        }
 //                        Bundle args = new Bundle();
 //                        args.putStringArrayList("dict",getArguments().getStringArrayList("dict"));
 //                        args.putStringArrayList("stop",getArguments().getStringArrayList("stop"));
 //                        fragment2.setArguments(args);
-                        selectedFragment = fragment2;//new SearchSymptomFragment();
+//                        selectedFragment = fragment2;//new SearchSymptomFragment();
 //                        selectedFragment.setArguments(args);
                         break;
                     case R.id.item_nearby:
-                        selectedFragment = fragment3;//new DiseaseListFragment();
+                        if(getChildFragmentManager().findFragmentByTag("3") != null){
+                            System.out.println("AAA = "+getChildFragmentManager().getBackStackEntryCount());
+                            getChildFragmentManager().beginTransaction().hide(selectedFragment)
+                                    .show(fragment3).commit();
+                            selectedFragment = fragment3;
+                        }else {
+                            getChildFragmentManager().beginTransaction().add(R.id.frame_bottom_nav,fragment3,"3").commit();
+                            selectedFragment = fragment3;
+                        }
+                       //selectedFragment = fragment3;//new DiseaseListFragment();
                         break;
                 }
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_bottom_nav, selectedFragment).commit();
+//                getActivity().getSupportFragmentManager().beginTransaction()
+//                        .replace(R.id.frame_bottom_nav, selectedFragment).commit();
                 return true;
             }
         });
@@ -68,14 +95,15 @@ public class DiseaseNavFragment extends Fragment{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        selectedFragment = fragment1;
         Bundle args = new Bundle();
         args.putStringArrayList("dict",getArguments().getStringArrayList("dict"));
         args.putStringArrayList("stop",getArguments().getStringArrayList("stop"));
         fragment2.setArguments(args);
+        getChildFragmentManager().beginTransaction().add(R.id.frame_bottom_nav,fragment1,"1").commit();
+//        getActivity().getSupportFragmentManager().beginTransaction()
+//                .replace(R.id.frame_bottom_nav,fragment1).commit();
 
-        System.out.println("AAADes11 "+getFragmentManager().getBackStackEntryCount());
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frame_bottom_nav,fragment1).commit();
     }
 }
+

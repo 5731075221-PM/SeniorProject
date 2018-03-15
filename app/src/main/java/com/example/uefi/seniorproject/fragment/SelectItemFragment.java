@@ -76,10 +76,6 @@ public class SelectItemFragment extends Fragment{
         symptom = dbHelperDAO.getContent(name, "symptom");
         treat = dbHelperDAO.getContent(name, "treat");
         protect = dbHelperDAO.getContent(name, "protect");
-        System.out.println("ABC = "+cause);
-        System.out.println("ABC = "+symptom);
-        System.out.println("ABC = "+treat);
-        System.out.println("ABC = "+protect);
     }
 
     private void setupTabIcons() {
@@ -99,59 +95,14 @@ public class SelectItemFragment extends Fragment{
         image.setBounds(0, 0, 25, 25);
         tabLayout.getTabAt(3).setIcon(image);
         tabLayout.setTabTextColors(Color.GRAY,getResources().getColor(R.color.colorMacawBlueGreen));
-//        TextView tabFour = (TextView) LayoutInflater.from(getActivity()).inflate(R.layout.custom_tab, null);
-//        tabFour.setText("FOURRRRRRRRRR");
-//        tabFour.setCompoundDrawablesWithIntrinsicBounds(null, image, null, null);
-//        tabLayout.getTabAt(3).setCustomView(tabFour);
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        PagerAdapterFragment adapter = new PagerAdapterFragment(getActivity().getSupportFragmentManager());
-        System.out.println("ABC/ = "+cause);
-        System.out.println("ABC = "+symptom);
-        System.out.println("ABC = "+treat);
-        System.out.println("ABC = "+protect);
+        PagerAdapterFragment adapter = new PagerAdapterFragment(getChildFragmentManager());
         adapter.addFrag(new CausePageFragment(cause), "สาเหตุ");
         adapter.addFrag(new SymptomPageFragment(symptom), "อาการ");
         adapter.addFrag(new TreatPageFragment(treat), "วิธีรักษา");
         adapter.addFrag(new ProtectPageFragment(protect), "วิธีป้องกัน");
         viewPager.setAdapter(adapter);
     }
-
-//    @Override
-//    public void onTabSelected(TabLayout.Tab tab) {
-//        viewPager.setCurrentItem(tab.getPosition());
-//    }
-//
-//    @Override
-//    public void onTabUnselected(TabLayout.Tab tab) {
-//
-//    }
-//
-//    @Override
-//    public void onTabReselected(TabLayout.Tab tab) {
-//
-//    }
-
-//    private class FetchData extends AsyncTask<Void,Void,Void>{
-//
-//        @Override
-//        protected Void doInBackground(Void... voids) {
-//            try {
-//                Document doc = Jsoup.connect("http://haamor.com/th/"+name).get();
-//                for(Element div : doc.select("h2, h2 ~ p, h2 ~ ul")){
-//                    System.out.println(div.tagName()+" "+div.text());
-//                    list += div.text();
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Void aVoid) {
-//            t.setText(list);
-//        }
-//    }
 }
