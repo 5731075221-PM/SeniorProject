@@ -46,14 +46,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/searchSymptomList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:listitem="@layout/activity_hospital_list" />
+            tools:listitem="@layout/activity_disease_list" />
+
+        <TextView
+            android:id="@+id/textEmpty"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginTop="36dp"
+            android:textSize="20dp"
+            android:text="ค้นหาโดยการพิมพ์ ชื่อโรค อาการของโรค หากมีหลายคำค้นหากรุณาเว้นวรรค"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </android.support.constraint.ConstraintLayout>
 
 </LinearLayout>

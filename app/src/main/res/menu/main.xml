@@ -6,6 +6,16 @@
         android:title="ค้นหา"
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="always|collapseActionView" />
+    <item
+        android:id="@+id/search_by_name"
+        android:orderInCategory="100"
+        android:title="@string/search_by_name"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/sort_by_name"
+        android:orderInCategory="100"
+        android:title="@string/sort_by_name"
+        app:showAsAction="never" />
     <!--<item android:id="@+id/action_map"-->
         <!--android:icon="@drawable/ic_map"-->
         <!--android:title="แผนที่"-->

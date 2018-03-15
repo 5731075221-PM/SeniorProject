@@ -102,14 +102,14 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
             phone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String[] tmp = phone.getText().toString().split("-");//textPhone.getText().toString().split("-");
+                    final String[] tmp = phone.getText().toString().split("-");//textPhone.getText().toString().split("-");
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setTitle("ยืนยันการโทรออก?");
                     builder.setMessage("ติดต่อ "+tmp[0]+tmp[1]+tmp[2]);
                     builder.setPositiveButton("ยืนยัน", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             Intent callActivity = new Intent(Intent.ACTION_CALL);
-                            callActivity.setData(Uri.parse("tel:0876739362"));
+                            callActivity.setData(Uri.parse("tel:"+tmp[0]+tmp[1]+tmp[2]));
 //                        callActivity.setData(Uri.parse("tel:"+tmp[0]+tmp[1]+tmp[2]));
                             startActivity(callActivity);
                         }
@@ -140,52 +140,41 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
         textType.setTypeface(tf2);
 //        textPhone.setTypeface(tf2);
 
-//        buttonPhone = (Button) view.findViewById(R.id.callPhone);
-//        buttonWeb = (Button) view.findViewById(R.id.linkWebsite);
-//        buttonNavigate = (Button) view.findViewById(R.id.navigationButton);
-//        buttonPhone.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                String[] tmp = textPhone.getText().toString().split("-");
-//                AlertDialog.Builder builder =
-//                        new AlertDialog.Builder(getActivity());
-//                builder.setMessage("ยืนยันการโทรออก?");
-//                builder.setPositiveButton("ยืนยัน", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int id) {
-//                        Intent callActivity = new Intent(Intent.ACTION_CALL);
-//                        callActivity.setData(Uri.parse("tel:0876739362"));
-////                        callActivity.setData(Uri.parse("tel:"+tmp[0]+tmp[1]+tmp[2]));
-//                        startActivity(callActivity);
-//                    }
-//                });
-//                builder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                    }
-//                });
-//                builder.show();
-//            }
-//        });
-//        buttonWeb.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Log.d("Web = ", website);
-//                Intent linkActivity = new Intent(Intent.ACTION_VIEW);
-//                linkActivity.setData(Uri.parse("http://" + website));
-//                startActivity(linkActivity);
-//            }
-//        });
-//        buttonNavigate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                final LocationManager manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-//                if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-//                    buildAlertMessageNoGps();
-//                }else {
-//                    openGoogleMap(new LatLng(lat,lng), location);
-//                }
-//            }
-//        });
+        buttonPhone = (Button) view.findViewById(R.id.emergencyButton);
+        buttonNavigate = (Button) view.findViewById(R.id.navigationButton);
+        buttonPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder =
+                        new AlertDialog.Builder(getActivity());
+                builder.setTitle("ยืนยันการโทรออก?");
+                builder.setMessage("ติดต่อ 1669");
+                builder.setPositiveButton("ยืนยัน", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Intent callActivity = new Intent(Intent.ACTION_CALL);
+                        callActivity.setData(Uri.parse("tel:1669"));
+                        startActivity(callActivity);
+                    }
+                });
+                builder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                builder.show();
+            }
+        });
+        buttonNavigate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final LocationManager manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+                if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    buildAlertMessageNoGps();
+                }else {
+                    openGoogleMap(new LatLng(lat,lng), location);
+                }
+            }
+        });
 
         if (isGPS) {
             System.out.println("GPS = " + isGPS);
@@ -317,7 +306,7 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mMap.addMarker(new MarkerOptions().position(new LatLng(location.latitude, location.longitude)).title(name).snippet(null));
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.latitude, location.longitude), 14));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.latitude, location.longitude), 15));
 
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
             @Override

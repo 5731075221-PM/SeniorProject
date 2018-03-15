@@ -295,6 +295,12 @@ public class DBHelperDAO {
         return list;
     }
 
+    public String getDiseaseType(String name) {
+        Cursor cursor = database.rawQuery("SELECT * FROM diseasesandsymptoms WHERE name='"+name+"'", null);
+        cursor.moveToFirst();
+        return cursor.getString(cursor.getColumnIndex("type"));
+    }
+
     public String getContent(String str, String type) {
         String list = "";
         Cursor cursor = database.rawQuery("SELECT " + type + " FROM diseases WHERE name=" + "'" + str + "'", null);

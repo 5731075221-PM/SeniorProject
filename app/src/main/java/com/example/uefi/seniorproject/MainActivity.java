@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.uefi.seniorproject.databases.DBHelperDAO;
 import com.example.uefi.seniorproject.fragment.DiseaseFragment;
+import com.example.uefi.seniorproject.fragment.DiseaseNavFragment;
 import com.example.uefi.seniorproject.fragment.Hospital;
 import com.example.uefi.seniorproject.fragment.HospitalNearbyFragment;
 import com.example.uefi.seniorproject.fragment.MainFragment;
@@ -68,8 +69,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-//                .add(R.id.container_fragment, new MainFragment())
-                .add(R.id.container_fragment, new DiseaseFragment())
+                .add(R.id.container_fragment, new MainFragment())
+//                .add(R.id.container_fragment, new DiseaseNavFragment())
                 .commit();
 
     }
@@ -162,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Bundle args = new Bundle();
             args.putStringArrayList("dict",dictList);
             args.putStringArrayList("stop",stopwordList);
-            SearchSymptomFragment fragment = new SearchSymptomFragment();
+            DiseaseNavFragment fragment = new DiseaseNavFragment();//new SearchSymptomFragment();
             fragment.setArguments(args);
             fragmentManager.beginTransaction()
                     .replace(R.id.container_fragment, fragment)

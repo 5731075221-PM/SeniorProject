@@ -12,7 +12,6 @@
 
     <ImageView
         android:id="@+id/gridview_image"
-        android:src="@drawable/ic_disease1_select"
         android:layout_width="60dp"
         android:layout_height="60dp" />
 

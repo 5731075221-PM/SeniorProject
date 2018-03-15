@@ -76,6 +76,10 @@ public class SelectItemFragment extends Fragment{
         symptom = dbHelperDAO.getContent(name, "symptom");
         treat = dbHelperDAO.getContent(name, "treat");
         protect = dbHelperDAO.getContent(name, "protect");
+        System.out.println("ABC = "+cause);
+        System.out.println("ABC = "+symptom);
+        System.out.println("ABC = "+treat);
+        System.out.println("ABC = "+protect);
     }
 
     private void setupTabIcons() {
@@ -103,6 +107,10 @@ public class SelectItemFragment extends Fragment{
 
     private void setupViewPager(ViewPager viewPager) {
         PagerAdapterFragment adapter = new PagerAdapterFragment(getActivity().getSupportFragmentManager());
+        System.out.println("ABC/ = "+cause);
+        System.out.println("ABC = "+symptom);
+        System.out.println("ABC = "+treat);
+        System.out.println("ABC = "+protect);
         adapter.addFrag(new CausePageFragment(cause), "สาเหตุ");
         adapter.addFrag(new SymptomPageFragment(symptom), "อาการ");
         adapter.addFrag(new TreatPageFragment(treat), "วิธีรักษา");

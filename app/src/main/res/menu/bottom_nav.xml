@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item_recent"
+        android:enabled="true"
+        android:icon="@drawable/ic_grid"
+        android:title="หมวดหมู่ของโรค"/>
+    <item
+        android:id="@+id/item_favorite"
+        android:enabled="true"
+        android:icon="@drawable/ic_search"
+        android:title="ค้นหาจากอาการ"/>
+    <item
+        android:id="@+id/item_nearby"
+        android:enabled="true"
+        android:icon="@drawable/ic_sort_list"
+        android:title="รายชื่อของโรค"/>
+</menu>
