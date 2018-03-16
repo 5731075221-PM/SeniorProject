@@ -118,6 +118,14 @@ public class DiseaseFragment extends Fragment {
                 @Override
                 public void onClick(View view, int position, boolean isLongClick, MotionEvent motionEvent) {
                     Toast.makeText(getActivity(), "GridView Item: " + position, Toast.LENGTH_LONG).show();
+                    DiseaseSelectFragment fragment = new DiseaseSelectFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("type", gridViewString[position]);
+                    fragment.setArguments(bundle);
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container_fragment, fragment)
+                            .addToBackStack(null)
+                            .commit();
                 }
 //                @Override
 //                public void onClick(View view, int position, boolean isLongClick, MotionEvent motionEvent) {

@@ -342,6 +342,18 @@ public class DBHelperDAO {
         return list;
     }
 
+    public ArrayList<String> getDiseaseNameFromType(String type) {
+//        System.out.println("CheckDB = Name");
+        ArrayList<String> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT * FROM diseasesandsymptoms WHERE type like '%"+type+"%'", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            list.add(cursor.getString(cursor.getColumnIndex("name")));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
 
     public ArrayList<String> getFirstaidList(int indicator) {
         ArrayList<String> list = new ArrayList<>();
