@@ -5,11 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,15 +12,12 @@ import android.view.ViewGroup;
 
 import com.example.uefi.seniorproject.R;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by UEFI on 14/3/2561.
  */
 
 public class DiseaseNavFragment extends Fragment{
-    final Fragment fragment1 = new DiseaseFragment();
+    final Fragment fragment1 = new DiseaseGridFragment();
     final Fragment fragment2 = new SearchSymptomFragment();
     final Fragment fragment3 = new DiseaseListFragment();
     Fragment selectedFragment;
@@ -51,7 +43,7 @@ public class DiseaseNavFragment extends Fragment{
                                     .show(fragment1).commit();
                             selectedFragment = fragment1;
                         }
-                        //new DiseaseFragment();
+                        //new DiseaseGridFragment();
                         break;
                     case R.id.item_favorite:
                         if(getChildFragmentManager().findFragmentByTag("2") != null){

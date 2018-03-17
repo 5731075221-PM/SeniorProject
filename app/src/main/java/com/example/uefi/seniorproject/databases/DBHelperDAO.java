@@ -9,6 +9,7 @@ import android.util.Log;
 import android.util.Pair;
 
 import com.example.uefi.seniorproject.firstaid.Firstaid;
+import com.example.uefi.seniorproject.fragment.Disease;
 import com.example.uefi.seniorproject.fragment.Hospital;
 import com.example.uefi.seniorproject.fragment.Symptom;
 
@@ -283,12 +284,24 @@ public class DBHelperDAO {
     }
 
     public ArrayList<String> getDiseaseName() {
-//        System.out.println("CheckDB = Name");
         ArrayList<String> list = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT * FROM diseasesandsymptoms", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             list.add(cursor.getString(cursor.getColumnIndex("name")));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
+
+    public ArrayList<Disease> getDisease() {
+        ArrayList<Disease> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT * FROM diseasesandsymptoms", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            list.add(new Disease(cursor.getString(cursor.getColumnIndex("name")),
+                    cursor.getString(cursor.getColumnIndex("type"))));
             cursor.moveToNext();
         }
         cursor.close();
@@ -342,13 +355,15 @@ public class DBHelperDAO {
         return list;
     }
 
-    public ArrayList<String> getDiseaseNameFromType(String type) {
-//        System.out.println("CheckDB = Name");
-        ArrayList<String> list = new ArrayList<>();
+    public ArrayList<Disease> getDiseaseFromType(String type) {
+        ArrayList<Disease> list = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT * FROM diseasesandsymptoms WHERE type like '%"+type+"%'", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            list.add(cursor.getString(cursor.getColumnIndex("name")));
+            list.add(new Disease(
+                    cursor.getString(cursor.getColumnIndex("name")),
+                    cursor.getString(cursor.getColumnIndex("type"))
+            ));
             cursor.moveToNext();
         }
         cursor.close();

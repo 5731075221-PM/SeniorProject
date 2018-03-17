@@ -23,11 +23,11 @@ import java.util.Arrays;
  * Created by UEFI on 16/3/2561.
  */
 
-public class DiseaseSelectFragment extends Fragment {
+public class DiseaseGridSelectFragment extends Fragment {
     DBHelperDAO dbHelperDAO;
     RecyclerView recyclerView;
     private RecyclerViewAdapter adapter = new RecyclerViewAdapter();
-    ArrayList<String> diseaseName;
+    ArrayList<Disease> diseaseName;
 
     String[] gridViewString = {"ระบบกระดูกและข้อ", "ระบบทางเดินปัสสาวะ", "ระบบทางเดินอาหาร", "ระบบศีรษะและลำคอ", "ระบบทางเดินหายใจ",
             "ระบบหูคอจมูก", "ระบบตา", "ระบบหัวใจและหลอดเลือด", "ระบบโรคไต", "ระบบโรคผิวหนัง", "ระบบอวัยวะสืบพันธุ์", "ระบบต่อมไร้ท่อ",
@@ -44,7 +44,7 @@ public class DiseaseSelectFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_disease_select, container, false);
+        View view = inflater.inflate(R.layout.fragment_disease_grid_select, container, false);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerDiseaseSelect);
         recyclerView.setAdapter(adapter);
@@ -59,7 +59,7 @@ public class DiseaseSelectFragment extends Fragment {
 
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());
         dbHelperDAO.open();
-        diseaseName = dbHelperDAO.getDiseaseNameFromType(getArguments().getString("type"));
+        diseaseName = dbHelperDAO.getDiseaseFromType(getArguments().getString("type"));
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener, View.OnTouchListener {
@@ -109,7 +109,7 @@ public class DiseaseSelectFragment extends Fragment {
 //                return new SearchSymptomFragment.HeaderViewHolder(view);
 //            }else if(viewType == VIEW_TYPE_ITEM){
             View view = LayoutInflater.from(getActivity()).inflate(R.layout.activity_disease_list, parent, false);
-            return new DiseaseSelectFragment.ViewHolder(view);
+            return new DiseaseGridSelectFragment.ViewHolder(view);
 //            }
 //            return null;
         }
@@ -117,9 +117,9 @@ public class DiseaseSelectFragment extends Fragment {
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
-            String type = dbHelperDAO.getDiseaseType(diseaseName.get(position));
+            String type = diseaseName.get(position).getType();
             ViewHolder viewHolder = (ViewHolder) holder;
-            viewHolder.name.setText(diseaseName.get(position));
+            viewHolder.name.setText(diseaseName.get(position).getName());
             viewHolder.name.setTypeface(tf);
             viewHolder.type.setText(type);
             viewHolder.type.setTypeface(tf);
@@ -130,9 +130,8 @@ public class DiseaseSelectFragment extends Fragment {
                     if (!isLongClick) {
                         SelectItemFragment fragment = new SelectItemFragment();
                         Bundle bundle = new Bundle();
-                        bundle.putString("name", diseaseName.get(position));
+                        bundle.putString("name", diseaseName.get(position).getName());
                         fragment.setArguments(bundle);
-//                        getFragmentManager().beginTransaction()
                         getActivity().getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.container_fragment, fragment)
                                 .addToBackStack(null)
@@ -146,34 +145,5 @@ public class DiseaseSelectFragment extends Fragment {
         public int getItemCount() {
             return diseaseName.size();
         }
-
-//        @Override
-//        public Object[] getSections() {
-//            String letters = "[ก-ฮ]";
-//            mDataArray = diseaseName;
-//            List<String> sections = new ArrayList<>(44);
-//            mSectionPositions = new ArrayList<>(44);
-//            for (int i = 0, size = mDataArray.size(); i < size; i++) {
-//                String section = String.valueOf(mDataArray.get(i).charAt(0)).toUpperCase();
-//                if(!section.matches(letters)){
-//                    section = String.valueOf(mDataArray.get(i).charAt(1)).toUpperCase();
-//                }
-//                if (!sections.contains(section)) {
-//                    sections.add(section);
-//                    mSectionPositions.add(i);
-//                }
-//            }
-//            return sections.toArray(new String[0]);
-//        }
-//
-//        @Override
-//        public int getPositionForSection(int i) {
-//            return mSectionPositions.get(i);
-//        }
-//
-//        @Override
-//        public int getSectionForPosition(int i) {
-//            return 0;
-//        }
     }
 }

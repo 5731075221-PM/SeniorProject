@@ -1,9 +1,7 @@
 package com.example.uefi.seniorproject;
 
-import android.app.ProgressDialog;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
@@ -18,12 +16,9 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.uefi.seniorproject.databases.DBHelperDAO;
-import com.example.uefi.seniorproject.fragment.DiseaseFragment;
 import com.example.uefi.seniorproject.fragment.DiseaseNavFragment;
-import com.example.uefi.seniorproject.fragment.Hospital;
 import com.example.uefi.seniorproject.fragment.HospitalNearbyFragment;
 import com.example.uefi.seniorproject.fragment.MainFragment;
-import com.example.uefi.seniorproject.fragment.SearchSymptomFragment;
 import com.example.uefi.seniorproject.firstaid.FirstaidFragment;
 
 import java.util.ArrayList;

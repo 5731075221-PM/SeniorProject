@@ -43,19 +43,14 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
     RecyclerView recyclerView;
     SearchView searchView;
     TextView empty;
-    ArrayList<String> dictList, stopwordList, idfDoc, docLength;
-    ArrayList<Double> keywordSymptom;
+    ArrayList<String> dictList, stopwordList, idfDoc, docLength, diseaseName, diseaseNameDefault, filteredValues;
+    ArrayList<Double> keywordSymptom, queryDotDoc;
     ArrayList<Symptom> allSymptoms, mainSymptoms;
     ArrayList<ArrayList<String>> vectordata;
-    ArrayList<Double> queryDotDoc;
-    ArrayList<String> diseaseName, diseaseNameDefault;
     ArrayList<Pair<Double, String>> simDoc;
-    ArrayList<String> filteredValues;
     double queryLength, sum;
     LongLexTo tokenizer;
     ProgressDialog progressBar;
-    private ArrayList<Integer> mSectionPositions;
-    private List<String> mDataArray;
 
     String[] gridViewString = {"ระบบกระดูกและข้อ", "ระบบทางเดินปัสสาวะ", "ระบบทางเดินอาหาร", "ระบบศีรษะและลำคอ", "ระบบทางเดินหายใจ",
             "ระบบหูคอจมูก", "ระบบตา", "ระบบหัวใจและหลอดเลือด", "ระบบโรคไต", "ระบบโรคผิวหนัง", "ระบบอวัยวะสืบพันธุ์", "ระบบต่อมไร้ท่อ",
@@ -89,8 +84,8 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
                 vectordata = dbHelperDAO.getVectorData();
                 docLength = dbHelperDAO.getDocLength();
                 idfDoc = dbHelperDAO.getFreq();
-                dictList = getArguments().getStringArrayList("dict");//dbHelperDAO.getLexitron();
-                stopwordList = getArguments().getStringArrayList("stop");//dbHelperDAO.getStopword();
+                dictList = getArguments().getStringArrayList("dict");
+                stopwordList = getArguments().getStringArrayList("stop");
                 tokenizer = new LongLexTo(dictList, stopwordList);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -124,11 +119,6 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
 
-//        recyclerView.setIndexBarColor("#f9f9f9");
-//        recyclerView.setIndexBarTextColor("#4d4d4d");
-//        recyclerView.setIndexBarHighLateTextVisibility(true);
-//        recyclerView.setIndexbarHighLateTextColor("#4cd29f");
-
         return view;
     }
 
@@ -145,27 +135,6 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
         new createTokenizer().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
-//    public void sortList(){
-//        String letters = "[ก-ฮ]";
-//        List<String> sect = new ArrayList<>(44);
-//        ArrayList<String> temp = new ArrayList<>();
-//        for (int i = 0; i < diseaseName.size(); i++) {
-//            String section = String.valueOf(diseaseName.get(i).charAt(0)).toUpperCase();
-//            if(!section.matches(letters)){
-//                section = String.valueOf(diseaseName.get(i).charAt(1)).toUpperCase();
-//            }
-//            if (!sect.contains(section)) {
-//                sect.add(section);
-//                temp.add(section);
-//            }
-//            temp.add(diseaseName.get(i));
-//        }
-//        diseaseName = new ArrayList<>(temp);
-//        for(int i = 0;i< diseaseName.size();i++){
-//            System.out.println(diseaseName.get(i));
-//        }
-//    }
-
     public void initialQueryVector() {
         keywordSymptom = new ArrayList<>();
         for (int i = 0; i < mainSymptoms.size(); i++) {
@@ -174,9 +143,8 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
     }
 
     public void resetSearch() {
-        diseaseName = new ArrayList<>();//diseaseNameDefault;
+        diseaseName = new ArrayList<>();
         empty.setVisibility(View.VISIBLE);
-        // diseaseName.add("ค้นหาโดยการพิมพ์ ชื่อโรค อาการของโรค หากมีหลายคำค้นหากรุณาเว้นวรรค");
         adapter = new RecyclerViewAdapter();
         recyclerView.setAdapter(adapter);
     }

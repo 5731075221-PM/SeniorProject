@@ -31,9 +31,9 @@ public class DiseaseListFragment extends Fragment{
     DBHelperDAO dbHelperDAO;
     private RecyclerViewAdapter adapter = new RecyclerViewAdapter();
     IndexFastScrollRecyclerView recyclerView;
-    ArrayList<String> diseaseName;
+    ArrayList<Disease> diseaseName;
     private ArrayList<Integer> mSectionPositions;
-    private List<String> mDataArray;
+    private List<Disease> mDataArray;
 
     String[] gridViewString = {"ระบบกระดูกและข้อ", "ระบบทางเดินปัสสาวะ", "ระบบทางเดินอาหาร", "ระบบศีรษะและลำคอ", "ระบบทางเดินหายใจ",
             "ระบบหูคอจมูก", "ระบบตา", "ระบบหัวใจและหลอดเลือด", "ระบบโรคไต", "ระบบโรคผิวหนัง", "ระบบอวัยวะสืบพันธุ์", "ระบบต่อมไร้ท่อ",
@@ -68,29 +68,26 @@ public class DiseaseListFragment extends Fragment{
 
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());
         dbHelperDAO.open();
-        diseaseName = dbHelperDAO.getDiseaseName();
+        diseaseName = dbHelperDAO.getDisease();
         sortList();
     }
 
     public void sortList(){
         String letters = "[ก-ฮ]";
         List<String> sect = new ArrayList<>(44);
-        ArrayList<String> temp = new ArrayList<>();
+        ArrayList<Disease> temp = new ArrayList<>();
         for (int i = 0; i < diseaseName.size(); i++) {
-            String section = String.valueOf(diseaseName.get(i).charAt(0)).toUpperCase();
+            String section = String.valueOf(diseaseName.get(i).getName().charAt(0)).toUpperCase();
             if(!section.matches(letters)){
-                section = String.valueOf(diseaseName.get(i).charAt(1)).toUpperCase();
+                section = String.valueOf(diseaseName.get(i).getName().charAt(1)).toUpperCase();
             }
             if (!sect.contains(section)) {
                 sect.add(section);
-                temp.add(section);
+                temp.add(new Disease(section,""));
             }
             temp.add(diseaseName.get(i));
         }
         diseaseName = new ArrayList<>(temp);
-        for(int i = 0;i< diseaseName.size();i++){
-            System.out.println(diseaseName.get(i));
-        }
     }
 
     public class HeaderViewHolder extends RecyclerView.ViewHolder {
@@ -156,13 +153,12 @@ public class DiseaseListFragment extends Fragment{
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             if(holder instanceof ViewHolder){
                 Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
-                String type = dbHelperDAO.getDiseaseType(diseaseName.get(position));
                 ViewHolder viewHolder = (ViewHolder) holder;
-                viewHolder.name.setText(diseaseName.get(position));
+                viewHolder.name.setText(diseaseName.get(position).getName());
                 viewHolder.name.setTypeface(tf);
-                viewHolder.type.setText(type);
+                viewHolder.type.setText(diseaseName.get(position).getType());
                 viewHolder.type.setTypeface(tf);
-                viewHolder.img.setImageResource(gridViewImageId[Arrays.asList(gridViewString).indexOf(type.split(",")[0])]);
+                viewHolder.img.setImageResource(gridViewImageId[Arrays.asList(gridViewString).indexOf(diseaseName.get(position).getType().split(",")[0])]);
                 viewHolder.setOnClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick, MotionEvent motionEvent) {
@@ -170,9 +166,8 @@ public class DiseaseListFragment extends Fragment{
                             System.out.println("ABC = "+diseaseName.get(position));
                             SelectItemFragment fragment = new SelectItemFragment();
                             Bundle bundle = new Bundle();
-                            bundle.putString("name",diseaseName.get(position));
+                            bundle.putString("name",diseaseName.get(position).getName());
                             fragment.setArguments(bundle);
-                            //getFragmentManager().beginTransaction()
 
                             getParentFragment().getFragmentManager().beginTransaction()
                                     .replace(R.id.container_fragment, fragment)
@@ -184,13 +179,13 @@ public class DiseaseListFragment extends Fragment{
 
             }else if(holder instanceof  HeaderViewHolder){
                 HeaderViewHolder headerHolder = (HeaderViewHolder)holder;
-                headerHolder.name.setText(diseaseName.get(position));
+                headerHolder.name.setText(diseaseName.get(position).getName());
             }
         }
 
         @Override
         public int getItemViewType(int position) {
-            return diseaseName.get(position).length() == 1 ? VIEW_TYPE_HEADER : VIEW_TYPE_ITEM;
+            return diseaseName.get(position).getName().length() == 1 ? VIEW_TYPE_HEADER : VIEW_TYPE_ITEM;
         }
 
         @Override
@@ -205,9 +200,9 @@ public class DiseaseListFragment extends Fragment{
             List<String> sections = new ArrayList<>(44);
             mSectionPositions = new ArrayList<>(44);
             for (int i = 0, size = mDataArray.size(); i < size; i++) {
-                String section = String.valueOf(mDataArray.get(i).charAt(0)).toUpperCase();
+                String section = String.valueOf(mDataArray.get(i).getName().charAt(0)).toUpperCase();
                 if(!section.matches(letters)){
-                    section = String.valueOf(mDataArray.get(i).charAt(1)).toUpperCase();
+                    section = String.valueOf(mDataArray.get(i).getName().charAt(1)).toUpperCase();
                 }
                 if (!sections.contains(section)) {
                     sections.add(section);
