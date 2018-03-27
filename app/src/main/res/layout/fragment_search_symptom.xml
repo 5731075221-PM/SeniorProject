@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:clickable="true">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -57,10 +58,9 @@
 
         <TextView
             android:id="@+id/textEmpty"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical|center_horizontal"
-            android:layout_marginTop="36dp"
             android:textSize="20dp"
             android:text="ค้นหาโดยการพิมพ์ ชื่อโรค อาการของโรค หากมีหลายคำค้นหากรุณาเว้นวรรค"
             android:visibility="visible"

@@ -22,7 +22,7 @@ import com.example.uefi.seniorproject.databases.DBHelperDAO;
 public class SelectItemFragment extends Fragment{
     DBHelperDAO dbHelperDAO;
     String name = "",cause,symptom,treat,protect;
-    TextView t;
+    TextView title;
 
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -31,6 +31,9 @@ public class SelectItemFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_select_item, container, false);
+
+        title = getActivity().findViewById(R.id.textTool);
+        title.setText(name);
 
         viewPager = (ViewPager) view.findViewById(R.id.viewpager);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

@@ -9,9 +9,9 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.uefi.seniorproject.R;
-
 /**
  * Created by UEFI on 14/3/2561.
  */
@@ -21,6 +21,8 @@ public class DiseaseNavFragment extends Fragment{
     final Fragment fragment2 = new SearchSymptomFragment();
     final Fragment fragment3 = new DiseaseListFragment();
     Fragment selectedFragment;
+    TextView title;
+    int currentFrag = 0;
 
     @Nullable
     @Override
@@ -38,16 +40,18 @@ public class DiseaseNavFragment extends Fragment{
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.item_recent:
+                        currentFrag = 0;
                         if(getChildFragmentManager().findFragmentByTag("1") != null){
                             getChildFragmentManager().beginTransaction().hide(selectedFragment)
                                     .show(fragment1).commit();
                             selectedFragment = fragment1;
                         }
-                        //new DiseaseGridFragment();
+                        title = getActivity().findViewById(R.id.textTool);
+                        title.setText("หมวดหมู่ของโรค");
                         break;
                     case R.id.item_favorite:
+                        currentFrag = 1;
                         if(getChildFragmentManager().findFragmentByTag("2") != null){
-                            System.out.println("AAA = "+getChildFragmentManager().getBackStackEntryCount());
                             getChildFragmentManager().beginTransaction().hide(selectedFragment)
                                     .show(fragment2).commit();
                             selectedFragment = fragment2;
@@ -61,10 +65,12 @@ public class DiseaseNavFragment extends Fragment{
 //                        fragment2.setArguments(args);
 //                        selectedFragment = fragment2;//new SearchSymptomFragment();
 //                        selectedFragment.setArguments(args);
+                        title = getActivity().findViewById(R.id.textTool);
+                        title.setText("ค้นหาโรคจากอาการ");
                         break;
                     case R.id.item_nearby:
+                        currentFrag = 2;
                         if(getChildFragmentManager().findFragmentByTag("3") != null){
-                            System.out.println("AAA = "+getChildFragmentManager().getBackStackEntryCount());
                             getChildFragmentManager().beginTransaction().hide(selectedFragment)
                                     .show(fragment3).commit();
                             selectedFragment = fragment3;
@@ -72,7 +78,8 @@ public class DiseaseNavFragment extends Fragment{
                             getChildFragmentManager().beginTransaction().add(R.id.frame_bottom_nav,fragment3,"3").commit();
                             selectedFragment = fragment3;
                         }
-                       //selectedFragment = fragment3;//new DiseaseListFragment();
+                        title = getActivity().findViewById(R.id.textTool);
+                        title.setText("ค้นหาโรคจากชื่อ");
                         break;
                 }
 //                getActivity().getSupportFragmentManager().beginTransaction()
@@ -85,8 +92,27 @@ public class DiseaseNavFragment extends Fragment{
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if(currentFrag == 0){
+            title = getActivity().findViewById(R.id.textTool);
+            title.setText("หมวดหมู่ของโรค");
+        }else if(currentFrag == 1){
+            title = getActivity().findViewById(R.id.textTool);
+            title.setText("ค้นหาโรคจากอาการ");
+        }else{
+            title = getActivity().findViewById(R.id.textTool);
+            title.setText("ค้นหาโรคจากชื่อ");
+        }
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        title = getActivity().findViewById(R.id.textTool);
+        title.setText("หมวดหมู่ของโรค");
+
         selectedFragment = fragment1;
         Bundle args = new Bundle();
         args.putStringArrayList("dict",getArguments().getStringArrayList("dict"));
