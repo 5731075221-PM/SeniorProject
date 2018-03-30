@@ -168,7 +168,7 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
         filteredValues = new ArrayList<>();
         resetSearch();//diseaseNameDefault;
         try {
-            String output = tokenizer.genOutput(newText.trim(), "nat.html", tokenizer);
+            String output = tokenizer.genOutput(newText.trim(), tokenizer);
             if (!(output.equals(null) || output.equals(""))) {
                 empty.setVisibility(View.INVISIBLE);
                 System.out.println("output = " + output);

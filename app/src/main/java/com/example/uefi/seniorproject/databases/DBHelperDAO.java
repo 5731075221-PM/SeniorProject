@@ -210,7 +210,8 @@ public class DBHelperDAO {
         while (!cursor.isAfterLast()) {
             list.add(new Symptom(cursor.getInt(cursor.getColumnIndex("id")),
                     cursor.getString(cursor.getColumnIndex("word")),
-                    cursor.getString(cursor.getColumnIndex("parent"))
+                    cursor.getString(cursor.getColumnIndex("parent")),
+                    cursor.getString(cursor.getColumnIndex("synonym"))
             ));
             cursor.moveToNext();
         }
@@ -226,7 +227,8 @@ public class DBHelperDAO {
         while (!cursor.isAfterLast()) {
             list.add(new Symptom(cursor.getInt(cursor.getColumnIndex("id")),
                     cursor.getString(cursor.getColumnIndex("word")),
-                    null
+                    null,
+                    cursor.getString(cursor.getColumnIndex("synonym"))
             ));
             cursor.moveToNext();
         }
@@ -327,17 +329,32 @@ public class DBHelperDAO {
         System.out.println("Setdatabase = " + w.toString());
         Set<String> set = new LinkedHashSet<>();
         ArrayList<String> list;
-        String parent = "";
+        String parent = "", synonym = "";
+        String[] tmp;
         for (int i = 0; i < w.length; i++) {
-            Cursor cursor = database.rawQuery("SELECT * FROM allsymptoms WHERE word like '%" + w[i] + "%' ORDER BY word ASC", null);
+            Cursor cursor = database.rawQuery("SELECT * FROM allsymptoms WHERE word like '%" + w[i].trim() + "%' ORDER BY word ASC", null);
             cursor.moveToFirst();
             System.out.println("Setdatabase = " + cursor.getCount());
             while (!cursor.isAfterLast()) {
                 parent = cursor.getString(cursor.getColumnIndex("parent"));
+                synonym = cursor.getString(cursor.getColumnIndex("synonym"));
                 System.out.println("Setdatabase = " + parent);
                 if (parent != null && parent != "") {
-                    set.add(parent);
-                } else set.add(cursor.getString(cursor.getColumnIndex("word")));
+                    tmp = parent.split(",");
+                    for(int j = 0; j < tmp.length; j++) {
+                        System.out.println("Tmp = "+tmp[j].trim());
+                        set.add(tmp[j].trim());
+                    }
+                } else {
+                    System.out.println("Tmp2 = "+cursor.getString(cursor.getColumnIndex("word")));
+                    set.add(cursor.getString(cursor.getColumnIndex("word")));
+                }
+
+                if(synonym != null && synonym != ""){
+                    System.out.println("Syn = ");
+                    tmp = synonym.split(",");
+                    for(int j = 0; j < tmp.length; j++) set.add(tmp[j].trim());
+                }
                 cursor.moveToNext();
             }
         }
@@ -347,10 +364,14 @@ public class DBHelperDAO {
 
     public ArrayList<Integer> getIndexSymptom(ArrayList<String> arr) {
         ArrayList list = new ArrayList();
+        for (int i = 0; i < arr.size(); i++)
+            System.out.println("Word = "+arr.get(i));
         for (int i = 0; i < arr.size(); i++) {
+            System.out.println("Word = "+arr.get(i));
             Cursor cursor = database.rawQuery("SELECT * FROM mainsymptoms WHERE word='" + arr.get(i) + "' ORDER BY word ASC", null);
             cursor.moveToFirst();
             list.add(cursor.getInt(cursor.getColumnIndex("id")));
+            System.out.println("Word = "+cursor.getInt(cursor.getColumnIndex("id")));
         }
         return list;
     }

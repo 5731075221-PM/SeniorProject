@@ -8,14 +8,16 @@ public class Symptom {
     private int id;
     private String word;
     private String parent;
+    private String synonym;
 
     public Symptom() {
     }
 
-    public Symptom(int id, String word, String parent) {
+    public Symptom(int id, String word, String parent, String synonym) {
         this.id = id;
         this.word = word;
         this.parent = parent;
+        this.synonym = synonym;
     }
 
     public int getId() {
@@ -40,5 +42,13 @@ public class Symptom {
 
     public void setParent(String parent) {
         this.parent = parent;
+    }
+
+    public String getSynonym() {
+        return synonym;
+    }
+
+    public void setSynonym(String synonym) {
+        this.synonym = synonym;
     }
 }
