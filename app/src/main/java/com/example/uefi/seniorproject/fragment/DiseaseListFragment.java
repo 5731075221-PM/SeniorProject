@@ -3,6 +3,7 @@ package com.example.uefi.seniorproject.fragment;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
@@ -37,6 +38,7 @@ public class DiseaseListFragment extends Fragment{
     ArrayList<Disease> diseaseName;
     private ArrayList<Integer> mSectionPositions;
     private List<Disease> mDataArray;
+    AppBarLayout appBarLayout;
 
     String[] gridViewString = {"ระบบกระดูกและข้อ", "ระบบทางเดินปัสสาวะ", "ระบบทางเดินอาหาร", "ระบบศีรษะและลำคอ", "ระบบทางเดินหายใจ",
             "ระบบหูคอจมูก", "ระบบตา", "ระบบหัวใจและหลอดเลือด", "ระบบโรคไต", "ระบบโรคผิวหนัง", "ระบบอวัยวะสืบพันธุ์", "ระบบต่อมไร้ท่อ",
@@ -55,6 +57,8 @@ public class DiseaseListFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_disease_list, container, false);
 
+        appBarLayout.setExpanded(true, true);
+
         recyclerView = (IndexFastScrollRecyclerView) view.findViewById(R.id.diseaseList);
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
@@ -68,6 +72,8 @@ public class DiseaseListFragment extends Fragment{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
 
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());
         dbHelperDAO.open();

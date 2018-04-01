@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
@@ -51,6 +52,7 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
     double queryLength, sum;
     LongLexTo tokenizer;
     ProgressDialog progressBar;
+    AppBarLayout appBarLayout;
 
     String[] gridViewString = {"ระบบกระดูกและข้อ", "ระบบทางเดินปัสสาวะ", "ระบบทางเดินอาหาร", "ระบบศีรษะและลำคอ", "ระบบทางเดินหายใจ",
             "ระบบหูคอจมูก", "ระบบตา", "ระบบหัวใจและหลอดเลือด", "ระบบโรคไต", "ระบบโรคผิวหนัง", "ระบบอวัยวะสืบพันธุ์", "ระบบต่อมไร้ท่อ",
@@ -104,6 +106,8 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search_symptom, container, false);
 
+        appBarLayout.setExpanded(true, true);
+
         empty = (TextView) view.findViewById(R.id.textEmpty);
         if (diseaseName.isEmpty()) empty.setVisibility(View.VISIBLE);
         else empty.setVisibility(View.INVISIBLE);
@@ -135,6 +139,7 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
 
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);

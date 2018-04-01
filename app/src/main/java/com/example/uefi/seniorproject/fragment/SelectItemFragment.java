@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -23,14 +24,16 @@ public class SelectItemFragment extends Fragment{
     DBHelperDAO dbHelperDAO;
     String name = "",cause,symptom,treat,protect;
     TextView title;
-
     TabLayout tabLayout;
     ViewPager viewPager;
+    AppBarLayout appBarLayout;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_select_item, container, false);
+
+        appBarLayout.setExpanded(true, true);
 
         title = getActivity().findViewById(R.id.textTool);
         title.setText(name);
@@ -39,7 +42,6 @@ public class SelectItemFragment extends Fragment{
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                System.out.println("Position = "+position);
             }
 
             @Override
@@ -71,6 +73,8 @@ public class SelectItemFragment extends Fragment{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
 
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());
         dbHelperDAO.open();

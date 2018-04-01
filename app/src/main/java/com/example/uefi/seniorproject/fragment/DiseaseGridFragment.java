@@ -3,6 +3,7 @@ package com.example.uefi.seniorproject.fragment;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,6 +28,7 @@ public class DiseaseGridFragment extends Fragment {
     RecyclerView recyclerView;
     RecyclerViewAdapter adapter;
     RecyclerView.LayoutManager recyclerViewLayoutManager;
+    AppBarLayout appBarLayout;
 
     String[] gridViewString = {"ระบบกระดูกและข้อ", "ระบบทางเดินปัสสาวะ", "ระบบทางเดินอาหาร", "ระบบศีรษะและลำคอ", "ระบบทางเดินหายใจ",
             "ระบบหูคอจมูก", "ระบบตา", "ระบบหัวใจและหลอดเลือด", "ระบบโรคไต", "ระบบโรคผิวหนัง", "ระบบอวัยวะสืบพันธุ์", "ระบบต่อมไร้ท่อ",
@@ -39,10 +41,18 @@ public class DiseaseGridFragment extends Fragment {
             R.drawable.ic_disease16_select, R.drawable.ic_disease17_select, R.drawable.ic_disease18_select, R.drawable.ic_disease19_select, R.drawable.ic_disease20_select
     };
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_disease, container, false);
+
+        appBarLayout.setExpanded(true, true);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerDisease);
 
