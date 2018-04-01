@@ -4,6 +4,8 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationListener;
@@ -16,6 +18,8 @@ import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,6 +30,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -526,11 +531,14 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener, View.OnTouchListener {
         TextView name, distance, type;
+        ImageView image;
         private ItemClickListener itemClickListener;
 
         public ViewHolder(View itemView) {
             super(itemView);
             Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
+            image = (ImageView)itemView.findViewById(R.id.imageView1);
+            image.setImageResource(R.drawable.ic_hospital_cross);
             name = (TextView) itemView.findViewById(R.id.textView1);
             name.setTypeface(tf);
             distance = (TextView) itemView.findViewById(R.id.distanceHospital);
@@ -617,6 +625,11 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
             if (holder instanceof ViewHolder) {
                 Hospital h = hos.get(position);
                 ViewHolder viewHolder = (ViewHolder) holder;
+//                if(h.getType().equals("รัฐบาล")) DrawableCompat.setTint(viewHolder.image.getDrawable(), ContextCompat.getColor(getActivity(), R.color.colorPrimary));
+//                else if(h.getType().equals("เอกชน")) DrawableCompat.setTint(viewHolder.image.getDrawable(), ContextCompat.getColor(getActivity(), R.color.colorMacawBlueGreen));
+//                else if(h.getType().equals("ชุมชน")) DrawableCompat.setTint(viewHolder.image.getDrawable(), ContextCompat.getColor(getActivity(), R.color.colorPrimaryDark));
+//                else if(h.getType().equals("ศูนย์")) DrawableCompat.setTint(viewHolder.image.getDrawable(), ContextCompat.getColor(getActivity(), R.color.colorAccent));
+//                else DrawableCompat.setTint(viewHolder.image.getDrawable(), ContextCompat.getColor(getActivity(), R.color.colorMacawBlueGreen));
                 viewHolder.name.setText(h.getName());
                 viewHolder.distance.setText(h.getDistance());
                 viewHolder.type.setText(h.getType());

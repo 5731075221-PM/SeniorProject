@@ -46,7 +46,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:gravity="center_horizontal|center_vertical"
-            android:background="@drawable/ic_hospital" />
+            android:background="@drawable/ic_hospital_cross" />
 
         <TextView
             android:id="@+id/distanceHospital"
