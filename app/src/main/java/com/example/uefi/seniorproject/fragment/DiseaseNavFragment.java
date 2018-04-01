@@ -9,9 +9,13 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import com.example.uefi.seniorproject.R;
+
+import static android.content.Context.INPUT_METHOD_SERVICE;
+
 /**
  * Created by UEFI on 14/3/2561.
  */
@@ -122,6 +126,20 @@ public class DiseaseNavFragment extends Fragment{
 //        getActivity().getSupportFragmentManager().beginTransaction()
 //                .replace(R.id.frame_bottom_nav,fragment1).commit();
 
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
     }
 }
 

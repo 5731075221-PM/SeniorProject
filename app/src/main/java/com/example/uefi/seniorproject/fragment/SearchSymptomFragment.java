@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
@@ -29,6 +30,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
+import static android.content.Context.INPUT_METHOD_SERVICE;
+
 /**
  * Created by UEFI on 21/1/2561.
  */
@@ -36,6 +39,7 @@ import java.util.Comparator;
 public class SearchSymptomFragment extends Fragment implements SearchView.OnQueryTextListener {
     DBHelperDAO dbHelperDAO;
     private RecyclerViewAdapter adapter = new RecyclerViewAdapter();
+    ConstraintLayout conslayout;
     RecyclerView recyclerView;
     SearchView searchView;
     TextView empty;
@@ -110,18 +114,20 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
         searchView.clearFocus();
         searchView.setQueryHint("ค้นหา");
         searchView.setOnQueryTextListener(this);
-        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
-            @Override
-            public boolean onClose() {
-                InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
-                return false;
-            }
-        });
 
         recyclerView = (RecyclerView) view.findViewById(R.id.searchSymptomList);
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
+
+        conslayout = (ConstraintLayout)view.findViewById(R.id.searchSymptomLayout);
+        empty.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+                return true;
+            }
+        });
 
         return view;
     }
@@ -129,6 +135,9 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
 
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());
         dbHelperDAO.open();

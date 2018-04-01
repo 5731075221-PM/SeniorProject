@@ -29,7 +29,8 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter android:label="Mymor">
                 <action android:name="android.intent.action.MAIN" />
 
