@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relanote"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
@@ -9,22 +10,22 @@
     <!-- TODO: Update blank fragment layout -->
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/notePic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/linearLayout"
+        android:layout_above="@+id/add"
         android:padding="50dp"
         android:scaleType="centerInside"
         android:src="@drawable/notes" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_remind"
+        android:id="@+id/recycler_note"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/linearLayout" />
+        android:layout_above="@+id/add" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/add"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"

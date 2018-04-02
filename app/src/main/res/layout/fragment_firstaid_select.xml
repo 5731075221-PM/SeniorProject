@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/cardview_light_background"
     android:clickable="true"
-    tools:context="com.example.uefi.seniorproject.firstaid.SubjectFragment">
+    tools:context="com.example.uefi.seniorproject.firstaid.FirstaidSelectFragment">
 
     <!-- TODO: Update blank fragment layout -->
 

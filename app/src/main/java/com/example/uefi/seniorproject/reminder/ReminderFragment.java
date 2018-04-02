@@ -1,12 +1,16 @@
 package com.example.uefi.seniorproject.reminder;
 
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,7 +26,11 @@ import com.example.uefi.seniorproject.R;
  */
 public class ReminderFragment extends Fragment {
 
+    final int FRAGMENT_CODE = 100;
     public TextView textTool;
+    PagerAdapterReminder adapter;
+    ViewPager viewPager;
+    TabLayout tabLayout;
 
     public static ReminderFragment newInstance() {
         ReminderFragment fragment = new ReminderFragment();
@@ -38,44 +46,39 @@ public class ReminderFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-//        View view =  inflater.inflate(R.layout.fragment_reminder, container, false);
-//        textTool = (TextView) getActivity().findViewById(R.id.textTool);
-//        textTool.setText("สุขภาพของฉัน");
-//
-//
-//        return view;
         View view = inflater.inflate(R.layout.fragment_reminder, container, false);
         textTool = (TextView) getActivity().findViewById(R.id.textTool);
         textTool.setText("สุขภาพของฉัน");
 
-        TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
+        tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("บันทึกสุขภาพ"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
+        tabLayout.addTab(tabLayout.newTab().setText("กิจกรรมของฉัน"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         tabLayout.setTabTextColors(Color.GRAY,getResources().getColor(R.color.colorMacawBlueGreen));
 
-        final ViewPager viewPager = (ViewPager) view.findViewById(R.id.pager);
-        final PagerAdapterReminder adapter = new PagerAdapterReminder
+        viewPager = (ViewPager) view.findViewById(R.id.pager);
+
+        adapter = new PagerAdapterReminder
                 (getFragmentManager(), tabLayout.getTabCount());
+//        viewPager.setOffscreenPageLimit(0);
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+//                adapter.notifyDataSetChanged();
+//                viewPager.destroyDrawingCache();
                 viewPager.setCurrentItem(tab.getPosition());
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
         });
-
         return view;
     }
 
@@ -95,10 +98,17 @@ public class ReminderFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    public void clickAdd(){
-//            FragmentTransaction transaction = getFragmentManager() .beginTransaction();
-//            transaction.replace(R.id.main_layout, AddNoteFragment.newInstance());
-//            transaction.addToBackStack("");
-//            transaction.commit();
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+//            adapter.notifyDataSetChanged();
+        }else{
+//            adapter.notifyDataSetChanged();
+        }
+
+//        viewPager.destroyDrawingCache();
     }
+
+
 }

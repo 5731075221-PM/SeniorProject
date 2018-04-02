@@ -32,9 +32,11 @@ public class CustomAdapterFirstaid extends RecyclerView.Adapter{
     }
 
     private  OnItemClickListener mListener;
+
     public void setItemClickListener(OnItemClickListener listener){
         mListener = listener;
     }
+
     public CustomAdapterFirstaid(Context context,ArrayList<String> dataset) {
         mContext = context;
         mFirstaids = dataset;

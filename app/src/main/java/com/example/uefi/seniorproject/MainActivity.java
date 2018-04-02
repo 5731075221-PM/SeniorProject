@@ -22,6 +22,7 @@ import com.example.uefi.seniorproject.fragment.HospitalSelectFragment;
 import com.example.uefi.seniorproject.fragment.MainFragment;
 import com.example.uefi.seniorproject.fragment.SearchSymptomFragment;
 import com.example.uefi.seniorproject.firstaid.FirstaidFragment;
+import com.example.uefi.seniorproject.reminder.NotesFragment;
 import com.example.uefi.seniorproject.reminder.ReminderFragment;
 
 import java.util.ArrayList;
@@ -94,11 +95,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }else if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
 
             Fragment fragment = getSupportFragmentManager().findFragmentByTag("Title");
-            if (fragment instanceof FirstaidFragment) {
-                textTool.setText("การปฐมพยาบาล");
-            }else if (fragment instanceof ReminderFragment) {
-                textTool.setText("สุขภาพของฉัน");
-            }
+//            if (fragment instanceof FirstaidFragment) {
+//                textTool.setText("การปฐมพยาบาล");
+//            }else if (fragment instanceof ReminderFragment) {
+//                textTool.setText("สุขภาพของฉัน");
+//            }
+            String title = fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount()-2).getName();
+            textTool.setText(title);
+
 //            Log.d("CASE2 = ",getSupportFragmentManager().getBackStackEntryCount()+"");
             getSupportFragmentManager().popBackStack();
             toggle.setDrawerIndicatorEnabled(false);
@@ -189,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
             fragmentManager.beginTransaction()
                     .replace(R.id.container_fragment, new FirstaidFragment(),"Title")
-                    .addToBackStack("Title")
+                    .addToBackStack("การปฐมพยาบาล")
                     .commit();
         } else if (id == R.id.nav_hospital) {
             toggle.setDrawerIndicatorEnabled(false);
@@ -225,7 +229,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
             fragmentManager.beginTransaction()
                     .replace(R.id.container_fragment, new ReminderFragment(),"Title")
-                    .addToBackStack("Title")
+                    .addToBackStack("สุขภาพของฉัน")
                     .commit();
         } else if (id == R.id.nav_food) {
 
