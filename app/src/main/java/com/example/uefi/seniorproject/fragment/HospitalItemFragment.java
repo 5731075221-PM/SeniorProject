@@ -58,20 +58,22 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
     Double lat = 0.0, lng = 0.0; //origin
     LatLng location; //destination
     String name, address, phone, website, type;
-    TextView textName, textAddress, textType, /*textPhone, textPhone2,*/ textDrivingDistance, textDrivingTime, topicTextAddress, topicTextPhone;
+    TextView textName, textAddress, textType,textDrivingDistance, textDrivingTime;
     Button buttonPhone, buttonWeb, buttonNavigate;
     LocationManager locationManager;
-    LocationListener locationListener;
     String provider;
     Boolean isGPS = false;
     String[] phonenum;
     int phoneno;
     ArrayList<TextView> textPhone = new ArrayList<>();
+    AppBarLayout appBarLayout;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_hospital_item, container, false);
+
+        appBarLayout.setExpanded(true, true);
 
         final Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/JasmineUPC.ttf");
         final Typeface tf2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
@@ -286,6 +288,9 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
+
         Bundle extraBundle = getArguments();
         if (!extraBundle.isEmpty()) {
             name = extraBundle.getString("name");

@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -76,6 +77,9 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
     String search = "";
     boolean isGPS, isNetwork;
     ProgressDialog progressBar;
+    AppBarLayout appBarLayout;
+    TextView title;
+    boolean isLoading = false;
 
     class RequestData extends AsyncTask<Void, Void, Void> {
 
@@ -150,6 +154,7 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
             progressBar.dismiss();
             adapter = new RecyclerViewAdapter(hosList);
             recyclerView.setAdapter(adapter);
+            if (isGPS && isNetwork) new SortNearbyHospital().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         }
     }
 
@@ -157,12 +162,16 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_hospital_nearby, container, false);
 
+        appBarLayout.setExpanded(true, true);
+
 //        searchView = (SearchView) view.findViewById(R.id.searchNearbyHospital);
 //        searchView.setIconifiedByDefault(false);
 //        searchView.setIconified(false);
 //        searchView.clearFocus();
 //        searchView.setQueryHint("ค้นหา");
 //        searchView.setOnQueryTextListener(this);
+        title = getActivity().findViewById(R.id.textTool);
+        title.setText("ค้นหาโรงพยาบาลใกล้เคียง");
 
         recyclerView = (RecyclerView) view.findViewById(R.id.nearbyHospitalRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -174,6 +183,7 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
             @Override
             public void onLoadMore() {
                 if (hosList.size() <= hospitalList.size()) {
+                    isLoading = true;
                     hosList.add(null);
                     adapter.notifyItemInserted(hosList.size() - 1);
                     new Handler().postDelayed(new Runnable() {
@@ -190,7 +200,8 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
                             }
                             if (isGPS && isNetwork) sortHospital();
                             adapter.notifyDataSetChanged();
-                            adapter.setLoaded();
+                            isLoading = false;
+//                            adapter.setLoaded();
                         }
                     }, 5000);
                 } else {
@@ -206,7 +217,6 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
         float dis[] = new float[1];
         for (int i = 0; i < hospitalList.size(); i++) {
             Location.distanceBetween(lat, lng, hospitalList.get(i).getLat(), hospitalList.get(i).getLng(), dis);
-            ;
             hospitalList.get(i).setPriority(dis[0]);
             System.out.println("DistPoints = " + dis[0] + " " + hospitalList.get(i).getName());
         }
@@ -383,6 +393,8 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
+        appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
+
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());
         dbHelperDAO.open();
 
@@ -434,7 +446,6 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
             }
         }
         System.out.println("location = " + lat + " " + lng);
-        if (isGPS && isNetwork) new SortNearbyHospital().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     @Override
@@ -574,7 +585,7 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
         private final int VIEW_TYPE_ITEM = 0;
         private final int VIEW_TYPE_LOADING = 1;
         private LoadMore onLoadMoreListener;
-        private boolean isLoading;
+//        private boolean isLoading;
         private List<Hospital> hos;
         private int visibleThreshold = 1;
         private int lastVisibleItem, totalItemCount;
@@ -594,10 +605,11 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
                     totalItemCount = linearLayoutManager.getItemCount();
                     lastVisibleItem = linearLayoutManager.findLastVisibleItemPosition();
                     if (!isLoading && totalItemCount <= (lastVisibleItem + visibleThreshold)) {
+//                        isLoading = true;
                         if (onLoadMoreListener != null) {
                             onLoadMoreListener.onLoadMore();
                         }
-                        isLoading = true;
+//                        isLoading = true;
                     }
                 }
             });
@@ -622,14 +634,16 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            System.out.println(position);
             if (holder instanceof ViewHolder) {
                 Hospital h = hos.get(position);
                 ViewHolder viewHolder = (ViewHolder) holder;
-//                if(h.getType().equals("รัฐบาล")) DrawableCompat.setTint(viewHolder.image.getDrawable(), ContextCompat.getColor(getActivity(), R.color.colorPrimary));
-//                else if(h.getType().equals("เอกชน")) DrawableCompat.setTint(viewHolder.image.getDrawable(), ContextCompat.getColor(getActivity(), R.color.colorMacawBlueGreen));
-//                else if(h.getType().equals("ชุมชน")) DrawableCompat.setTint(viewHolder.image.getDrawable(), ContextCompat.getColor(getActivity(), R.color.colorPrimaryDark));
-//                else if(h.getType().equals("ศูนย์")) DrawableCompat.setTint(viewHolder.image.getDrawable(), ContextCompat.getColor(getActivity(), R.color.colorAccent));
-//                else DrawableCompat.setTint(viewHolder.image.getDrawable(), ContextCompat.getColor(getActivity(), R.color.colorMacawBlueGreen));
+                System.out.println(position);
+                if(h.getType().equals("รัฐบาล")) viewHolder.image.getDrawable().setColorFilter(Color.parseColor("#3f51b5"),PorterDuff.Mode.SRC_IN);//DrawableCompat.setTint(viewHolder.image.getDrawable(), ContextCompat.getColor(getActivity(), R.color.colorPrimary));
+                else if(h.getType().equals("เอกชน")) viewHolder.image.getDrawable().setColorFilter(Color.parseColor("#43bfc7"),PorterDuff.Mode.SRC_IN);//DrawableCompat.setTint(viewHolder.image.getDrawable(), ContextCompat.getColor(getActivity(), R.color.colorMacawBlueGreen));
+                else if(h.getType().equals("ชุมชน")) viewHolder.image.getDrawable().setColorFilter(Color.parseColor("#4cd29f"),PorterDuff.Mode.SRC_IN);//DrawableCompat.setTint(viewHolder.image.getDrawable(), ContextCompat.getColor(getActivity(), R.color.colorPrimaryDark));
+                else if(h.getType().equals("ศูนย์")) viewHolder.image.getDrawable().setColorFilter(Color.parseColor("#79ccd0"),PorterDuff.Mode.SRC_IN);//DrawableCompat.setTint(viewHolder.image.getDrawable(), ContextCompat.getColor(getActivity(), R.color.colorAccent));
+                else viewHolder.image.getDrawable().setColorFilter(Color.parseColor("#98d5cc"),PorterDuff.Mode.SRC_IN);//DrawableCompat.setTint(viewHolder.image.getDrawable(), ContextCompat.getColor(getActivity(), R.color.colorMacawBlueGreen));
                 viewHolder.name.setText(h.getName());
                 viewHolder.distance.setText(h.getDistance());
                 viewHolder.type.setText(h.getType());
