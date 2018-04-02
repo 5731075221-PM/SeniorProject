@@ -15,6 +15,7 @@ import com.example.uefi.seniorproject.firstaid.SubjectItem;
 import com.example.uefi.seniorproject.firstaid.SubjectRedItem;
 import com.example.uefi.seniorproject.fragment.Hospital;
 import com.example.uefi.seniorproject.fragment.Symptom;
+import com.example.uefi.seniorproject.reminder.ChoiceItem;
 
 import java.util.ArrayList;
 
@@ -354,6 +355,18 @@ public class DBHelperDAO {
         return list;
     }
 
+    public ArrayList<ChoiceItem> getSymptomsChoice(){
+        ArrayList<ChoiceItem> list = new ArrayList();
+        Cursor cursor = database.rawQuery("SELECT * FROM symptoms_choice ORDER BY word ASC", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+//            list.add(cursor.getString(cursor.getColumnIndex("word")));
+            list.add(new ChoiceItem(cursor.getString(cursor.getColumnIndex("word")),false));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
 
 //    public ArrayList<Pair<Double,Double>> getLatLng() {
 //        ArrayList<Pair<Double,Double>> list = new ArrayList<>();

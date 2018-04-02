@@ -12,13 +12,15 @@
         android:layout_height="wrap_content"
         android:background="@color/grey"
         android:orientation="vertical"
-        android:padding="2dp">
+        android:padding="4dp">
 
         <TextView
             android:id="@+id/day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:text="05 มีนาคม 61" />
+            android:text="05 มีนาคม 61"
+            android:textColor="@color/cardview_dark_background" />
     </LinearLayout>
 </RelativeLayout>
