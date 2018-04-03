@@ -18,9 +18,9 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.uefi.seniorproject.databases.DBHelperDAO;
-import com.example.uefi.seniorproject.fragment.HospitalSelectFragment;
+import com.example.uefi.seniorproject.fragment.DiseaseNavFragment;
+import com.example.uefi.seniorproject.fragment.HospitalNearbyFragment;
 import com.example.uefi.seniorproject.fragment.MainFragment;
-import com.example.uefi.seniorproject.fragment.SearchSymptomFragment;
 import com.example.uefi.seniorproject.firstaid.FirstaidFragment;
 import com.example.uefi.seniorproject.reminder.NotesFragment;
 import com.example.uefi.seniorproject.reminder.ReminderFragment;
@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .add(R.id.container_fragment, new MainFragment())
+//                .add(R.id.container_fragment, new DiseaseNavFragment())
                 .commit();
 
     }
@@ -171,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Bundle args = new Bundle();
             args.putStringArrayList("dict",dictList);
             args.putStringArrayList("stop",stopwordList);
-            SearchSymptomFragment fragment = new SearchSymptomFragment();
+            DiseaseNavFragment fragment = new DiseaseNavFragment();//new SearchSymptomFragment();
             fragment.setArguments(args);
             fragmentManager.beginTransaction()
                     .replace(R.id.container_fragment, fragment)
@@ -210,7 +211,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 mToolBarNavigationListenerIsRegistered = true;
             }
             fragmentManager.beginTransaction()
-                    .replace(R.id.container_fragment, new HospitalSelectFragment())
+                    .replace(R.id.container_fragment, new HospitalNearbyFragment())
                     .addToBackStack(null)
                     .commit();
         } else if (id == R.id.nav_reminder) {
