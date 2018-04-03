@@ -117,7 +117,7 @@ public class DiseaseGridFragment extends Fragment {
             Vholder.setOnClickListener(new ItemClickListener() {
                 @Override
                 public void onClick(View view, int position, boolean isLongClick, MotionEvent motionEvent) {
-                    Toast.makeText(getActivity(), "GridView Item: " + position, Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getActivity(), "GridView Item: " + position, Toast.LENGTH_LONG).show();
                     DiseaseGridSelectFragment fragment = new DiseaseGridSelectFragment();
                     Bundle bundle = new Bundle();
                     bundle.putString("type", gridViewString[position]);
