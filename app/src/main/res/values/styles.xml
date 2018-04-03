@@ -28,4 +28,10 @@
         <item name="textAllCaps">true</item>
     </style>
 
+    <style name="datepicker" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorPrimary">@color/nav_bar</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/nav_bar</item>
+    </style>
+
 </resources>

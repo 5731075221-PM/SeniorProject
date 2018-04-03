@@ -30,7 +30,7 @@
         app:showAsAction="always"/>
     <item
         android:id="@+id/nav_food"
-        android:icon="@drawable/ic_menu_manage"
+        android:icon="@drawable/icon_food"
         android:title="เมนูของฉัน"
         android:visible="true"
         app:showAsAction="always" />

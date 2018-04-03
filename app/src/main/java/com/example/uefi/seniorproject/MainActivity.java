@@ -1,5 +1,7 @@
 package com.example.uefi.seniorproject;
 
+//import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -20,6 +22,8 @@ import com.example.uefi.seniorproject.fragment.DiseaseNavFragment;
 import com.example.uefi.seniorproject.fragment.HospitalNearbyFragment;
 import com.example.uefi.seniorproject.fragment.MainFragment;
 import com.example.uefi.seniorproject.firstaid.FirstaidFragment;
+import com.example.uefi.seniorproject.reminder.NotesFragment;
+import com.example.uefi.seniorproject.reminder.ReminderFragment;
 
 import java.util.ArrayList;
 
@@ -41,8 +45,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         dbHelperDAO = DBHelperDAO.getInstance(this);
         dbHelperDAO.open();
-        dictList = dbHelperDAO.getLexitron();
-        stopwordList = dbHelperDAO.getStopword();
+//        dictList = dbHelperDAO.getLexitron();
+//        stopwordList = dbHelperDAO.getStopword();
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -90,6 +94,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             toggle.setToolbarNavigationClickListener(null);
             mToolBarNavigationListenerIsRegistered = false;
         }else if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+
+            Fragment fragment = getSupportFragmentManager().findFragmentByTag("Title");
+//            if (fragment instanceof FirstaidFragment) {
+//                textTool.setText("การปฐมพยาบาล");
+//            }else if (fragment instanceof ReminderFragment) {
+//                textTool.setText("สุขภาพของฉัน");
+//            }
+            String title = fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount()-2).getName();
+            textTool.setText(title);
+
 //            Log.d("CASE2 = ",getSupportFragmentManager().getBackStackEntryCount()+"");
             getSupportFragmentManager().popBackStack();
             toggle.setDrawerIndicatorEnabled(false);
@@ -179,8 +193,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 mToolBarNavigationListenerIsRegistered = true;
             }
             fragmentManager.beginTransaction()
-                    .replace(R.id.container_fragment, new FirstaidFragment())
-                    .addToBackStack(null)
+                    .replace(R.id.container_fragment, new FirstaidFragment(),"Title")
+                    .addToBackStack("การปฐมพยาบาล")
                     .commit();
         } else if (id == R.id.nav_hospital) {
             toggle.setDrawerIndicatorEnabled(false);
@@ -201,7 +215,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .addToBackStack(null)
                     .commit();
         } else if (id == R.id.nav_reminder) {
+            toggle.setDrawerIndicatorEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            if(!mToolBarNavigationListenerIsRegistered) {
+                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Doesn't have to be onBackPressed
+                        onBackPressed();
+                    }
+                });
 
+                mToolBarNavigationListenerIsRegistered = true;
+            }
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container_fragment, new ReminderFragment(),"Title")
+                    .addToBackStack("สุขภาพของฉัน")
+                    .commit();
         } else if (id == R.id.nav_food) {
 
         }

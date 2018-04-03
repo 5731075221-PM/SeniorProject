@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/selector_recycler"
-    tools:context="com.example.uefi.seniorproject.firstaid.FirstaidFragment">
+    android:paddingBottom="10dp">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -12,26 +12,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp">
-
-        <ImageView
-            android:id="@+id/charac"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp" />
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/firstaid_subject_item"
+            android:id="@+id/textViewDetailPic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/firstaid_item"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center"
-            android:layout_marginLeft="40dp"
+            android:gravity="center_horizontal"
             android:text="TextView"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </LinearLayout>
 

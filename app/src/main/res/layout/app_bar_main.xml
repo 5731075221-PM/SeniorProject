@@ -19,8 +19,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/try1"
             app:layout_scrollFlags="scroll|enterAlways"
+            android:background="@color/nav_bar"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <me.grantland.widget.AutofitTextView
@@ -29,6 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
+                android:fontFamily="@font/kanit"
                 android:text="@string/app_name"
                 android:textColor="@color/cardview_light_background"
                 android:textSize="20sp"

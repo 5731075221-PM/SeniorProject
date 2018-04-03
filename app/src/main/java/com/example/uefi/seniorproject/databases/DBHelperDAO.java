@@ -10,8 +10,14 @@ import android.util.Pair;
 
 import com.example.uefi.seniorproject.firstaid.Firstaid;
 import com.example.uefi.seniorproject.fragment.Disease;
+import com.example.uefi.seniorproject.firstaid.DetailItem;
+import com.example.uefi.seniorproject.firstaid.PicDetailItem;
+import com.example.uefi.seniorproject.firstaid.PicItem;
+import com.example.uefi.seniorproject.firstaid.SubjectItem;
+import com.example.uefi.seniorproject.firstaid.SubjectRedItem;
 import com.example.uefi.seniorproject.fragment.Hospital;
 import com.example.uefi.seniorproject.fragment.Symptom;
+import com.example.uefi.seniorproject.reminder.ChoiceItem;
 
 import java.util.ArrayList;
 
@@ -391,12 +397,86 @@ public class DBHelperDAO {
         return list;
     }
 
-    public ArrayList<String> getFirstaidList(int indicator) {
+    public ArrayList<String> getFirstaidList(String indicator){
         ArrayList<String> list = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT * FROM firstaid WHERE id_subject='" + indicator + "' ORDER BY subject ASC", null);
+        Cursor cursor = database.rawQuery("SELECT * FROM firstaid WHERE type='"+indicator+"' ORDER BY title ASC", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            list.add(cursor.getString(cursor.getColumnIndex("subject")));
+            list.add(cursor.getString(cursor.getColumnIndex("title")));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
+
+    public int getFirstaidId(String indicator){
+        int id = -1;
+        Cursor cursor = database.rawQuery("SELECT * FROM firstaid WHERE title='"+indicator+"'", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            id=cursor.getInt(cursor.getColumnIndex("id"));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return id;
+    }
+
+    public ArrayList getFirstaidDetail(int indicator){
+        ArrayList list = new ArrayList();
+        Cursor cursor = database.rawQuery("SELECT * FROM subject WHERE id='"+indicator+"'", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            if(cursor.getString(cursor.getColumnIndex("subject_title")).equals("ข้อควรระวัง")){
+                list.add(new SubjectRedItem(cursor.getString(cursor.getColumnIndex("subject_title"))));
+            }else{
+                list.add(new SubjectItem(cursor.getString(cursor.getColumnIndex("subject_title"))));
+            }
+
+            String[] check = {"2.","3.","4.","5.","6.","7.","8.","9.","10.","11."};
+            String temp = cursor.getString(cursor.getColumnIndex("subject_detail"));
+            String add = "";
+            for(int i =0;i<check.length;i++){
+                if(temp.toLowerCase().contains(check[i].toLowerCase())){
+
+                    int index = temp.indexOf(check[i], 0);
+
+                    add = temp.substring(0, index); //include \n at index-1
+                    temp = temp.substring(index);
+                    list.add(new DetailItem(add)); // new DetailItemKa
+
+                }
+            }
+            list.add(new DetailItem(temp+"\n"));
+//            list.add(new DetailItem(cursor.getString(cursor.getColumnIndex("subject_detail"))));
+//            list.add(new DetailItem(cursor.getString(cursor.getColumnIndex("subject_detail"))));
+
+            int subject_id = cursor.getInt(cursor.getColumnIndex("subject_id"));
+            Cursor cursorPic = database.rawQuery("SELECT * FROM picture WHERE subject_id='"+subject_id+"'", null);
+            cursorPic.moveToFirst();
+            while (!cursorPic.isAfterLast()) {
+                if(!cursorPic.isNull(1)) {
+                    list.add(new PicItem(cursorPic.getBlob(1)));
+                }
+                if(!cursorPic.isNull(2)) {
+                    list.add(new PicDetailItem(cursorPic.getString(cursorPic.getColumnIndex("description"))));
+                }
+                cursorPic.moveToNext();
+            }
+            cursorPic.close();
+
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
+
+    public ArrayList<ChoiceItem> getSymptomsChoice(){
+        ArrayList<ChoiceItem> list = new ArrayList();
+        Cursor cursor = database.rawQuery("SELECT * FROM symptoms_choice ORDER BY word ASC", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+//            list.add(cursor.getString(cursor.getColumnIndex("word")));
+            list.add(new ChoiceItem(cursor.getString(cursor.getColumnIndex("word")),false));
             cursor.moveToNext();
         }
         cursor.close();

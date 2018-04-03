@@ -1,38 +1,28 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameFirstaidNav"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cardview_light_background"
+    android:clickable="true"
     tools:context="com.example.uefi.seniorproject.firstaid.FirstaidFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
 
     <RelativeLayout
+        android:id="@+id/frameFirstaidSecondNav"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:alpha="0.8"
-        android:background="@color/try1"
-        android:padding="10dp">
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/rela"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:layout_height="40dp"
+        android:background="@color/second_bar"
+        android:gravity="center">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/kanit"
             android:paddingLeft="20dp"
             android:text="TextView"
             android:textColor="@color/cardview_light_background"
@@ -44,5 +34,5 @@
         android:id="@+id/recycler_firstaid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/rela" />
+        android:layout_below="@+id/frameFirstaidSecondNav" />
 </RelativeLayout>
