@@ -20,8 +20,9 @@
         android:layout_height="72dp"
         android:layout_gravity="center_horizontal|center_vertical"
         style="@style/TabLayout"
-        app:tabBackground="@drawable/ripple_effect_item"
-        app:tabIndicatorColor="@color/colorMacawBlueGreen"
+        app:tabBackground="@drawable/tab_color_select"
+        app:tabIndicatorColor="@android:color/white"
+        app:tabIndicatorHeight="4dp"
         app:tabSelectedTextColor="@color/colorMacawBlueGreen"
         app:tabTextColor="@color/colorAccent"
         app:tabMode="fixed" />

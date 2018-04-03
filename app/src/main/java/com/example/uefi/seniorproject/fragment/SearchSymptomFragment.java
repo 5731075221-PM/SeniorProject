@@ -1,7 +1,6 @@
 package com.example.uefi.seniorproject.fragment;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,14 +10,17 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.SearchView;
+//import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.example.uefi.seniorproject.R;
@@ -43,8 +45,9 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
     ConstraintLayout conslayout;
     RecyclerView recyclerView;
     SearchView searchView;
+    SearchView.SearchAutoComplete mSearchAutoComplete;
     TextView empty;
-    ArrayList<String> dictList, stopwordList, idfDoc, docLength, diseaseName, diseaseNameDefault, filteredValues;
+    ArrayList<String> dictList, stopwordList, idfDoc, docLength, diseaseName, diseaseNameDefault, filteredValues, data;
     ArrayList<Double> keywordSymptom, queryDotDoc;
     ArrayList<Symptom> allSymptoms, mainSymptoms;
     ArrayList<ArrayList<String>> vectordata;
@@ -53,6 +56,7 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
     LongLexTo tokenizer;
     ProgressDialog progressBar;
     AppBarLayout appBarLayout;
+    ArrayAdapter<String> adapterAuto;
 
     String[] gridViewString = {"ระบบกระดูกและข้อ", "ระบบทางเดินปัสสาวะ", "ระบบทางเดินอาหาร", "ระบบศีรษะและลำคอ", "ระบบทางเดินหายใจ",
             "ระบบหูคอจมูก", "ระบบตา", "ระบบหัวใจและหลอดเลือด", "ระบบโรคไต", "ระบบโรคผิวหนัง", "ระบบอวัยวะสืบพันธุ์", "ระบบต่อมไร้ท่อ",
@@ -81,7 +85,6 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                mainSymptoms = dbHelperDAO.getMainSymptoms();
                 allSymptoms = dbHelperDAO.getAllSymptoms();
                 vectordata = dbHelperDAO.getVectorData();
                 docLength = dbHelperDAO.getDocLength();
@@ -113,11 +116,28 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
         else empty.setVisibility(View.INVISIBLE);
 
         searchView = (SearchView) view.findViewById(R.id.searchSymptom);
+        searchView.setBackgroundResource(R.drawable.search_view);
         searchView.setIconifiedByDefault(false);
         searchView.setIconified(false);
         searchView.clearFocus();
         searchView.setQueryHint("ค้นหา");
         searchView.setOnQueryTextListener(this);
+
+        String dataArray[] = new String[529];
+        data.toArray(dataArray);
+        adapterAuto = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, dataArray);
+        mSearchAutoComplete = (SearchView.SearchAutoComplete) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        mSearchAutoComplete.setDropDownBackgroundResource(R.color.cardview_light_background);
+        mSearchAutoComplete.setDropDownAnchor(R.id.searchSymptom);
+        mSearchAutoComplete.setAdapter(adapterAuto);
+
+        mSearchAutoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int itemIndex, long id) {
+                String queryString=(String)adapterView.getItemAtPosition(itemIndex);
+                mSearchAutoComplete.setText("" + queryString);
+            }
+        });
 
         recyclerView = (RecyclerView) view.findViewById(R.id.searchSymptomList);
         recyclerView.setAdapter(adapter);
@@ -148,9 +168,14 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
         dbHelperDAO.open();
         diseaseNameDefault = dbHelperDAO.getDiseaseName();
         diseaseName = new ArrayList<>();
-//        sortList();
-
+        mainSymptoms = dbHelperDAO.getMainSymptoms();
+        addSearchList();
         new createTokenizer().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    }
+
+    public void addSearchList(){
+        data = new ArrayList<>();
+        for(Symptom str : mainSymptoms) data.add(str.getWord());
     }
 
     public void initialQueryVector() {

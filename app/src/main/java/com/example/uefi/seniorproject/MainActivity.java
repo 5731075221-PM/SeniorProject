@@ -45,8 +45,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         dbHelperDAO = DBHelperDAO.getInstance(this);
         dbHelperDAO.open();
-//        dictList = dbHelperDAO.getLexitron();
-//        stopwordList = dbHelperDAO.getStopword();
+        dictList = dbHelperDAO.getLexitron();
+        stopwordList = dbHelperDAO.getStopword();
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -101,8 +101,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            }else if (fragment instanceof ReminderFragment) {
 //                textTool.setText("สุขภาพของฉัน");
 //            }
-            String title = fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount()-2).getName();
-            textTool.setText(title);
+//            String title = fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount()-2).getName();
+//            textTool.setText(title);
 
 //            Log.d("CASE2 = ",getSupportFragmentManager().getBackStackEntryCount()+"");
             getSupportFragmentManager().popBackStack();

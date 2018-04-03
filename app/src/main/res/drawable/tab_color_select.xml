@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true" android:drawable="@drawable/ripple_effect_item" />
+    <item android:state_focused="true" android:drawable="@drawable/ripple_effect_item" />
+    <item android:state_selected="true" android:drawable="@color/second_bar" />
+    <item android:drawable="@color/nav_bar" />
+</selector>

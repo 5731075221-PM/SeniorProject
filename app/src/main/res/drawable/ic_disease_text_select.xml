@@ -2,6 +2,6 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true" android:color="@android:color/white" />
     <item android:state_focused="true" android:color="@android:color/white" />
-    <item android:state_selected="true" android:color="@color/colorMacawBlueGreen" />
-    <item android:color="@color/colorMacawBlueGreen" />
+    <item android:state_selected="true" android:color="@color/second_bar" />
+    <item android:color="@color/second_bar" />
 </selector>

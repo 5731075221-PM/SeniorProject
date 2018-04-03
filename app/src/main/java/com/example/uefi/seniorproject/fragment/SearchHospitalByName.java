@@ -1,11 +1,11 @@
 package com.example.uefi.seniorproject.fragment;
 
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.example.uefi.seniorproject.R;
@@ -68,11 +69,18 @@ public class SearchHospitalByName extends Fragment implements SearchView.OnQuery
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
 
+        searchView = (SearchView) view.findViewById(R.id.searchHospital);
+        searchView.setBackgroundResource(R.drawable.search_view);
+        searchView.setIconifiedByDefault(false);
+        searchView.setIconified(false);
+        searchView.clearFocus();
+        searchView.setQueryHint("ค้นหา");
+        searchView.setOnQueryTextListener(this);
+
         province = (SearchableSpinner) view.findViewById(R.id.spinnerProvince);
         province.setTitle("กรุณาเลือกจังหวัด");
         province.setPositiveButton("ยกเลิก");
-        adapterProvince = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_dropdown_item_1line, arrayProvince);
+        adapterProvince = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, arrayProvince);
         province.setAdapter(adapterProvince);
         province.setOnItemSelectedListener(this);
 
@@ -113,10 +121,11 @@ public class SearchHospitalByName extends Fragment implements SearchView.OnQuery
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.main, menu);
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        searchView = (SearchView) searchItem.getActionView();
-        searchView.setOnQueryTextListener(this);
-        searchView.setQueryHint("ค้นหา");
+//        MenuItem searchItem = menu.findItem(R.id.action_search);
+//        searchView = (SearchView) searchItem.getActionView();
+//        searchView.setBackgroundResource(R.drawable.search_view);
+//        searchView.setOnQueryTextListener(this);
+//        searchView.setQueryHint("ค้นหา");
 
         super.onCreateOptionsMenu(menu, inflater);
     }

@@ -31,6 +31,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
@@ -56,6 +57,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 /**
  * Created by UEFI on 7/2/2561.
@@ -449,6 +452,13 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.main_map, menu);
         super.onCreateOptionsMenu(menu, inflater);
@@ -468,17 +478,12 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
                             .commit();
                 return true;
             case R.id.search_by_name:
-                Toast.makeText(getActivity(), "search_by_name", Toast.LENGTH_SHORT).show();
                 getFragmentManager().beginTransaction()
                         .replace(R.id.container_fragment, new SearchHospitalByName())
                         .addToBackStack(null)
                         .commit();
                 return true;
-//            case R.id.search_by_area:
-//                Toast.makeText(getActivity(), "search_by_area", Toast.LENGTH_SHORT).show();
-//                return true;
             case R.id.sort_by_name:
-                Toast.makeText(getActivity(), "sort_by_name", Toast.LENGTH_SHORT).show();
                 getFragmentManager().beginTransaction()
                         .replace(R.id.container_fragment, new ShowHospitalByOrder())
                         .addToBackStack(null)
