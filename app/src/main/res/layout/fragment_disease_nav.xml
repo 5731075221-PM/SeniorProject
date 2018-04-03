@@ -18,6 +18,8 @@
         android:id="@+id/bottom_nav_view"
         android:layout_width="match_parent"
         android:layout_height="72dp"
+        android:layout_gravity="center_horizontal|center_vertical"
+        style="@style/TabLayout"
         app:tabBackground="@drawable/ripple_effect_item"
         app:tabIndicatorColor="@color/colorMacawBlueGreen"
         app:tabSelectedTextColor="@color/colorMacawBlueGreen"

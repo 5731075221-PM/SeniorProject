@@ -78,7 +78,7 @@ public class DiseaseGridFragment extends Fragment {
 
             public ViewHolder(View v){
                 super(v);
-                Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/JasmineUPC.ttf");
+                Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
                 textView = (TextView) v.findViewById(R.id.diseae_grid_text);
                 textView.setTypeface(tf);
                 imageView = (ImageView) v.findViewById(R.id.diseae_grid_image);

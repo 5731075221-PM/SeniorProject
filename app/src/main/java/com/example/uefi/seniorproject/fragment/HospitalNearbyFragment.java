@@ -553,7 +553,6 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
             name = (TextView) itemView.findViewById(R.id.textView1);
             name.setTypeface(tf);
             distance = (TextView) itemView.findViewById(R.id.distanceHospital);
-            distance.setTypeface(tf);
             type = (TextView) itemView.findViewById(R.id.typeHospital);
             type.setTypeface(tf);
             itemView.setOnClickListener(this);
@@ -638,12 +637,22 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
             if (holder instanceof ViewHolder) {
                 Hospital h = hos.get(position);
                 ViewHolder viewHolder = (ViewHolder) holder;
-                System.out.println(position);
-                if(h.getType().equals("รัฐบาล")) viewHolder.image.getDrawable().setColorFilter(Color.parseColor("#3f51b5"),PorterDuff.Mode.SRC_IN);//DrawableCompat.setTint(viewHolder.image.getDrawable(), ContextCompat.getColor(getActivity(), R.color.colorPrimary));
-                else if(h.getType().equals("เอกชน")) viewHolder.image.getDrawable().setColorFilter(Color.parseColor("#43bfc7"),PorterDuff.Mode.SRC_IN);//DrawableCompat.setTint(viewHolder.image.getDrawable(), ContextCompat.getColor(getActivity(), R.color.colorMacawBlueGreen));
-                else if(h.getType().equals("ชุมชน")) viewHolder.image.getDrawable().setColorFilter(Color.parseColor("#4cd29f"),PorterDuff.Mode.SRC_IN);//DrawableCompat.setTint(viewHolder.image.getDrawable(), ContextCompat.getColor(getActivity(), R.color.colorPrimaryDark));
-                else if(h.getType().equals("ศูนย์")) viewHolder.image.getDrawable().setColorFilter(Color.parseColor("#79ccd0"),PorterDuff.Mode.SRC_IN);//DrawableCompat.setTint(viewHolder.image.getDrawable(), ContextCompat.getColor(getActivity(), R.color.colorAccent));
-                else viewHolder.image.getDrawable().setColorFilter(Color.parseColor("#98d5cc"),PorterDuff.Mode.SRC_IN);//DrawableCompat.setTint(viewHolder.image.getDrawable(), ContextCompat.getColor(getActivity(), R.color.colorMacawBlueGreen));
+                if(h.getType().equals("รัฐบาล")) {
+                    viewHolder.image.getDrawable().setColorFilter(Color.parseColor("#3f51b5"),PorterDuff.Mode.SRC_IN);
+                    viewHolder.distance.setTextColor(getActivity().getResources().getColor(R.color.colorPrimary));
+                } else if(h.getType().equals("เอกชน")) {
+                    viewHolder.image.getDrawable().setColorFilter(Color.parseColor("#43bfc7"),PorterDuff.Mode.SRC_IN);
+                    viewHolder.distance.setTextColor(getActivity().getResources().getColor(R.color.colorMacawBlueGreen));
+                } else if(h.getType().equals("ชุมชน")) {
+                    viewHolder.image.getDrawable().setColorFilter(Color.parseColor("#4cd29f"),PorterDuff.Mode.SRC_IN);
+                    viewHolder.distance.setTextColor(getActivity().getResources().getColor(R.color.colorGreen));
+                } else if(h.getType().equals("ศูนย์")) {
+                    viewHolder.image.getDrawable().setColorFilter(Color.parseColor("#79ccd0"),PorterDuff.Mode.SRC_IN);
+                    viewHolder.distance.setTextColor(getActivity().getResources().getColor(R.color.colorBlue));
+                } else {
+                    viewHolder.image.getDrawable().setColorFilter(Color.parseColor("#3f6fb7"),PorterDuff.Mode.SRC_IN);
+                    viewHolder.distance.setTextColor(getActivity().getResources().getColor(R.color.colorBlue2));
+                }
                 viewHolder.name.setText(h.getName());
                 viewHolder.distance.setText(h.getDistance());
                 viewHolder.type.setText(h.getType());

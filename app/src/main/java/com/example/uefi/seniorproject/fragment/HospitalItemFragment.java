@@ -58,13 +58,14 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
     Double lat = 0.0, lng = 0.0; //origin
     LatLng location; //destination
     String name, address, phone, website, type;
-    TextView textName, textAddress, textType,textDrivingDistance, textDrivingTime;
+    TextView textName, textAddress, textType, textDrivingDistance, textDrivingTime;
     Button buttonPhone, buttonWeb, buttonNavigate;
     LocationManager locationManager;
     String provider;
     Boolean isGPS = false;
     String[] phonenum;
     int phoneno;
+    String selected;
     ArrayList<TextView> textPhone = new ArrayList<>();
     AppBarLayout appBarLayout;
 
@@ -97,8 +98,8 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
         });
         textAddress = (TextView) view.findViewById((R.id.textAddress));
         int[] rid = {R.id.textPhone, R.id.textPhone2, R.id.textPhone3, R.id.textPhone4};
-        for(int i = 0 ; i<phoneno;i++){
-            final TextView phone = (TextView)view.findViewById(rid[i]);
+        for (int i = 0; i < phoneno; i++) {
+            final TextView phone = (TextView) view.findViewById(rid[i]);
             phone.setTypeface(tf2);
             phone.setText(phonenum[i]);
             phone.setOnClickListener(new View.OnClickListener() {
@@ -107,11 +108,11 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
                     final String[] tmp = phone.getText().toString().split("-");//textPhone.getText().toString().split("-");
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setTitle("ยืนยันการโทรออก?");
-                    builder.setMessage("ติดต่อ "+tmp[0]+tmp[1]+tmp[2]);
+                    builder.setMessage("ติดต่อ " + tmp[0] + tmp[1] + tmp[2]);
                     builder.setPositiveButton("ยืนยัน", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             Intent callActivity = new Intent(Intent.ACTION_CALL);
-                            callActivity.setData(Uri.parse("tel:"+tmp[0]+tmp[1]+tmp[2]));
+                            callActivity.setData(Uri.parse("tel:" + tmp[0] + tmp[1] + tmp[2]));
 //                        callActivity.setData(Uri.parse("tel:"+tmp[0]+tmp[1]+tmp[2]));
                             startActivity(callActivity);
                         }
@@ -147,22 +148,43 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
         buttonPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder =
-                        new AlertDialog.Builder(getActivity());
-                builder.setTitle("ยืนยันการโทรออก?");
-                builder.setMessage("ติดต่อ 1669");
-                builder.setPositiveButton("ยืนยัน", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        Intent callActivity = new Intent(Intent.ACTION_CALL);
-                        callActivity.setData(Uri.parse("tel:1669"));
-                        startActivity(callActivity);
-                    }
-                });
-                builder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setItems(phonenum, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        selected = phonenum[which];
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        builder.setTitle("ยืนยันการโทรออก");
+                        builder.setMessage("ติดต่อ " + selected);
+                        builder.setPositiveButton("ยืนยัน", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Intent callActivity = new Intent(Intent.ACTION_CALL);
+                                callActivity.setData(Uri.parse("tel:0876739362"));
+                                startActivity(callActivity);
+                            }
+                        });
+                        builder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        });
+                        builder.show();
                     }
                 });
+                builder.setTitle("กรุณาเลือกหมายเลขโทรศัพท์");
+//                builder.setMessage("ติดต่อ "+selected);
+//                builder.setPositiveButton("ยืนยัน", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int id) {
+//                        Intent callActivity = new Intent(Intent.ACTION_CALL);
+//                        callActivity.setData(Uri.parse("tel:0876739362"));
+//                        startActivity(callActivity);
+//                    }
+//                });
+//                builder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                    }
+//                });
                 builder.show();
             }
         });
@@ -172,8 +194,8 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
                 final LocationManager manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
                 if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                     buildAlertMessageNoGps();
-                }else {
-                    openGoogleMap(new LatLng(lat,lng), location);
+                } else {
+                    openGoogleMap(new LatLng(lat, lng), location);
                 }
             }
         });
@@ -278,7 +300,7 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
     }
 
     private void openGoogleMap(LatLng src, LatLng dest) {
-        String url = "http://maps.google.com/maps?saddr="+src.latitude+","+src.longitude+"&daddr="+dest.latitude+","+dest.longitude+"&mode=driving";
+        String url = "http://maps.google.com/maps?saddr=" + src.latitude + "," + src.longitude + "&daddr=" + dest.latitude + "," + dest.longitude + "&mode=driving";
         Uri gmmIntentUri = Uri.parse(url);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");

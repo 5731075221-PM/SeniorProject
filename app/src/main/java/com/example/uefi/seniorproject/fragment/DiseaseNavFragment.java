@@ -2,6 +2,7 @@ package com.example.uefi.seniorproject.fragment;
 
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -140,20 +142,33 @@ public class DiseaseNavFragment extends Fragment{
 
     private void setupTabIcons() {
         Drawable image = getActivity().getResources().getDrawable(R.drawable.ic_grid);
-        image.setBounds(0, 0, 25, 25);
+        image.setBounds(25, 25, 25, 25);
         image.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
         tabLayout.getTabAt(0).setIcon(image);
 
         image = getActivity().getResources().getDrawable(R.drawable.ic_search);
-        image.setBounds(0, 0, 25, 25);
+        image.setBounds(25, 25, 25, 25);
         tabLayout.getTabAt(1).setIcon(image);
 
         image = getActivity().getResources().getDrawable(R.drawable.ic_sort_list);
-        image.setBounds(0, 0, 25, 25);
+        image.setBounds(25, 25, 25, 25);
         image.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
         tabLayout.getTabAt(2).setIcon(image);
 
         tabLayout.setTabTextColors(Color.WHITE,getResources().getColor(R.color.cardview_light_background));
+
+        ViewGroup childTabLayout = (ViewGroup) tabLayout.getChildAt(0);
+        for (int i = 0; i < childTabLayout.getChildCount(); i++) {
+            ViewGroup viewTab = (ViewGroup) childTabLayout.getChildAt(i);
+            for (int j = 0; j < viewTab.getChildCount(); j++) {
+                View tabTextView = viewTab.getChildAt(j);
+                if (tabTextView instanceof TextView) {
+                    Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
+                    ((TextView) tabTextView).setTypeface(typeface);
+                    ((TextView) tabTextView).setTextSize(TypedValue.COMPLEX_UNIT_DIP, 50);
+                }
+            }
+        }
     }
 
     private void setupViewPager(ViewPager viewPager) {
