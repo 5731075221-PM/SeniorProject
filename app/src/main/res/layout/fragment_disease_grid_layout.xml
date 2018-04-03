@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/gridview_layout"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:background="@drawable/ic_disease_background_select"
+    android:gravity="center_horizontal|center_vertical"
+    android:clickable="true"
+    android:addStatesFromChildren="true"
+    android:orientation="vertical">
+    <!--android:background="?android:attr/selectableItemBackground"-->
+
+    <ImageView
+        android:id="@+id/diseae_grid_image"
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
+
+    <TextView
+        android:id="@+id/diseae_grid_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textColor="@drawable/ic_disease_text_select"
+        android:textSize="22sp"/>
+</LinearLayout>

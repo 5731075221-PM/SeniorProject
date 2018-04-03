@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:clickable="true">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -43,17 +44,33 @@
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/searchSymptomLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/searchSymptomList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:clickable="false"
             app:layoutManager="LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:listitem="@layout/activity_hospital_list" />
+            tools:listitem="@layout/activity_disease_list" />
+
+        <TextView
+            android:id="@+id/textEmpty"
+            android:clickable="false"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:textSize="20dp"
+            android:text="ค้นหาโดยการพิมพ์ ชื่อโรค อาการของโรค หากมีหลายคำค้นหากรุณาเว้นวรรค"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </android.support.constraint.ConstraintLayout>
 
 </LinearLayout>

@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -22,21 +23,25 @@ import com.example.uefi.seniorproject.databases.DBHelperDAO;
 public class SelectItemFragment extends Fragment{
     DBHelperDAO dbHelperDAO;
     String name = "",cause,symptom,treat,protect;
-    TextView t;
-
+    TextView title;
     TabLayout tabLayout;
     ViewPager viewPager;
+    AppBarLayout appBarLayout;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_select_item, container, false);
 
+        appBarLayout.setExpanded(true, true);
+
+        title = getActivity().findViewById(R.id.textTool);
+        title.setText(name);
+
         viewPager = (ViewPager) view.findViewById(R.id.viewpager);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                System.out.println("Position = "+position);
             }
 
             @Override
@@ -69,6 +74,8 @@ public class SelectItemFragment extends Fragment{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
+
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());
         dbHelperDAO.open();
         name = getArguments().getString("name");
@@ -95,55 +102,14 @@ public class SelectItemFragment extends Fragment{
         image.setBounds(0, 0, 25, 25);
         tabLayout.getTabAt(3).setIcon(image);
         tabLayout.setTabTextColors(Color.GRAY,getResources().getColor(R.color.colorMacawBlueGreen));
-//        TextView tabFour = (TextView) LayoutInflater.from(getActivity()).inflate(R.layout.custom_tab, null);
-//        tabFour.setText("FOURRRRRRRRRR");
-//        tabFour.setCompoundDrawablesWithIntrinsicBounds(null, image, null, null);
-//        tabLayout.getTabAt(3).setCustomView(tabFour);
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        PagerAdapterFragment adapter = new PagerAdapterFragment(getActivity().getSupportFragmentManager());
+        PagerAdapterFragment adapter = new PagerAdapterFragment(getChildFragmentManager());
         adapter.addFrag(new CausePageFragment(cause), "สาเหตุ");
         adapter.addFrag(new SymptomPageFragment(symptom), "อาการ");
         adapter.addFrag(new TreatPageFragment(treat), "วิธีรักษา");
         adapter.addFrag(new ProtectPageFragment(protect), "วิธีป้องกัน");
         viewPager.setAdapter(adapter);
     }
-
-//    @Override
-//    public void onTabSelected(TabLayout.Tab tab) {
-//        viewPager.setCurrentItem(tab.getPosition());
-//    }
-//
-//    @Override
-//    public void onTabUnselected(TabLayout.Tab tab) {
-//
-//    }
-//
-//    @Override
-//    public void onTabReselected(TabLayout.Tab tab) {
-//
-//    }
-
-//    private class FetchData extends AsyncTask<Void,Void,Void>{
-//
-//        @Override
-//        protected Void doInBackground(Void... voids) {
-//            try {
-//                Document doc = Jsoup.connect("http://haamor.com/th/"+name).get();
-//                for(Element div : doc.select("h2, h2 ~ p, h2 ~ ul")){
-//                    System.out.println(div.tagName()+" "+div.text());
-//                    list += div.text();
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Void aVoid) {
-//            t.setText(list);
-//        }
-//    }
 }

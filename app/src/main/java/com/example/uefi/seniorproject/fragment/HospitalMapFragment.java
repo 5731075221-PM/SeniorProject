@@ -12,6 +12,8 @@ import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -75,7 +77,7 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
             mMarker.setTitle("คุณอยู่ที่นี่");
             mMarker.setSnippet("-1");
 //                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(coordinate, 12));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 12));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 15));
         }
 
         mapFragment = (SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.hospitalMap);
@@ -97,11 +99,16 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        icon = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.ic_location_on_white).copy(Bitmap.Config.ARGB_8888, true);
-        filter = new PorterDuffColorFilter(ContextCompat.getColor(getActivity(), R.color.colorRubyRed), PorterDuff.Mode.SRC_IN);
-        paint.setColorFilter(filter);
-        canvas = new Canvas(icon);
-        canvas.drawBitmap(icon, 0, 0, paint);
+        Drawable drawable = getResources().getDrawable(R.drawable.ic_map_pin);
+        icon = Bitmap.createBitmap(drawable.getIntrinsicWidth()+50, drawable.getIntrinsicHeight()+50, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(icon);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+//        icon = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.ic_local_hospital_white).copy(Bitmap.Config.ARGB_8888, true);
+//        filter = new PorterDuffColorFilter(ContextCompat.getColor(getActivity(), R.color.colorRubyRed), PorterDuff.Mode.SRC_IN);
+//        paint.setColorFilter(filter);
+//        canvas = new Canvas(icon);
+//        canvas.drawBitmap(icon, 0, 0, paint);
 
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
@@ -177,24 +184,30 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
 
         if (!hospitalList.isEmpty()) {
             for (int i = 0; i < hospitalList.size(); i++) {
-                avgLat += hospitalList.get(i).getLat();
-                avgLng += hospitalList.get(i).getLng();
+//                avgLat += hospitalList.get(i).getLat();
+//                avgLng += hospitalList.get(i).getLng();
 
-                Bitmap icon = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.ic_local_hospital_white).copy(Bitmap.Config.ARGB_8888, true);
-                Paint paint = new Paint();
-                ColorFilter filter = new PorterDuffColorFilter(ContextCompat.getColor(getActivity(), R.color.colorMacawBlueGreen), PorterDuff.Mode.SRC_IN);
-                paint.setColorFilter(filter);
+                Drawable drawable = getResources().getDrawable(R.drawable.ic_hospital_cross);
+                Bitmap icon = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
                 Canvas canvas = new Canvas(icon);
-                canvas.drawBitmap(icon, 0, 0, paint);
+                drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+                drawable.draw(canvas);
+
+//                Bitmap icon = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.ic_local_hospital_white).copy(Bitmap.Config.ARGB_8888, true);
+//                Paint paint = new Paint();
+//                ColorFilter filter = new PorterDuffColorFilter(ContextCompat.getColor(getActivity(), R.color.colorMacawBlueGreen), PorterDuff.Mode.SRC_IN);
+//                paint.setColorFilter(filter);
+//                Canvas canvas = new Canvas(icon);
+//                canvas.drawBitmap(icon, 0, 0, paint);
 
                 mMap.addMarker(new MarkerOptions().position(new LatLng(hospitalList.get(i).getLat(), hospitalList.get(i).getLng()))
                         .title(hospitalList.get(i).getName()).snippet(i + "")).setIcon(BitmapDescriptorFactory.fromBitmap(icon));
             }
-            avgLat = avgLat / hospitalList.size();
-            avgLng = avgLng / hospitalList.size();
+//            avgLat = avgLat / hospitalList.size();
+//            avgLng = avgLng / hospitalList.size();
 //            mMap.addMarker(new MarkerOptions().position(new LatLng(avgLat,avgLng))
 //                    .title("You're here").snippet(null));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(avgLat, avgLng), 12));
+//            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(avgLat, avgLng), 12));
         }
 
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
@@ -268,13 +281,5 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
 
     @Override
     public void onProviderDisabled(String s) {
-        System.out.println("onProviderDis");
-//        if (ActivityCompat.checkSelfPermission(getActivity(),
-//                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//            // Check Permissions Now
-//            ActivityCompat.requestPermissions(getActivity(),
-//                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-//                    0);
-//        }
     }
 }

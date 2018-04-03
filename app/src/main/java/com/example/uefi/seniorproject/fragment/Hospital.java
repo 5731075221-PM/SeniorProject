@@ -4,12 +4,16 @@ package com.example.uefi.seniorproject.fragment;
  * Created by UEFI on 27/12/2560.
  */
 public class Hospital{
-    private String name;
-    private Double lat;
-    private Double lng;
-    private String address,phone,website,zone, distance, duration;
+    private String name,address,phone,website,zone, distance, duration,province,type;
+    private Double lat, lng;
+    private Float priority;
 
-    public Hospital(String name, Double lat, Double lng, String address, String phone, String website, String zone) {
+    public Hospital(String name, String province) {
+        this.name = name;
+        this.province = province;
+    }
+
+    public Hospital(String name, Double lat, Double lng, String address, String phone, String website, String zone, String province, String type) {
         this.name = name;
         this.lat = lat;
         this.lng = lng;
@@ -19,6 +23,8 @@ public class Hospital{
         this.zone = zone;
         this.distance = "";
         this.duration = "";
+        this.province = province;
+        this.type = type;
     }
 
     public String getName() {
@@ -79,8 +85,8 @@ public class Hospital{
 
     public Double getDistanceValue() {
         String[] tmp = distance.split(" ");
-        System.out.println(tmp.toString());
-        System.out.println(tmp[0]+" "+tmp[1]);
+//        System.out.println("TmpString = "+tmp.toString());
+//        System.out.println("TmpString = "+tmp[0]+" "+tmp[1]);
         return Double.parseDouble(tmp[0]);
     }
 
@@ -98,5 +104,29 @@ public class Hospital{
 
     public void setDuration(String duration) {
         this.duration = duration;
+    }
+
+    public float getPriority() {
+        return priority;
+    }
+
+    public void setPriority(float priority) {
+        this.priority = priority;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

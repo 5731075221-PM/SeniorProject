@@ -1,0 +1,13 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/headerItem"
+            android:gravity="left"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="@dimen/abc_text_size_large_material"
+            android:background="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:paddingLeft="20dp"
+            android:layout_height="30dp" />
+</LinearLayout>

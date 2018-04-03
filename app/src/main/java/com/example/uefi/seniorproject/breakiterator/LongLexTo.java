@@ -202,7 +202,7 @@ public class LongLexTo {
         iter=indexList.iterator();
     } //wordInstance
 
-    public String genOutput(String line,String outFileName, LongLexTo tokenizer) throws IOException {
+    public String genOutput(String line, LongLexTo tokenizer) throws IOException {
         String ProcessedText="";
 //        String COMMA_DELIMITER = ",";
 //        String NEW_LINE_SEPARATOR = "\n";
