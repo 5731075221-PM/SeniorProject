@@ -332,8 +332,8 @@ public class DBHelperDAO {
 
     public ArrayList<String> checkKeyword(String[] w) {
         System.out.println("Setdatabase = " + w.toString());
-        Set<String> set = new LinkedHashSet<>();
-        ArrayList<String> list;
+//        Set<String> set = new LinkedHashSet<>();
+        ArrayList<String> list,set = new ArrayList<>();
         String parent = "", synonym = "";
         String[] tmp;
         for (int i = 0; i < w.length; i++) {

@@ -226,9 +226,10 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
 //                    System.out.println("keyword[i] = " + keyword[i]);
                 indexList = dbHelperDAO.getIndexSymptom(dbHelperDAO.checkKeyword(keyword));
                 System.out.println("Indexlist = " + indexList.toString());
+                for(int i = 0; i< indexList.size(); i++) keywordSymptom.set(indexList.get(i),keywordSymptom.get(indexList.get(i))+1);
                 for (int j = 0; j < indexList.size(); j++) {
                     // 2. normalize query and calculate weight of terms
-                    calvar = (Math.log10(keywordSymptom.get(indexList.get(j)) + 1) + 1) * Double.parseDouble(idfDoc.get(indexList.get(j)));
+                    calvar = (Math.log10(keywordSymptom.get(indexList.get(j))) + 1) * Double.parseDouble(idfDoc.get(indexList.get(j)));
                     keywordSymptom.set(indexList.get(j), calvar);
                     queryLength += Math.pow(calvar, 2);
                 }
