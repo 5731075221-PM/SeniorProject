@@ -8,7 +8,6 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Pair;
 
-import com.example.uefi.seniorproject.firstaid.Firstaid;
 import com.example.uefi.seniorproject.fragment.Disease;
 import com.example.uefi.seniorproject.firstaid.DetailItem;
 import com.example.uefi.seniorproject.firstaid.PicDetailItem;
