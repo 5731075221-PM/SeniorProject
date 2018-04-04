@@ -1213,7 +1213,7 @@
         <item>หนองปรือ</item>
         <item>ห้วยกระเจา</item>
     </string-array>
-    
+
     <string-array name="ZoneKalasin">
         <item>เลือกเขต</item>
         <item>กมลาไสย</item>
@@ -1235,7 +1235,7 @@
         <item>ห้วยผึ้ง</item>
         <item>ห้วยเม็ก</item>
     </string-array>
-    
+
     <string-array name="ZoneKamphaengphet">
         <item>เลือกเขต</item>
         <item>โกสัมพีนคร</item>
@@ -1250,7 +1250,7 @@
         <item>ลานกระบือ</item>
         <item>เมืองกำแพงเพชร</item>
     </string-array>
-    
+
     <string-array name="ZoneKhonkaen">
         <item>เลือกเขต</item>
         <item>กระนวน</item>
@@ -1294,7 +1294,7 @@
         <item>สอยดาว</item>
         <item>แหลมสิงห์</item>
     </string-array>
-    
+
     <string-array name="ZoneChachoengsao">
         <item>เลือกเขต</item>
         <item>คลองเขื่อน</item>
@@ -1309,7 +1309,7 @@
         <item>สนามชัยเขต</item>
         <item>บ้านโพธิ์</item>
     </string-array>
-    
+
     <string-array name="ZoneChonburi">
         <item>เลือกเขต</item>
         <item>เกาะจันทร์</item>
@@ -1324,7 +1324,7 @@
         <item>สัตหีบ</item>
         <item>หนองใหญ่</item>
     </string-array>
-    
+
     <string-array name="ZoneChainat">
         <item>เลือกเขต</item>
         <item>เนินขาม</item>
@@ -1335,7 +1335,7 @@
         <item>เมืองชัยนาท</item>
     </string-array>
 
-    <string-array name="ZoneChaiyaphum" >
+    <string-array name="ZoneChaiyaphum">
         <item>เลือกเขต</item>
         <item>เกษตรสมบูรณ์</item>
         <item>แก้งคร้อ</item>
@@ -1366,7 +1366,7 @@
         <item>สวี</item>
         <item>หลังสวน</item>
     </string-array>
-    
+
     <string-array name="ZoneChiangrai">
         <item>เลือกเขต</item>
         <item>ขุนตาล</item>
@@ -1388,7 +1388,7 @@
         <item>เวียงป่าเป้า</item>
         <item>เมืองเชียงราย</item>
     </string-array>
-    
+
     <string-array name="ZoneChiangmai">
         <item>เลือกเขต</item>
         <item>กัลยาณิวัฒนา</item>
@@ -1417,7 +1417,7 @@
         <item>อมก๋อย</item>
         <item>ฮอด</item>
     </string-array>
-    
+
     <string-array name="ZoneTrang">
         <item>เลือกเขต</item>
         <item>กันตัง</item>
@@ -1431,7 +1431,7 @@
         <item>หาดสำราญ</item>
         <item>ห้วยยอด</item>
     </string-array>
-    
+
     <string-array name="ZoneTrat">
         <item>เลือกเขต</item>
         <item>เกาะกูด</item>
@@ -1442,7 +1442,7 @@
         <item>เมืองตราด</item>
         <item>แหลมงอบ</item>
     </string-array>
-    
+
     <string-array name="ZoneTak">
         <item>เลือกเขต</item>
         <item>ท่าสองยาง</item>
@@ -1455,7 +1455,7 @@
         <item>สามเงา</item>
         <item>อุ้มผาง</item>
     </string-array>
-    
+
     <string-array name="ZoneNakhonnayok">
         <item>เลือกเขต</item>
         <item>บ้านนา</item>
@@ -1463,7 +1463,7 @@
         <item>เมืองนครนายก</item>
         <item>องครักษ์</item>
     </string-array>
-    
+
     <string-array name="ZoneNakhonpathom">
         <item>เลือกเขต</item>
         <item>พุทธมณฑล‎</item>
@@ -1474,7 +1474,7 @@
         <item>เมืองนครปฐม</item>
         <item>สามพราน</item>
     </string-array>
-    
+
     <string-array name="ZoneNakhonphanom">
         <item>เลือกเขต</item>
         <item>ท่าอุเทน</item>
@@ -1490,7 +1490,7 @@
         <item>วังยาง</item>
         <item>ศรีสงคราม</item>
     </string-array>
-    
+
     <string-array name="ZoneNakhonratchasima">
         <item>เลือกเขต</item>
         <item>แก้งสนามนาง</item>
@@ -1553,7 +1553,7 @@
         <item>สิชล</item>
         <item>หัวไทร</item>
     </string-array>
-    
+
     <string-array name="ZoneNakhonsawan">
         <item>เลือกเขต</item>
         <item>เก้าเลี้ยว</item>
@@ -1618,7 +1618,7 @@
         <item>สองแคว</item>
         <item>สันติสุข</item>
     </string-array>
-    
+
     <string-array name="ZoneBuengkan">
         <item>เลือกเขต</item>
         <item>โซ่พิสัย</item>
@@ -1657,7 +1657,7 @@
         <item>หนองหงส์</item>
         <item>ห้วยราช</item>
     </string-array>
-    
+
     <string-array name="ZonePathumthani">
         <item>เลือกเขต</item>
         <item>ตลองหลวง</item>
@@ -1668,7 +1668,7 @@
         <item>หนองเสือ</item>
         <item>เมืองปทุมธานี</item>
     </string-array>
-    
+
     <string-array name="ZonePrachuapkirikhan">
         <item>เลือกเขต</item>
         <item>กุยบุรี</item>
@@ -1680,7 +1680,7 @@
         <item>สามร้อยยอด</item>
         <item>หัวหิน</item>
     </string-array>
-    
+
     <string-array name="ZonePrachinburi">
         <item>เลือกเขต</item>
         <item>กบินทร์บุรี</item>
@@ -1724,7 +1724,7 @@
         <item>บางปะหัน</item>
         <item>บางปะอิน</item>
     </string-array>
-    
+
     <string-array name="ZonePhangnga">
         <item>เลือกเขต</item>
         <item>เกาะยาว</item>
@@ -1736,7 +1736,7 @@
         <item>ท้ายเหมือง</item>
         <item>เมืองพังงา</item>
     </string-array>
-    
+
     <string-array name="ZonePhatthalung">
         <item>เลือกเขต</item>
         <item>กงหรา</item>
@@ -1779,7 +1779,7 @@
         <item>วัดโบสถ์</item>
         <item>เมืองพิษณุโลก</item>
     </string-array>
-    
+
     <string-array name="ZonePhetchaburi">
         <item>เลือกเขต</item>
         <item>แก่งกระจาน</item>
@@ -1791,7 +1791,7 @@
         <item>เมืองเพชรบุรี</item>
         <item>หนองหญ้าปล้อง</item>
     </string-array>
-    
+
     <string-array name="ZonePhetchabun">
         <item>เลือกเขต</item>
         <item>เขาค้อ</item>
@@ -1806,7 +1806,7 @@
         <item>หล่มเก่า</item>
         <item>หล่มสัก</item>
     </string-array>
-    
+
     <string-array name="ZonePhrae">
         <item>เลือกเขต</item>
         <item>เมืองแพร่</item>
@@ -1831,14 +1831,14 @@
         <item>ภูซาง</item>
         <item>แม่ใจ</item>
     </string-array>
-    
+
     <string-array name="ZonePhuket">
         <item>เลือกเขต</item>
         <item>กะทู้</item>
         <item>ถลาง</item>
         <item>เมืองภูเก็ต</item>
     </string-array>
-    
+
     <string-array name="ZoneMahasarakham">
         <item>เลือกเขต</item>
         <item>แกดำ</item>
@@ -1855,7 +1855,7 @@
         <item>ยางสีสุราช</item>
         <item>วาปีปทุม</item>
     </string-array>
-    
+
     <string-array name="ZoneMukdahan">
         <item>เลือกเขต</item>
         <item>คำชะอี</item>
@@ -1866,7 +1866,7 @@
         <item>หนองสูง</item>
         <item>หว้านใหญ่</item>
     </string-array>
-    
+
     <string-array name="ZoneMaehongson">
         <item>เลือกเขต</item>
         <item>ขุนยวม</item>
@@ -1889,7 +1889,7 @@
         <item>ยะหา</item>
         <item>รามัน</item>
     </string-array>
-    
+
     <string-array name="ZoneYasothon">
         <item>เลือกเขต</item>
         <item>กุดชุม</item>
@@ -1902,7 +1902,7 @@
         <item>เมืองยโสธร</item>
         <item>เลิงนกทา</item>
     </string-array>
-    
+
     <string-array name="ZoneRoiet">
         <item>เลือกเขต</item>
         <item>หนองพอก</item>
@@ -1926,7 +1926,7 @@
         <item>หนองฮี</item>
         <item>อาจสามารถ</item>
     </string-array>
-    
+
     <string-array name="ZoneRanong">
         <item>เลือกเขต</item>
         <item>กระบุรี</item>
@@ -1935,7 +1935,7 @@
         <item>ละอุ่น</item>
         <item>สุขสำราญ</item>
     </string-array>
-    
+
     <string-array name="ZoneRayong">
         <item>เลือกเขต</item>
         <item>แกลง</item>
@@ -1947,7 +1947,7 @@
         <item>เมืองระยอง</item>
         <item>วังจันทร์</item>
     </string-array>
-    
+
     <string-array name="ZoneRatchaburi">
         <item>เลือกเขต</item>
         <item>จอมบึง</item>
@@ -1961,7 +1961,7 @@
         <item>วัดเพลง</item>
         <item>สวนผึ้ง</item>
     </string-array>
-    
+
     <string-array name="ZoneLopburi">
         <item>เลือกเขต</item>
         <item>โคกเจริญ</item>
@@ -1976,7 +1976,7 @@
         <item>หนองม่วง</item>
         <item>บ้านหมี่</item>
     </string-array>
-    
+
     <string-array name="ZoneLampang">
         <item>เลือกเขต</item>
         <item>งาว</item>
@@ -2004,7 +2004,7 @@
         <item>เวียงหนองล่อง</item>
         <item>ป่าซาง</item>
     </string-array>
-    
+
     <string-array name="ZoneLoei">
         <item>เลือกเขต</item>
         <item>เชียงคาน</item>
@@ -2047,7 +2047,7 @@
         <item>ห้วยทับทัน</item>
         <item>อุทุมพรพิสัย</item>
     </string-array>
-    
+
     <string-array name="ZoneSakonnakhon">
         <item>เลือกเขต</item>
         <item>กุดบาก</item>
@@ -2089,7 +2089,7 @@
         <item>สิงหนคร</item>
         <item>หาดใหญ่</item>
     </string-array>
-    
+
     <string-array name="ZoneSatun">
         <item>เลือกเขต</item>
         <item>ควนกาหลง</item>
@@ -2100,7 +2100,7 @@
         <item>มะนัง</item>
         <item>ละงู</item>
     </string-array>
-    
+
     <string-array name="ZoneSamutprakarn">
         <item>เลือกเขต</item>
         <item>บางบ่อ</item>
@@ -2111,21 +2111,21 @@
         <item>สำโรงเหนือ</item>
         <item>เมืองสมุทรปราการ</item>
     </string-array>
-    
+
     <string-array name="ZoneSamutsongkhram">
         <item>เลือกเขต</item>
         <item>บางคนที</item>
         <item>เมืองสมุทรสงคราม</item>
         <item>อัมพวา</item>
     </string-array>
-    
+
     <string-array name="ZoneSamutsakhon">
         <item>เลือกเขต</item>
         <item>กระทุ่มแบน</item>
         <item>บ้านแพ้ว</item>
         <item>เมืองสมุทรสาคร‎</item>
     </string-array>
-    
+
     <string-array name="ZoneSakaeo">
         <item>เลือกเขต</item>
         <item>เขาฉกรรจ์</item>
@@ -2138,7 +2138,7 @@
         <item>วัฒนานคร</item>
         <item>อรัญประเทศ</item>
     </string-array>
-    
+
     <string-array name="ZoneSaraburi">
         <item>เลือกเขต</item>
         <item>แก่งคอย</item>
@@ -2155,7 +2155,7 @@
         <item>หนองแซง</item>
         <item>หนองโดน</item>
     </string-array>
-    
+
     <string-array name="ZoneSingburi">
         <item>เลือกเขต</item>
         <item>ค่ายบางระจัน</item>
@@ -2178,7 +2178,7 @@
         <item>ศรีสำโรง</item>
         <item>สวรรคโลก</item>
     </string-array>
-    
+
     <string-array name="ZoneSuphanburi">
         <item>เลือกเขต</item>
         <item>ดอนเจดีย์</item>
@@ -2192,7 +2192,7 @@
         <item>สามชุก</item>
         <item>อู่ทอง</item>
     </string-array>
-    
+
     <string-array name="ZoneSuratthani">
         <item>เลือกเขต</item>
         <item>เกาะพะงัน</item>
@@ -2215,7 +2215,7 @@
         <item>วิภาวดี</item>
         <item>เวียงสระ</item>
     </string-array>
-    
+
     <string-array name="ZoneSurin">
         <item>เลือกเขต</item>
         <item>กาบเชิง</item>
@@ -2236,7 +2236,7 @@
         <item>สังขะ</item>
         <item>สำโรงทาบ</item>
     </string-array>
-    
+
     <string-array name="ZoneNongkhai">
         <item>เลือกเขต</item>
         <item>ท่าบ่อ</item>
@@ -2259,7 +2259,7 @@
         <item>ศรีบุญเรือง</item>
         <item>สุวรรณคูหา</item>
     </string-array>
-    
+
     <string-array name="ZoneAngthong">
         <item>เลือกเขต</item>
         <item>ไชโย</item>
@@ -2270,7 +2270,7 @@
         <item>แสวงหา</item>
         <item>สามโก้</item>
     </string-array>
-    
+
     <string-array name="ZoneUdonthani">
         <item>เลือกเขต</item>
         <item>กุดจับ</item>
@@ -2294,7 +2294,7 @@
         <item>หนองแสง</item>
         <item>หนองหาน</item>
     </string-array>
-    
+
     <string-array name="ZoneUthaithani">
         <item>เลือกเขต</item>
         <item>ทัพทัน</item>
@@ -2306,7 +2306,7 @@
         <item>หนองฉาง</item>
         <item>ห้วยคต</item>
     </string-array>
-    
+
     <string-array name="ZoneUttaradit">
         <item>เลือกเขต</item>
         <item>ตรอน</item>
@@ -2319,7 +2319,7 @@
         <item>เมืองอุตรดิตถ์</item>
         <item>ลับแล</item>
     </string-array>
-    
+
     <string-array name="ZoneUbonratchathani">
         <item>เลือกเขต</item>
         <item>กุดข้าวปุ้น</item>
@@ -2348,7 +2348,7 @@
         <item>สิรินธร</item>
         <item>เหล่าเสือโก้ก</item>
     </string-array>
-    
+
     <string-array name="ZoneAmnartcharoen">
         <item>เลือกเขต</item>
         <item>ชานุมาน</item>

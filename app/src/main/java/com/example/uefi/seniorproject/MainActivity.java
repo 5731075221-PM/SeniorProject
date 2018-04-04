@@ -128,9 +128,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
 //        getMenuInflater().inflate(R.menu.main, menu);
-
-
-
         return true;
     }
 
@@ -172,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Bundle args = new Bundle();
             args.putStringArrayList("dict",dictList);
             args.putStringArrayList("stop",stopwordList);
-            DiseaseNavFragment fragment = new DiseaseNavFragment();//new SearchSymptomFragment();
+            DiseaseNavFragment fragment = new DiseaseNavFragment();
             fragment.setArguments(args);
             fragmentManager.beginTransaction()
                     .replace(R.id.container_fragment, fragment)
