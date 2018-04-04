@@ -1,0 +1,245 @@
+package com.example.uefi.seniorproject.fragment;
+
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.example.uefi.seniorproject.R;
+import com.example.uefi.seniorproject.databases.DBHelperDAO;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+/**
+ * Created by UEFI on 4/4/2561.
+ */
+
+public class FavoriteItemFragment extends Fragment {
+    DBHelperDAO dbHelperDAO;
+    ArrayList<Object> list;
+    RecyclerView recyclerView;
+    private RecyclerViewAdapter adapter;
+
+    String[] gridViewString = {"ระบบกระดูกและข้อ", "ระบบทางเดินปัสสาวะ", "ระบบทางเดินอาหาร", "ระบบศีรษะและลำคอ", "ระบบทางเดินหายใจ",
+            "ระบบหูคอจมูก", "ระบบตา", "ระบบหัวใจและหลอดเลือด", "ระบบโรคไต", "ระบบโรคผิวหนัง", "ระบบอวัยวะสืบพันธุ์", "ระบบต่อมไร้ท่อ",
+            "ระบบประสาทวิทยา", "ระบบโรคติดเชื้อ", "ระบบมะเร็งวิทยา", "ระบบจิตเวช", "ระบบน้ำเหลือง", "ระบบกล้ามเนื้อและกระดูก", "ระบบภูมิคุ้มกัน", "อื่นๆ"
+    };
+
+    int[] gridViewImageId = {
+            R.drawable.ic_disease1_select, R.drawable.ic_disease2_select, R.drawable.ic_disease3_select, R.drawable.ic_disease4_select, R.drawable.ic_disease5_select,
+            R.drawable.ic_disease6_select, R.drawable.ic_disease7_select, R.drawable.ic_disease8_select, R.drawable.ic_disease9_select, R.drawable.ic_disease10_select,
+            R.drawable.ic_disease11_select, R.drawable.ic_disease12_select, R.drawable.ic_disease13_select, R.drawable.ic_disease14_select, R.drawable.ic_disease15_select,
+            R.drawable.ic_disease16_select, R.drawable.ic_disease17_select, R.drawable.ic_disease18_select, R.drawable.ic_disease19_select, R.drawable.ic_disease20_select
+    };
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_favorite_item, container, false);
+
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerFavList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        adapter = new RecyclerViewAdapter();
+        recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
+
+        return view;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        dbHelperDAO = DBHelperDAO.getInstance(getActivity());
+        dbHelperDAO.open();
+        list = dbHelperDAO.getAllFavList();
+        System.out.println("list.size " + list.size());
+    }
+
+    public class DiseaseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener, View.OnTouchListener {
+        TextView name, type;
+        ImageView img;
+        private ItemClickListener itemClickListener;
+
+        public DiseaseViewHolder(View itemView) {
+            super(itemView);
+            name = (TextView) itemView.findViewById(R.id.diseasetextView1);
+            type = (TextView)itemView.findViewById(R.id.diseasetextView2);
+            img = (ImageView) itemView.findViewById(R.id.diseaseimageView1);
+            itemView.setOnClickListener(this);
+        }
+
+        public void setOnClickListener(ItemClickListener itemClickListener) {
+            this.itemClickListener = itemClickListener;
+        }
+
+        @Override
+        public void onClick(View view) {
+            itemClickListener.onClick(view, getAdapterPosition(), false, null);
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            itemClickListener.onClick(view, getAdapterPosition(), true, null);
+            return true;
+        }
+
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            itemClickListener.onClick(view, getAdapterPosition(), false, motionEvent);
+            return true;
+        }
+    }
+
+    public class HospitalViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener, View.OnTouchListener {
+        TextView name, distance, type;
+        ImageView image;
+        private ItemClickListener itemClickListener;
+
+        public HospitalViewHolder(View itemView) {
+            super(itemView);
+            Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
+            image = (ImageView)itemView.findViewById(R.id.imageView1);
+            image.setImageResource(R.drawable.ic_hospital_cross);
+            name = (TextView) itemView.findViewById(R.id.textView1);
+            name.setTypeface(tf);
+            distance = (TextView) itemView.findViewById(R.id.distanceHospital);
+            type = (TextView) itemView.findViewById(R.id.typeHospital);
+            type.setTypeface(tf);
+            itemView.setOnClickListener(this);
+        }
+
+        public void setOnClickListener(ItemClickListener itemClickListener) {
+            this.itemClickListener = itemClickListener;
+        }
+
+        @Override
+        public void onClick(View view) {
+            itemClickListener.onClick(view, getAdapterPosition(), false, null);
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            itemClickListener.onClick(view, getAdapterPosition(), true, null);
+            return true;
+        }
+
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            itemClickListener.onClick(view, getAdapterPosition(), false, motionEvent);
+            return true;
+        }
+    }
+
+    public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+        private final int VIEW_TYPE_DISEASE = 0;
+        private final int VIEW_TYPE_HOSPITAL = 1;
+
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            if(viewType == VIEW_TYPE_DISEASE){
+                View view = LayoutInflater.from(getActivity()).inflate(R.layout.activity_disease_list, parent, false);
+                return new FavoriteItemFragment.DiseaseViewHolder(view);
+            }else if(viewType == VIEW_TYPE_HOSPITAL){
+                View view = LayoutInflater.from(getActivity()).inflate(R.layout.activity_hospital_list, parent, false);
+                return new FavoriteItemFragment.HospitalViewHolder(view);
+            }
+            return null;
+        }
+
+        @Override
+        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            if(holder instanceof HospitalViewHolder){
+                Hospital h = (Hospital) list.get(position);
+                HospitalViewHolder viewHolder = (HospitalViewHolder) holder;
+                if(h.getType().equals("รัฐบาล")) {
+                    viewHolder.image.getDrawable().setColorFilter(Color.parseColor("#3f51b5"), PorterDuff.Mode.SRC_IN);
+                    viewHolder.distance.setTextColor(getActivity().getResources().getColor(R.color.colorPrimary));
+                } else if(h.getType().equals("เอกชน")) {
+                    viewHolder.image.getDrawable().setColorFilter(Color.parseColor("#43bfc7"),PorterDuff.Mode.SRC_IN);
+                    viewHolder.distance.setTextColor(getActivity().getResources().getColor(R.color.colorMacawBlueGreen));
+                } else if(h.getType().equals("ชุมชน")) {
+                    viewHolder.image.getDrawable().setColorFilter(Color.parseColor("#4cd29f"),PorterDuff.Mode.SRC_IN);
+                    viewHolder.distance.setTextColor(getActivity().getResources().getColor(R.color.colorGreen));
+                } else if(h.getType().equals("ศูนย์")) {
+                    viewHolder.image.getDrawable().setColorFilter(Color.parseColor("#79ccd0"),PorterDuff.Mode.SRC_IN);
+                    viewHolder.distance.setTextColor(getActivity().getResources().getColor(R.color.colorBlue));
+                } else {
+                    viewHolder.image.getDrawable().setColorFilter(Color.parseColor("#3f6fb7"),PorterDuff.Mode.SRC_IN);
+                    viewHolder.distance.setTextColor(getActivity().getResources().getColor(R.color.colorBlue2));
+                }
+                viewHolder.name.setText(h.getName());
+//                viewHolder.distance.setText(h.getDistance());
+                viewHolder.type.setText(h.getType());
+                viewHolder.setOnClickListener(new ItemClickListener() {
+                    @Override
+                    public void onClick(View view, int position, boolean isLongClick, MotionEvent motionEvent) {
+                        if (!isLongClick) {
+                            HospitalItemFragment fragment = new HospitalItemFragment();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("name", ((Hospital)list.get(position)).getName());
+                            bundle.putDouble("lat", ((Hospital)list.get(position)).getLat());
+                            bundle.putDouble("lng", ((Hospital)list.get(position)).getLng());
+                            bundle.putString("address", ((Hospital)list.get(position)).getAddress());
+                            bundle.putString("phone", ((Hospital)list.get(position)).getPhone());
+                            bundle.putString("website", ((Hospital)list.get(position)).getWebsite());
+                            bundle.putString("type",((Hospital)list.get(position)).getType());
+                            fragment.setArguments(bundle);
+                            getFragmentManager().beginTransaction()
+                                    .replace(R.id.container_fragment, fragment)
+                                    .addToBackStack(null)
+                                    .commit();
+                        }
+                    }
+                });
+            }else if(holder instanceof DiseaseViewHolder){
+                Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
+                DiseaseViewHolder viewHolder = (DiseaseViewHolder) holder;
+                viewHolder.name.setText(((Disease)list.get(position)).getName());
+                viewHolder.name.setTypeface(tf);
+                viewHolder.type.setText(((Disease)list.get(position)).getType());
+                viewHolder.type.setTypeface(tf);
+                viewHolder.img.setImageResource(gridViewImageId[Arrays.asList(gridViewString).indexOf(((Disease)list.get(position)).getType().split(",")[0])]);
+                viewHolder.setOnClickListener(new ItemClickListener() {
+                    @Override
+                    public void onClick(View view, int position, boolean isLongClick, MotionEvent motionEvent) {
+                        if (!isLongClick) {
+                            SelectItemFragment fragment = new SelectItemFragment();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("name",((Disease)list.get(position)).getName());
+                            bundle.putString("type",((Disease)list.get(position)).getType());
+                            fragment.setArguments(bundle);
+
+                            getParentFragment().getFragmentManager().beginTransaction()
+                                    .replace(R.id.container_fragment, fragment)
+                                    .addToBackStack(null)
+                                    .commit();
+                        }
+                    }
+                });
+            }
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            return list.get(position) instanceof Hospital ? VIEW_TYPE_HOSPITAL : VIEW_TYPE_DISEASE;
+        }
+
+        @Override
+        public int getItemCount() {
+            return list.size();
+        }
+    }
+
+}

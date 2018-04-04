@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -22,6 +24,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -35,6 +40,7 @@ import com.akexorcist.googledirection.model.Direction;
 import com.akexorcist.googledirection.model.Leg;
 import com.akexorcist.googledirection.model.Route;
 import com.example.uefi.seniorproject.R;
+import com.example.uefi.seniorproject.databases.DBHelperDAO;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -53,6 +59,7 @@ import java.util.ArrayList;
 
 public class HospitalItemFragment extends Fragment implements OnMapReadyCallback, LocationListener {
     String serverKey = "AIzaSyBfgUci7cUhr0q2jqFgvuLUPrdCDhDfsuU";
+    DBHelperDAO dbHelperDAO;
     SupportMapFragment mapFragment;
     private GoogleMap mMap;
     Double lat = 0.0, lng = 0.0; //origin
@@ -310,7 +317,10 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 
+        dbHelperDAO = DBHelperDAO.getInstance(getActivity());
+        dbHelperDAO.open();
         appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
 
         Bundle extraBundle = getArguments();
@@ -325,6 +335,35 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
         phonenum = phone.split(", ");
         phoneno = phonenum.length;
         statusCheck();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.hospital_item_menu, menu);
+
+        MenuItem item = menu.findItem(R.id.item_star);
+        Drawable drawable = item.getIcon();
+        if(dbHelperDAO.checkExistItem("hospital", name)) drawable.setColorFilter(getResources().getColor(R.color.yellow), PorterDuff.Mode.SRC_ATOP);
+        else drawable.setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.item_star:
+                    Drawable drawable = item.getIcon();
+                    if(dbHelperDAO.checkExistItem("hospital", name)){
+                        drawable.setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
+                        dbHelperDAO.removeFavItem("hospital", name);
+                    }else{
+                        drawable.setColorFilter(getResources().getColor(R.color.yellow), PorterDuff.Mode.SRC_ATOP);
+                        dbHelperDAO.addFavHospitalItem("hospital", name, address, location.latitude+", "+location.longitude, phone,website,type);
+                    }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override

@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.uefi.seniorproject.databases.DBHelperDAO;
 import com.example.uefi.seniorproject.fragment.DiseaseNavFragment;
+import com.example.uefi.seniorproject.fragment.FavoriteItemFragment;
 import com.example.uefi.seniorproject.fragment.HospitalNearbyFragment;
 import com.example.uefi.seniorproject.fragment.MainFragment;
 import com.example.uefi.seniorproject.firstaid.FirstaidFragment;
@@ -231,6 +232,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .commit();
         } else if (id == R.id.nav_food) {
 
+        }else if(id == R.id.nav_fav){
+            toggle.setDrawerIndicatorEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            if(!mToolBarNavigationListenerIsRegistered) {
+                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Doesn't have to be onBackPressed
+                        onBackPressed();
+                    }
+                });
+
+                mToolBarNavigationListenerIsRegistered = true;
+            }
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container_fragment, new FavoriteItemFragment())
+                    .addToBackStack(null)
+                    .commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

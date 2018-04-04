@@ -31,6 +31,7 @@ public class DiseaseGridSelectFragment extends Fragment {
     ArrayList<Disease> diseaseName;
     TextView title;
     AppBarLayout appBarLayout;
+    String type;
 
     String[] gridViewString = {"ระบบกระดูกและข้อ", "ระบบทางเดินปัสสาวะ", "ระบบทางเดินอาหาร", "ระบบศีรษะและลำคอ", "ระบบทางเดินหายใจ",
             "ระบบหูคอจมูก", "ระบบตา", "ระบบหัวใจและหลอดเลือด", "ระบบโรคไต", "ระบบโรคผิวหนัง", "ระบบอวัยวะสืบพันธุ์", "ระบบต่อมไร้ท่อ",
@@ -66,10 +67,10 @@ public class DiseaseGridSelectFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
-
+        type = getArguments().getString("type");
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());
         dbHelperDAO.open();
-        diseaseName = dbHelperDAO.getDiseaseFromType(getArguments().getString("type"));
+        diseaseName = dbHelperDAO.getDiseaseFromType(type);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener, View.OnTouchListener {
@@ -141,6 +142,7 @@ public class DiseaseGridSelectFragment extends Fragment {
                         SelectItemFragment fragment = new SelectItemFragment();
                         Bundle bundle = new Bundle();
                         bundle.putString("name", diseaseName.get(position).getName());
+                        bundle.putString("type", diseaseName.get(position).getType());
                         fragment.setArguments(bundle);
                         getActivity().getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.container_fragment, fragment)

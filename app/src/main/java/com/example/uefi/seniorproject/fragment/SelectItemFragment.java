@@ -1,6 +1,7 @@
 package com.example.uefi.seniorproject.fragment;
 
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +10,9 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -22,7 +26,7 @@ import com.example.uefi.seniorproject.databases.DBHelperDAO;
 
 public class SelectItemFragment extends Fragment{
     DBHelperDAO dbHelperDAO;
-    String name = "",cause,symptom,treat,protect;
+    String name = "",cause,symptom,treat,protect,type;
     TextView title;
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -73,6 +77,7 @@ public class SelectItemFragment extends Fragment{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 
         appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
 
@@ -83,6 +88,36 @@ public class SelectItemFragment extends Fragment{
         symptom = dbHelperDAO.getContent(name, "symptom");
         treat = dbHelperDAO.getContent(name, "treat");
         protect = dbHelperDAO.getContent(name, "protect");
+        type = getArguments().getString("type");
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.hospital_item_menu, menu);
+
+        MenuItem item = menu.findItem(R.id.item_star);
+        Drawable drawable = item.getIcon();
+        if(dbHelperDAO.checkExistItem("disease", name)) drawable.setColorFilter(getResources().getColor(R.color.yellow), PorterDuff.Mode.SRC_ATOP);
+        else drawable.setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.item_star:
+                Drawable drawable = item.getIcon();
+                if(dbHelperDAO.checkExistItem("disease", name)){
+                    drawable.setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
+                    dbHelperDAO.removeFavItem("disease", name);
+                }else{
+                    drawable.setColorFilter(getResources().getColor(R.color.yellow), PorterDuff.Mode.SRC_ATOP);
+                    dbHelperDAO.addFavDiseaseItem("disease", name, type);
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void setupTabIcons() {

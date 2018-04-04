@@ -53,6 +53,7 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
     ArrayList<ArrayList<String>> vectordata;
     ArrayList<Pair<Double, String>> simDoc;
     double queryLength, sum;
+    String type;
     LongLexTo tokenizer;
     ProgressDialog progressBar;
     AppBarLayout appBarLayout;
@@ -364,7 +365,7 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
-            String type = dbHelperDAO.getDiseaseType(diseaseName.get(position));
+            type = dbHelperDAO.getDiseaseType(diseaseName.get(position));
             ViewHolder viewHolder = (ViewHolder) holder;
             viewHolder.name.setText(diseaseName.get(position));
             viewHolder.name.setTypeface(tf);
@@ -378,6 +379,7 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
                         SelectItemFragment fragment = new SelectItemFragment();
                         Bundle bundle = new Bundle();
                         bundle.putString("name", diseaseName.get(position));
+                        bundle.putString("type", type);
                         fragment.setArguments(bundle);
 //                        getFragmentManager().beginTransaction()
                         getParentFragment().getFragmentManager().beginTransaction()

@@ -175,6 +175,7 @@ public class DiseaseListFragment extends Fragment{
                             SelectItemFragment fragment = new SelectItemFragment();
                             Bundle bundle = new Bundle();
                             bundle.putString("name",diseaseName.get(position).getName());
+                            bundle.putString("type",diseaseName.get(position).getType());
                             fragment.setArguments(bundle);
 
                             getParentFragment().getFragmentManager().beginTransaction()
