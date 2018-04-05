@@ -70,9 +70,16 @@ public class FavoriteItemFragment extends Fragment {
 
     public void addHeader(){
         ArrayList<Object> tmp = new ArrayList<>();
-        tmp.add("โรงพยาบาล");
+        if(list.size() == 0) return;
+        boolean hos = false, dis = false;
         for(int i = 0; i < list.size(); i++){
-            if(list.get(i) instanceof Hospital) tmp.add(list.get(i));
+            if(list.get(i) instanceof Hospital) {
+                if(!hos) {
+                    tmp.add("โรงพยาบาล");
+                    hos = true;
+                }
+                tmp.add(list.get(i));
+            }
             else {
                 tmp.add("โรค");
                 tmp.addAll(list.subList(i,list.size()));
@@ -248,7 +255,7 @@ public class FavoriteItemFragment extends Fragment {
                             bundle.putString("type",((Disease)list.get(position)).getType());
                             fragment.setArguments(bundle);
 
-                            getParentFragment().getFragmentManager().beginTransaction()
+                            getFragmentManager().beginTransaction()
                                     .replace(R.id.container_fragment, fragment)
                                     .addToBackStack(null)
                                     .commit();

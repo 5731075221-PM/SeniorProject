@@ -115,7 +115,8 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
                     final String[] tmp = phone.getText().toString().split("-");//textPhone.getText().toString().split("-");
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setTitle("ยืนยันการโทรออก?");
-                    builder.setMessage("ติดต่อ " + tmp[0] + tmp[1] + tmp[2]);
+                    if(tmp.length > 1) builder.setMessage("ติดต่อ " + tmp[0] + tmp[1] + tmp[2]);
+                    else builder.setMessage("ติดต่อ " + tmp[0]);
                     builder.setPositiveButton("ยืนยัน", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             Intent callActivity = new Intent(Intent.ACTION_CALL);

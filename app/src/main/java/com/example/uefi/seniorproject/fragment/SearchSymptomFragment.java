@@ -124,7 +124,7 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
         searchView.setQueryHint("ค้นหา");
         searchView.setOnQueryTextListener(this);
 
-        String dataArray[] = new String[529];
+        String dataArray[] = new String[531];
         data.toArray(dataArray);
         adapterAuto = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, dataArray);
         mSearchAutoComplete = (SearchView.SearchAutoComplete) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
