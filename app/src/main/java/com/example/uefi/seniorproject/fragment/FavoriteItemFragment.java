@@ -64,7 +64,30 @@ public class FavoriteItemFragment extends Fragment {
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());
         dbHelperDAO.open();
         list = dbHelperDAO.getAllFavList();
+        addHeader();
         System.out.println("list.size " + list.size());
+    }
+
+    public void addHeader(){
+        ArrayList<Object> tmp = new ArrayList<>();
+        tmp.add("โรงพยาบาล");
+        for(int i = 0; i < list.size(); i++){
+            if(list.get(i) instanceof Hospital) tmp.add(list.get(i));
+            else {
+                tmp.add("โรค");
+                tmp.addAll(list.subList(i,list.size()));
+                break;
+            }
+        }
+        list = tmp;
+    }
+
+    public class HeaderViewHolder extends RecyclerView.ViewHolder {
+        TextView name;
+        public HeaderViewHolder(View itemView) {
+            super(itemView);
+            name = (TextView) itemView.findViewById(R.id.headerItem);
+        }
     }
 
     public class DiseaseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener, View.OnTouchListener {
@@ -145,6 +168,7 @@ public class FavoriteItemFragment extends Fragment {
     public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private final int VIEW_TYPE_DISEASE = 0;
         private final int VIEW_TYPE_HOSPITAL = 1;
+        private final int VIEW_TYPE_HEADER = 2;
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -154,6 +178,9 @@ public class FavoriteItemFragment extends Fragment {
             }else if(viewType == VIEW_TYPE_HOSPITAL){
                 View view = LayoutInflater.from(getActivity()).inflate(R.layout.activity_hospital_list, parent, false);
                 return new FavoriteItemFragment.HospitalViewHolder(view);
+            }else if(viewType == VIEW_TYPE_HEADER){
+                View view = LayoutInflater.from(getActivity()).inflate(R.layout.header_list, parent, false);
+                return new FavoriteItemFragment.HeaderViewHolder(view);
             }
             return null;
         }
@@ -228,12 +255,15 @@ public class FavoriteItemFragment extends Fragment {
                         }
                     }
                 });
+            }else if(holder instanceof HeaderViewHolder){
+                HeaderViewHolder headerHolder = (HeaderViewHolder)holder;
+                headerHolder.name.setText(list.get(position).toString());
             }
         }
 
         @Override
         public int getItemViewType(int position) {
-            return list.get(position) instanceof Hospital ? VIEW_TYPE_HOSPITAL : VIEW_TYPE_DISEASE;
+            return list.get(position) instanceof Hospital ? VIEW_TYPE_HOSPITAL : (list.get(position) instanceof Disease) ? VIEW_TYPE_DISEASE : VIEW_TYPE_HEADER;
         }
 
         @Override
