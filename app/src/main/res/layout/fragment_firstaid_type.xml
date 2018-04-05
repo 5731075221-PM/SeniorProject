@@ -11,28 +11,8 @@
     <!-- TODO: Update blank fragment layout -->
 
 
-    <RelativeLayout
-        android:id="@+id/frameFirstaidSecondNav"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/second_bar"
-        android:gravity="center">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/kanit"
-            android:paddingLeft="20dp"
-            android:text="TextView"
-            android:textColor="@color/cardview_light_background"
-            android:textSize="18sp" />
-
-    </RelativeLayout>
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_firstaid"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/frameFirstaidSecondNav" />
+        android:layout_height="match_parent" />
 </RelativeLayout>

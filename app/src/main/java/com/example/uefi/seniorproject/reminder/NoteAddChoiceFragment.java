@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.uefi.seniorproject.R;
+import com.example.uefi.seniorproject.databases.DBHelperDAO;
 
 import java.util.ArrayList;
 
@@ -25,9 +26,10 @@ public class NoteAddChoiceFragment extends Fragment {
     public RecyclerView.LayoutManager mLayoutManager;
     public RecyclerView mRecyclerView;
     public CustomAdapterNoteAddChoice mAdapter;
-    public ArrayList<ChoiceItem> list;
-    public ArrayList<ChoiceItem> currentSelectedItems = new ArrayList<>();
-
+    public ArrayList<ChoiceItem> list,currentSelectedItems = new ArrayList<>();;
+    public DBHelperDAO dbHelperDAO;
+    public Bundle bundle;
+    int isSave;
 
     public NoteAddChoiceFragment() {
         // Required empty public constructor
@@ -45,6 +47,7 @@ public class NoteAddChoiceFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_note_add_choice, container, false);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recy_choice);
@@ -55,6 +58,7 @@ public class NoteAddChoiceFragment extends Fragment {
             @Override
             public void onItemCheck(ChoiceItem item) {
                 currentSelectedItems.add(item);
+
             }
 
             @Override
@@ -64,13 +68,25 @@ public class NoteAddChoiceFragment extends Fragment {
         });
 
         mRecyclerView.setAdapter(mAdapter);
+        isSave = 0;
 
         LinearLayout buttonClick = (LinearLayout) view.findViewById(R.id.save);
         buttonClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                isSave=1;
+
+                for(int i =0;i<list.size();i++){
+                    list.get(i).setCheck(false);
+                    for(int j = 0;j<currentSelectedItems.size();j++){
+                        if(list.get(i).getText().equals(currentSelectedItems.get(j).getText())){
+                            list.get(i).setCheck(true);
+                        }
+                    }
+                }
                 Intent intent = new Intent();
                 intent.putParcelableArrayListExtra("list_select", list);
+                intent.putExtra("isSave",isSave);
                 getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
                 getFragmentManager().popBackStack();
 
@@ -82,7 +98,17 @@ public class NoteAddChoiceFragment extends Fragment {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle bundle = getArguments();
-        list = bundle.getParcelableArrayList("list");
+        bundle = getArguments();
+
+        if (savedInstanceState == null){
+            dbHelperDAO = DBHelperDAO.getInstance(getActivity());
+            dbHelperDAO.open();
+            list = bundle.getParcelableArrayList("list");
+        }else{
+            list = savedInstanceState.getParcelableArrayList("list");
+        }
+
     }
+
+
 }

@@ -1,32 +1,67 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:padding="8dp">
+    android:id="@+id/swipe"
+    app:leftEdgeSwipeOffset="0dp"
+    app:rightEdgeSwipeOffset="0dp"
+    android:layout_height="80dp">
 
     <!-- TODO: Update blank fragment layout -->
+    <!-- Button View For Right to Left -->
+    <LinearLayout
+        android:id="@+id/bottom_wraper"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/tvDelete"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#e74c3c"
+            android:gravity="center"
+            android:text="ลบ"
+            android:textColor="#fff" />
+
+    </LinearLayout>
 
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="5dp"
-        app:srcCompat="@drawable/mon" />
+    <!-- Top View, Row ItemView of RecyclerView -->
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
 
-    <TextView
-        android:id="@+id/note"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="30dp"
-        android:layout_toRightOf="@+id/imageView2"
-        android:text="TextView \niii\nmmm"
-        android:textColor="@color/cardview_dark_background"
-        android:textSize="18sp"
-        android:maxLines="3"
-        android:ellipsize="end"/>
-</RelativeLayout>
+        <!-- TODO: Update blank fragment layout -->
+
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            app:srcCompat="@drawable/mon" />
+
+        <TextView
+            android:id="@+id/note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:layout_toRightOf="@+id/imageView2"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:text="TextView \niii\nว่าไงละแงๆๆๆ\nmmmm"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+
+
+</com.daimajia.swipe.SwipeLayout>

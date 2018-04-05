@@ -1,10 +1,13 @@
 package com.example.uefi.seniorproject.firstaid;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 //import android.app.Fragment;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,8 +69,8 @@ public class FirstaidFragment extends Fragment {
             public void onClick(View v) {
                 toolbar = "ตา หู คอ";
                 FragmentTransaction transaction = getFragmentManager() .beginTransaction();
-                transaction.replace(R.id.relaFirstaid, FirstaidTypeFragment.newInstance(toolbar));
-                transaction.addToBackStack("การปฐมพยาบาล");
+                transaction.add(R.id.relaFirstaid, FirstaidTypeFragment.newInstance(toolbar),"Hey");
+                transaction.addToBackStack(toolbar);
                 transaction.commit();
             }
         });
@@ -77,7 +80,7 @@ public class FirstaidFragment extends Fragment {
                 toolbar = "กล้ามเนื้อ กระดูก ลำไส้";
                 FragmentTransaction transaction = getFragmentManager() .beginTransaction();
                 transaction.replace(R.id.relaFirstaid, FirstaidTypeFragment.newInstance(toolbar));
-                transaction.addToBackStack("การปฐมพยาบาล");
+                transaction.addToBackStack(toolbar);
                 transaction.commit();
             }
         });
@@ -87,7 +90,7 @@ public class FirstaidFragment extends Fragment {
                 toolbar = "แผลไหม้ น้ำร้อนลวก";
                 FragmentTransaction transaction = getFragmentManager() .beginTransaction();
                 transaction.replace(R.id.relaFirstaid, FirstaidTypeFragment.newInstance(toolbar));
-                transaction.addToBackStack("การปฐมพยาบาล");
+                transaction.addToBackStack(toolbar);
                 transaction.commit();
             }
         });
@@ -97,7 +100,7 @@ public class FirstaidFragment extends Fragment {
                 toolbar = "พิษ สารพิษ";
                 FragmentTransaction transaction = getFragmentManager() .beginTransaction();
                 transaction.replace(R.id.relaFirstaid, FirstaidTypeFragment.newInstance(toolbar));
-                transaction.addToBackStack("การปฐมพยาบาล");
+                transaction.addToBackStack(toolbar);
                 transaction.commit();
             }
         });
@@ -107,7 +110,7 @@ public class FirstaidFragment extends Fragment {
                 toolbar = "เบ็ดเตล็ด";
                 FragmentTransaction transaction = getFragmentManager() .beginTransaction();
                 transaction.replace(R.id.relaFirstaid, FirstaidTypeFragment.newInstance(toolbar));
-                transaction.addToBackStack("การปฐมพยาบาล");
+                transaction.addToBackStack(toolbar);
                 transaction.commit();
             }
         });
@@ -117,7 +120,7 @@ public class FirstaidFragment extends Fragment {
                 toolbar = "การช่วยฟื้นคืนชีพขั้นพื้นฐาน";
                 FragmentTransaction transaction = getFragmentManager() .beginTransaction();
                 transaction.replace(R.id.relaFirstaid, FirstaidSelectFragment.newInstance(toolbar));
-                transaction.addToBackStack("การปฐมพยาบาล");
+                transaction.addToBackStack(toolbar);
                 transaction.commit();
 
             }
@@ -128,7 +131,7 @@ public class FirstaidFragment extends Fragment {
                 toolbar = "การยกและเคลื่อนย้ายผู้ป่วย";
                 FragmentTransaction transaction = getFragmentManager() .beginTransaction();
                 transaction.replace(R.id.relaFirstaid,  FirstaidSelectFragment.newInstance(toolbar));
-                transaction.addToBackStack("การปฐมพยาบาล");
+                transaction.addToBackStack(toolbar);
                 transaction.commit();
             }
         });
@@ -137,4 +140,53 @@ public class FirstaidFragment extends Fragment {
         return view;
     }
 
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Log.i("Check", "onActivityCreated 1");
+    }
+
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        Log.i("Check", "onAttach 1");
+    }
+
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.i("Check", "onCreate 1");
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
+        Log.i("Check", "onDestroy 1");
+    }
+
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.i("Check", "onDestroyView 1");
+    }
+
+    public void onDetach() {
+        super.onDetach();
+        Log.i("Check", "onDetach 1");
+    }
+
+    public void onPause() {
+        super.onPause();
+        Log.i("Check", "onPause 1");
+    }
+
+    public void onResume() {
+        super.onResume();
+        Log.i("Check", "onResume 1 YOOOOOOOOOOO");
+    }
+
+    public void onStart() {
+        super.onStart();
+        Log.i("Check", "onStart 1");
+    }
+
+    public void onStop() {
+        super.onStop();
+        Log.i("Check", "onStop 1");
+    }
 }

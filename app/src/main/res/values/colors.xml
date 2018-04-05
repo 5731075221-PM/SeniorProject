@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#e20077c2</color>
+    <color name="colorPrimary">#0077c2</color>
     <!--<color name="colorPrimaryDark">#303f9f</color>-->
     <color name="colorPrimaryDark">#696969</color>
 
-    <color name="colorAccent">#ff4081</color>\
+    <!--<color name="colorAccent">#ff4081</color>-->
+    <color name="colorAccent">#0077c2</color>
     <color name="colorRubyRed">#f62217</color>
     <color name="colorMacawBlueGreen">#43bfc7</color>
 
@@ -15,11 +16,11 @@
     <!--nav-->
     <!--<color name="nav_bar">#008e76</color>-->
     <!--<color name="second_bar">#d3008e76</color>-->
-    <color name="nav_bar">#e20077c2</color>
-    <color name="second_bar">#59ABE3</color>
+    <color name="nav_bar">#0077c2</color>
+    <color name="second_bar">#59abe3</color>
     <!--button effect selector-->
     <color name="white">#fff</color>
-    <color name="grey">#cbcbc5</color>
+    <color name="grey">#E8E8E8</color>
 
     <color name="pink">#ed7263</color>
     <color name="red">#ee4c41</color>

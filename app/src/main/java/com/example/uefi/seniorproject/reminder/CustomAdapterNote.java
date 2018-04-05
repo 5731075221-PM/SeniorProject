@@ -2,12 +2,16 @@ package com.example.uefi.seniorproject.reminder;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.daimajia.swipe.SwipeLayout;
+import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 import com.example.uefi.seniorproject.R;
+import com.example.uefi.seniorproject.databases.InternalDatabaseHelper;
 
 import java.util.ArrayList;
 
@@ -15,11 +19,12 @@ import java.util.ArrayList;
  * Created by palida on 31-Mar-18.
  */
 
-public class CustomAdapterNote  extends RecyclerView.Adapter{
+public class CustomAdapterNote  extends RecyclerSwipeAdapter<RecyclerView.ViewHolder> {
     private ArrayList mItems;
     private Context mContext;
     private final int NOTE_DAY_ITEM = 0;
     private final int NOTE_ITEM = 1;
+    public InternalDatabaseHelper internalDatabaseHelper;
 
     interface OnItemClickListener{
         void onItemClick(View item,int position,int note_id);
@@ -49,15 +54,12 @@ public class CustomAdapterNote  extends RecyclerView.Adapter{
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-//        final RecyclerView.ViewHolder vHolder;
         if(viewType == NOTE_DAY_ITEM){
             final View v = inflater.inflate(R.layout.singlerow_note_day,parent,false);
-//            vHolder = new DayHolder(v);
             final DayHolder vHolder = new DayHolder(v);
             return vHolder;
         } else if(viewType == NOTE_ITEM){
             final View v = inflater.inflate(R.layout.singlerow_note_item,parent,false);
-//            vHolder = new NoteHolder(v);
             final NoteHolder vHolder = new NoteHolder(v);
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -76,7 +78,7 @@ public class CustomAdapterNote  extends RecyclerView.Adapter{
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder,final int position) {
         int type = getItemViewType(position);
         if(type == NOTE_DAY_ITEM){
             DayItem item = (DayItem) mItems.get(position);
@@ -84,15 +86,105 @@ public class CustomAdapterNote  extends RecyclerView.Adapter{
             detailHolder.name.setText(item.text);
         }else if(type == NOTE_ITEM){
             NoteItem item = (NoteItem) mItems.get(position);
-            NoteHolder detailHolder = (NoteHolder) holder;
+            final NoteHolder detailHolder = (NoteHolder) holder;
             detailHolder.name.setText(item.text);
             detailHolder.note_id = item.note_id;
+
+            detailHolder.swipeLayout.setShowMode(SwipeLayout.ShowMode.PullOut);
+            //drag from right
+            detailHolder.swipeLayout.addDrag(SwipeLayout.DragEdge.Right, detailHolder.swipeLayout.findViewById(R.id.bottom_wraper));
+
+            //handling different event when swiping
+            detailHolder.swipeLayout.addSwipeListener(new SwipeLayout.SwipeListener() {
+                @Override
+                public void onStartOpen(SwipeLayout layout) {
+                    //when the SurfaceView totally cover the BottomView.
+                }
+
+                @Override
+                public void onOpen(SwipeLayout layout) {
+                    //when the BottomView totally show.
+                }
+
+                @Override
+                public void onStartClose(SwipeLayout layout) {
+
+                }
+
+                @Override
+                public void onClose(SwipeLayout layout) {
+                    //when the SurfaceView totally cover the BottomView.
+                }
+
+                @Override
+                public void onUpdate(SwipeLayout layout, int leftOffset, int topOffset) {
+                    //you are swiping.
+                }
+
+                @Override
+                public void onHandRelease(SwipeLayout layout, float xvel, float yvel) {
+                    //when user's hand released.
+                }
+            });
+
+            detailHolder.swipeLayout.getSurfaceView().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    Toast.makeText(mContext, " onClick : " + item.getName() + " \n" + item.getEmailId(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            detailHolder.tvDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    internalDatabaseHelper = InternalDatabaseHelper.getInstance(mContext);
+                    internalDatabaseHelper.open();
+                    mItemManger.removeShownLayouts(detailHolder.swipeLayout);
+
+                    int prepType = getItemViewType(position-1);
+
+                    if(prepType == NOTE_DAY_ITEM){
+                        Log.i("check "," if has prep day");
+                        if(position  ==  getItemCount()-1){
+                            Log.i("check "," if has prep day no next");
+                            deleteDayItem(position-1); // day
+                            deleteDayItem(position-1); // note
+                        }else{
+                            int nextType = getItemViewType(position+1);
+                            if(nextType == NOTE_DAY_ITEM){
+                                   Log.i("check "," if has prep day has next");
+                                deleteDayItem(position-1); // day
+                                deleteDayItem(position-1); // note
+                            }else{
+                                deleteDayItem(position); // note
+                            }
+                        }
+                    }else{
+                        Log.i("check "," if has no prep day");
+                        deleteDayItem(position); // note
+                    }
+                    mItemManger.closeAllItems();
+                    internalDatabaseHelper.deleteNote(detailHolder.note_id);
+                }
+            });
+            mItemManger.bindView(detailHolder.itemView, position);
         }
+    }
+
+    public void deleteDayItem(int position){
+        mItems.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, mItems.size());
     }
 
     @Override
     public int getItemCount() {
         return mItems.size();
+    }
+
+    @Override
+    public int getSwipeLayoutResourceId(int position) {
+        return R.id.swipe;
     }
 
     private class DayHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -111,18 +203,18 @@ public class CustomAdapterNote  extends RecyclerView.Adapter{
     }
     private class NoteHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView name;
+        public TextView tvDelete;
         private int note_id;
+        public SwipeLayout swipeLayout;
 
         public NoteHolder (View itemView){
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.note);
-
+            swipeLayout = (SwipeLayout) itemView.findViewById(R.id.swipe);
+            tvDelete = (TextView) itemView.findViewById(R.id.tvDelete);
         }
-
         public void onClick(View view){
-
         }
-
     }
 
 

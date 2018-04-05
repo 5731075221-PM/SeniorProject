@@ -5,15 +5,16 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
-import com.example.uefi.seniorproject.firstaid.CustomAdapterFirstaid;
 import com.example.uefi.seniorproject.reminder.ChoiceItem;
 import com.example.uefi.seniorproject.reminder.DayItem;
-import com.example.uefi.seniorproject.reminder.Note;
 import com.example.uefi.seniorproject.reminder.NoteItem;
 import com.example.uefi.seniorproject.reminder.Symptom_Note;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by palida on 09-Mar-18.
@@ -93,9 +94,6 @@ public class InternalDatabaseHelper extends SQLiteOpenHelper {
 
     //create
     public void createSymptom(ArrayList<String> symptom,int note_id) {
-//        InternalDatabaseHelper internalDatabaseHelper = InternalDatabaseHelper.getInstance(c.getApplicationContext());
-//        SQLiteDatabase db = internalDatabaseHelper.getWritableDatabase();
-
         for(int i =0;i<symptom.size();i++) {
             ContentValues values = new ContentValues();
             values.put("symptom", symptom.get(i));
@@ -105,7 +103,6 @@ public class InternalDatabaseHelper extends SQLiteOpenHelper {
             long symptom_id = database.insert("symptom_notes", null, values);
         }
     }
-
 
     public ArrayList readAllNote(){
         ArrayList notes = new ArrayList();
@@ -152,10 +149,10 @@ public class InternalDatabaseHelper extends SQLiteOpenHelper {
                 );
             }
             lastDate = date;
-            ArrayList<Symptom_Note> symp = readSymptom(cursor.getInt(cursor.getColumnIndex("id_note")));
+            ArrayList symp = readSymptom(cursor.getInt(cursor.getColumnIndex("id_note")));
             String note = "";
             for(int i = 0; i<symp.size(); i++){
-                note +=""+symp.get(i).getSymptom()+"\n";
+                note +=""+symp.get(i) +" \n";
             }
             note += cursor.getString(cursor.getColumnIndex("comment"));
             notes.add(
@@ -167,42 +164,23 @@ public class InternalDatabaseHelper extends SQLiteOpenHelper {
         return notes;
     }
 
-
     //read call by readAllNote
-    public ArrayList<Symptom_Note> readSymptom(int id_note){
+    public ArrayList readSymptom(int id_note){
 
-        ArrayList<Symptom_Note>  symptom_note = new ArrayList();
+        ArrayList  symptom_note = new ArrayList();
         String sql = "SELECT * FROM symptom_notes "+
                 "WHERE id_note ='"+id_note+"'";
 
         Cursor cursor = database.rawQuery(sql,null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            symptom_note.add(new Symptom_Note(
-                    cursor.getInt(cursor.getColumnIndex("id_symptom_note")),
-                    cursor.getString(cursor.getColumnIndex("symptom")),
-                    cursor.getInt(cursor.getColumnIndex("id_note"))
+            symptom_note.add(
+                    cursor.getString(cursor.getColumnIndex("symptom")
             ));
             cursor.moveToNext();
         }
         cursor.close();
         return symptom_note;
-    }
-
-    public void updateNote(int id_note,Note newNote){
-        String sql = "UPDATE notes "+
-                "SET day = ? ,"+
-                "SET month = ? ,"+
-                "SET year = ? ,"+
-                "SET comment = ? "+
-                "WHERE id_note = ?";
-        String[] args = {newNote.getDay()+"",
-                        newNote.getMonth()+"",
-                        newNote.getYear()+"",
-                        newNote.getComment()+""};
-        database.execSQL(sql,args);
-
-        // not complete
     }
 
     public ArrayList<ChoiceItem> getChoiceItem(int id_note,ArrayList<ChoiceItem> listNew){
@@ -253,4 +231,53 @@ public class InternalDatabaseHelper extends SQLiteOpenHelper {
         return comment;
     }
 
+    public void updateNote(int id_note,int day, int month,int year,String comment,ArrayList<String> symptom){
+        ContentValues values = new ContentValues();
+        values.put("day",day);
+        values.put("month",month);
+        values.put("year",year);
+        values.put("comment",comment);
+        database.update("notes", values, "id_note="+id_note, null);
+
+        updateSymptom(id_note,symptom);
+    }
+
+    public void updateSymptom(int id_note,ArrayList<String> newS){
+        ArrayList<String>  oldS = readSymptom(id_note);
+
+        ArrayList<String>  toAdd = new ArrayList();
+        ArrayList<String>  toDel = new ArrayList();
+
+        Set<String> setNewS = new HashSet<String>();
+        setNewS.addAll(newS);
+
+        Set<String> setOldS = new HashSet<String>();
+        setOldS.addAll(oldS);
+
+        ArrayList<String> common = new ArrayList<String>(newS);
+        common.retainAll(oldS);
+
+        Set<String> setCommon = new HashSet<String>();
+        setCommon.addAll(common);
+
+        setNewS.removeAll(setCommon);
+        setOldS.removeAll(setCommon);
+
+
+        toAdd.addAll(setNewS);
+        toDel.addAll(setOldS);
+        createSymptom(toAdd,id_note);
+        deleteSymptom(toDel,id_note);
+    }
+
+    public void deleteNote(int id_note){
+        database.delete("notes", "id_note" + "='" + id_note+"'", null);
+        database.delete("symptom_notes", "id_note" + "='" + id_note +"'", null);
+    }
+
+    public void deleteSymptom(ArrayList symptom,int id_note){
+        for (int i = 0;i<symptom.size();i++){
+            database.delete("symptom_notes", "id_note" + "='" + id_note +"' AND symptom "+ "='"+ symptom.get(i)+"'" , null);
+        }
+    }
 }

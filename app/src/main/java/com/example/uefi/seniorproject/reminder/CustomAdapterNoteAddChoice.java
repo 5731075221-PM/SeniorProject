@@ -81,10 +81,8 @@ public class CustomAdapterNoteAddChoice extends RecyclerView.Adapter{
                         !((ListViewHolder) viewHolder).checkBox.isChecked());
                 if (((ListViewHolder) viewHolder).checkBox.isChecked()) {
                     onItemCheckListener.onItemCheck(currentItem);
-                    currentItem.setCheck(true);
                 } else {
                     onItemCheckListener.onItemUncheck(currentItem);
-                    currentItem.setCheck(false);
                 }
             }
         });
@@ -96,10 +94,8 @@ public class CustomAdapterNoteAddChoice extends RecyclerView.Adapter{
                 ChoiceItem currentItem = mChoice.get(pos);
                 if(viewHolder.checkBox.isChecked()){
                     onItemCheckListener.onItemCheck(currentItem);
-                    currentItem.setCheck(true);
                 }else{
                     onItemCheckListener.onItemUncheck(currentItem);
-                    currentItem.setCheck(false);
                 }
             }
         });

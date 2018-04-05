@@ -1,6 +1,7 @@
 package com.example.uefi.seniorproject;
 
 //import android.app.Fragment;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
@@ -94,12 +95,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mToolBarNavigationListenerIsRegistered = false;
         }else if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
 
-            Fragment fragment = getSupportFragmentManager().findFragmentByTag("Title");
-//            if (fragment instanceof FirstaidFragment) {
-//                textTool.setText("การปฐมพยาบาล");
-//            }else if (fragment instanceof ReminderFragment) {
-//                textTool.setText("สุขภาพของฉัน");
-//            }
             String title = fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount()-2).getName();
             textTool.setText(title);
 

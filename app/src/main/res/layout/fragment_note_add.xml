@@ -107,7 +107,8 @@
                 android:orientation="horizontal"
                 android:paddingBottom="15dp"
                 android:paddingTop="10dp"
-                android:weightSum="4">
+                android:weightSum="4"
+                android:focusableInTouchMode="true">
 
                 <ImageView
                     android:id="@+id/imageView5"

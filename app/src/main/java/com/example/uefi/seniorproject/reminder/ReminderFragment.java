@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentTransaction;
@@ -94,21 +95,11 @@ public class ReminderFragment extends Fragment {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-//            adapter.notifyDataSetChanged();
-        }else{
-//            adapter.notifyDataSetChanged();
-        }
+    public void onResume() {
+        super.onResume();
 
-//        viewPager.destroyDrawingCache();
     }
-
-
 }
