@@ -1,6 +1,8 @@
 package com.example.uefi.seniorproject.reminder;
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,23 +24,15 @@ import java.util.ArrayList;
 public class CustomAdapterNote  extends RecyclerSwipeAdapter<RecyclerView.ViewHolder> {
     private ArrayList mItems;
     private Context mContext;
+    private FragmentManager fm;
     private final int NOTE_DAY_ITEM = 0;
     private final int NOTE_ITEM = 1;
     public InternalDatabaseHelper internalDatabaseHelper;
 
-    interface OnItemClickListener{
-        void onItemClick(View item,int position,int note_id);
-    }
-
-    private  OnItemClickListener mListener;
-
-    public void setItemClickListener(OnItemClickListener listener){
-        mListener = listener;
-    }
-
-    public CustomAdapterNote(Context context,ArrayList dataset) {
+    public CustomAdapterNote(Context context, ArrayList dataset, FragmentManager fm) {
         mContext = context;
         mItems = dataset;
+        this.fm = fm;
     }
 
     @Override
@@ -61,17 +55,6 @@ public class CustomAdapterNote  extends RecyclerSwipeAdapter<RecyclerView.ViewHo
         } else if(viewType == NOTE_ITEM){
             final View v = inflater.inflate(R.layout.singlerow_note_item,parent,false);
             final NoteHolder vHolder = new NoteHolder(v);
-            v.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if(mListener!=null){
-                        int pos = vHolder.getAdapterPosition();
-                        if(pos!=RecyclerView.NO_POSITION){
-                            mListener.onItemClick(view,pos,vHolder.note_id);
-                        }
-                    }
-                }
-            });
             return vHolder;
         }
         return null;
@@ -85,7 +68,7 @@ public class CustomAdapterNote  extends RecyclerSwipeAdapter<RecyclerView.ViewHo
             DayHolder detailHolder = (DayHolder) holder;
             detailHolder.name.setText(item.text);
         }else if(type == NOTE_ITEM){
-            NoteItem item = (NoteItem) mItems.get(position);
+            final NoteItem item = (NoteItem) mItems.get(position);
             final NoteHolder detailHolder = (NoteHolder) holder;
             detailHolder.name.setText(item.text);
             detailHolder.note_id = item.note_id;
@@ -130,7 +113,12 @@ public class CustomAdapterNote  extends RecyclerSwipeAdapter<RecyclerView.ViewHo
             detailHolder.swipeLayout.getSurfaceView().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Toast.makeText(mContext, " onClick : " + item.getName() + " \n" + item.getEmailId(), Toast.LENGTH_SHORT).show();
+                    FragmentTransaction transaction = fm.beginTransaction();
+                    transaction.replace(R.id.container_fragment, NoteAddFragment.newInstance("edit",
+                            item.note_id
+                    ));
+                    transaction.addToBackStack("แก้ไขบันทึกสุขภาพ");
+                    transaction.commit();
                 }
             });
 
@@ -144,7 +132,6 @@ public class CustomAdapterNote  extends RecyclerSwipeAdapter<RecyclerView.ViewHo
                     int prepType = getItemViewType(position-1);
 
                     if(prepType == NOTE_DAY_ITEM){
-                        Log.i("check "," if has prep day");
                         if(position  ==  getItemCount()-1){
                             Log.i("check "," if has prep day no next");
                             deleteDayItem(position-1); // day

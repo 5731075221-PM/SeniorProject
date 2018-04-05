@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.example.uefi.seniorproject.alert.AlertFragment;
 import com.example.uefi.seniorproject.firstaid.FirstaidFragment;
 
 /**
@@ -27,7 +28,7 @@ public class PagerAdapterReminder extends FragmentStatePagerAdapter {
                 NotesFragment tab1 = new NotesFragment();
                 return tab1;
             case 1:
-                NotesFragment tab2 = new NotesFragment();
+                AlertFragment tab2 = new AlertFragment();
                 return tab2;
             default:
                 return null;

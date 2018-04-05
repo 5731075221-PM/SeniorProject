@@ -1,10 +1,13 @@
 package com.example.uefi.seniorproject.fragment;
 
 import android.app.ProgressDialog;
-import android.graphics.Color;
+import android.content.Context;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
@@ -13,8 +16,9 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
 import android.widget.SearchView;
-import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import com.example.uefi.seniorproject.R;
@@ -22,14 +26,12 @@ import com.example.uefi.seniorproject.breakiterator.LongLexTo;
 import com.example.uefi.seniorproject.databases.DBHelperDAO;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
-import in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView;
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 /**
  * Created by UEFI on 21/1/2561.
@@ -38,26 +40,36 @@ import in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView;
 public class SearchSymptomFragment extends Fragment implements SearchView.OnQueryTextListener {
     DBHelperDAO dbHelperDAO;
     private RecyclerViewAdapter adapter = new RecyclerViewAdapter();
-    IndexFastScrollRecyclerView recyclerView;
+    ConstraintLayout conslayout;
+    RecyclerView recyclerView;
     SearchView searchView;
-    ArrayList<String> dictList, stopwordList, idfDoc, docLength;
-    ArrayList<Double> keywordSymptom;
+    TextView empty;
+    ArrayList<String> dictList, stopwordList, idfDoc, docLength, diseaseName, diseaseNameDefault, filteredValues;
+    ArrayList<Double> keywordSymptom, queryDotDoc;
     ArrayList<Symptom> allSymptoms, mainSymptoms;
     ArrayList<ArrayList<String>> vectordata;
-    ArrayList<Double> queryDotDoc;
-    ArrayList<String> diseaseName, diseaseNameDefault;
     ArrayList<Pair<Double, String>> simDoc;
-    ArrayList<String> filteredValues;
     double queryLength, sum;
     LongLexTo tokenizer;
     ProgressDialog progressBar;
-    private ArrayList<Integer> mSectionPositions;
-    private List<String> mDataArray;
+    AppBarLayout appBarLayout;
+
+    String[] gridViewString = {"ระบบกระดูกและข้อ", "ระบบทางเดินปัสสาวะ", "ระบบทางเดินอาหาร", "ระบบศีรษะและลำคอ", "ระบบทางเดินหายใจ",
+            "ระบบหูคอจมูก", "ระบบตา", "ระบบหัวใจและหลอดเลือด", "ระบบโรคไต", "ระบบโรคผิวหนัง", "ระบบอวัยวะสืบพันธุ์", "ระบบต่อมไร้ท่อ",
+            "ระบบประสาทวิทยา", "ระบบโรคติดเชื้อ", "ระบบมะเร็งวิทยา", "ระบบจิตเวช", "ระบบน้ำเหลือง", "ระบบกล้ามเนื้อและกระดูก", "ระบบภูมิคุ้มกัน", "อื่นๆ"
+    };
+
+    int[] gridViewImageId = {
+            R.drawable.ic_disease1_select, R.drawable.ic_disease2_select, R.drawable.ic_disease3_select, R.drawable.ic_disease4_select, R.drawable.ic_disease5_select,
+            R.drawable.ic_disease6_select, R.drawable.ic_disease7_select, R.drawable.ic_disease8_select, R.drawable.ic_disease9_select, R.drawable.ic_disease10_select,
+            R.drawable.ic_disease11_select, R.drawable.ic_disease12_select, R.drawable.ic_disease13_select, R.drawable.ic_disease14_select, R.drawable.ic_disease15_select,
+            R.drawable.ic_disease16_select, R.drawable.ic_disease17_select, R.drawable.ic_disease18_select, R.drawable.ic_disease19_select, R.drawable.ic_disease20_select
+    };
+
 
     class createTokenizer extends AsyncTask<Void, Integer, Void> {
         @Override
         protected void onPreExecute() {
-            super.onPreExecute();
             progressBar = new ProgressDialog(getContext());
             progressBar.setMessage("กรุณารอสักครู่...");
             progressBar.setIndeterminate(false);
@@ -74,8 +86,8 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
                 vectordata = dbHelperDAO.getVectorData();
                 docLength = dbHelperDAO.getDocLength();
                 idfDoc = dbHelperDAO.getFreq();
-                dictList = getArguments().getStringArrayList("dict");//dbHelperDAO.getLexitron();
-                stopwordList = getArguments().getStringArrayList("stop");//dbHelperDAO.getStopword();
+                dictList = getArguments().getStringArrayList("dict");
+                stopwordList = getArguments().getStringArrayList("stop");
                 tokenizer = new LongLexTo(dictList, stopwordList);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -85,7 +97,6 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
             progressBar.dismiss();
         }
     }
@@ -95,6 +106,12 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search_symptom, container, false);
 
+        appBarLayout.setExpanded(true, true);
+
+        empty = (TextView) view.findViewById(R.id.textEmpty);
+        if (diseaseName.isEmpty()) empty.setVisibility(View.VISIBLE);
+        else empty.setVisibility(View.INVISIBLE);
+
         searchView = (SearchView) view.findViewById(R.id.searchSymptom);
         searchView.setIconifiedByDefault(false);
         searchView.setIconified(false);
@@ -102,13 +119,19 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
         searchView.setQueryHint("ค้นหา");
         searchView.setOnQueryTextListener(this);
 
-        recyclerView = (IndexFastScrollRecyclerView) view.findViewById(R.id.searchSymptomList);
+        recyclerView = (RecyclerView) view.findViewById(R.id.searchSymptomList);
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
-        recyclerView.setIndexBarColor("#f9f9f9");
-        recyclerView.setIndexBarTextColor("#4d4d4d");
-        recyclerView.setIndexBarHighLateTextVisibility(true);
-        recyclerView.setIndexbarHighLateTextColor("#4cd29f");
+
+        conslayout = (ConstraintLayout)view.findViewById(R.id.searchSymptomLayout);
+        empty.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+                return true;
+            }
+        });
 
         return view;
     }
@@ -116,11 +139,16 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
+
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
 
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());
         dbHelperDAO.open();
-        diseaseName = dbHelperDAO.getDiseaseName();
-        diseaseNameDefault = diseaseName;
+        diseaseNameDefault = dbHelperDAO.getDiseaseName();
+        diseaseName = new ArrayList<>();
+//        sortList();
 
         new createTokenizer().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
@@ -133,7 +161,8 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
     }
 
     public void resetSearch() {
-        diseaseName = diseaseNameDefault;
+        diseaseName = new ArrayList<>();
+        empty.setVisibility(View.VISIBLE);
         adapter = new RecyclerViewAdapter();
         recyclerView.setAdapter(adapter);
     }
@@ -151,10 +180,11 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
         }
 
         filteredValues = new ArrayList<>();
-        diseaseName = diseaseNameDefault;
+        resetSearch();//diseaseNameDefault;
         try {
-            String output = tokenizer.genOutput(newText.trim(), "nat.html", tokenizer);
+            String output = tokenizer.genOutput(newText.trim(), tokenizer);
             if (!(output.equals(null) || output.equals(""))) {
+                empty.setVisibility(View.INVISIBLE);
                 System.out.println("output = " + output);
 //                System.out.println("allsymptomsize = " + allSymptoms.size());
                 String[] keyword = output.split("-");
@@ -169,14 +199,14 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
                 // 1. check freq of query vector with mainsymptoms
 //                for (int i = 0; i < keyword.length; i++) {
 //                    System.out.println("keyword[i] = " + keyword[i]);
-                    indexList = dbHelperDAO.getIndexSymptom(dbHelperDAO.checkKeyword(keyword));
-                    System.out.println("Indexlist = "+indexList.toString());
-                    for(int j = 0; j< indexList.size(); j++){
-                        // 2. normalize query and calculate weight of terms
-                        calvar = (Math.log10(keywordSymptom.get(indexList.get(j)) + 1) + 1) * Double.parseDouble(idfDoc.get(indexList.get(j)));
-                        keywordSymptom.set(indexList.get(j),calvar);
-                        queryLength += Math.pow(calvar, 2);
-                    }
+                indexList = dbHelperDAO.getIndexSymptom(dbHelperDAO.checkKeyword(keyword));
+                System.out.println("Indexlist = " + indexList.toString());
+                for (int j = 0; j < indexList.size(); j++) {
+                    // 2. normalize query and calculate weight of terms
+                    calvar = (Math.log10(keywordSymptom.get(indexList.get(j)) + 1) + 1) * Double.parseDouble(idfDoc.get(indexList.get(j)));
+                    keywordSymptom.set(indexList.get(j), calvar);
+                    queryLength += Math.pow(calvar, 2);
+                }
 //                }
                 queryLength = Math.sqrt(queryLength);
 //                System.out.println("keywordSymptom = " + keywordSymptom.toString());
@@ -211,9 +241,10 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
                     // 4. calculate similarity
 //                    if(!isOK) isOK = true;
 //                    else{
-                        double var = sum / (queryLength * Double.parseDouble(docLength.get(i)));
-                        System.out.println("var sum = " + var);
-                        if(var > 0.0) simDoc.add(new Pair<Double, String>(var, diseaseName.get(i)));
+                    double var = sum / (queryLength * Double.parseDouble(docLength.get(i)));
+                    System.out.println("var sum = " + var);
+                    if (var > 0.0)
+                        simDoc.add(new Pair<Double, String>(var, diseaseNameDefault.get(i)));
 //                    }
 //                    queryDotDoc.add(sum);
                 }
@@ -242,7 +273,7 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
                 }
 //                System.out.println(filteredValues.toString());
                 diseaseName = filteredValues;
-            } else diseaseName = diseaseNameDefault;
+            } else resetSearch();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -253,14 +284,16 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
         return false;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
-            , View.OnLongClickListener, View.OnTouchListener {
-        TextView name;
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener, View.OnTouchListener {
+        TextView name, type;
+        ImageView img;
         private ItemClickListener itemClickListener;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            name = (TextView) itemView.findViewById(R.id.textView1);
+            name = (TextView) itemView.findViewById(R.id.diseasetextView1);
+            type = (TextView) itemView.findViewById(R.id.diseasetextView2);
+            img = (ImageView) itemView.findViewById(R.id.diseaseimageView1);
             itemView.setOnClickListener(this);
         }
 
@@ -286,26 +319,42 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
         }
     }
 
-    public class RecyclerViewAdapter extends RecyclerView.Adapter<SearchSymptomFragment.ViewHolder> implements SectionIndexer {
+    public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>/* implements SectionIndexer*/ {
+        private final int VIEW_TYPE_HEADER = 0;
+        private final int VIEW_TYPE_ITEM = 1;
 
         @Override
-        public SearchSymptomFragment.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(getActivity()).inflate(R.layout.activity_hospital_list, parent, false);
+        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+//            if(viewType == VIEW_TYPE_HEADER){
+//                View view = LayoutInflater.from(getActivity()).inflate(R.layout.header_list, parent, false);
+//                return new SearchSymptomFragment.HeaderViewHolder(view);
+//            }else if(viewType == VIEW_TYPE_ITEM){
+            View view = LayoutInflater.from(getActivity()).inflate(R.layout.activity_disease_list, parent, false);
             return new SearchSymptomFragment.ViewHolder(view);
+//            }
+//            return null;
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
-            holder.name.setText(diseaseName.get(position));
-            holder.setOnClickListener(new ItemClickListener() {
+        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
+            String type = dbHelperDAO.getDiseaseType(diseaseName.get(position));
+            ViewHolder viewHolder = (ViewHolder) holder;
+            viewHolder.name.setText(diseaseName.get(position));
+            viewHolder.name.setTypeface(tf);
+            viewHolder.type.setText(type);
+            viewHolder.type.setTypeface(tf);
+            viewHolder.img.setImageResource(gridViewImageId[Arrays.asList(gridViewString).indexOf(type.split(",")[0])]);
+            viewHolder.setOnClickListener(new ItemClickListener() {
                 @Override
                 public void onClick(View view, int position, boolean isLongClick, MotionEvent motionEvent) {
                     if (!isLongClick) {
                         SelectItemFragment fragment = new SelectItemFragment();
                         Bundle bundle = new Bundle();
-                        bundle.putString("name",diseaseName.get(position));
+                        bundle.putString("name", diseaseName.get(position));
                         fragment.setArguments(bundle);
-                        getFragmentManager().beginTransaction()
+//                        getFragmentManager().beginTransaction()
+                        getParentFragment().getFragmentManager().beginTransaction()
                                 .replace(R.id.container_fragment, fragment)
                                 .addToBackStack(null)
                                 .commit();
@@ -319,33 +368,33 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
             return diseaseName.size();
         }
 
-        @Override
-        public Object[] getSections() {
-            String letters = "[ก-ฮ]";
-            mDataArray = diseaseName;
-            List<String> sections = new ArrayList<>(44);
-            mSectionPositions = new ArrayList<>(44);
-            for (int i = 0, size = mDataArray.size(); i < size; i++) {
-                String section = String.valueOf(mDataArray.get(i).charAt(0)).toUpperCase();
-                if(!section.matches(letters)){
-                    section = String.valueOf(mDataArray.get(i).charAt(1)).toUpperCase();
-                }
-                if (!sections.contains(section)) {
-                    sections.add(section);
-                    mSectionPositions.add(i);
-                }
-            }
-            return sections.toArray(new String[0]);
-        }
-
-        @Override
-        public int getPositionForSection(int i) {
-            return mSectionPositions.get(i);
-        }
-
-        @Override
-        public int getSectionForPosition(int i) {
-            return 0;
-        }
+//        @Override
+//        public Object[] getSections() {
+//            String letters = "[ก-ฮ]";
+//            mDataArray = diseaseName;
+//            List<String> sections = new ArrayList<>(44);
+//            mSectionPositions = new ArrayList<>(44);
+//            for (int i = 0, size = mDataArray.size(); i < size; i++) {
+//                String section = String.valueOf(mDataArray.get(i).charAt(0)).toUpperCase();
+//                if(!section.matches(letters)){
+//                    section = String.valueOf(mDataArray.get(i).charAt(1)).toUpperCase();
+//                }
+//                if (!sections.contains(section)) {
+//                    sections.add(section);
+//                    mSectionPositions.add(i);
+//                }
+//            }
+//            return sections.toArray(new String[0]);
+//        }
+//
+//        @Override
+//        public int getPositionForSection(int i) {
+//            return mSectionPositions.get(i);
+//        }
+//
+//        @Override
+//        public int getSectionForPosition(int i) {
+//            return 0;
+//        }
     }
 }

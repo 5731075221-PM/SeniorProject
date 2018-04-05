@@ -18,6 +18,7 @@
     <!--<color name="second_bar">#d3008e76</color>-->
     <color name="nav_bar">#0077c2</color>
     <color name="second_bar">#59abe3</color>
+
     <!--button effect selector-->
     <color name="white">#fff</color>
     <color name="grey">#E8E8E8</color>
@@ -29,4 +30,5 @@
     <color name="firstaid">#98d5cc</color>
 
     <color name="colorMainGreen">#429f46</color>
+
 </resources>

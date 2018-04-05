@@ -1,10 +1,9 @@
 package com.example.uefi.seniorproject.reminder;
 
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,14 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.support.v7.widget.Toolbar;
 
 import com.example.uefi.seniorproject.R;
 import com.example.uefi.seniorproject.databases.DBHelperDAO;
 import com.example.uefi.seniorproject.databases.InternalDatabaseHelper;
-import com.example.uefi.seniorproject.firstaid.FirstaidFragment;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,7 +29,7 @@ public class NotesFragment extends Fragment {
 
     public DBHelperDAO dbHelperDAO;
     public InternalDatabaseHelper internalDatabaseHelper;
-    public ArrayList<ChoiceItem> listNew,createFromlistNote,listNote;
+    public ArrayList<ChoiceItem> listNew,listNote;
     public RecyclerView.LayoutManager mLayoutManager;
     public RecyclerView mRecyclerView;
     public CustomAdapterNote mAdapter;
@@ -46,37 +44,23 @@ public class NotesFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_notes, container, false);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_note);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new CustomAdapterNote(getActivity(),listNote);
-        mAdapter.setItemClickListener(new CustomAdapterNote.OnItemClickListener() {
-            @Override
-            public void onItemClick(View item, int position,int note_id) {
-                createFromlistNote = internalDatabaseHelper.getChoiceItem(note_id,listNew);
-                FragmentTransaction transaction = getFragmentManager() .beginTransaction();
-                transaction.replace(R.id.main_layout, NoteAddFragment.newInstance("edit",
-                        note_id
-                ));
-                transaction.addToBackStack("แก้ไขบันทึกสุขภาพ");
-                transaction.commit();
-            }
-        });
+        mAdapter = new CustomAdapterNote(getActivity(),listNote,getFragmentManager());
         mRecyclerView.setAdapter(mAdapter);
-
-
 
         LinearLayout addNote = (LinearLayout) view.findViewById(R.id.add);
         addNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             FragmentTransaction transaction = getFragmentManager() .beginTransaction();
-            transaction.replace(R.id.main_layout, NoteAddFragment.newInstance("add",0
+            transaction.replace(R.id.container_fragment, NoteAddFragment.newInstance("add",0
             ));
             transaction.addToBackStack("เพิ่มบันทึกสุขภาพ");
             transaction.commit();
@@ -87,6 +71,8 @@ public class NotesFragment extends Fragment {
             notePic = (ImageView) view.findViewById(R.id.notePic);
             notePic.setVisibility(View.GONE);
         }
+        Log.i("Check", "onCreateView NNNNNNNNNNNN");
+
         return view;
     }
 
@@ -99,6 +85,48 @@ public class NotesFragment extends Fragment {
         internalDatabaseHelper = InternalDatabaseHelper.getInstance(getActivity());
         internalDatabaseHelper.open();
         listNote = internalDatabaseHelper.readAllNote();
+        Log.i("Check", "onCreate NNNNNNNNNNNN");
+
+    }
+
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Log.i("Check", "onActivityCreated NNNNNNNNNNNN");
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
+        Log.i("Check", "onDestroy NNNNNNNNNNNN");
+    }
+
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.i("Check", "onDestroyView NNNNNNNNNNNN");
+    }
+
+    public void onDetach() {
+        super.onDetach();
+        Log.i("Check", "onDetach NNNNNNNNNNNN");
+    }
+
+    public void onPause() {
+        super.onPause();
+        Log.i("Check", "onPause NNNNNNNNNNNN");
+    }
+
+    public void onResume() {
+        super.onResume();
+        Log.i("Check", "onResume NNNNNNNNNNNN");
+    }
+
+    public void onStart() {
+        super.onStart();
+        Log.i("Check", "onStart   NNNNNNNNNNNN");
+    }
+
+    public void onStop() {
+        super.onStop();
+        Log.i("Check", "onStop      NNNNNNNNNNNN");
     }
 
 }

@@ -38,7 +38,6 @@ public class PagerAdapterFragment extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        System.out.println("Title = ");
         return mFragmentTitleList.get(position);
     }
 }

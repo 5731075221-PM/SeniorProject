@@ -9,25 +9,1141 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="search_by_name">ค้นหาจากชื่อ</string>
+    <string name="sort_by_name">แสดงตามตัวอักษร</string>
 
-    <string-array name="Area">
-        <item>กรุงเทพฯ – ปริมณฑล</item>
-        <item>ภาคกลาง</item>
-        <item>ภาคตะวันออกเฉียงเหนือ</item>
-        <item>ภาคเหนือ</item>
-        <item>ภาคใต้</item>
-        <item>ภาคตะวันออก</item>
-    </string-array>
-
-    <string-array name="Province1">
+    <string-array name="ProvinceList">
         <item>เลือกจังหวัด</item>
+        <item>กระบี่</item>
         <item>กรุงเทพมหานคร</item>
+        <item>กาญจนบุรี</item>
+        <item>กาฬสินธุ์</item>
+        <item>กำแพงเพชร</item>
+        <item>ขอนแก่น</item>
+        <item>จันทบุรี</item>
+        <item>ฉะเชิงเทรา</item>
+        <item>ชลบุรี</item>
+        <item>ชัยนาท</item>
+        <item>ชัยภูมิ</item>
+        <item>ชุมพร</item>
+        <item>เชียงราย</item>
+        <item>เชียงใหม่</item>
+        <item>ตรัง</item>
+        <item>ตราด</item>
+        <item>ตาก</item>
+        <item>นครนายก</item>
+        <item>นครปฐม</item>
+        <item>นครพนม</item>
+        <item>นครราชสีมา</item>
+        <item>นครศรีธรรมราช</item>
+        <item>นครสวรรค์</item>
         <item>นนทบุรี</item>
+        <item>นราธิวาส</item>
+        <item>น่าน</item>
+        <item>บึงกาฬ</item>
+        <item>บุรีรัมย์</item>
         <item>ปทุมธานี</item>
+        <item>ประจวบคีรีขันธ์</item>
+        <item>ปราจีนบุรี</item>
+        <item>ปัตตานี</item>
+        <item>พระนครศรีอยุธยา</item>
+        <item>พังงา</item>
+        <item>พัทลุง</item>
+        <item>พิจิตร</item>
+        <item>พิษณุโลก</item>
+        <item>เพชรบุรี</item>
+        <item>เพชรบูรณ์</item>
+        <item>แพร่</item>
+        <item>พะเยา</item>
+        <item>ภูเก็ต</item>
+        <item>มหาสารคาม</item>
+        <item>มุกดาหาร</item>
+        <item>แม่ฮ่องสอน</item>
+        <item>ยะลา</item>
+        <item>ยโสธร</item>
+        <item>ร้อยเอ็ด</item>
+        <item>ระนอง</item>
+        <item>ระยอง</item>
+        <item>ราชบุรี</item>
+        <item>ลพบุรี</item>
+        <item>ลำปาง</item>
+        <item>ลำพูน</item>
+        <item>เลย</item>
+        <item>ศรีสะเกษ</item>
+        <item>สกลนคร</item>
+        <item>สงขลา</item>
+        <item>สตูล</item>
         <item>สมุทรปราการ</item>
+        <item>สมุทรสงคราม</item>
+        <item>สมุทรสาคร</item>
+        <item>สระแก้ว</item>
+        <item>สระบุรี</item>
+        <item>สิงห์บุรี</item>
+        <item>สุโขทัย</item>
+        <item>สุพรรณบุรี</item>
+        <item>สุราษฎร์ธานี</item>
+        <item>สุรินทร์</item>
+        <item>หนองคาย</item>
+        <item>หนองบัวลำภู</item>
+        <item>อ่างทอง</item>
+        <item>อุดรธานี</item>
+        <item>อุทัยธานี</item>
+        <item>อุตรดิตถ์</item>
+        <item>อุบลราชธานี</item>
+        <item>อำนาจเจริญ</item>
     </string-array>
 
-    <string-array name="Zone1Bangkok">
+    <string-array name="ZoneAll">
+        <item>เลือกเขต</item>
+        <item>เกาะลันตา</item>
+        <item>เขาพนม</item>
+        <item>คลองท่อม</item>
+        <item>ปลายพระยา</item>
+        <item>เมืองกระบี่</item>
+        <item>ลำทับ</item>
+        <item>เหนือคลอง</item>
+        <item>อ่าวลึก</item>
+
+        <item>คลองสาน</item>
+        <item>คลองสามวา</item>
+        <item>คลองเตย</item>
+        <item>คันนายาว</item>
+        <item>จตุจักร</item>
+        <item>จอมทอง</item>
+        <item>ดอนเมือง</item>
+        <item>ดินแดง</item>
+        <item>ดุสิต</item>
+        <item>ตลิ่งชัน</item>
+        <item>ทวีวัฒนา</item>
+        <item>ทุ่มครุ</item>
+        <item>ธนบุรี</item>
+        <item>บางกอกน้อย</item>
+        <item>บางกอกใหญ่</item>
+        <item>บางกะปิ</item>
+        <item>บางขุนเทียน</item>
+        <item>บางคอแหลม</item>
+        <item>บางซื่อ</item>
+        <item>บางนา</item>
+        <item>บางบอน</item>
+        <item>บางพลัด</item>
+        <item>บางรัก</item>
+        <item>บางเขน</item>
+        <item>บางแค</item>
+        <item>บึ่งกุ่ม</item>
+        <item>ปทุมวัน</item>
+        <item>ประเวศ</item>
+        <item>ป้อมปราบศัตรูพ่าย</item>
+        <item>พญาไท</item>
+        <item>พระนคร</item>
+        <item>พระโขนง</item>
+        <item>ภาษีเจริญ</item>
+        <item>มีนบุรี</item>
+        <item>ยานนาวา</item>
+        <item>ราชเทวี</item>
+        <item>ราชฎร์บูรณะ</item>
+        <item>ลาดกระบัง</item>
+        <item>ลาดพร้าว</item>
+        <item>วังทองหลาง</item>
+        <item>วัฒนา</item>
+        <item>สวนหลวง</item>
+        <item>สะพานสูง</item>
+        <item>สัมพันธสงศ์</item>
+        <item>สาทร</item>
+        <item>สายไหม</item>
+        <item>หนองจอก</item>
+        <item>หนองแขม</item>
+        <item>หลักสี่</item>
+        <item>ห้วยขวาง</item>
+
+        <item>ด่านมะขามเตี้ย</item>
+        <item>ทองผาภูมิ</item>
+        <item>ท่าม่วง</item>
+        <item>ท่ามะกา</item>
+        <item>ไทรโยค</item>
+        <item>บ่อพลอย</item>
+        <item>พนมทวน</item>
+        <item>เมืองกาญจนบุรี</item>
+        <item>เลาขวัญ</item>
+        <item>ศรีสวัสดิ์</item>
+        <item>สังขละบุรี</item>
+        <item>หนองปรือ</item>
+        <item>ห้วยกระเจา</item>
+
+        <item>กมลาไสย</item>
+        <item>กุฉินารายณ์</item>
+        <item>เขาวง</item>
+        <item>คำม่วง</item>
+        <item>ฆ้องชัย</item>
+        <item>ดอนจาน</item>
+        <item>ท่าคันโท</item>
+        <item>นาคู</item>
+        <item>นามน</item>
+        <item>เมืองกาฬสินธุ์</item>
+        <item>ยางตลาด</item>
+        <item>ร่องคำ</item>
+        <item>สมเด็จ</item>
+        <item>สหัสขันธ์</item>
+        <item>สามชัย</item>
+        <item>หนองกุงศรี</item>
+        <item>ห้วยผึ้ง</item>
+        <item>ห้วยเม็ก</item>
+
+        <item>โกสัมพีนคร</item>
+        <item>ขาณุวรลักษบุรี</item>
+        <item>คลองขลุง</item>
+        <item>คลองลาน</item>
+        <item>ทรายทองวัฒนา</item>
+        <item>ไทรงาม</item>
+        <item>บึงสามัคคี</item>
+        <item>ปางศิลาทอง</item>
+        <item>พรานกระต่าย</item>
+        <item>ลานกระบือ</item>
+        <item>เมืองกำแพงเพชร</item>
+
+        <item>กระนวน</item>
+        <item>เขาสวนกวาง</item>
+        <item>โคกโพธิ์ไชย</item>
+        <item>ชนบท</item>
+        <item>ชุมแพ</item>
+        <item>ซำสูง</item>
+        <item>น้ำพอง</item>
+        <item>โนนศิลา</item>
+        <item>บ้านไผ่</item>
+        <item>บ้านฝาง</item>
+        <item>บ้านแฮด</item>
+        <item>เปือยน้อย</item>
+        <item>พระยืน</item>
+        <item>พล</item>
+        <item>ภูผาม่าน</item>
+        <item>ภูเวียง</item>
+        <item>เมืองขอนแก่น</item>
+        <item>มัญจาคีรี</item>
+        <item>แวงน้อย</item>
+        <item>แวงใหญ่</item>
+        <item>เวียงเก่า</item>
+        <item>สีชมพู</item>
+        <item>หนองนาคำ</item>
+        <item>หนองเรือ</item>
+        <item>หนองสองห้อง</item>
+        <item>อุบลรัตน์</item>
+
+        <item>เลือกเขต</item>
+        <item>แก่งหางแมว</item>
+        <item>ขลุง</item>
+        <item>เขาคิชฌกูฏ</item>
+        <item>ท่าใหม่</item>
+        <item>นายายอาม</item>
+        <item>โป่งน้ำร้อน</item>
+        <item>เมืองจันทบุรี</item>
+        <item>มะขาม</item>
+        <item>สอยดาว</item>
+        <item>แหลมสิงห์</item>
+
+        <item>คลองเขื่อน</item>
+        <item>ท่าตะเกียบ</item>
+        <item>บางน้ำเปรี้ยว</item>
+        <item>บางคล้า</item>
+        <item>บางปะกง</item>
+        <item>แปลงยาว</item>
+        <item>พนมสารคาม</item>
+        <item>เมืองฉะเชิงเทรา</item>
+        <item>ราชสาส์น</item>
+        <item>สนามชัยเขต</item>
+        <item>บ้านโพธิ์</item>
+
+        <item>เกาะจันทร์</item>
+        <item>เกาะสีชัง</item>
+        <item>บ่อทอง</item>
+        <item>บางละมุง</item>
+        <item>บ้านบึง</item>
+        <item>พนัสนิคม</item>
+        <item>พานทอง</item>
+        <item>เมืองชลบุรี</item>
+        <item>ศรีราชา</item>
+        <item>สัตหีบ</item>
+        <item>หนองใหญ่</item>
+
+        <item>เนินขาม</item>
+        <item>วัดสิงห์</item>
+        <item>สรรพยา</item>
+        <item>หนองมะโมง</item>
+        <item>มโนรมย์</item>
+        <item>เมืองชัยนาท</item>
+
+        <item>เกษตรสมบูรณ์</item>
+        <item>แก้งคร้อ</item>
+        <item>คอนสวรรค์</item>
+        <item>คอนสาร</item>
+        <item>จัตุรัส</item>
+        <item>ซับใหญ่</item>
+        <item>เทพสถิต</item>
+        <item>เนินสง่า</item>
+        <item>บ้านเขว้า</item>
+        <item>บ้านแท่น</item>
+        <item>บำเหน็จณรงค์</item>
+        <item>ภักดีชุมพล</item>
+        <item>ภูเขียว</item>
+        <item>เมืองชัยภูมิ</item>
+        <item>หนองบัวแดง</item>
+        <item>หนองบัวระเหว</item>
+
+        <item>ท่าแซะ</item>
+        <item>ทุ่งตะโก</item>
+        <item>ปะทิว</item>
+        <item>พะโต๊ะ</item>
+        <item>เมืองชุมพร</item>
+        <item>ละแม</item>
+        <item>สวี</item>
+        <item>หลังสวน</item>
+
+        <item>ขุนตาล</item>
+        <item>เชียงของ</item>
+        <item>เชียงแสน‎</item>
+        <item>ดอยหลวง</item>
+        <item>เทิง</item>
+        <item>ป่าแดด</item>
+        <item>พญาเม็งราย</item>
+        <item>พาน</item>
+        <item>แม่ฟ้าหลวง</item>
+        <item>แม่จัน</item>
+        <item>แม่ลาว</item>
+        <item>แม่สรวย</item>
+        <item>แม่สาย</item>
+        <item>เวียงแก่น</item>
+        <item>เวียงเชียงรุ้ง</item>
+        <item>เวียงชัย</item>
+        <item>เวียงป่าเป้า</item>
+        <item>เมืองเชียงราย</item>
+
+        <item>กัลยาณิวัฒนา</item>
+        <item>จอมทอง</item>
+        <item>ไชยปราการ</item>
+        <item>เชียงดาว</item>
+        <item>ดอยสะเก็ด</item>
+        <item>ดอยเต่า</item>
+        <item>ดอยหล่อ</item>
+        <item>ฝาง</item>
+        <item>พร้าว</item>
+        <item>แม่วาง</item>
+        <item>แม่แจ่ม</item>
+        <item>แม่แตง</item>
+        <item>แม่ริม</item>
+        <item>แม่ออน</item>
+        <item>แม่อาย</item>
+        <item>เมืองเชียงใหม่</item>
+        <item>เวียงแหง</item>
+        <item>สะเมิง</item>
+        <item>สันกำแพง</item>
+        <item>สันทราย</item>
+        <item>ป่าตอง</item>
+        <item>สารภี</item>
+        <item>หางดง</item>
+        <item>อมก๋อย</item>
+        <item>ฮอด</item>
+
+        <item>กันตัง</item>
+        <item>นาโยง</item>
+        <item>ปะเหลียน</item>
+        <item>เมืองตรัง</item>
+        <item>ย่านตาขาว</item>
+        <item>รัษฎา</item>
+        <item>วังวิเศษ</item>
+        <item>สิเกา</item>
+        <item>หาดสำราญ</item>
+        <item>ห้วยยอด</item>
+
+        <item>เกาะกูด</item>
+        <item>เกาะช้าง</item>
+        <item>เขาสมิง</item>
+        <item>คลองใหญ่</item>
+        <item>บ่อไร่</item>
+        <item>เมืองตราด</item>
+        <item>แหลมงอบ</item>
+
+        <item>ท่าสองยาง</item>
+        <item>บ้านตาก</item>
+        <item>พบพระ</item>
+        <item>เมืองตาก</item>
+        <item>แม่ระมาด</item>
+        <item>แม่สอด</item>
+        <item>วังเจ้า</item>
+        <item>สามเงา</item>
+        <item>อุ้มผาง</item>
+
+        <item>บ้านนา</item>
+        <item>ปากพลี</item>
+        <item>เมืองนครนายก</item>
+        <item>องครักษ์</item>
+
+        <item>พุทธมณฑล‎</item>
+        <item>กำแพงแสน</item>
+        <item>ดอนตูม</item>
+        <item>นครชัยศรี</item>
+        <item>บางเลน</item>
+        <item>เมืองนครปฐม</item>
+        <item>สามพราน</item>
+
+        <item>ท่าอุเทน</item>
+        <item>นาแก</item>
+        <item>นาทม</item>
+        <item>นาหว้า</item>
+        <item>ธาตุพนม</item>
+        <item>านแพง</item>
+        <item>ปลาปาก</item>
+        <item>โพนสวรรค์</item>
+        <item>เมืองนครพนม</item>
+        <item>เรณูนคร</item>
+        <item>วังยาง</item>
+        <item>ศรีสงคราม</item>
+
+        <item>แก้งสนามนาง</item>
+        <item>ขามทะเลสอ</item>
+        <item>ขามสะแกแสง</item>
+        <item>คง</item>
+        <item>ครบุรี</item>
+        <item>จักราช</item>
+        <item>เฉลิมพระเกียรติ</item>
+        <item>โชคชัย</item>
+        <item>ชุมพวง</item>
+        <item>ด่านขุนทด</item>
+        <item>เทพารักษ์</item>
+        <item>โนนไทย</item>
+        <item>โนนสูง</item>
+        <item>โนนแดง</item>
+        <item>บัวลาย</item>
+        <item>บัวใหญ่</item>
+        <item>บ้านเหลื่อม</item>
+        <item>ประทาย</item>
+        <item>ปักธงชัย</item>
+        <item>ปากช่อง</item>
+        <item>พระทองคำ</item>
+        <item>พิมาย</item>
+        <item>เมืองนครราชสีมา</item>
+        <item>เมืองยาง</item>
+        <item>ลำทะเมนชัย</item>
+        <item>วังน้ำเขียว</item>
+        <item>เสิงสาง</item>
+        <item>สีคิ้ว</item>
+        <item>สีดา</item>
+        <item>สูงเนิน</item>
+        <item>หนองบุญมาก</item>
+        <item>ห้วยแถลง</item>
+
+        <item>ขนอม</item>
+        <item>จุฬาภรณ์</item>
+        <item>เฉลิมพระเกียรติ</item>
+        <item>ฉวาง</item>
+        <item>ชะอวด</item>
+        <item>ช้างกลาง</item>
+        <item>เชียรใหญ่</item>
+        <item>ถ้ำพรรณรา</item>
+        <item>ท่าศาลา</item>
+        <item>ทุ่งใหญ่</item>
+        <item>ทุ่งสง</item>
+        <item>นบพิตำ</item>
+        <item>นาบอน</item>
+        <item>บางขัน</item>
+        <item>ปากพนัง</item>
+        <item>พรหมคีรี</item>
+        <item>พระพรหม</item>
+        <item>พิปูน</item>
+        <item>เมืองนครศรีธรรมราช</item>
+        <item>ร่อนพิบูลย์</item>
+        <item>ลานสกา</item>
+        <item>สิชล</item>
+        <item>หัวไทร</item>
+
+        <item>เก้าเลี้ยว</item>
+        <item>โกรกพระ</item>
+        <item>ชุมแสง</item>
+        <item>ตากฟ้า</item>
+        <item>แม่เปิน</item>
+        <item>แม่วงก์</item>
+        <item>ลาดยาว</item>
+        <item>ชุมตาบง</item>
+        <item>ตาคลี</item>
+        <item>ท่าตะโก</item>
+        <item>บรรพตพิสัย</item>
+        <item>พยุหะคีรี</item>
+        <item>ไพศาลี</item>
+        <item>เมืองนครสวรรค์</item>
+        <item>หนองบัว</item>
+
+        <item>บางกรวย</item>
+        <item>บางบัวทอง</item>
+        <item>บางใหญ่</item>
+        <item>ปากเกร็ด</item>
+        <item>เมืองนนทบุรี</item>
+        <item>ไทรน้อย</item>
+
+        <item>จะแนะ</item>
+        <item>เจาะไอร้อง</item>
+        <item>ตากใบ</item>
+        <item>บาเจาะ</item>
+        <item>เมืองนราธิวาส</item>
+        <item>ยี่งอ</item>
+        <item>ระแงะ</item>
+        <item>รือเสาะ</item>
+        <item>แว้ง</item>
+        <item>ศรีสาคร</item>
+        <item>สุคิริน</item>
+        <item>สุไหงโก-ลก</item>
+        <item>สุไหงปาดี</item>
+
+        <item>เฉลิมพระเกียรติ</item>
+        <item>เชียงกลาง</item>
+        <item>ท่าวังผา</item>
+        <item>ทุ่งช้าง</item>
+        <item>นาน้อย</item>
+        <item>นาหมื่น</item>
+        <item>บ่อเกลือ</item>
+        <item>บ้านหลวง</item>
+        <item>ปัว</item>
+        <item>ภูเพียง</item>
+        <item>แม่จริม</item>
+        <item>เมืองน่าน</item>
+        <item>เวียงสา</item>
+        <item>สองแคว</item>
+        <item>สันติสุข</item>
+
+        <item>โซ่พิสัย</item>
+        <item>เซกา</item>
+        <item>บึงโขงหลง</item>
+        <item>บุ่งคล้า</item>
+        <item>ปากคาด</item>
+        <item>พรเจริญ</item>
+        <item>เมืองบึงกาฬ</item>
+        <item>ศรีวิไล</item>
+
+        <item>กระสัง</item>
+        <item>แคนดง</item>
+        <item>คูเมือง</item>
+        <item>เฉลิมพระเกียรติ</item>
+        <item>ชำนิ</item>
+        <item>โนนดินแดง</item>
+        <item>โนนสุวรรณ</item>
+        <item>นางรอง</item>
+        <item>นาโพธิ์</item>
+        <item>บ้านกรวด</item>
+        <item>บ้านด่าน</item>
+        <item>บ้านใหม่ไชยพจน์</item>
+        <item>ประโคนชัย</item>
+        <item>ปะคำ</item>
+        <item>พลับพลาชัย</item>
+        <item>พุทไธสง</item>
+        <item>เมืองบุรีรัมย์</item>
+        <item>ละหานทราย</item>
+        <item>ลำปลายมาศ</item>
+        <item>สตึก</item>
+        <item>หนองกี่</item>
+        <item>หนองหงส์</item>
+        <item>ห้วยราช</item>
+
+        <item>ตลองหลวง</item>
+        <item>ธัญบุรี</item>
+        <item>ฃาดหลุมแก้ว</item>
+        <item>ลำลูกกา</item>
+        <item>สามโคก</item>
+        <item>หนองเสือ</item>
+        <item>เมืองปทุมธานี</item>
+
+        <item>กุยบุรี</item>
+        <item>ทับสะแก</item>
+        <item>บางสะพาน</item>
+        <item>บางสะพานน้อย</item>
+        <item>ปราณบุรี</item>
+        <item>เมืองประจวบคีรีขันธ์</item>
+        <item>สามร้อยยอด</item>
+        <item>หัวหิน</item>
+
+        <item>กบินทร์บุรี</item>
+        <item>นาดี</item>
+        <item>บ้านสร้าง</item>
+        <item>ประจันตคาม</item>
+        <item>เมืองปราจีนบุรี</item>
+        <item>ศรีมโหสถ</item>
+        <item>ศรีมหาโพธิ</item>
+
+        <item>กะพ้อ</item>
+        <item>โคกโพธิ์</item>
+        <item>ทุ่งยางแดง</item>
+        <item>ปะนาเระ</item>
+        <item>แม่ลาน</item>
+        <item>มายอ</item>
+        <item>เมืองปัตตานี</item>
+        <item>ไม้แก่น</item>
+        <item>ยะรัง</item>
+        <item>ยะหริ่ง</item>
+        <item>สายบุรี</item>
+        <item>หนองจิก</item>
+
+        <item>ท่าเรือ</item>
+        <item>นครหลวง</item>
+        <item>บางซ้าย</item>
+        <item>บางบาล</item>
+        <item>บ้านแพรก</item>
+        <item>ผักไห่</item>
+        <item>พระนครศรีอยุธยา</item>
+        <item>ภาชี</item>
+        <item>วังน้อย</item>
+        <item>เสนา</item>
+        <item>อุทัย</item>
+        <item>บางปะหัน</item>
+        <item>บางปะอิน</item>
+
+        <item>เกาะยาว</item>
+        <item>กะปง</item>
+        <item>คุระบุรี</item>
+        <item>ตะกั่วทุ่ง</item>
+        <item>ตะกั่วป่า</item>
+        <item>ทับปุด</item>
+        <item>ท้ายเหมือง</item>
+        <item>เมืองพังงา</item>
+
+        <item>กงหรา</item>
+        <item>เขาชัยสน</item>
+        <item>ควนขนุน</item>
+        <item>ตะโหมด</item>
+        <item>บางแก้ว</item>
+        <item>ปากพะยูน</item>
+        <item>ป่าบอน</item>
+        <item>ป่าพะยอม</item>
+        <item>เมืองพัทลุง</item>
+        <item>ศรีนครินทร์</item>
+        <item>ศรีบรรพต</item>
+
+        <item>ดงเจริญ</item>
+        <item>ตะพานหิน</item>
+        <item>ทับคล้อ</item>
+        <item>บางมูลนาก</item>
+        <item>บึงนาราง</item>
+        <item>โพทะเล</item>
+        <item>โพธิ์ประทับช้าง</item>
+        <item>เมืองพิจิตร</item>
+        <item>วชิรบารมี</item>
+        <item>วังทรายพูน</item>
+        <item>สากเหล็ก</item>
+        <item>สามง่าม</item>
+
+        <item>ชาติตระการ</item>
+        <item>นครไทย</item>
+        <item>เนินมะปราง</item>
+        <item>บางกระทุ่ม</item>
+        <item>บางระกำ</item>
+        <item>วังทอง</item>
+        <item>วัดโบสถ์</item>
+        <item>เมืองพิษณุโลก</item>
+
+        <item>แก่งกระจาน</item>
+        <item>เขาย้อย</item>
+        <item>ชะอำ</item>
+        <item>ท่ายาง</item>
+        <item>บ้านลาด</item>
+        <item>บ้านแหลม</item>
+        <item>เมืองเพชรบุรี</item>
+        <item>หนองหญ้าปล้อง</item>
+
+        <item>เขาค้อ</item>
+        <item>ชนแดน</item>
+        <item>น้ำหนาว</item>
+        <item>บึงสามพัน</item>
+        <item>เมืองเพชรบูรณ์</item>
+        <item>วังโป่ง</item>
+        <item>วิเชียรบุรี</item>
+        <item>ศรีเทพ</item>
+        <item>หนองไผ่</item>
+        <item>หล่มเก่า</item>
+        <item>หล่มสัก</item>
+
+        <item>เมืองแพร่</item>
+        <item>ร้องกวาง</item>
+        <item>ลอง</item>
+        <item>วังชิ้น</item>
+        <item>สอง</item>
+        <item>สูงเม่น</item>
+        <item>หนองม่วงไข่</item>
+        <item>เด่นชัย</item>
+
+        <item>เมืองพะเยา</item>
+        <item>จุน</item>
+        <item>เชียงคำ</item>
+        <item>เชียงม่วน</item>
+        <item>ดอกคำใต้</item>
+        <item>ปง</item>
+        <item>ภูกามยาว</item>
+        <item>ภูซาง</item>
+        <item>แม่ใจ</item>
+
+        <item>กะทู้</item>
+        <item>ถลาง</item>
+        <item>เมืองภูเก็ต</item>
+
+        <item>แกดำ</item>
+        <item>โกสุมพิสัย</item>
+        <item>กันทรวิชัย</item>
+        <item>กุดรัง</item>
+        <item>ชื่นชม</item>
+        <item>เชียงยืน</item>
+        <item>นาเชือก</item>
+        <item>นาดูน</item>
+        <item>บรบือ</item>
+        <item>พยัคฆภูมิพิสัย</item>
+        <item>เมืองมหาสารคาม</item>
+        <item>ยางสีสุราช</item>
+        <item>วาปีปทุม</item>
+
+        <item>คำชะอี</item>
+        <item>ดงหลวง</item>
+        <item>ดอนตาล</item>
+        <item>นิคมคำสร้อย</item>
+        <item>เมืองมุกดาหาร</item>
+        <item>หนองสูง</item>
+        <item>หว้านใหญ่</item>
+
+        <item>ขุนยวม</item>
+        <item>ปางมะผ้า</item>
+        <item>ปาย</item>
+        <item>แม่ลาน้อย</item>
+        <item>แม่สะเรียง</item>
+        <item>เมืองแม่ฮ่องสอน</item>
+        <item>สบเมย</item>
+
+        <item>เบตง‎</item>
+        <item>กรงปินัง</item>
+        <item>กาบัง</item>
+        <item>ธารโต</item>
+        <item>บันนังสตา</item>
+        <item>เมืองยะลา</item>
+        <item>ยะหา</item>
+        <item>รามัน</item>
+
+        <item>กุดชุม</item>
+        <item>ค้อวัง</item>
+        <item>คำเขื่อนแก้ว</item>
+        <item>ทรายมูล</item>
+        <item>ไทยเจริญ</item>
+        <item>ป่าติ้ว</item>
+        <item>มหาชนะชัย</item>
+        <item>เมืองยโสธร</item>
+        <item>เลิงนกทา</item>
+
+        <item>หนองพอก</item>
+        <item>เกษตรวิสัย</item>
+        <item>จตุรพักตรพิมาน</item>
+        <item>จังหาร</item>
+        <item>เชียงขวัญ</item>
+        <item>ทุ่งเขาหลวง</item>
+        <item>ธวัชบุรี</item>
+        <item>ปทุมรัตต์</item>
+        <item>พนมไพร</item>
+        <item>โพนทราย</item>
+        <item>โพนทอง</item>
+        <item>โพธิ์ชัย</item>
+        <item>เมยวดี</item>
+        <item>เมืองสรวง</item>
+        <item>เมืองร้อยเอ็ด</item>
+        <item>ศรีสมเด็จ</item>
+        <item>เสลภูมิ</item>
+        <item>สุวรรณภูมิ</item>
+        <item>หนองฮี</item>
+        <item>อาจสามารถ</item>
+
+        <item>กระบุรี</item>
+        <item>กะเปอร์</item>
+        <item>เมืองระนอง</item>
+        <item>ละอุ่น</item>
+        <item>สุขสำราญ</item>
+
+        <item>แกลง</item>
+        <item>เขาชะเมา</item>
+        <item>นิคมพัฒนา</item>
+        <item>บ้านค่าย</item>
+        <item>บ้านฉาง</item>
+        <item>ปลวกแดง</item>
+        <item>เมืองระยอง</item>
+        <item>วังจันทร์</item>
+
+        <item>จอมบึง</item>
+        <item>ดำเนินสะดวก</item>
+        <item>บางแพ</item>
+        <item>บ้านคา</item>
+        <item>บ้านโป่ง</item>
+        <item>ปากท่อ</item>
+        <item>โพธาราม</item>
+        <item>เมืองราชบุรี</item>
+        <item>วัดเพลง</item>
+        <item>สวนผึ้ง</item>
+
+        <item>โคกเจริญ</item>
+        <item>โคกสำโรง</item>
+        <item>ชัยบาดาล</item>
+        <item>ท่าวุ้ง</item>
+        <item>ท่าหลวง</item>
+        <item>พัฒนานิคม</item>
+        <item>เมืองลพบุรี</item>
+        <item>ลำสนธิ</item>
+        <item>สระโบสถ์</item>
+        <item>หนองม่วง</item>
+        <item>บ้านหมี่</item>
+
+        <item>งาว</item>
+        <item>แจ้ห่ม</item>
+        <item>เถิน</item>
+        <item>แม่ทะ</item>
+        <item>แม่พริก</item>
+        <item>แม่เมาะ</item>
+        <item>เมืองปาน</item>
+        <item>เมืองลำปาง</item>
+        <item>วังเหนือ</item>
+        <item>สบปราบ</item>
+        <item>เสริมงาม</item>
+        <item>ห้างฉัตร</item>
+
+        <item>ทุ่งหัวช้าง</item>
+        <item>บ้านธิ</item>
+        <item>บ้านโฮ่ง</item>
+        <item>แม่ทา</item>
+        <item>เมืองลำพูน</item>
+        <item>ลี้</item>
+        <item>เวียงหนองล่อง</item>
+        <item>ป่าซาง</item>
+
+        <item>เชียงคาน</item>
+        <item>ด่านซ้าย</item>
+        <item>ท่าลี่</item>
+        <item>นาด้วง</item>
+        <item>นาแห้ว</item>
+        <item>ปากชม</item>
+        <item>ผาขาว</item>
+        <item>ภูกระดึง</item>
+        <item>ภูเรือ</item>
+        <item>ภูหลวง</item>
+        <item>เมืองเลย</item>
+        <item>วังสะพุง</item>
+        <item>เอราวัณ</item>
+
+        <item>กันทรลักษ์</item>
+        <item>กันทรารมย์</item>
+        <item>ขุขันธ์</item>
+        <item>ขุนหาญ</item>
+        <item>โนนคูณ</item>
+        <item>น้ำเกลี้ยง</item>
+        <item>บึงบูรพ์</item>
+        <item>เบญจลักษ์</item>
+        <item>ปรางค์กู่</item>
+        <item>โพธิ์ศรีสุวรรณ</item>
+        <item>พยุห์</item>
+        <item>ไพรบึง</item>
+        <item>ภูสิงห์</item>
+        <item>เมืองศรีสะเกษ</item>
+        <item>เมืองจันทร์</item>
+        <item>ยางชุมน้อย</item>
+        <item>ราษีไศล</item>
+        <item>วังหิน</item>
+        <item>ศรีรัตนะ</item>
+        <item>ลาลาด</item>
+        <item>ห้วยทับทัน</item>
+        <item>อุทุมพรพิสัย</item>
+
+        <item>กุดบาก</item>
+        <item>กุสุมาลย์</item>
+        <item>โคกศรีสุพรรณ</item>
+        <item>คำตากล้า</item>
+        <item>เจริญศิลป์</item>
+        <item>เต่างอย</item>
+        <item>นิคมน้ำอูน</item>
+        <item>บ้านม่วง</item>
+        <item>โพนนาแก้ว</item>
+        <item>พรรณานิคม</item>
+        <item>พังโคน</item>
+        <item>ภูพาน</item>
+        <item>เมืองสกลนคร</item>
+        <item>วาริชภูมิ</item>
+        <item>สว่างแดนดิน</item>
+        <item>ส่องดาว</item>
+        <item>อากาศอำนวย</item>
+        <item>วานรนิวาส</item>
+
+        <item>กระแสสินธุ์</item>
+        <item>คลองหอยโข่ง</item>
+        <item>ควนเนียง</item>
+        <item>จะนะ</item>
+        <item>เทพา</item>
+        <item>นาทวี</item>
+        <item>นาหม่อม</item>
+        <item>บางกล่ำ</item>
+        <item>เมืองสงขลา</item>
+        <item>ระโนด</item>
+        <item>รัตภูมิ</item>
+        <item>สทิงพระ</item>
+        <item>สะเดา</item>
+        <item>สะบ้าย้อย</item>
+        <item>สิงหนคร</item>
+        <item>หาดใหญ่</item>
+
+        <item>ควนกาหลง</item>
+        <item>ควนโดน</item>
+        <item>ท่าแพ</item>
+        <item>ทุ่งหว้า</item>
+        <item>เมืองสตูล</item>
+        <item>มะนัง</item>
+        <item>ละงู</item>
+
+        <item>บางบ่อ</item>
+        <item>บางพลี</item>
+        <item>บางเสาธง</item>
+        <item>พระประแดง</item>
+        <item>พระสมุทรเจดีย์</item>
+        <item>สำโรงเหนือ</item>
+        <item>เมืองสมุทรปราการ</item>
+
+        <item>บางคนที</item>
+        <item>เมืองสมุทรสงคราม</item>
+        <item>อัมพวา</item>
+
+        <item>กระทุ่มแบน</item>
+        <item>บ้านแพ้ว</item>
+        <item>เมืองสมุทรสาคร‎</item>
+
+        <item>เขาฉกรรจ์</item>
+        <item>โคกสูง</item>
+        <item>คลองหาด</item>
+        <item>ตาพระยา</item>
+        <item>เมืองสระแก้ว</item>
+        <item>วังน้ำเย็น</item>
+        <item>วังสมบูรณ์</item>
+        <item>วัฒนานคร</item>
+        <item>อรัญประเทศ</item>
+
+        <item>แก่งคอย</item>
+        <item>เฉลิมพระเกียรติ</item>
+        <item>ดอนพุด</item>
+        <item>บ้านหมอ</item>
+        <item>พระพุทธบาท</item>
+        <item>มวกเหล็ก</item>
+        <item>เมืองสระบุรี</item>
+        <item>วังม่วง</item>
+        <item>วิหารแดง</item>
+        <item>เสาไห้</item>
+        <item>หนองแค</item>
+        <item>หนองแซง</item>
+        <item>หนองโดน</item>
+
+        <item>ค่ายบางระจัน</item>
+        <item>ท่าช้าง</item>
+        <item>บางระจัน</item>
+        <item>พรหมบุรี</item>
+        <item>เมืองสิงห์บุรี</item>
+        <item>อินทร์บุรี</item>
+
+        <item>กงไกรลาศ</item>
+        <item>คีรีมาศ</item>
+        <item>ทุ่งเสลี่ยม</item>
+        <item>บ้านด่านลานหอย</item>
+        <item>เมืองสุโขทัย</item>
+        <item>ศรีนคร</item>
+        <item>ศรีสัชนาลัย</item>
+        <item>ศรีสำโรง</item>
+        <item>สวรรคโลก</item>
+
+        <item>ดอนเจดีย์</item>
+        <item>เดิมบางนางบวช</item>
+        <item>ด่านช้าง</item>
+        <item>หนองหญ้าไซ</item>
+        <item>บางปลาม้า</item>
+        <item>เมืองสุพรรณบุรี</item>
+        <item>ศรีประจันต์</item>
+        <item>สองพี่น้อง</item>
+        <item>สามชุก</item>
+        <item>อู่ทอง</item>
+
+        <item>เกาะพะงัน</item>
+        <item>เกาะสมุย</item>
+        <item>กาญจนดิษฐ์</item>
+        <item>เคียนซา</item>
+        <item>คีรีรัฐนิคม</item>
+        <item>ไชยา</item>
+        <item>ชัยบุรี</item>
+        <item>ดอนสัก</item>
+        <item>ท่าฉาง</item>
+        <item>ท่าชนะ</item>
+        <item>บ้านตาขุน</item>
+        <item>บ้านนาเดิม</item>
+        <item>บ้านนาสาร</item>
+        <item>พนม</item>
+        <item>พระแสง</item>
+        <item>พุนพิน</item>
+        <item>เมืองสุราษฎร์ธานี</item>
+        <item>วิภาวดี</item>
+        <item>เวียงสระ</item>
+
+        <item>กาบเชิง</item>
+        <item>เขวาสินรินทร์</item>
+        <item>จอมพระ</item>
+        <item>ชุมพลบุรี</item>
+        <item>ท่าตูม</item>
+        <item>โนนนารายณ์</item>
+        <item>บัวเชด</item>
+        <item>ปราสาท</item>
+        <item>พนมดงรัก</item>
+        <item>เมืองสุรินทร์</item>
+        <item>รัตนบุรี</item>
+        <item>ลำดวน</item>
+        <item>ศรีณรงค์</item>
+        <item>ศีขรภูมิ</item>
+        <item>สนม</item>
+        <item>สังขะ</item>
+        <item>สำโรงทาบ</item>
+
+        <item>ท่าบ่อ</item>
+        <item>เฝ้าไร่</item>
+        <item>โพธิ์ตาก</item>
+        <item>โพนพิสัย</item>
+        <item>เมืองหนองคาย</item>
+        <item>รัตนวาปี</item>
+        <item>ศรีเชียงใหม่</item>
+        <item>สระใคร</item>
+        <item>สังคม</item>
+
+        <item>โนนสัง</item>
+        <item>นากลาง</item>
+        <item>นาวัง</item>
+        <item>เมืองหนองบัวลำภู</item>
+        <item>ศรีบุญเรือง</item>
+        <item>สุวรรณคูหา</item>
+
+        <item>ไชโย</item>
+        <item>ป่าโมก</item>
+        <item>โพธิ์ทอง</item>
+        <item>เมืองอ่างทอง</item>
+        <item>วิเศษชัยชาญ</item>
+        <item>แสวงหา</item>
+        <item>สามโก้</item>
+
+        <item>กุดจับ</item>
+        <item>กุมภวาปี</item>
+        <item>กู่แก้ว</item>
+        <item>ไชยวาน</item>
+        <item>ทุ่งฝน</item>
+        <item>นายูง</item>
+        <item>น้ำโสม</item>
+        <item>โนนสะอาด</item>
+        <item>บ้านดุง</item>
+        <item>บ้านผือ</item>
+        <item>ประจักษ์ศิลปาคม</item>
+        <item>เพ็ญ</item>
+        <item>พิบูลย์รักษ์</item>
+        <item>เมืองอุดรธานี</item>
+        <item>วังสามหมอ</item>
+        <item>ศรีธาตุ</item>
+        <item>สร้างคอม</item>
+        <item>หนองวัวซอ</item>
+        <item>หนองแสง</item>
+        <item>หนองหาน</item>
+
+        <item>โนนสัง</item>
+        <item>นากลาง</item>
+        <item>นาวัง</item>
+        <item>เมืองหนองบัวลำภู</item>
+        <item>ศรีบุญเรือง</item>
+        <item>สุวรรณคูหา</item>
+
+        <item>ไชโย</item>
+        <item>ป่าโมก</item>
+        <item>โพธิ์ทอง</item>
+        <item>เมืองอ่างทอง</item>
+        <item>วิเศษชัยชาญ</item>
+        <item>แสวงหา</item>
+        <item>สามโก้</item>
+
+        <item>กุดจับ</item>
+        <item>กุมภวาปี</item>
+        <item>กู่แก้ว</item>
+        <item>ไชยวาน</item>
+        <item>ทุ่งฝน</item>
+        <item>นายูง</item>
+        <item>น้ำโสม</item>
+        <item>โนนสะอาด</item>
+        <item>บ้านดุง</item>
+        <item>บ้านผือ</item>
+        <item>ประจักษ์ศิลปาคม</item>
+        <item>เพ็ญ</item>
+        <item>พิบูลย์รักษ์</item>
+        <item>เมืองอุดรธานี</item>
+        <item>วังสามหมอ</item>
+        <item>ศรีธาตุ</item>
+        <item>สร้างคอม</item>
+        <item>หนองวัวซอ</item>
+        <item>หนองแสง</item>
+        <item>หนองหาน</item>
+
+        <item>ทัพทัน</item>
+        <item>บ้านไร่</item>
+        <item>เมืองอุทัยธานี</item>
+        <item>ลานสัก</item>
+        <item>สว่างอารมณ์</item>
+        <item>หนองขาหย่าง</item>
+        <item>หนองฉาง</item>
+        <item>ห้วยคต</item>
+
+        <item>ตรอน</item>
+        <item>ทองแสนขัน</item>
+        <item>ท่าปลา</item>
+        <item>น้ำปาด</item>
+        <item>บ้านโคก</item>
+        <item>พิชัย</item>
+        <item>ฟากท่า</item>
+        <item>เมืองอุตรดิตถ์</item>
+        <item>ลับแล</item>
+
+        <item>กุดข้าวปุ้น</item>
+        <item>โขงเจียม</item>
+        <item>เขมราฐ</item>
+        <item>เขื่องใน</item>
+        <item>เดชอุดม</item>
+        <item>ดอนมดแดง</item>
+        <item>ตระการพืชผล</item>
+        <item>ตาลสุม</item>
+        <item>ทุ่งศรีอุดม</item>
+        <item>นาจะหลวย</item>
+        <item>นาตาล</item>
+        <item>นาเยีย</item>
+        <item>น้ำขุ่น</item>
+        <item>น้ำยืน</item>
+        <item>บุณฑริก</item>
+        <item>โพธิ์ไทร</item>
+        <item>พิบูลมังสาหาร</item>
+        <item>ม่วงสามสิบ</item>
+        <item>เมืองอุบลราชธานี</item>
+        <item>วารินชำราบ</item>
+        <item>ศรีเมืองใหม่</item>
+        <item>สว่างวีระวงศ์</item>
+        <item>สำโรง</item>
+        <item>สิรินธร</item>
+        <item>เหล่าเสือโก้ก</item>
+
+        <item>ชานุมาน</item>
+        <item>ปทุมราชวงศา</item>
+        <item>พนา</item>
+        <item>เมืองอำนาจเจริญ</item>
+        <item>ลืออำนาจ</item>
+        <item>เสนางคนิคม</item>
+        <item>หัวตะพาน</item>
+    </string-array>
+
+    <string-array name="ZoneKrabi">
+        <item>เลือกเขต</item>
+        <item>เกาะลันตา</item>
+        <item>เขาพนม</item>
+        <item>คลองท่อม</item>
+        <item>ปลายพระยา</item>
+        <item>เมืองกระบี่</item>
+        <item>ลำทับ</item>
+        <item>เหนือคลอง</item>
+        <item>อ่าวลึก</item>
+    </string-array>
+
+    <string-array name="ZoneBangkok">
         <item>เลือกเขต</item>
         <item>คลองสาน</item>
         <item>คลองสามวา</item>
@@ -81,96 +1197,469 @@
         <item>ห้วยขวาง</item>
     </string-array>
 
-    <string-array name="Zone1Nonthaburi">
+    <string-array name="ZoneKanchanaburi">
         <item>เลือกเขต</item>
-        <item>บางกรวย</item>
-        <item>บางบัวทอง</item>
-        <item>บางใหญ่</item>
-        <item>ปากเกร็ด</item>
-        <item>เมือง</item>
-        <item>ไทรน้อย</item>
+        <item>ด่านมะขามเตี้ย</item>
+        <item>ทองผาภูมิ</item>
+        <item>ท่าม่วง</item>
+        <item>ท่ามะกา</item>
+        <item>ไทรโยค</item>
+        <item>บ่อพลอย</item>
+        <item>พนมทวน</item>
+        <item>เมืองกาญจนบุรี</item>
+        <item>เลาขวัญ</item>
+        <item>ศรีสวัสดิ์</item>
+        <item>สังขละบุรี</item>
+        <item>หนองปรือ</item>
+        <item>ห้วยกระเจา</item>
     </string-array>
 
-    <string-array name="Zone1Patumthani">
+    <string-array name="ZoneKalasin">
         <item>เลือกเขต</item>
-        <item>ตลองหลวง</item>
-        <item>ธัญบุรี</item>
-        <item>ฃาดหลุมแก้ว</item>
-        <item>ลำลูกกา</item>
-        <item>สามโคก</item>
-        <item>หนองเสือ</item>
-        <item>เมืองปทุมธานี</item>
+        <item>กมลาไสย</item>
+        <item>กุฉินารายณ์</item>
+        <item>เขาวง</item>
+        <item>คำม่วง</item>
+        <item>ฆ้องชัย</item>
+        <item>ดอนจาน</item>
+        <item>ท่าคันโท</item>
+        <item>นาคู</item>
+        <item>นามน</item>
+        <item>เมืองกาฬสินธุ์</item>
+        <item>ยางตลาด</item>
+        <item>ร่องคำ</item>
+        <item>สมเด็จ</item>
+        <item>สหัสขันธ์</item>
+        <item>สามชัย</item>
+        <item>หนองกุงศรี</item>
+        <item>ห้วยผึ้ง</item>
+        <item>ห้วยเม็ก</item>
     </string-array>
 
-    <string-array name="Zone1SamutPrakarn">
+    <string-array name="ZoneKamphaengphet">
         <item>เลือกเขต</item>
-        <item>บางบ่อ</item>
-        <item>บางพลี</item>
-        <item>บางเสาธง</item>
-        <item>พระประแดง</item>
-        <item>พระสมุทรเจดีย์</item>
-        <item>สำโรงเหนือ</item>
-        <item>เมือง</item>
+        <item>โกสัมพีนคร</item>
+        <item>ขาณุวรลักษบุรี</item>
+        <item>คลองขลุง</item>
+        <item>คลองลาน</item>
+        <item>ทรายทองวัฒนา</item>
+        <item>ไทรงาม</item>
+        <item>บึงสามัคคี</item>
+        <item>ปางศิลาทอง</item>
+        <item>พรานกระต่าย</item>
+        <item>ลานกระบือ</item>
+        <item>เมืองกำแพงเพชร</item>
     </string-array>
 
-    <string-array name="Zone1All">
+    <string-array name="ZoneKhonkaen">
         <item>เลือกเขต</item>
-        <item>คลองสาน</item>
-        <item>คลองสามวา</item>
-        <item>คลองเตย</item>
-        <item>คันนายาว</item>
-        <item>จตุจักร</item>
+        <item>กระนวน</item>
+        <item>เขาสวนกวาง</item>
+        <item>โคกโพธิ์ไชย</item>
+        <item>ชนบท</item>
+        <item>ชุมแพ</item>
+        <item>ซำสูง</item>
+        <item>น้ำพอง</item>
+        <item>โนนศิลา</item>
+        <item>บ้านไผ่</item>
+        <item>บ้านฝาง</item>
+        <item>บ้านแฮด</item>
+        <item>เปือยน้อย</item>
+        <item>พระยืน</item>
+        <item>พล</item>
+        <item>ภูผาม่าน</item>
+        <item>ภูเวียง</item>
+        <item>เมืองขอนแก่น</item>
+        <item>มัญจาคีรี</item>
+        <item>แวงน้อย</item>
+        <item>แวงใหญ่</item>
+        <item>เวียงเก่า</item>
+        <item>สีชมพู</item>
+        <item>หนองนาคำ</item>
+        <item>หนองเรือ</item>
+        <item>หนองสองห้อง</item>
+        <item>อุบลรัตน์</item>
+    </string-array>
+
+    <string-array name="ZoneChanthaburi">
+        <item>เลือกเขต</item>
+        <item>แก่งหางแมว</item>
+        <item>ขลุง</item>
+        <item>เขาคิชฌกูฏ</item>
+        <item>ท่าใหม่</item>
+        <item>นายายอาม</item>
+        <item>โป่งน้ำร้อน</item>
+        <item>เมืองจันทบุรี</item>
+        <item>มะขาม</item>
+        <item>สอยดาว</item>
+        <item>แหลมสิงห์</item>
+    </string-array>
+
+    <string-array name="ZoneChachoengsao">
+        <item>เลือกเขต</item>
+        <item>คลองเขื่อน</item>
+        <item>ท่าตะเกียบ</item>
+        <item>บางน้ำเปรี้ยว</item>
+        <item>บางคล้า</item>
+        <item>บางปะกง</item>
+        <item>แปลงยาว</item>
+        <item>พนมสารคาม</item>
+        <item>เมืองฉะเชิงเทรา</item>
+        <item>ราชสาส์น</item>
+        <item>สนามชัยเขต</item>
+        <item>บ้านโพธิ์</item>
+    </string-array>
+
+    <string-array name="ZoneChonburi">
+        <item>เลือกเขต</item>
+        <item>เกาะจันทร์</item>
+        <item>เกาะสีชัง</item>
+        <item>บ่อทอง</item>
+        <item>บางละมุง</item>
+        <item>บ้านบึง</item>
+        <item>พนัสนิคม</item>
+        <item>พานทอง</item>
+        <item>เมืองชลบุรี</item>
+        <item>ศรีราชา</item>
+        <item>สัตหีบ</item>
+        <item>หนองใหญ่</item>
+    </string-array>
+
+    <string-array name="ZoneChainat">
+        <item>เลือกเขต</item>
+        <item>เนินขาม</item>
+        <item>วัดสิงห์</item>
+        <item>สรรพยา</item>
+        <item>หนองมะโมง</item>
+        <item>มโนรมย์</item>
+        <item>เมืองชัยนาท</item>
+    </string-array>
+
+    <string-array name="ZoneChaiyaphum">
+        <item>เลือกเขต</item>
+        <item>เกษตรสมบูรณ์</item>
+        <item>แก้งคร้อ</item>
+        <item>คอนสวรรค์</item>
+        <item>คอนสาร</item>
+        <item>จัตุรัส</item>
+        <item>ซับใหญ่</item>
+        <item>เทพสถิต</item>
+        <item>เนินสง่า</item>
+        <item>บ้านเขว้า</item>
+        <item>บ้านแท่น</item>
+        <item>บำเหน็จณรงค์</item>
+        <item>ภักดีชุมพล</item>
+        <item>ภูเขียว</item>
+        <item>เมืองชัยภูมิ</item>
+        <item>หนองบัวแดง</item>
+        <item>หนองบัวระเหว</item>
+    </string-array>
+
+    <string-array name="ZoneChumphon">
+        <item>เลือกเขต</item>
+        <item>ท่าแซะ</item>
+        <item>ทุ่งตะโก</item>
+        <item>ปะทิว</item>
+        <item>พะโต๊ะ</item>
+        <item>เมืองชุมพร</item>
+        <item>ละแม</item>
+        <item>สวี</item>
+        <item>หลังสวน</item>
+    </string-array>
+
+    <string-array name="ZoneChiangrai">
+        <item>เลือกเขต</item>
+        <item>ขุนตาล</item>
+        <item>เชียงของ</item>
+        <item>เชียงแสน‎</item>
+        <item>ดอยหลวง</item>
+        <item>เทิง</item>
+        <item>ป่าแดด</item>
+        <item>พญาเม็งราย</item>
+        <item>พาน</item>
+        <item>แม่ฟ้าหลวง</item>
+        <item>แม่จัน</item>
+        <item>แม่ลาว</item>
+        <item>แม่สรวย</item>
+        <item>แม่สาย</item>
+        <item>เวียงแก่น</item>
+        <item>เวียงเชียงรุ้ง</item>
+        <item>เวียงชัย</item>
+        <item>เวียงป่าเป้า</item>
+        <item>เมืองเชียงราย</item>
+    </string-array>
+
+    <string-array name="ZoneChiangmai">
+        <item>เลือกเขต</item>
+        <item>กัลยาณิวัฒนา</item>
         <item>จอมทอง</item>
-        <item>ดอนเมือง</item>
-        <item>ดินแดง</item>
-        <item>ดุสิต</item>
-        <item>ตลิ่งชัน</item>
-        <item>ทวีวัฒนา</item>
-        <item>ทุ่มครุ</item>
-        <item>ธนบุรี</item>
-        <item>บางกอกน้อย</item>
-        <item>บางกอกใหญ่</item>
-        <item>บางกะปิ</item>
-        <item>บางขุนเทียน</item>
-        <item>บางคอแหลม</item>
-        <item>บางซื่อ</item>
-        <item>บางนา</item>
-        <item>บางบอน</item>
-        <item>บางพลัด</item>
-        <item>บางรัก</item>
-        <item>บางเขน</item>
-        <item>บางแค</item>
-        <item>บึ่งกุ่ม</item>
-        <item>ปทุมวัน</item>
-        <item>ประเวศ</item>
-        <item>ป้อมปราบศัตรูพ่าย</item>
-        <item>พญาไท</item>
-        <item>พระนคร</item>
-        <item>พระโขนง</item>
-        <item>ภาษีเจริญ</item>
-        <item>มีนบุรี</item>
-        <item>ยานนาวา</item>
-        <item>ราชเทวี</item>
-        <item>ราชฎร์บูรณะ</item>
-        <item>ลาดกระบัง</item>
-        <item>ลาดพร้าว</item>
-        <item>วังทองหลาง</item>
-        <item>วัฒนา</item>
-        <item>สวนหลวง</item>
-        <item>สะพานสูง</item>
-        <item>สัมพันธสงศ์</item>
-        <item>สาทร</item>
-        <item>สายไหม</item>
-        <item>หนองจอก</item>
-        <item>หนองแขม</item>
-        <item>หลักสี่</item>
-        <item>ห้วยขวาง</item>
+        <item>ไชยปราการ</item>
+        <item>เชียงดาว</item>
+        <item>ดอยสะเก็ด</item>
+        <item>ดอยเต่า</item>
+        <item>ดอยหล่อ</item>
+        <item>ฝาง</item>
+        <item>พร้าว</item>
+        <item>แม่วาง</item>
+        <item>แม่แจ่ม</item>
+        <item>แม่แตง</item>
+        <item>แม่ริม</item>
+        <item>แม่ออน</item>
+        <item>แม่อาย</item>
+        <item>เมืองเชียงใหม่</item>
+        <item>เวียงแหง</item>
+        <item>สะเมิง</item>
+        <item>สันกำแพง</item>
+        <item>สันทราย</item>
+        <item>ป่าตอง</item>
+        <item>สารภี</item>
+        <item>หางดง</item>
+        <item>อมก๋อย</item>
+        <item>ฮอด</item>
+    </string-array>
+
+    <string-array name="ZoneTrang">
+        <item>เลือกเขต</item>
+        <item>กันตัง</item>
+        <item>นาโยง</item>
+        <item>ปะเหลียน</item>
+        <item>เมืองตรัง</item>
+        <item>ย่านตาขาว</item>
+        <item>รัษฎา</item>
+        <item>วังวิเศษ</item>
+        <item>สิเกา</item>
+        <item>หาดสำราญ</item>
+        <item>ห้วยยอด</item>
+    </string-array>
+
+    <string-array name="ZoneTrat">
+        <item>เลือกเขต</item>
+        <item>เกาะกูด</item>
+        <item>เกาะช้าง</item>
+        <item>เขาสมิง</item>
+        <item>คลองใหญ่</item>
+        <item>บ่อไร่</item>
+        <item>เมืองตราด</item>
+        <item>แหลมงอบ</item>
+    </string-array>
+
+    <string-array name="ZoneTak">
+        <item>เลือกเขต</item>
+        <item>ท่าสองยาง</item>
+        <item>บ้านตาก</item>
+        <item>พบพระ</item>
+        <item>เมืองตาก</item>
+        <item>แม่ระมาด</item>
+        <item>แม่สอด</item>
+        <item>วังเจ้า</item>
+        <item>สามเงา</item>
+        <item>อุ้มผาง</item>
+    </string-array>
+
+    <string-array name="ZoneNakhonnayok">
+        <item>เลือกเขต</item>
+        <item>บ้านนา</item>
+        <item>ปากพลี</item>
+        <item>เมืองนครนายก</item>
+        <item>องครักษ์</item>
+    </string-array>
+
+    <string-array name="ZoneNakhonpathom">
+        <item>เลือกเขต</item>
+        <item>พุทธมณฑล‎</item>
+        <item>กำแพงแสน</item>
+        <item>ดอนตูม</item>
+        <item>นครชัยศรี</item>
+        <item>บางเลน</item>
+        <item>เมืองนครปฐม</item>
+        <item>สามพราน</item>
+    </string-array>
+
+    <string-array name="ZoneNakhonphanom">
+        <item>เลือกเขต</item>
+        <item>ท่าอุเทน</item>
+        <item>นาแก</item>
+        <item>นาทม</item>
+        <item>นาหว้า</item>
+        <item>ธาตุพนม</item>
+        <item>านแพง</item>
+        <item>ปลาปาก</item>
+        <item>โพนสวรรค์</item>
+        <item>เมืองนครพนม</item>
+        <item>เรณูนคร</item>
+        <item>วังยาง</item>
+        <item>ศรีสงคราม</item>
+    </string-array>
+
+    <string-array name="ZoneNakhonratchasima">
+        <item>เลือกเขต</item>
+        <item>แก้งสนามนาง</item>
+        <item>ขามทะเลสอ</item>
+        <item>ขามสะแกแสง</item>
+        <item>คง</item>
+        <item>ครบุรี</item>
+        <item>จักราช</item>
+        <item>เฉลิมพระเกียรติ</item>
+        <item>โชคชัย</item>
+        <item>ชุมพวง</item>
+        <item>ด่านขุนทด</item>
+        <item>เทพารักษ์</item>
+        <item>โนนไทย</item>
+        <item>โนนสูง</item>
+        <item>โนนแดง</item>
+        <item>บัวลาย</item>
+        <item>บัวใหญ่</item>
+        <item>บ้านเหลื่อม</item>
+        <item>ประทาย</item>
+        <item>ปักธงชัย</item>
+        <item>ปากช่อง</item>
+        <item>พระทองคำ</item>
+        <item>พิมาย</item>
+        <item>เมืองนครราชสีมา</item>
+        <item>เมืองยาง</item>
+        <item>ลำทะเมนชัย</item>
+        <item>วังน้ำเขียว</item>
+        <item>เสิงสาง</item>
+        <item>สีคิ้ว</item>
+        <item>สีดา</item>
+        <item>สูงเนิน</item>
+        <item>หนองบุญมาก</item>
+        <item>ห้วยแถลง</item>
+    </string-array>
+
+    <string-array name="ZoneNakhonsithammarat">
+        <item>เลือกเขต</item>
+        <item>ขนอม</item>
+        <item>จุฬาภรณ์</item>
+        <item>เฉลิมพระเกียรติ</item>
+        <item>ฉวาง</item>
+        <item>ชะอวด</item>
+        <item>ช้างกลาง</item>
+        <item>เชียรใหญ่</item>
+        <item>ถ้ำพรรณรา</item>
+        <item>ท่าศาลา</item>
+        <item>ทุ่งใหญ่</item>
+        <item>ทุ่งสง</item>
+        <item>นบพิตำ</item>
+        <item>นาบอน</item>
+        <item>บางขัน</item>
+        <item>ปากพนัง</item>
+        <item>พรหมคีรี</item>
+        <item>พระพรหม</item>
+        <item>พิปูน</item>
+        <item>เมืองนครศรีธรรมราช</item>
+        <item>ร่อนพิบูลย์</item>
+        <item>ลานสกา</item>
+        <item>สิชล</item>
+        <item>หัวไทร</item>
+    </string-array>
+
+    <string-array name="ZoneNakhonsawan">
+        <item>เลือกเขต</item>
+        <item>เก้าเลี้ยว</item>
+        <item>โกรกพระ</item>
+        <item>ชุมแสง</item>
+        <item>ตากฟ้า</item>
+        <item>แม่เปิน</item>
+        <item>แม่วงก์</item>
+        <item>ลาดยาว</item>
+        <item>ชุมตาบง</item>
+        <item>ตาคลี</item>
+        <item>ท่าตะโก</item>
+        <item>บรรพตพิสัย</item>
+        <item>พยุหะคีรี</item>
+        <item>ไพศาลี</item>
+        <item>เมืองนครสวรรค์</item>
+        <item>หนองบัว</item>
+    </string-array>
+
+    <string-array name="ZoneNonthaburi">
+        <item>เลือกเขต</item>
         <item>บางกรวย</item>
         <item>บางบัวทอง</item>
         <item>บางใหญ่</item>
         <item>ปากเกร็ด</item>
-        <item>เมือง</item>
+        <item>เมืองนนทบุรี</item>
         <item>ไทรน้อย</item>
+    </string-array>
+
+    <string-array name="ZoneNarathiwat">
+        <item>เลือกเขต</item>
+        <item>จะแนะ</item>
+        <item>เจาะไอร้อง</item>
+        <item>ตากใบ</item>
+        <item>บาเจาะ</item>
+        <item>เมืองนราธิวาส</item>
+        <item>ยี่งอ</item>
+        <item>ระแงะ</item>
+        <item>รือเสาะ</item>
+        <item>แว้ง</item>
+        <item>ศรีสาคร</item>
+        <item>สุคิริน</item>
+        <item>สุไหงโก-ลก</item>
+        <item>สุไหงปาดี</item>
+    </string-array>
+
+    <string-array name="ZoneNan">
+        <item>เลือกเขต</item>
+        <item>เฉลิมพระเกียรติ</item>
+        <item>เชียงกลาง</item>
+        <item>ท่าวังผา</item>
+        <item>ทุ่งช้าง</item>
+        <item>นาน้อย</item>
+        <item>นาหมื่น</item>
+        <item>บ่อเกลือ</item>
+        <item>บ้านหลวง</item>
+        <item>ปัว</item>
+        <item>ภูเพียง</item>
+        <item>แม่จริม</item>
+        <item>เมืองน่าน</item>
+        <item>เวียงสา</item>
+        <item>สองแคว</item>
+        <item>สันติสุข</item>
+    </string-array>
+
+    <string-array name="ZoneBuengkan">
+        <item>เลือกเขต</item>
+        <item>โซ่พิสัย</item>
+        <item>เซกา</item>
+        <item>บึงโขงหลง</item>
+        <item>บุ่งคล้า</item>
+        <item>ปากคาด</item>
+        <item>พรเจริญ</item>
+        <item>เมืองบึงกาฬ</item>
+        <item>ศรีวิไล</item>
+    </string-array>
+
+    <string-array name="ZoneBuriram">
+        <item>เลือกเขต</item>
+        <item>กระสัง</item>
+        <item>แคนดง</item>
+        <item>คูเมือง</item>
+        <item>เฉลิมพระเกียรติ</item>
+        <item>ชำนิ</item>
+        <item>โนนดินแดง</item>
+        <item>โนนสุวรรณ</item>
+        <item>นางรอง</item>
+        <item>นาโพธิ์</item>
+        <item>บ้านกรวด</item>
+        <item>บ้านด่าน</item>
+        <item>บ้านใหม่ไชยพจน์</item>
+        <item>ประโคนชัย</item>
+        <item>ปะคำ</item>
+        <item>พลับพลาชัย</item>
+        <item>พุทไธสง</item>
+        <item>เมืองบุรีรัมย์</item>
+        <item>ละหานทราย</item>
+        <item>ลำปลายมาศ</item>
+        <item>สตึก</item>
+        <item>หนองกี่</item>
+        <item>หนองหงส์</item>
+        <item>ห้วยราช</item>
+    </string-array>
+
+    <string-array name="ZonePathumthani">
+        <item>เลือกเขต</item>
         <item>ตลองหลวง</item>
         <item>ธัญบุรี</item>
         <item>ฃาดหลุมแก้ว</item>
@@ -178,13 +1667,697 @@
         <item>สามโคก</item>
         <item>หนองเสือ</item>
         <item>เมืองปทุมธานี</item>
+    </string-array>
+
+    <string-array name="ZonePrachuapkirikhan">
+        <item>เลือกเขต</item>
+        <item>กุยบุรี</item>
+        <item>ทับสะแก</item>
+        <item>บางสะพาน</item>
+        <item>บางสะพานน้อย</item>
+        <item>ปราณบุรี</item>
+        <item>เมืองประจวบคีรีขันธ์</item>
+        <item>สามร้อยยอด</item>
+        <item>หัวหิน</item>
+    </string-array>
+
+    <string-array name="ZonePrachinburi">
+        <item>เลือกเขต</item>
+        <item>กบินทร์บุรี</item>
+        <item>นาดี</item>
+        <item>บ้านสร้าง</item>
+        <item>ประจันตคาม</item>
+        <item>เมืองปราจีนบุรี</item>
+        <item>ศรีมโหสถ</item>
+        <item>ศรีมหาโพธิ</item>
+    </string-array>
+
+    <string-array name="ZonePattani">
+        <item>เลือกเขต</item>
+        <item>กะพ้อ</item>
+        <item>โคกโพธิ์</item>
+        <item>ทุ่งยางแดง</item>
+        <item>ปะนาเระ</item>
+        <item>แม่ลาน</item>
+        <item>มายอ</item>
+        <item>เมืองปัตตานี</item>
+        <item>ไม้แก่น</item>
+        <item>ยะรัง</item>
+        <item>ยะหริ่ง</item>
+        <item>สายบุรี</item>
+        <item>หนองจิก</item>
+    </string-array>
+
+    <string-array name="ZonePhranakhonsiayutthaya">
+        <item>เลือกเขต</item>
+        <item>ท่าเรือ</item>
+        <item>นครหลวง</item>
+        <item>บางซ้าย</item>
+        <item>บางบาล</item>
+        <item>บ้านแพรก</item>
+        <item>ผักไห่</item>
+        <item>พระนครศรีอยุธยา</item>
+        <item>ภาชี</item>
+        <item>วังน้อย</item>
+        <item>เสนา</item>
+        <item>อุทัย</item>
+        <item>บางปะหัน</item>
+        <item>บางปะอิน</item>
+    </string-array>
+
+    <string-array name="ZonePhangnga">
+        <item>เลือกเขต</item>
+        <item>เกาะยาว</item>
+        <item>กะปง</item>
+        <item>คุระบุรี</item>
+        <item>ตะกั่วทุ่ง</item>
+        <item>ตะกั่วป่า</item>
+        <item>ทับปุด</item>
+        <item>ท้ายเหมือง</item>
+        <item>เมืองพังงา</item>
+    </string-array>
+
+    <string-array name="ZonePhatthalung">
+        <item>เลือกเขต</item>
+        <item>กงหรา</item>
+        <item>เขาชัยสน</item>
+        <item>ควนขนุน</item>
+        <item>ตะโหมด</item>
+        <item>บางแก้ว</item>
+        <item>ปากพะยูน</item>
+        <item>ป่าบอน</item>
+        <item>ป่าพะยอม</item>
+        <item>เมืองพัทลุง</item>
+        <item>ศรีนครินทร์</item>
+        <item>ศรีบรรพต</item>
+    </string-array>
+
+    <string-array name="ZonePhichit">
+        <item>เลือกเขต</item>
+        <item>ดงเจริญ</item>
+        <item>ตะพานหิน</item>
+        <item>ทับคล้อ</item>
+        <item>บางมูลนาก</item>
+        <item>บึงนาราง</item>
+        <item>โพทะเล</item>
+        <item>โพธิ์ประทับช้าง</item>
+        <item>เมืองพิจิตร</item>
+        <item>วชิรบารมี</item>
+        <item>วังทรายพูน</item>
+        <item>สากเหล็ก</item>
+        <item>สามง่าม</item>
+    </string-array>
+
+    <string-array name="ZonePhitsanulok">
+        <item>เลือกเขต</item>
+        <item>ชาติตระการ</item>
+        <item>นครไทย</item>
+        <item>เนินมะปราง</item>
+        <item>บางกระทุ่ม</item>
+        <item>บางระกำ</item>
+        <item>วังทอง</item>
+        <item>วัดโบสถ์</item>
+        <item>เมืองพิษณุโลก</item>
+    </string-array>
+
+    <string-array name="ZonePhetchaburi">
+        <item>เลือกเขต</item>
+        <item>แก่งกระจาน</item>
+        <item>เขาย้อย</item>
+        <item>ชะอำ</item>
+        <item>ท่ายาง</item>
+        <item>บ้านลาด</item>
+        <item>บ้านแหลม</item>
+        <item>เมืองเพชรบุรี</item>
+        <item>หนองหญ้าปล้อง</item>
+    </string-array>
+
+    <string-array name="ZonePhetchabun">
+        <item>เลือกเขต</item>
+        <item>เขาค้อ</item>
+        <item>ชนแดน</item>
+        <item>น้ำหนาว</item>
+        <item>บึงสามพัน</item>
+        <item>เมืองเพชรบูรณ์</item>
+        <item>วังโป่ง</item>
+        <item>วิเชียรบุรี</item>
+        <item>ศรีเทพ</item>
+        <item>หนองไผ่</item>
+        <item>หล่มเก่า</item>
+        <item>หล่มสัก</item>
+    </string-array>
+
+    <string-array name="ZonePhrae">
+        <item>เลือกเขต</item>
+        <item>เมืองแพร่</item>
+        <item>ร้องกวาง</item>
+        <item>ลอง</item>
+        <item>วังชิ้น</item>
+        <item>สอง</item>
+        <item>สูงเม่น</item>
+        <item>หนองม่วงไข่</item>
+        <item>เด่นชัย</item>
+    </string-array>
+
+    <string-array name="ZonePhayao">
+        <item>เลือกเขต</item>
+        <item>เมืองพะเยา</item>
+        <item>จุน</item>
+        <item>เชียงคำ</item>
+        <item>เชียงม่วน</item>
+        <item>ดอกคำใต้</item>
+        <item>ปง</item>
+        <item>ภูกามยาว</item>
+        <item>ภูซาง</item>
+        <item>แม่ใจ</item>
+    </string-array>
+
+    <string-array name="ZonePhuket">
+        <item>เลือกเขต</item>
+        <item>กะทู้</item>
+        <item>ถลาง</item>
+        <item>เมืองภูเก็ต</item>
+    </string-array>
+
+    <string-array name="ZoneMahasarakham">
+        <item>เลือกเขต</item>
+        <item>แกดำ</item>
+        <item>โกสุมพิสัย</item>
+        <item>กันทรวิชัย</item>
+        <item>กุดรัง</item>
+        <item>ชื่นชม</item>
+        <item>เชียงยืน</item>
+        <item>นาเชือก</item>
+        <item>นาดูน</item>
+        <item>บรบือ</item>
+        <item>พยัคฆภูมิพิสัย</item>
+        <item>เมืองมหาสารคาม</item>
+        <item>ยางสีสุราช</item>
+        <item>วาปีปทุม</item>
+    </string-array>
+
+    <string-array name="ZoneMukdahan">
+        <item>เลือกเขต</item>
+        <item>คำชะอี</item>
+        <item>ดงหลวง</item>
+        <item>ดอนตาล</item>
+        <item>นิคมคำสร้อย</item>
+        <item>เมืองมุกดาหาร</item>
+        <item>หนองสูง</item>
+        <item>หว้านใหญ่</item>
+    </string-array>
+
+    <string-array name="ZoneMaehongson">
+        <item>เลือกเขต</item>
+        <item>ขุนยวม</item>
+        <item>ปางมะผ้า</item>
+        <item>ปาย</item>
+        <item>แม่ลาน้อย</item>
+        <item>แม่สะเรียง</item>
+        <item>เมืองแม่ฮ่องสอน</item>
+        <item>สบเมย</item>
+    </string-array>
+
+    <string-array name="ZoneYala">
+        <item>เลือกเขต</item>
+        <item>เบตง‎</item>
+        <item>กรงปินัง</item>
+        <item>กาบัง</item>
+        <item>ธารโต</item>
+        <item>บันนังสตา</item>
+        <item>เมืองยะลา</item>
+        <item>ยะหา</item>
+        <item>รามัน</item>
+    </string-array>
+
+    <string-array name="ZoneYasothon">
+        <item>เลือกเขต</item>
+        <item>กุดชุม</item>
+        <item>ค้อวัง</item>
+        <item>คำเขื่อนแก้ว</item>
+        <item>ทรายมูล</item>
+        <item>ไทยเจริญ</item>
+        <item>ป่าติ้ว</item>
+        <item>มหาชนะชัย</item>
+        <item>เมืองยโสธร</item>
+        <item>เลิงนกทา</item>
+    </string-array>
+
+    <string-array name="ZoneRoiet">
+        <item>เลือกเขต</item>
+        <item>หนองพอก</item>
+        <item>เกษตรวิสัย</item>
+        <item>จตุรพักตรพิมาน</item>
+        <item>จังหาร</item>
+        <item>เชียงขวัญ</item>
+        <item>ทุ่งเขาหลวง</item>
+        <item>ธวัชบุรี</item>
+        <item>ปทุมรัตต์</item>
+        <item>พนมไพร</item>
+        <item>โพนทราย</item>
+        <item>โพนทอง</item>
+        <item>โพธิ์ชัย</item>
+        <item>เมยวดี</item>
+        <item>เมืองสรวง</item>
+        <item>เมืองร้อยเอ็ด</item>
+        <item>ศรีสมเด็จ</item>
+        <item>เสลภูมิ</item>
+        <item>สุวรรณภูมิ</item>
+        <item>หนองฮี</item>
+        <item>อาจสามารถ</item>
+    </string-array>
+
+    <string-array name="ZoneRanong">
+        <item>เลือกเขต</item>
+        <item>กระบุรี</item>
+        <item>กะเปอร์</item>
+        <item>เมืองระนอง</item>
+        <item>ละอุ่น</item>
+        <item>สุขสำราญ</item>
+    </string-array>
+
+    <string-array name="ZoneRayong">
+        <item>เลือกเขต</item>
+        <item>แกลง</item>
+        <item>เขาชะเมา</item>
+        <item>นิคมพัฒนา</item>
+        <item>บ้านค่าย</item>
+        <item>บ้านฉาง</item>
+        <item>ปลวกแดง</item>
+        <item>เมืองระยอง</item>
+        <item>วังจันทร์</item>
+    </string-array>
+
+    <string-array name="ZoneRatchaburi">
+        <item>เลือกเขต</item>
+        <item>จอมบึง</item>
+        <item>ดำเนินสะดวก</item>
+        <item>บางแพ</item>
+        <item>บ้านคา</item>
+        <item>บ้านโป่ง</item>
+        <item>ปากท่อ</item>
+        <item>โพธาราม</item>
+        <item>เมืองราชบุรี</item>
+        <item>วัดเพลง</item>
+        <item>สวนผึ้ง</item>
+    </string-array>
+
+    <string-array name="ZoneLopburi">
+        <item>เลือกเขต</item>
+        <item>โคกเจริญ</item>
+        <item>โคกสำโรง</item>
+        <item>ชัยบาดาล</item>
+        <item>ท่าวุ้ง</item>
+        <item>ท่าหลวง</item>
+        <item>พัฒนานิคม</item>
+        <item>เมืองลพบุรี</item>
+        <item>ลำสนธิ</item>
+        <item>สระโบสถ์</item>
+        <item>หนองม่วง</item>
+        <item>บ้านหมี่</item>
+    </string-array>
+
+    <string-array name="ZoneLampang">
+        <item>เลือกเขต</item>
+        <item>งาว</item>
+        <item>แจ้ห่ม</item>
+        <item>เถิน</item>
+        <item>แม่ทะ</item>
+        <item>แม่พริก</item>
+        <item>แม่เมาะ</item>
+        <item>เมืองปาน</item>
+        <item>เมืองลำปาง</item>
+        <item>วังเหนือ</item>
+        <item>สบปราบ</item>
+        <item>เสริมงาม</item>
+        <item>ห้างฉัตร</item>
+    </string-array>
+
+    <string-array name="ZoneLamphun">
+        <item>เลือกเขต</item>
+        <item>ทุ่งหัวช้าง</item>
+        <item>บ้านธิ</item>
+        <item>บ้านโฮ่ง</item>
+        <item>แม่ทา</item>
+        <item>เมืองลำพูน</item>
+        <item>ลี้</item>
+        <item>เวียงหนองล่อง</item>
+        <item>ป่าซาง</item>
+    </string-array>
+
+    <string-array name="ZoneLoei">
+        <item>เลือกเขต</item>
+        <item>เชียงคาน</item>
+        <item>ด่านซ้าย</item>
+        <item>ท่าลี่</item>
+        <item>นาด้วง</item>
+        <item>นาแห้ว</item>
+        <item>ปากชม</item>
+        <item>ผาขาว</item>
+        <item>ภูกระดึง</item>
+        <item>ภูเรือ</item>
+        <item>ภูหลวง</item>
+        <item>เมืองเลย</item>
+        <item>วังสะพุง</item>
+        <item>เอราวัณ</item>
+    </string-array>
+
+    <string-array name="ZoneSisaket">
+        <item>เลือกเขต</item>
+        <item>กันทรลักษ์</item>
+        <item>กันทรารมย์</item>
+        <item>ขุขันธ์</item>
+        <item>ขุนหาญ</item>
+        <item>โนนคูณ</item>
+        <item>น้ำเกลี้ยง</item>
+        <item>บึงบูรพ์</item>
+        <item>เบญจลักษ์</item>
+        <item>ปรางค์กู่</item>
+        <item>โพธิ์ศรีสุวรรณ</item>
+        <item>พยุห์</item>
+        <item>ไพรบึง</item>
+        <item>ภูสิงห์</item>
+        <item>เมืองศรีสะเกษ</item>
+        <item>เมืองจันทร์</item>
+        <item>ยางชุมน้อย</item>
+        <item>ราษีไศล</item>
+        <item>วังหิน</item>
+        <item>ศรีรัตนะ</item>
+        <item>ลาลาด</item>
+        <item>ห้วยทับทัน</item>
+        <item>อุทุมพรพิสัย</item>
+    </string-array>
+
+    <string-array name="ZoneSakonnakhon">
+        <item>เลือกเขต</item>
+        <item>กุดบาก</item>
+        <item>กุสุมาลย์</item>
+        <item>โคกศรีสุพรรณ</item>
+        <item>คำตากล้า</item>
+        <item>เจริญศิลป์</item>
+        <item>เต่างอย</item>
+        <item>นิคมน้ำอูน</item>
+        <item>บ้านม่วง</item>
+        <item>โพนนาแก้ว</item>
+        <item>พรรณานิคม</item>
+        <item>พังโคน</item>
+        <item>ภูพาน</item>
+        <item>เมืองสกลนคร</item>
+        <item>วาริชภูมิ</item>
+        <item>สว่างแดนดิน</item>
+        <item>ส่องดาว</item>
+        <item>อากาศอำนวย</item>
+        <item>วานรนิวาส</item>
+    </string-array>
+
+    <string-array name="ZoneSongkhla">
+        <item>เลือกเขต</item>
+        <item>กระแสสินธุ์</item>
+        <item>คลองหอยโข่ง</item>
+        <item>ควนเนียง</item>
+        <item>จะนะ</item>
+        <item>เทพา</item>
+        <item>นาทวี</item>
+        <item>นาหม่อม</item>
+        <item>บางกล่ำ</item>
+        <item>เมืองสงขลา</item>
+        <item>ระโนด</item>
+        <item>รัตภูมิ</item>
+        <item>สทิงพระ</item>
+        <item>สะเดา</item>
+        <item>สะบ้าย้อย</item>
+        <item>สิงหนคร</item>
+        <item>หาดใหญ่</item>
+    </string-array>
+
+    <string-array name="ZoneSatun">
+        <item>เลือกเขต</item>
+        <item>ควนกาหลง</item>
+        <item>ควนโดน</item>
+        <item>ท่าแพ</item>
+        <item>ทุ่งหว้า</item>
+        <item>เมืองสตูล</item>
+        <item>มะนัง</item>
+        <item>ละงู</item>
+    </string-array>
+
+    <string-array name="ZoneSamutprakarn">
+        <item>เลือกเขต</item>
         <item>บางบ่อ</item>
         <item>บางพลี</item>
         <item>บางเสาธง</item>
         <item>พระประแดง</item>
         <item>พระสมุทรเจดีย์</item>
         <item>สำโรงเหนือ</item>
-        <item>เมือง</item>
+        <item>เมืองสมุทรปราการ</item>
+    </string-array>
+
+    <string-array name="ZoneSamutsongkhram">
+        <item>เลือกเขต</item>
+        <item>บางคนที</item>
+        <item>เมืองสมุทรสงคราม</item>
+        <item>อัมพวา</item>
+    </string-array>
+
+    <string-array name="ZoneSamutsakhon">
+        <item>เลือกเขต</item>
+        <item>กระทุ่มแบน</item>
+        <item>บ้านแพ้ว</item>
+        <item>เมืองสมุทรสาคร‎</item>
+    </string-array>
+
+    <string-array name="ZoneSakaeo">
+        <item>เลือกเขต</item>
+        <item>เขาฉกรรจ์</item>
+        <item>โคกสูง</item>
+        <item>คลองหาด</item>
+        <item>ตาพระยา</item>
+        <item>เมืองสระแก้ว</item>
+        <item>วังน้ำเย็น</item>
+        <item>วังสมบูรณ์</item>
+        <item>วัฒนานคร</item>
+        <item>อรัญประเทศ</item>
+    </string-array>
+
+    <string-array name="ZoneSaraburi">
+        <item>เลือกเขต</item>
+        <item>แก่งคอย</item>
+        <item>เฉลิมพระเกียรติ</item>
+        <item>ดอนพุด</item>
+        <item>บ้านหมอ</item>
+        <item>พระพุทธบาท</item>
+        <item>มวกเหล็ก</item>
+        <item>เมืองสระบุรี</item>
+        <item>วังม่วง</item>
+        <item>วิหารแดง</item>
+        <item>เสาไห้</item>
+        <item>หนองแค</item>
+        <item>หนองแซง</item>
+        <item>หนองโดน</item>
+    </string-array>
+
+    <string-array name="ZoneSingburi">
+        <item>เลือกเขต</item>
+        <item>ค่ายบางระจัน</item>
+        <item>ท่าช้าง</item>
+        <item>บางระจัน</item>
+        <item>พรหมบุรี</item>
+        <item>เมืองสิงห์บุรี</item>
+        <item>อินทร์บุรี</item>
+    </string-array>
+
+    <string-array name="ZoneSukhothai">
+        <item>เลือกเขต</item>
+        <item>กงไกรลาศ</item>
+        <item>คีรีมาศ</item>
+        <item>ทุ่งเสลี่ยม</item>
+        <item>บ้านด่านลานหอย</item>
+        <item>เมืองสุโขทัย</item>
+        <item>ศรีนคร</item>
+        <item>ศรีสัชนาลัย</item>
+        <item>ศรีสำโรง</item>
+        <item>สวรรคโลก</item>
+    </string-array>
+
+    <string-array name="ZoneSuphanburi">
+        <item>เลือกเขต</item>
+        <item>ดอนเจดีย์</item>
+        <item>เดิมบางนางบวช</item>
+        <item>ด่านช้าง</item>
+        <item>หนองหญ้าไซ</item>
+        <item>บางปลาม้า</item>
+        <item>เมืองสุพรรณบุรี</item>
+        <item>ศรีประจันต์</item>
+        <item>สองพี่น้อง</item>
+        <item>สามชุก</item>
+        <item>อู่ทอง</item>
+    </string-array>
+
+    <string-array name="ZoneSuratthani">
+        <item>เลือกเขต</item>
+        <item>เกาะพะงัน</item>
+        <item>เกาะสมุย</item>
+        <item>กาญจนดิษฐ์</item>
+        <item>เคียนซา</item>
+        <item>คีรีรัฐนิคม</item>
+        <item>ไชยา</item>
+        <item>ชัยบุรี</item>
+        <item>ดอนสัก</item>
+        <item>ท่าฉาง</item>
+        <item>ท่าชนะ</item>
+        <item>บ้านตาขุน</item>
+        <item>บ้านนาเดิม</item>
+        <item>บ้านนาสาร</item>
+        <item>พนม</item>
+        <item>พระแสง</item>
+        <item>พุนพิน</item>
+        <item>เมืองสุราษฎร์ธานี</item>
+        <item>วิภาวดี</item>
+        <item>เวียงสระ</item>
+    </string-array>
+
+    <string-array name="ZoneSurin">
+        <item>เลือกเขต</item>
+        <item>กาบเชิง</item>
+        <item>เขวาสินรินทร์</item>
+        <item>จอมพระ</item>
+        <item>ชุมพลบุรี</item>
+        <item>ท่าตูม</item>
+        <item>โนนนารายณ์</item>
+        <item>บัวเชด</item>
+        <item>ปราสาท</item>
+        <item>พนมดงรัก</item>
+        <item>เมืองสุรินทร์</item>
+        <item>รัตนบุรี</item>
+        <item>ลำดวน</item>
+        <item>ศรีณรงค์</item>
+        <item>ศีขรภูมิ</item>
+        <item>สนม</item>
+        <item>สังขะ</item>
+        <item>สำโรงทาบ</item>
+    </string-array>
+
+    <string-array name="ZoneNongkhai">
+        <item>เลือกเขต</item>
+        <item>ท่าบ่อ</item>
+        <item>เฝ้าไร่</item>
+        <item>โพธิ์ตาก</item>
+        <item>โพนพิสัย</item>
+        <item>เมืองหนองคาย</item>
+        <item>รัตนวาปี</item>
+        <item>ศรีเชียงใหม่</item>
+        <item>สระใคร</item>
+        <item>สังคม</item>
+    </string-array>
+
+    <string-array name="ZoneNongbualamphu">
+        <item>เลือกเขต</item>
+        <item>โนนสัง</item>
+        <item>นากลาง</item>
+        <item>นาวัง</item>
+        <item>เมืองหนองบัวลำภู</item>
+        <item>ศรีบุญเรือง</item>
+        <item>สุวรรณคูหา</item>
+    </string-array>
+
+    <string-array name="ZoneAngthong">
+        <item>เลือกเขต</item>
+        <item>ไชโย</item>
+        <item>ป่าโมก</item>
+        <item>โพธิ์ทอง</item>
+        <item>เมืองอ่างทอง</item>
+        <item>วิเศษชัยชาญ</item>
+        <item>แสวงหา</item>
+        <item>สามโก้</item>
+    </string-array>
+
+    <string-array name="ZoneUdonthani">
+        <item>เลือกเขต</item>
+        <item>กุดจับ</item>
+        <item>กุมภวาปี</item>
+        <item>กู่แก้ว</item>
+        <item>ไชยวาน</item>
+        <item>ทุ่งฝน</item>
+        <item>นายูง</item>
+        <item>น้ำโสม</item>
+        <item>โนนสะอาด</item>
+        <item>บ้านดุง</item>
+        <item>บ้านผือ</item>
+        <item>ประจักษ์ศิลปาคม</item>
+        <item>เพ็ญ</item>
+        <item>พิบูลย์รักษ์</item>
+        <item>เมืองอุดรธานี</item>
+        <item>วังสามหมอ</item>
+        <item>ศรีธาตุ</item>
+        <item>สร้างคอม</item>
+        <item>หนองวัวซอ</item>
+        <item>หนองแสง</item>
+        <item>หนองหาน</item>
+    </string-array>
+
+    <string-array name="ZoneUthaithani">
+        <item>เลือกเขต</item>
+        <item>ทัพทัน</item>
+        <item>บ้านไร่</item>
+        <item>เมืองอุทัยธานี</item>
+        <item>ลานสัก</item>
+        <item>สว่างอารมณ์</item>
+        <item>หนองขาหย่าง</item>
+        <item>หนองฉาง</item>
+        <item>ห้วยคต</item>
+    </string-array>
+
+    <string-array name="ZoneUttaradit">
+        <item>เลือกเขต</item>
+        <item>ตรอน</item>
+        <item>ทองแสนขัน</item>
+        <item>ท่าปลา</item>
+        <item>น้ำปาด</item>
+        <item>บ้านโคก</item>
+        <item>พิชัย</item>
+        <item>ฟากท่า</item>
+        <item>เมืองอุตรดิตถ์</item>
+        <item>ลับแล</item>
+    </string-array>
+
+    <string-array name="ZoneUbonratchathani">
+        <item>เลือกเขต</item>
+        <item>กุดข้าวปุ้น</item>
+        <item>โขงเจียม</item>
+        <item>เขมราฐ</item>
+        <item>เขื่องใน</item>
+        <item>เดชอุดม</item>
+        <item>ดอนมดแดง</item>
+        <item>ตระการพืชผล</item>
+        <item>ตาลสุม</item>
+        <item>ทุ่งศรีอุดม</item>
+        <item>นาจะหลวย</item>
+        <item>นาตาล</item>
+        <item>นาเยีย</item>
+        <item>น้ำขุ่น</item>
+        <item>น้ำยืน</item>
+        <item>บุณฑริก</item>
+        <item>โพธิ์ไทร</item>
+        <item>พิบูลมังสาหาร</item>
+        <item>ม่วงสามสิบ</item>
+        <item>เมืองอุบลราชธานี</item>
+        <item>วารินชำราบ</item>
+        <item>ศรีเมืองใหม่</item>
+        <item>สว่างวีระวงศ์</item>
+        <item>สำโรง</item>
+        <item>สิรินธร</item>
+        <item>เหล่าเสือโก้ก</item>
+    </string-array>
+
+    <string-array name="ZoneAmnartcharoen">
+        <item>เลือกเขต</item>
+        <item>ชานุมาน</item>
+        <item>ปทุมราชวงศา</item>
+        <item>พนา</item>
+        <item>เมืองอำนาจเจริญ</item>
+        <item>ลืออำนาจ</item>
+        <item>เสนางคนิคม</item>
+        <item>หัวตะพาน</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
