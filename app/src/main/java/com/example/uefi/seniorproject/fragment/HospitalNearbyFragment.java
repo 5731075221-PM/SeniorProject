@@ -83,6 +83,9 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
     AppBarLayout appBarLayout;
     TextView title;
     boolean isLoading = false;
+    SortNearbyHospital sort;
+    GetHospitalList get;
+    RequestData request;
 
     class RequestData extends AsyncTask<Void, Void, Void> {
 
@@ -124,7 +127,7 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            new RequestData().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            request = (RequestData) new RequestData().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             sortHospital();
             adapter.notifyDataSetChanged();
         }
@@ -157,7 +160,7 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
             progressBar.dismiss();
             adapter = new RecyclerViewAdapter(hosList);
             recyclerView.setAdapter(adapter);
-            if (isGPS && isNetwork) new SortNearbyHospital().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            if (isGPS && isNetwork) sort = (SortNearbyHospital) new SortNearbyHospital().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         }
     }
 
@@ -201,7 +204,7 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
                             for (int i = index; i < end; i++) {
                                 hosList.add(hospitalList.get(i));
                             }
-                            if (isGPS && isNetwork) sortHospital();
+                            if (isGPS && isNetwork && lat != 0.0 && lng != 0.0) sortHospital();
                             adapter.notifyDataSetChanged();
                             isLoading = false;
 //                            adapter.setLoaded();
@@ -401,7 +404,7 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());
         dbHelperDAO.open();
 
-        new GetHospitalList().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        get = (GetHospitalList) new GetHospitalList().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 //        hospitalList = dbHelperDAO.getHospital();
 //        defaultList = hospitalList;
 //        hosList = new ArrayList<Hospital>(hospitalList.subList(0, 10));
@@ -585,6 +588,21 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        if(get != null){
+            System.out.println("Aget");
+            get.cancel(true);
+        }
+        if(sort != null){
+            System.out.println("Bget");
+            sort.cancel(true);
+        }
+//        request.cancel(true);
+    }
+
     public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private final int VIEW_TYPE_ITEM = 0;
         private final int VIEW_TYPE_LOADING = 1;
@@ -658,7 +676,7 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
                     viewHolder.image.getDrawable().setColorFilter(Color.parseColor("#3f6fb7"),PorterDuff.Mode.SRC_IN);
                     viewHolder.distance.setTextColor(getActivity().getResources().getColor(R.color.colorBlue2));
                 }
-                viewHolder.name.setText(h.getName());
+                viewHolder.name.setText(h.getName().length() > 35 ? h.getName().substring(0,35)+".." : h.getName());
                 viewHolder.distance.setText(h.getDistance());
                 viewHolder.type.setText(h.getType());
                 viewHolder.setOnClickListener(new ItemClickListener() {
