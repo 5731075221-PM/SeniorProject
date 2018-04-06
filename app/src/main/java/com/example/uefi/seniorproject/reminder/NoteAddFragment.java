@@ -119,10 +119,14 @@ public class NoteAddFragment extends Fragment {
             public void onClick(View v) {
                 NoteAddChoiceFragment fragmentChild = NoteAddChoiceFragment.newInstance(list);
                 fragmentChild.setTargetFragment(NoteAddFragment.this, FRAGMENT_CODE);
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.linear_choice, fragmentChild);
-                transaction.addToBackStack(title);
-                transaction.commit();
+//                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//                transaction.replace(R.id.linear_choice, fragmentChild);
+//                transaction.addToBackStack(title);
+//                transaction.commit();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container_fragment, fragmentChild)
+                        .addToBackStack(title)
+                        .commit();
             }
         });
 

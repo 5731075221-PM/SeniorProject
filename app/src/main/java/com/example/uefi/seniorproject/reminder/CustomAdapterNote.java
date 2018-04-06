@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,11 +27,13 @@ public class CustomAdapterNote  extends RecyclerSwipeAdapter<RecyclerView.ViewHo
     private final int NOTE_DAY_ITEM = 0;
     private final int NOTE_ITEM = 1;
     public InternalDatabaseHelper internalDatabaseHelper;
+    public NotesFragment fragment;
 
-    public CustomAdapterNote(Context context, ArrayList dataset, FragmentManager fm) {
+    public CustomAdapterNote(Context context, ArrayList dataset, FragmentManager fm,NotesFragment fragment) {
         mContext = context;
         mItems = dataset;
         this.fm = fm;
+        this.fragment = fragment;
     }
 
     @Override
@@ -113,12 +114,10 @@ public class CustomAdapterNote  extends RecyclerSwipeAdapter<RecyclerView.ViewHo
             detailHolder.swipeLayout.getSurfaceView().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    FragmentTransaction transaction = fm.beginTransaction();
-                    transaction.replace(R.id.container_fragment, NoteAddFragment.newInstance("edit",
-                            item.note_id
-                    ));
-                    transaction.addToBackStack("แก้ไขบันทึกสุขภาพ");
-                    transaction.commit();
+                    fm.beginTransaction()
+                            .replace(R.id.container_fragment, NoteAddFragment.newInstance("edit", item.note_id))
+                            .addToBackStack("แก้ไขบันทึกสุขภาพ")
+                            .commit();
                 }
             });
 
@@ -133,13 +132,11 @@ public class CustomAdapterNote  extends RecyclerSwipeAdapter<RecyclerView.ViewHo
 
                     if(prepType == NOTE_DAY_ITEM){
                         if(position  ==  getItemCount()-1){
-                            Log.i("check "," if has prep day no next");
                             deleteDayItem(position-1); // day
                             deleteDayItem(position-1); // note
                         }else{
                             int nextType = getItemViewType(position+1);
                             if(nextType == NOTE_DAY_ITEM){
-                                   Log.i("check "," if has prep day has next");
                                 deleteDayItem(position-1); // day
                                 deleteDayItem(position-1); // note
                             }else{
@@ -147,11 +144,12 @@ public class CustomAdapterNote  extends RecyclerSwipeAdapter<RecyclerView.ViewHo
                             }
                         }
                     }else{
-                        Log.i("check "," if has no prep day");
                         deleteDayItem(position); // note
                     }
-                    mItemManger.closeAllItems();
                     internalDatabaseHelper.deleteNote(detailHolder.note_id);
+                    mItemManger.closeAllItems();
+
+                    fragment.showPic();
                 }
             });
             mItemManger.bindView(detailHolder.itemView, position);

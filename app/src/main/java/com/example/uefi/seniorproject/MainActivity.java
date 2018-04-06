@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 mToolBarNavigationListenerIsRegistered = true;
             }
             fragmentManager.beginTransaction()
-                    .replace(R.id.container_fragment, new FirstaidFragment(),"Title")
+                    .replace(R.id.container_fragment, new FirstaidFragment())
                     .addToBackStack("การปฐมพยาบาล")
                     .commit();
         } else if (id == R.id.nav_hospital) {
@@ -224,7 +224,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 mToolBarNavigationListenerIsRegistered = true;
             }
             fragmentManager.beginTransaction()
-                    .replace(R.id.container_fragment, new ReminderFragment(),"Title")
+                    .replace(R.id.container_fragment, new ReminderFragment())
                     .addToBackStack("สุขภาพของฉัน")
                     .commit();
         } else if (id == R.id.nav_food) {

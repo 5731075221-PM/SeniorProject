@@ -3,8 +3,8 @@ package com.example.uefi.seniorproject.firstaid;
 
 import android.app.Activity;
 import android.os.Bundle;
-//import android.app.Fragment;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -20,15 +20,9 @@ import com.example.uefi.seniorproject.R;
  */
 public class FirstaidFragment extends Fragment {
 
-    public TextView head;
-    public TextView body;
-    public TextView fire;
-    public TextView poison;
-    public TextView normal;
-    public TextView cpr;
-    public TextView transport;
-    public TextView textTool;
+    public TextView head,body,fire,poison,normal,cpr,transport,textTool;
     public String toolbar;
+    public AppBarLayout appBarLayout;
 
     public FirstaidFragment() {
         // Required empty public constructor
@@ -43,7 +37,8 @@ public class FirstaidFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_firstaid, container, false);
-//        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("การปฐมพยาบาล");
+
+        appBarLayout.setExpanded(true, true);
 
         head = (TextView) view.findViewById(R.id.head);
         body = (TextView) view.findViewById(R.id.body);
@@ -55,73 +50,64 @@ public class FirstaidFragment extends Fragment {
         textTool = (TextView) getActivity().findViewById(R.id.textTool);
         textTool.setText("การปฐมพยาบาล");
 
-//        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Kanit-Regular.ttf");
-//        head.setTypeface(font);
-//        body.setTypeface(font);
-//        fire.setTypeface(font);
-//        poison.setTypeface(font);
-//        normal.setTypeface(font);
-//        cpr.setTypeface(font);
-//        transport.setTypeface(font);
-
         head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 toolbar = "ตา หู คอ";
-                FragmentTransaction transaction = getFragmentManager() .beginTransaction();
-                transaction.add(R.id.relaFirstaid, FirstaidTypeFragment.newInstance(toolbar),"Hey");
-                transaction.addToBackStack(toolbar);
-                transaction.commit();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container_fragment, FirstaidTypeFragment.newInstance(toolbar))
+                        .addToBackStack(toolbar)
+                        .commit();
             }
         });
         body.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 toolbar = "กล้ามเนื้อ กระดูก ลำไส้";
-                FragmentTransaction transaction = getFragmentManager() .beginTransaction();
-                transaction.replace(R.id.relaFirstaid, FirstaidTypeFragment.newInstance(toolbar));
-                transaction.addToBackStack(toolbar);
-                transaction.commit();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container_fragment, FirstaidTypeFragment.newInstance(toolbar))
+                        .addToBackStack(toolbar)
+                        .commit();
             }
         });
         fire.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 toolbar = "แผลไหม้ น้ำร้อนลวก";
-                FragmentTransaction transaction = getFragmentManager() .beginTransaction();
-                transaction.replace(R.id.relaFirstaid, FirstaidTypeFragment.newInstance(toolbar));
-                transaction.addToBackStack(toolbar);
-                transaction.commit();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container_fragment, FirstaidTypeFragment.newInstance(toolbar))
+                        .addToBackStack(toolbar)
+                        .commit();
             }
         });
         poison.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 toolbar = "พิษ สารพิษ";
-                FragmentTransaction transaction = getFragmentManager() .beginTransaction();
-                transaction.replace(R.id.relaFirstaid, FirstaidTypeFragment.newInstance(toolbar));
-                transaction.addToBackStack(toolbar);
-                transaction.commit();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container_fragment, FirstaidTypeFragment.newInstance(toolbar))
+                        .addToBackStack(toolbar)
+                        .commit();
             }
         });
         normal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 toolbar = "เบ็ดเตล็ด";
-                FragmentTransaction transaction = getFragmentManager() .beginTransaction();
-                transaction.replace(R.id.relaFirstaid, FirstaidTypeFragment.newInstance(toolbar));
-                transaction.addToBackStack(toolbar);
-                transaction.commit();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container_fragment, FirstaidTypeFragment.newInstance(toolbar))
+                        .addToBackStack(toolbar)
+                        .commit();
             }
         });
         cpr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 toolbar = "การช่วยฟื้นคืนชีพขั้นพื้นฐาน";
-                FragmentTransaction transaction = getFragmentManager() .beginTransaction();
-                transaction.replace(R.id.relaFirstaid, FirstaidSelectFragment.newInstance(toolbar));
-                transaction.addToBackStack(toolbar);
-                transaction.commit();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container_fragment, FirstaidSelectFragment.newInstance(toolbar))
+                        .addToBackStack(toolbar)
+                        .commit();
 
             }
         });
@@ -129,64 +115,19 @@ public class FirstaidFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 toolbar = "การยกและเคลื่อนย้ายผู้ป่วย";
-                FragmentTransaction transaction = getFragmentManager() .beginTransaction();
-                transaction.replace(R.id.relaFirstaid,  FirstaidSelectFragment.newInstance(toolbar));
-                transaction.addToBackStack(toolbar);
-                transaction.commit();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container_fragment, FirstaidSelectFragment.newInstance(toolbar))
+                        .addToBackStack(toolbar)
+                        .commit();
             }
         });
-
 
         return view;
     }
 
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        Log.i("Check", "onActivityCreated 1");
-    }
-
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        Log.i("Check", "onAttach 1");
-    }
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("Check", "onCreate 1");
+        appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
     }
 
-    public void onDestroy() {
-        super.onDestroy();
-        Log.i("Check", "onDestroy 1");
-    }
-
-    public void onDestroyView() {
-        super.onDestroyView();
-        Log.i("Check", "onDestroyView 1");
-    }
-
-    public void onDetach() {
-        super.onDetach();
-        Log.i("Check", "onDetach 1");
-    }
-
-    public void onPause() {
-        super.onPause();
-        Log.i("Check", "onPause 1");
-    }
-
-    public void onResume() {
-        super.onResume();
-        Log.i("Check", "onResume 1 YOOOOOOOOOOO");
-    }
-
-    public void onStart() {
-        super.onStart();
-        Log.i("Check", "onStart 1");
-    }
-
-    public void onStop() {
-        super.onStop();
-        Log.i("Check", "onStop 1");
-    }
 }

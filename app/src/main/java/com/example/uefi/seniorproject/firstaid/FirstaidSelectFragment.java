@@ -2,6 +2,7 @@ package com.example.uefi.seniorproject.firstaid;
 
 
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,12 +21,13 @@ import java.util.ArrayList;
  */
 public class FirstaidSelectFragment extends Fragment {
 
-    DBHelperDAO dbHelperDAO;
+    public DBHelperDAO dbHelperDAO;
     public TextView textTool;
     public String toolbar;
     private RecyclerView.LayoutManager mLayoutManager;
     private int id;
     private ArrayList items;
+    public AppBarLayout appBarLayout;
 
     public FirstaidSelectFragment() {
         // Required empty public constructor
@@ -45,18 +47,7 @@ public class FirstaidSelectFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_firstaid_select, container, false);
 
-        Bundle bundle = getArguments();
-        toolbar = bundle.getString("toolbar");
-        textTool = (TextView) getActivity().findViewById(R.id.textTool);
-        textTool.setText(toolbar);
-
-
-        dbHelperDAO = DBHelperDAO.getInstance(getActivity());
-        dbHelperDAO.open();
-        id = dbHelperDAO.getFirstaidId(toolbar);
-        items = new ArrayList();
-        items = dbHelperDAO.getFirstaidDetail(id);
-
+        appBarLayout.setExpanded(true, true);
 
         RecyclerView rcv = (RecyclerView) view.findViewById(R.id.recycler_firstaid);
         mLayoutManager = new LinearLayoutManager( getActivity());
@@ -67,4 +58,18 @@ public class FirstaidSelectFragment extends Fragment {
         return  view;
     }
 
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle bundle = getArguments();
+        toolbar = bundle.getString("toolbar");
+        textTool = (TextView) getActivity().findViewById(R.id.textTool);
+        textTool.setText(toolbar);
+
+        dbHelperDAO = DBHelperDAO.getInstance(getActivity());
+        dbHelperDAO.open();
+        id = dbHelperDAO.getFirstaidId(toolbar);
+        items = dbHelperDAO.getFirstaidDetail(id);
+
+        appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
+    }
 }

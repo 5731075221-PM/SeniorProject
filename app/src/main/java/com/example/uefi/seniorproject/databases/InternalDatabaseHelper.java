@@ -13,6 +13,8 @@ import com.example.uefi.seniorproject.reminder.NoteItem;
 import com.example.uefi.seniorproject.reminder.Symptom_Note;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -150,14 +152,29 @@ public class InternalDatabaseHelper extends SQLiteOpenHelper {
             }
             lastDate = date;
             ArrayList symp = readSymptom(cursor.getInt(cursor.getColumnIndex("id_note")));
+            Collections.sort(symp, new Comparator<String>() {
+                @Override
+                public int compare(String s1, String s2) {
+                    return s1.compareToIgnoreCase(s2);
+                }
+            });
             String note = "";
             for(int i = 0; i<symp.size(); i++){
-                note +=""+symp.get(i) +" \n";
+                if(i!=symp.size()-1)
+                    note +=""+symp.get(i) +" \n";
+                else
+                    note +=""+symp.get(i);
             }
-            note += cursor.getString(cursor.getColumnIndex("comment"));
+            String comment = cursor.getString(cursor.getColumnIndex("comment"));
+            if(!comment.equals("") && !note.equals("")) {
+                note += "\n" + comment;
+            }else{
+                note += comment;
+            }
             notes.add(
-                    new NoteItem(note,cursor.getInt(cursor.getColumnIndex("id_note")))
+                    new NoteItem(note, cursor.getInt(cursor.getColumnIndex("id_note")))
             );
+
             cursor.moveToNext();
         }
         cursor.close();
