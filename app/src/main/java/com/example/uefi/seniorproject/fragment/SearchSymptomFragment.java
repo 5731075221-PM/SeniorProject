@@ -250,6 +250,9 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
 //                        queryLength += Math.pow(keywordSymptom.get(i), 2);
 //                    }
 //                }
+//for(int i = 0; i<keywordSymptom.size();i++){
+//    System.out.println("keywordSymptom "+i+" "+keywordSymptom.get(i));
+//}
 
                 System.out.println("keywordSymptom = " + keywordSymptom.toString());
 
@@ -265,6 +268,7 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
 //                            break;
 //                        }
 //                        if ((keywordSymptom.get(indexList.get(j)) > 0.0) && (Double.parseDouble(vectordata.get(i).get(indexList.get(j))) > 0.0)) {
+//                        System.out.println("i = "+i+" j = "+j+" "+" vectordata)="+vectordata.get(i).get(indexList.get(j))+" keysym"+keywordSymptom.get(indexList.get(j)));
                         sum += Double.parseDouble(vectordata.get(i).get(indexList.get(j))) * keywordSymptom.get(indexList.get(j));
 //                        }
                     }
@@ -272,7 +276,7 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
 //                    if(!isOK) isOK = true;
 //                    else{
                     double var = sum / (queryLength * Double.parseDouble(docLength.get(i)));
-                    System.out.println("var sum = " + var);
+                    System.out.println("var sum = " +i+" "+ var);
                     if (var > 0.0)
                         simDoc.add(new Pair<Double, String>(var, diseaseNameDefault.get(i)));
 //                    }

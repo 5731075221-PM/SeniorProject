@@ -77,8 +77,6 @@ public class SearchHospitalByName extends Fragment implements SearchView.OnQuery
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_hospital, container, false);
 
-        final Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
-
         layout = (LinearLayout)view.findViewById(R.id.hideLayout);
         arrow = (ImageView) view.findViewById(R.id.arrowDrop);
         arrow.setOnClickListener(new View.OnClickListener() {
@@ -409,6 +407,7 @@ public class SearchHospitalByName extends Fragment implements SearchView.OnQuery
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
             if(holder instanceof ViewHolder){
                 ViewHolder viewHolder = (ViewHolder) holder;
                 viewHolder.name.setText(hospitalList.get(position).getName());
@@ -453,6 +452,7 @@ public class SearchHospitalByName extends Fragment implements SearchView.OnQuery
             }else if(holder instanceof  HeaderViewHolder){
                 HeaderViewHolder headerHolder = (HeaderViewHolder)holder;
                 headerHolder.name.setText(hospitalList.get(position).getProvince());
+                headerHolder.name.setTypeface(tf);
             }
         }
 

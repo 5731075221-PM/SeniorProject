@@ -26,6 +26,7 @@
                 android:orientation="vertical">
 
                 <me.grantland.widget.AutofitTextView
+                    android:id="@+id/headCause"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
@@ -36,7 +37,7 @@
                     android:lineSpacingExtra="5dp"
                     android:maxLines="2"
                     android:text="สาเหตุของโรค"
-                    android:textSize="30dp"
+                    android:textSize="35dp"
                     autofit:minTextSize="16sp" />
 
                 <View
@@ -44,7 +45,6 @@
                     android:layout_height="1dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
                     android:background="@android:color/darker_gray" />
 
                 <me.grantland.widget.AutofitTextView
@@ -57,8 +57,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_weight="1"
                     android:lineSpacingExtra="5dp"
-                    android:textSize="15dp"
-                    autofit:minTextSize="16sp" />
+                    android:textSize="20dp"/>
 
             </LinearLayout>
 

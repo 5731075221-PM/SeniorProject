@@ -162,8 +162,8 @@ public class DiseaseListFragment extends Fragment{
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
             if(holder instanceof ViewHolder){
-                Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
                 ViewHolder viewHolder = (ViewHolder) holder;
                 viewHolder.name.setText(diseaseName.get(position).getName());
                 viewHolder.name.setTypeface(tf);
@@ -191,6 +191,7 @@ public class DiseaseListFragment extends Fragment{
             }else if(holder instanceof  HeaderViewHolder){
                 HeaderViewHolder headerHolder = (HeaderViewHolder)holder;
                 headerHolder.name.setText(diseaseName.get(position).getName());
+                headerHolder.name.setTypeface(tf);
             }
         }
 

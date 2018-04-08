@@ -19,6 +19,8 @@ import android.widget.TextView;
 import com.example.uefi.seniorproject.R;
 import com.example.uefi.seniorproject.databases.DBHelperDAO;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -30,6 +32,7 @@ public class FavoriteItemFragment extends Fragment {
     DBHelperDAO dbHelperDAO;
     ArrayList<Object> list;
     RecyclerView recyclerView;
+    TextView empty;
     private RecyclerViewAdapter adapter;
 
     String[] gridViewString = {"ระบบกระดูกและข้อ", "ระบบทางเดินปัสสาวะ", "ระบบทางเดินอาหาร", "ระบบศีรษะและลำคอ", "ระบบทางเดินหายใจ",
@@ -48,6 +51,10 @@ public class FavoriteItemFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorite_item, container, false);
+
+        empty = (TextView) view.findViewById(R.id.textEmptyFav) ;
+        if(list.isEmpty()) empty.setVisibility(View.VISIBLE);
+        else empty.setVisibility(View.INVISIBLE);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerFavList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -194,6 +201,7 @@ public class FavoriteItemFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
             if(holder instanceof HospitalViewHolder){
                 Hospital h = (Hospital) list.get(position);
                 HospitalViewHolder viewHolder = (HospitalViewHolder) holder;
@@ -238,7 +246,6 @@ public class FavoriteItemFragment extends Fragment {
                     }
                 });
             }else if(holder instanceof DiseaseViewHolder){
-                Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
                 DiseaseViewHolder viewHolder = (DiseaseViewHolder) holder;
                 viewHolder.name.setText(((Disease)list.get(position)).getName());
                 viewHolder.name.setTypeface(tf);
@@ -265,6 +272,7 @@ public class FavoriteItemFragment extends Fragment {
             }else if(holder instanceof HeaderViewHolder){
                 HeaderViewHolder headerHolder = (HeaderViewHolder)holder;
                 headerHolder.name.setText(list.get(position).toString());
+                headerHolder.name.setTypeface(tf);
             }
         }
 

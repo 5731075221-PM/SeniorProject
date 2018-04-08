@@ -1,6 +1,7 @@
 package com.example.uefi.seniorproject.fragment;
 
 import android.annotation.SuppressLint;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,7 +19,7 @@ import com.example.uefi.seniorproject.R;
 @SuppressLint("ValidFragment")
 public class TreatPageFragment extends Fragment {
     String treat = "";
-    TextView treatTextView;
+    TextView treatTextView, headTreat;
 
     public TreatPageFragment(String treat) {
         this.treat = treat;
@@ -28,8 +29,12 @@ public class TreatPageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_treat_page, container, false);
+        Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
         treatTextView = (TextView)view.findViewById(R.id.pageTextview);
         treatTextView.setText(treat);
+        treatTextView.setTypeface(tf);
+        headTreat = (TextView)view.findViewById(R.id.headTreat);
+        headTreat.setTypeface(tf);
         return view;
     }
 

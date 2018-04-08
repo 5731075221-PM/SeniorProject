@@ -2,6 +2,7 @@ package com.example.uefi.seniorproject.fragment;
 
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -126,17 +128,30 @@ public class SelectItemFragment extends Fragment{
         tabLayout.getTabAt(0).setIcon(image);
 
         image = getActivity().getResources().getDrawable(R.drawable.image2_tab_select);
-        image.setBounds(0, 0, 25, 25);
+        image.setBounds(25, 25, 25, 25);
         tabLayout.getTabAt(1).setIcon(image);
 
         image = getActivity().getResources().getDrawable(R.drawable.image3_tab_select);
-        image.setBounds(0, 0, 25, 25);
+        image.setBounds(25, 25, 25, 25);
         tabLayout.getTabAt(2).setIcon(image);
 
         image = getActivity().getResources().getDrawable(R.drawable.image4_tab_select);
-        image.setBounds(0, 0, 25, 25);
+        image.setBounds(25, 25, 25, 25);
         tabLayout.getTabAt(3).setIcon(image);
-        tabLayout.setTabTextColors(Color.GRAY,getResources().getColor(R.color.colorMacawBlueGreen));
+        tabLayout.setTabTextColors(Color.GRAY,getResources().getColor(R.color.second_bar));
+
+        ViewGroup childTabLayout = (ViewGroup) tabLayout.getChildAt(0);
+        for (int i = 0; i < childTabLayout.getChildCount(); i++) {
+            ViewGroup viewTab = (ViewGroup) childTabLayout.getChildAt(i);
+            for (int j = 0; j < viewTab.getChildCount(); j++) {
+                View tabTextView = viewTab.getChildAt(j);
+                if (tabTextView instanceof TextView) {
+                    Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
+                    ((TextView) tabTextView).setTypeface(typeface);
+                    ((TextView) tabTextView).setTextSize(TypedValue.COMPLEX_UNIT_DIP, 50);
+                }
+            }
+        }
     }
 
     private void setupViewPager(ViewPager viewPager) {
