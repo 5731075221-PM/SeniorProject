@@ -17,11 +17,11 @@
     <item
         android:state_focused="true"
         android:state_pressed="true"
-        android:drawable="@color/second_bar" />
+        android:drawable="@color/grey" />
     <item
         android:state_focused="false"
         android:state_pressed="true"
-        android:drawable="@color/second_bar" />
+        android:drawable="@color/grey" />
     <item
         android:state_focused="true"
         android:drawable="@android:color/white" />

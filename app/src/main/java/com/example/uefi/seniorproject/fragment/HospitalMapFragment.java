@@ -83,15 +83,15 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
         mapFragment = (SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.hospitalMap);
         mapFragment.getMapAsync(this);
 
-        Bundle extraBundle = getArguments();
-        if (!extraBundle.isEmpty()) {
+//        Bundle extraBundle = getArguments();
+//        if (!extraBundle.isEmpty()) {
             dbHelperDAO = DBHelperDAO.getInstance(getActivity());
             dbHelperDAO.open();
 
-            if (extraBundle.getString("type") == "0") {
+//            if (extraBundle.getString("type") == "0") {
                 hospitalList = dbHelperDAO.getHospital();
-            }
-        }
+//            }
+//        }
         return view;
     }
 

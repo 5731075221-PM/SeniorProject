@@ -1,12 +1,14 @@
 package com.example.uefi.seniorproject.fragment;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -461,41 +463,36 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
         imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.main_map, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_map:
-                    HospitalMapFragment fragment = new HospitalMapFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("type", "0");
-                    fragment.setArguments(bundle);
-                    getFragmentManager().beginTransaction()
-                            .replace(R.id.container_fragment, fragment)
-                            .addToBackStack(null)
-                            .commit();
-                return true;
-            case R.id.search_by_name:
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.container_fragment, new SearchHospitalByName())
-                        .addToBackStack(null)
-                        .commit();
-                return true;
-            case R.id.sort_by_name:
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.container_fragment, new ShowHospitalByOrder())
-                        .addToBackStack(null)
-                        .commit();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        inflater.inflate(R.menu.main_map, menu);
+//        super.onCreateOptionsMenu(menu, inflater);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.action_map:
+//                    HospitalMapFragment fragment = new HospitalMapFragment();
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("type", "0");
+//                    fragment.setArguments(bundle);
+//                    getFragmentManager().beginTransaction()
+//                            .replace(R.id.container_fragment, fragment)
+//                            .addToBackStack(null)
+//                            .commit();
+//                return true;
+////            case R.id.search_by_name:
+////                getFragmentManager().beginTransaction()
+////                        .replace(R.id.container_fragment, new SearchHospitalByName())
+////                        .addToBackStack(null)
+////                        .commit();
+////                return true;
+//////
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
 
     @Override
     public boolean onQueryTextSubmit(String s) {
@@ -557,10 +554,10 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
             super(itemView);
             Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
             image = (ImageView)itemView.findViewById(R.id.imageView1);
-            image.setImageResource(R.drawable.ic_hospital_cross);
             name = (TextView) itemView.findViewById(R.id.textView1);
             name.setTypeface(tf);
             distance = (TextView) itemView.findViewById(R.id.distanceHospital);
+            distance.setTypeface(tf);
             type = (TextView) itemView.findViewById(R.id.typeHospital);
             type.setTypeface(tf);
             itemView.setOnClickListener(this);
@@ -654,6 +651,7 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
             return null;
         }
 
+        @SuppressLint("ResourceAsColor")
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             System.out.println(position);
@@ -661,23 +659,23 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
                 Hospital h = hos.get(position);
                 ViewHolder viewHolder = (ViewHolder) holder;
                 if(h.getType().equals("รัฐบาล")) {
-                    viewHolder.image.getDrawable().setColorFilter(Color.parseColor("#3f51b5"),PorterDuff.Mode.SRC_IN);
-                    viewHolder.distance.setTextColor(getActivity().getResources().getColor(R.color.colorPrimary));
+                    viewHolder.image.setBackgroundResource(R.drawable.ic_hospital1);
+                    viewHolder.distance.setTextColor(getActivity().getResources().getColor(R.color.grid9));
                 } else if(h.getType().equals("เอกชน")) {
-                    viewHolder.image.getDrawable().setColorFilter(Color.parseColor("#43bfc7"),PorterDuff.Mode.SRC_IN);
-                    viewHolder.distance.setTextColor(getActivity().getResources().getColor(R.color.colorMacawBlueGreen));
+                    viewHolder.image.setBackgroundResource(R.drawable.ic_hospital2);
+                    viewHolder.distance.setTextColor(getActivity().getResources().getColor(R.color.grid1));
                 } else if(h.getType().equals("ชุมชน")) {
-                    viewHolder.image.getDrawable().setColorFilter(Color.parseColor("#4cd29f"),PorterDuff.Mode.SRC_IN);
-                    viewHolder.distance.setTextColor(getActivity().getResources().getColor(R.color.colorGreen));
+                    viewHolder.image.setBackgroundResource(R.drawable.ic_hospital3);
+                    viewHolder.distance.setTextColor(getActivity().getResources().getColor(R.color.grid4));
                 } else if(h.getType().equals("ศูนย์")) {
-                    viewHolder.image.getDrawable().setColorFilter(Color.parseColor("#79ccd0"),PorterDuff.Mode.SRC_IN);
-                    viewHolder.distance.setTextColor(getActivity().getResources().getColor(R.color.colorBlue));
+                    viewHolder.image.setBackgroundResource(R.drawable.ic_hospital4);
+                    viewHolder.distance.setTextColor(getActivity().getResources().getColor(R.color.grid8));
                 } else {
-                    viewHolder.image.getDrawable().setColorFilter(Color.parseColor("#3f6fb7"),PorterDuff.Mode.SRC_IN);
-                    viewHolder.distance.setTextColor(getActivity().getResources().getColor(R.color.colorBlue2));
+                    viewHolder.image.setBackgroundResource(R.drawable.ic_hospital5);
+                    viewHolder.distance.setTextColor(getActivity().getResources().getColor(R.color.grid3));
                 }
                 viewHolder.name.setText(h.getName().length() > 35 ? h.getName().substring(0,35)+".." : h.getName());
-                viewHolder.distance.setText(h.getDistance());
+                viewHolder.distance.setText(h.getDistance() == "" ? "- กม." : h.getDistance());
                 viewHolder.type.setText(h.getType());
                 viewHolder.setOnClickListener(new ItemClickListener() {
                     @Override
@@ -693,7 +691,7 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
                             bundle.putString("website", hosList.get(position).getWebsite());
                             bundle.putString("type", hosList.get(position).getType());
                             fragment.setArguments(bundle);
-                            getFragmentManager().beginTransaction()
+                            getActivity().getSupportFragmentManager().beginTransaction()
                                     .replace(R.id.container_fragment, fragment)
                                     .addToBackStack(null)
                                     .commit();

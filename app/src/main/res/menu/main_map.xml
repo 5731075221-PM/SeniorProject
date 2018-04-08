@@ -6,14 +6,14 @@
         android:icon="@drawable/ic_map"
         android:title="แผนที่"
         app:showAsAction="always" />
-    <item
-        android:id="@+id/search_by_name"
-        android:orderInCategory="100"
-        android:title="@string/search_by_name"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/sort_by_name"
-        android:orderInCategory="100"
-        android:title="@string/sort_by_name"
-        app:showAsAction="never" />
+    <!--<item-->
+        <!--android:id="@+id/search_by_name"-->
+        <!--android:orderInCategory="100"-->
+        <!--android:title="@string/search_by_name"-->
+        <!--app:showAsAction="never" />-->
+    <!--<item-->
+        <!--android:id="@+id/sort_by_name"-->
+        <!--android:orderInCategory="100"-->
+        <!--android:title="@string/sort_by_name"-->
+        <!--app:showAsAction="never" />-->
 </menu>

@@ -65,7 +65,7 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
     Double lat = 0.0, lng = 0.0; //origin
     LatLng location; //destination
     String name, address, phone, website, type;
-    TextView textName, textAddress, textType, textDrivingDistance, textDrivingTime;
+    TextView textName, textAddress, textType, textDrivingDistance, textDrivingTime, textNavigationButton, textPhoneButton;
     Button buttonPhone, buttonWeb, buttonNavigate;
     LocationManager locationManager;
     String provider;
@@ -107,7 +107,7 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
         int[] rid = {R.id.textPhone, R.id.textPhone2, R.id.textPhone3, R.id.textPhone4};
         for (int i = 0; i < phoneno; i++) {
             final TextView phone = (TextView) view.findViewById(rid[i]);
-            phone.setTypeface(tf2);
+//            phone.setTypeface(tf2);
             phone.setText(phonenum[i]);
             phone.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -138,7 +138,13 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
 //        textPhone = (TextView) view.findViewById(R.id.textPhone);
 //        textPhone2 = (TextView) view.findViewById(R.id.textPhone2);
         textDrivingDistance = (TextView) view.findViewById(R.id.drivingDistance);
+        textDrivingDistance.setTypeface(tf2);
         textDrivingTime = (TextView) view.findViewById(R.id.drivingTime);
+        textDrivingTime.setTypeface(tf2);
+        textNavigationButton = (TextView) view.findViewById(R.id.textNavigationButton);
+        textNavigationButton.setTypeface(tf2);
+        textPhoneButton = (TextView)view.findViewById(R.id.textPhoneButton);
+        textPhoneButton.setTypeface(tf2);
 
 //        topicTextAddress.setTypeface(tf);
 //        topicTextPhone.setTypeface(tf);

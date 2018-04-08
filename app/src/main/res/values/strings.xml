@@ -12,6 +12,29 @@
     <string name="search_by_name">ค้นหาจากชื่อ</string>
     <string name="sort_by_name">แสดงตามตัวอักษร</string>
 
+    <string-array name="gridString">
+        <item name="gridString1">ระบบกระดูกและข้อ</item>
+        <item name="gridString2">ระบบทางเดินปัสสาวะ</item>
+        <item name="gridString3">ระบบทางเดินอาหาร</item>
+        <item name="gridString4">ระบบศีรษะและลำคอ</item>
+        <item name="gridString5">ระบบทางเดินหายใจ</item>
+        <item name="gridString6">ระบบหูคอจมูก</item>
+        <item name="gridString7">ระบบตา</item>
+        <item name="gridString8">ระบบหัวใจและหลอดเลือด</item>
+        <item name="gridString9">ระบบโรคไต</item>
+        <item name="gridString10">ระบบโรคผิวหนัง</item>
+        <item name="gridString11">ระบบอวัยวะสืบพันธุ์</item>
+        <item name="gridString12">ระบบต่อมไร้ท่อ</item>
+        <item name="gridString13">ระบบประสาทวิทยา</item>
+        <item name="gridString14">ระบบโรคติดเชื้อ</item>
+        <item name="gridString15">ระบบมะเร็งวิทยา</item>
+        <item name="gridString16">ระบบจิตเวช</item>
+        <item name="gridString17">ระบบน้ำเหลือง</item>
+        <item name="gridString18">ระบบกล้ามเนื้อและกระดูก</item>
+        <item name="gridString19">ระบบภูมิคุ้มกัน</item>
+        <item name="gridString20">อื่นๆ</item>
+    </string-array>
+
     <string-array name="ProvinceList">
         <item>เลือกจังหวัด</item>
         <item>กระบี่</item>

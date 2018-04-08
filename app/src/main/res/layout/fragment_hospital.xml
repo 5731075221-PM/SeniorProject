@@ -41,24 +41,44 @@
         android:gravity="top|center_vertical|center_horizontal|center"
         android:orientation="vertical">
 
-        <SearchView
-            android:id="@+id/searchHospital"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:gravity="top|center_vertical|center_horizontal|center"
-            android:background="@color/cardview_light_background"
-            android:queryBackground="@android:color/transparent"
-            app:layout_constraintVertical_bias="0.015" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="top|center_vertical|center_horizontal|center"
             android:orientation="horizontal">
+
+            <SearchView
+                android:id="@+id/searchHospital"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/cardview_light_background"
+                android:gravity="top|center_vertical|center_horizontal|center"
+                android:queryBackground="@android:color/transparent"
+                app:layout_constraintVertical_bias="0.015" >
+            </SearchView>
+
+            <ImageView
+                android:id="@+id/arrowDrop"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_arrow_drop_down"
+                android:layout_gravity="clip_horizontal|center_vertical"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/hideLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|center_vertical|center_horizontal|center"
+            android:orientation="horizontal"
+            android:visibility="gone">
 
 
             <com.toptoche.searchablespinnerlibrary.SearchableSpinner
@@ -102,7 +122,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.v7.widget.RecyclerView
+        <in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -111,7 +131,7 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:listitem="@layout/activity_hospital_list">
 
-        </android.support.v7.widget.RecyclerView>
+        </in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView>
     </android.support.constraint.ConstraintLayout>
 
     <!--<android.support.constraint.ConstraintLayout-->

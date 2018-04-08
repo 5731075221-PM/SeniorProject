@@ -33,5 +33,4 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/nav_bar</item>
     </style>
-
 </resources>

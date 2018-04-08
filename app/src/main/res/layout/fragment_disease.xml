@@ -1,14 +1,193 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layoutdisease"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/layoutdisease">
+    android:layout_centerInParent="true"
+    android:layout_gravity="center"
+    android:orientation="vertical">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerDisease"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical">
+    android:id="@+id/recyclerDisease"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true"
+    android:layout_gravity="center|center_vertical|clip_horizontal"
+    android:scrollbars="none">
     </android.support.v7.widget.RecyclerView>
+    <!--<LinearLayout-->
+        <!--android:clipToPadding="false"-->
+        <!--android:gravity="center"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <!--<android.support.v7.widget.CardView-->
+            <!--android:id="@+id/grid1"-->
+            <!--android:layout_width="160dp"-->
+            <!--android:layout_height="160dp"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:clickable="true"-->
+            <!--android:foreground="?android:attr/selectableItemBackground">-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:gravity="center"-->
+                <!--android:orientation="vertical">-->
+
+                <!--<ImageView-->
+                    <!--android:layout_width="100dp"-->
+                    <!--android:layout_height="100dp"-->
+                    <!--android:background="@drawable/selector_grid1"-->
+                    <!--android:padding="10dp"-->
+                    <!--app:srcCompat="@drawable/ic_disease1_selected" />-->
+
+                <!--<View-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="1dp"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_marginRight="10dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:background="@color/grey" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/grid1Text"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:text="ระบบกระดูกและข้อ"-->
+                    <!--android:textSize="22dp"-->
+                    <!--android:textStyle="bold" />-->
+
+            <!--</LinearLayout>-->
+        <!--</android.support.v7.widget.CardView>-->
+
+        <!--<android.support.v7.widget.CardView-->
+            <!--android:id="@+id/grid2"-->
+            <!--android:layout_width="160dp"-->
+            <!--android:layout_height="160dp"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:clickable="true"-->
+            <!--android:foreground="?android:attr/selectableItemBackground">-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:gravity="center"-->
+                <!--android:orientation="vertical">-->
+
+                <!--<ImageView-->
+                    <!--android:layout_width="100dp"-->
+                    <!--android:layout_height="100dp"-->
+                    <!--android:background="@drawable/selector_grid2"-->
+                    <!--android:padding="10dp"-->
+                    <!--app:srcCompat="@drawable/ic_disease2_selected" />-->
+
+                <!--<View-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="1dp"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_marginRight="10dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:background="@color/grey" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/grid2Text"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:text="ระบบทางเดินปัสสาวะ"-->
+                    <!--android:textSize="22dp"-->
+                    <!--android:textStyle="bold" />-->
+
+            <!--</LinearLayout>-->
+        <!--</android.support.v7.widget.CardView>-->
+
+        <!--<android.support.v7.widget.CardView-->
+            <!--android:id="@+id/grid3"-->
+            <!--android:layout_width="160dp"-->
+            <!--android:layout_height="160dp"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:clickable="true"-->
+            <!--android:foreground="?android:attr/selectableItemBackground">-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:gravity="center"-->
+                <!--android:orientation="vertical">-->
+
+                <!--<ImageView-->
+                    <!--android:layout_width="100dp"-->
+                    <!--android:layout_height="100dp"-->
+                    <!--android:background="@drawable/selector_grid3"-->
+                    <!--android:padding="10dp"-->
+                    <!--app:srcCompat="@drawable/ic_disease3_selected" />-->
+
+                <!--<View-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="1dp"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_marginRight="10dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:background="@color/grey" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/grid3Text"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:text="ระบบทางเดินอาหาร"-->
+                    <!--android:textSize="22dp"-->
+                    <!--android:textStyle="bold" />-->
+
+            <!--</LinearLayout>-->
+        <!--</android.support.v7.widget.CardView>-->
+
+        <!--<android.support.v7.widget.CardView-->
+            <!--android:id="@+id/grid4"-->
+            <!--android:layout_width="160dp"-->
+            <!--android:layout_height="160dp"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:clickable="true"-->
+            <!--android:foreground="?android:attr/selectableItemBackground">-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:gravity="center"-->
+                <!--android:orientation="vertical">-->
+
+                <!--<ImageView-->
+                    <!--android:layout_width="100dp"-->
+                    <!--android:layout_height="100dp"-->
+                    <!--android:background="@drawable/selector_grid4"-->
+                    <!--android:padding="10dp"-->
+                    <!--app:srcCompat="@drawable/ic_disease4_selected" />-->
+
+                <!--<View-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="1dp"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_marginRight="10dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:background="@color/grey" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/grid4Text"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:text="ระบบศีรษะและลำคอ"-->
+                    <!--android:textSize="22dp"-->
+                    <!--android:textStyle="bold" />-->
+
+            <!--</LinearLayout>-->
+        <!--</android.support.v7.widget.CardView>-->
+
+    <!--</LinearLayout>-->
 
 </RelativeLayout>

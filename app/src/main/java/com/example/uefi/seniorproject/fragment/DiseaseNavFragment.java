@@ -32,7 +32,6 @@ public class DiseaseNavFragment extends Fragment{
     final Fragment fragment1 = new DiseaseGridFragment();
     final Fragment fragment2 = new SearchSymptomFragment();
     final Fragment fragment3 = new DiseaseListFragment();
-    Fragment selectedFragment;
     TextView title;
     int currentFrag = 0;
     TabLayout tabLayout;
@@ -44,7 +43,9 @@ public class DiseaseNavFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_disease_nav, container, false);
 
-        appBarLayout.setExpanded(true, true);
+        if(appBarLayout != null) appBarLayout.setExpanded(true, true);
+        title = (TextView)view.findViewById(R.id.textTool);
+//        title.setText("หมวดหมู่ของโรค");
 
         viewPager = (ViewPager) view.findViewById(R.id.viewpagerdisease);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -200,9 +201,6 @@ public class DiseaseNavFragment extends Fragment{
 
         appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
 
-        title = getActivity().findViewById(R.id.textTool);
-        title.setText("หมวดหมู่ของโรค");
-
 //        selectedFragment = fragment1;
         Bundle args = new Bundle();
         args.putStringArrayList("dict",getArguments().getStringArrayList("dict"));
@@ -217,15 +215,19 @@ public class DiseaseNavFragment extends Fragment{
     @Override
     public void onPause() {
         super.onPause();
-        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+        if(getActivity().getCurrentFocus() != null){
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+        }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+        if(getActivity().getCurrentFocus() != null){
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+        }
     }
 }
 

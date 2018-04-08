@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_pressed="true" android:color="@android:color/white" />
-    <item android:state_focused="true" android:color="@android:color/white" />
-    <item android:state_selected="true" android:color="@color/second_bar" />
-    <item android:color="@color/second_bar" />
+    <item android:state_pressed="true" android:color="@color/mdtp_dark_gray" />
+    <item android:state_focused="true" android:color="@color/mdtp_dark_gray" />
+    <item android:state_selected="true" android:color="@color/mdtp_dark_gray" />
+    <item android:color="@color/mdtp_dark_gray" />
 </selector>

@@ -46,7 +46,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal|center_vertical"
-            android:textSize="12dp" />
+            android:textStyle="bold"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
@@ -62,6 +63,7 @@
             android:layout_height="match_parent"
             android:layout_marginRight="20dp"
             android:gravity="center_vertical"
+            android:textColor="@drawable/ic_disease_text_select"
             android:textStyle="bold"
             android:maxLines="1"
             android:textSize="24sp"
