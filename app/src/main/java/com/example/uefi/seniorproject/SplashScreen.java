@@ -14,12 +14,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class SplashScreen extends AppCompatActivity {
+    DBHelperDAO dbHelperDAO;
     private static int SPLASH_TIME_OUT = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
+        dbHelperDAO = DBHelperDAO.getInstance(this);
+        dbHelperDAO.open();
+
+        Singleton single = Singleton.getInstance();
+        single.setDict(dbHelperDAO.getLexitron());
+        single.setStopword(dbHelperDAO.getStopword());
 
         new Handler().postDelayed(new Runnable() {
             @Override
