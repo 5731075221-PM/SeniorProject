@@ -96,8 +96,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mToolBarNavigationListenerIsRegistered = false;
         }else if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
 
-            String title = fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount()-2).getName();
-            textTool.setText(title);
+//            String title = fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount()-2).getName();
+//            textTool.setText(title);
 
 //            Log.d("CASE2 = ",getSupportFragmentManager().getBackStackEntryCount()+"");
             getSupportFragmentManager().popBackStack();

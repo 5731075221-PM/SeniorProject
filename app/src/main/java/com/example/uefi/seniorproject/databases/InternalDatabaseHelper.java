@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.example.uefi.seniorproject.reminder.ChoiceItem;
 import com.example.uefi.seniorproject.reminder.DayItem;
+import com.example.uefi.seniorproject.reminder.EmptyItem;
 import com.example.uefi.seniorproject.reminder.NoteItem;
 import com.example.uefi.seniorproject.reminder.Symptom_Note;
 
@@ -69,6 +70,47 @@ public class InternalDatabaseHelper extends SQLiteOpenHelper {
                 ")";
         sqLiteDatabase.execSQL(sql_symptom_notes);
 
+        String sql_alerts = "CREATE TABLE alerts (" +
+                "id_alert INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                "medicine_name TEXT, "+
+                "medicine_num INTEGER, "+
+                "breakfast INTEGER, "+
+                "lunch INTEGER, "+
+                "dinner INTEGER, "+
+                "bed INTEGER, "+
+                "before INTEGER, "+
+                "after INTEGER, "+
+                "is_alert INTEGER "+
+                ")";
+        sqLiteDatabase.execSQL(sql_alerts);
+
+        String sql_settings = "CREATE TABLE settings (" +
+                "id_setting INTEGER PRIMARY KEY, "+
+                "breakfast_hour INTEGER, "+
+                "breakfast_minute INTEGER, "+
+                "lunch_hour INTEGER, "+
+                "lunch_minute INTEGER, "+
+                "dinner_hour INTEGER, "+
+                "dinner_minute INTEGER, "+
+                "bed_hour INTEGER, "+
+                "bed_minute INTEGER " +
+                ")";
+        sqLiteDatabase.execSQL(sql_settings);
+//        createSetting();
+
+        ContentValues values = new ContentValues();
+        values.put("id_setting", 1);
+        values.put("breakfast_hour", 7);
+        values.put("breakfast_minute",00);
+        values.put("lunch_hour",12);
+        values.put("lunch_minute",00);
+        values.put("dinner_hour",17);
+        values.put("dinner_minute",00);
+        values.put("bed_hour",22);
+        values.put("bed_minute",00);
+
+        // insert row
+        long alert_id = sqLiteDatabase.insert("settings", null, values);
     }
 
     @Override
@@ -76,6 +118,7 @@ public class InternalDatabaseHelper extends SQLiteOpenHelper {
         // on upgrade drop older tables
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS notes");
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS symptom_notes");
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS alerts");
 
         // create new tables
         onCreate(sqLiteDatabase);
@@ -297,4 +340,194 @@ public class InternalDatabaseHelper extends SQLiteOpenHelper {
             database.delete("symptom_notes", "id_note" + "='" + id_note +"' AND symptom "+ "='"+ symptom.get(i)+"'" , null);
         }
     }
+
+    public void createAlert(String name,int num,int breakfast,int lunch,int dinner,int bed,int before, int after,int isAlert) {
+        ContentValues values = new ContentValues();
+        values.put("medicine_name", name);
+        values.put("medicine_num", num);
+        values.put("breakfast", breakfast);
+        values.put("lunch",lunch);
+        values.put("dinner",dinner);
+        values.put("bed",bed);
+        values.put("before",before);
+        values.put("after",after);
+        values.put("is_alert",isAlert);
+
+        // insert row
+        long alert_id = database.insert("alerts", null, values);
+    }
+
+    public ArrayList readAllAlert(){
+        ArrayList alerts = new ArrayList();
+        ArrayList temp = new ArrayList();
+
+        alerts.add(new DayItem("เช้า"));
+        temp = readAllAlertBy("breakfast");
+        if(temp.size()==0){
+            alerts.add(new EmptyItem());
+        }else
+            alerts.addAll(temp);
+
+        alerts.add(new DayItem("กลางวัน"));
+        temp = readAllAlertBy("lunch");
+        if(temp.size()==0){
+            alerts.add(new EmptyItem());
+        }else
+            alerts.addAll(temp);
+
+
+        alerts.add(new DayItem("เย็น"));
+        temp = readAllAlertBy("dinner");
+        if(temp.size()==0){
+            alerts.add(new EmptyItem());
+        }else
+            alerts.addAll(temp);
+
+        alerts.add(new DayItem("ก่อนนอน"));
+        temp = readAllAlertBy("bed");
+        if(temp.size()==0){
+            alerts.add(new EmptyItem());
+        }else
+            alerts.addAll(temp);
+
+        // test
+//        String sql = "SELECT * FROM alerts";
+//        Cursor cursor = database.rawQuery(sql,null);
+//        cursor.moveToFirst();
+//
+//        while (!cursor.isAfterLast()) {
+//            alerts.add(new NoteItem(
+//                    cursor.getString(cursor.getColumnIndex("medicine_name")),
+//                    cursor.getInt(cursor.getColumnIndex("id_alert")),
+//                    cursor.getInt(cursor.getColumnIndex("medicine_num")),
+//                    "test"
+//            ));
+//
+//            cursor.moveToNext();
+//        }
+//        cursor.close();
+        // test
+
+        return alerts;
+    }
+
+    public ArrayList readAllAlertBy(String column){
+        ArrayList times = new ArrayList();
+        String sql = "SELECT * FROM alerts "+"WHERE "+ column + " = 1" +" ORDER BY medicine_name";
+        Cursor cursor = database.rawQuery(sql,null);
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+
+            times.add(new NoteItem(
+                    cursor.getString(cursor.getColumnIndex("medicine_name")),
+                    cursor.getInt(cursor.getColumnIndex("id_alert")),
+                    cursor.getInt(cursor.getColumnIndex("medicine_num")),
+                    column
+            ));
+
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return times;
+    }
+
+    public ArrayList readAlert(int id_alert){
+
+        ArrayList  alert = new ArrayList();
+        String sql = "SELECT * FROM alerts "+
+                "WHERE id_alert ='"+id_alert+"'";
+
+        Cursor cursor = database.rawQuery(sql,null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            alert.add(cursor.getString(cursor.getColumnIndex("medicine_name")));
+            alert.add(cursor.getInt(cursor.getColumnIndex("medicine_num")));
+            alert.add(cursor.getInt(cursor.getColumnIndex("breakfast")));
+            alert.add(cursor.getInt(cursor.getColumnIndex("lunch")));
+            alert.add(cursor.getInt(cursor.getColumnIndex("dinner")));
+            alert.add(cursor.getInt(cursor.getColumnIndex("bed")));
+            alert.add(cursor.getInt(cursor.getColumnIndex("before")));
+            alert.add(cursor.getInt(cursor.getColumnIndex("after")));
+            alert.add(cursor.getInt(cursor.getColumnIndex("is_alert")));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return alert;
+    }
+
+    public void updateAlert(int id_alert,String name,int num,int breakfast,int lunch,int dinner,int bed,int before, int after,int isAlert){
+        ContentValues values = new ContentValues();
+        values.put("medicine_name", name);
+        values.put("medicine_num", num);
+        values.put("breakfast", breakfast);
+        values.put("lunch",lunch);
+        values.put("dinner",dinner);
+        values.put("bed",bed);
+        values.put("before",before);
+        values.put("after",after);
+        values.put("is_alert",isAlert);
+        database.update("alerts", values, "id_alert="+id_alert, null);
+    }
+
+    public void deleteAlert(int id_alert,String name,int num,int breakfast,int lunch,int dinner,int bed,int before, int after,int isAlert){
+        if( breakfast==0 && lunch == 0 && dinner ==0 && bed ==0)
+            database.delete("alerts", "id_alert" + "='" + id_alert+"'", null);
+        else
+            updateAlert(id_alert,name,num,breakfast,lunch,dinner,bed,before,after,isAlert);
+    }
+
+    public void createSetting() {
+        ContentValues values = new ContentValues();
+        values.put("id_setting", 1);
+        values.put("breakfast_hour", 7);
+        values.put("breakfast_minute",00);
+        values.put("lunch_hour",12);
+        values.put("lunch_minute",00);
+        values.put("dinner_hour",17);
+        values.put("dinner_minute",00);
+        values.put("bed_hour",22);
+        values.put("bed_minute",00);
+
+        // insert row
+        long alert_id = database.insert("settings", null, values);
+    }
+
+    public void updateSetting(int breakfast_hour,int breakfast_minute,int lunch_hour,int lunch_minute,int dinner_hour,int dinner_minute, int bed_hour,int bed_minute){
+        ContentValues values = new ContentValues();
+        values.put("breakfast_hour", breakfast_hour);
+        values.put("breakfast_minute", breakfast_minute);
+        values.put("lunch_hour",lunch_hour);
+        values.put("lunch_minute",lunch_minute);
+        values.put("dinner_hour",dinner_hour);
+        values.put("dinner_minute",dinner_minute);
+        values.put("bed_hour",bed_hour);
+        values.put("bed_minute",bed_minute);
+        database.update("settings", values, "id_setting="+1, null);
+    }
+
+    public ArrayList<Integer> readSetting(){
+
+        ArrayList<Integer>  setting = new ArrayList<Integer>();
+        String sql = "SELECT * FROM settings "+
+                "WHERE id_setting ='"+1+"'";
+
+
+        Cursor cursor = database.rawQuery(sql,null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            setting.add(cursor.getInt(cursor.getColumnIndex("breakfast_hour")));
+            setting.add(cursor.getInt(cursor.getColumnIndex("breakfast_minute")));
+            setting.add(cursor.getInt(cursor.getColumnIndex("lunch_hour")));
+            setting.add(cursor.getInt(cursor.getColumnIndex("lunch_minute")));
+            setting.add(cursor.getInt(cursor.getColumnIndex("dinner_hour")));
+            setting.add(cursor.getInt(cursor.getColumnIndex("dinner_minute")));
+            setting.add(cursor.getInt(cursor.getColumnIndex("bed_hour")));
+            setting.add(cursor.getInt(cursor.getColumnIndex("bed_minute")));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return setting;
+    }
+
 }

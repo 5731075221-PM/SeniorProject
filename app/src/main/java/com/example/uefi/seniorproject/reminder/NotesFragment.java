@@ -1,12 +1,15 @@
 package com.example.uefi.seniorproject.reminder;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +34,7 @@ public class NotesFragment extends Fragment {
     public RecyclerView mRecyclerView;
     public CustomAdapterNote mAdapter;
     public ImageView notePic;
+    public AppBarLayout appBarLayout;
 
     public NotesFragment() {
         // Required empty public constructor
@@ -46,23 +50,30 @@ public class NotesFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_notes, container, false);
 
+        appBarLayout.setExpanded(true, true);
+
         listNote = internalDatabaseHelper.readAllNote();
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_note);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new CustomAdapterNote(getActivity(),listNote,getActivity().getSupportFragmentManager(),NotesFragment.this);
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (mAdapter.getOpenItems().size() > 0) {
+                    mAdapter.closeAllExcept(null);
+                }
+            }
+        });
+        mAdapter.notifyDataSetChanged();
 
 
         LinearLayout addNote = (LinearLayout) view.findViewById(R.id.add);
         addNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//            transaction.replace(R.id.container_fragment, NoteAddFragment.newInstance("add",0
-//            ));
-//            transaction.addToBackStack("เพิ่มบันทึกสุขภาพ");
-//            transaction.commit();
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container_fragment, NoteAddFragment.newInstance("add",0))
                     .addToBackStack("เพิ่มบันทึกสุขภาพ")
@@ -92,6 +103,7 @@ public class NotesFragment extends Fragment {
         internalDatabaseHelper = InternalDatabaseHelper.getInstance(getActivity());
         internalDatabaseHelper.open();
 
+        appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
     }
 
 }

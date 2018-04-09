@@ -49,22 +49,42 @@
             android:layout_height="40dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            app:srcCompat="@drawable/mon" />
+            android:background="@drawable/circle"
+            android:padding="4dp"
+            app:srcCompat="@drawable/icons_note" />
 
-        <TextView
-            android:id="@+id/note"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="25dp"
+            android:layout_height="match_parent"
             android:layout_toRightOf="@+id/imageView2"
-            android:ellipsize="end"
-            android:gravity="center_vertical"
-            android:maxLines="3"
-            android:text="TextView + \n + @string/common_google_play_services"
-            android:textColor="@color/cardview_dark_background"
-            android:textSize="18sp" />
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <TextView
+                android:id="@+id/note"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="25dp"
+                android:layout_weight="2"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxLines="3"
+                android:text="TextView + \n + @string/common_google_play_services"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/medicine_num"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:textSize="18sp" />
+        </LinearLayout>
+
     </RelativeLayout>
 
 

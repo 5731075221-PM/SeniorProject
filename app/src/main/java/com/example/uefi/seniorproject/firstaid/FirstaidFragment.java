@@ -48,7 +48,7 @@ public class FirstaidFragment extends Fragment {
         cpr = (TextView) view.findViewById(R.id.cpr);
         transport = (TextView) view.findViewById(R.id.transport);
         textTool = (TextView) getActivity().findViewById(R.id.textTool);
-        textTool.setText("การปฐมพยาบาล");
+//        textTool.setText("การปฐมพยาบาล");
 
         head.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,4 +130,8 @@ public class FirstaidFragment extends Fragment {
         appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
     }
 
+    public void onResume() {
+        super.onResume();
+        textTool.setText("การปฐมพยาบาล");
+    }
 }

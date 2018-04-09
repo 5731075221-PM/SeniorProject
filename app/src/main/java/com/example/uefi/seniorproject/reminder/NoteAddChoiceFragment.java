@@ -4,6 +4,7 @@ package com.example.uefi.seniorproject.reminder;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,6 +31,7 @@ public class NoteAddChoiceFragment extends Fragment {
     public DBHelperDAO dbHelperDAO;
     public Bundle bundle;
     int isSave;
+    public AppBarLayout appBarLayout;
 
     public NoteAddChoiceFragment() {
         // Required empty public constructor
@@ -49,6 +51,8 @@ public class NoteAddChoiceFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_note_add_choice, container, false);
+
+        appBarLayout.setExpanded(true, true);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recy_choice);
         mLayoutManager = new LinearLayoutManager( getActivity());
@@ -107,6 +111,8 @@ public class NoteAddChoiceFragment extends Fragment {
         }else{
             list = savedInstanceState.getParcelableArrayList("list");
         }
+        appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
+
 
     }
 

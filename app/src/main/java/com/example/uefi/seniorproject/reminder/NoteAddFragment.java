@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
@@ -39,10 +40,10 @@ import java.util.Locale;
  * A simple {@link Fragment} subclass.
  */
 public class NoteAddFragment extends Fragment {
-    public TextView textTool,selectChoice;
+    public TextView textTool,selectChoice,editDate;
     public Calendar myCalendar;
     public DatePickerDialog.OnDateSetListener date;
-    public EditText editDate,commentEditText;
+    public EditText commentEditText;
     public SimpleDateFormat sdf;
     final int FRAGMENT_CODE = 100;
     public ImageView arrow;
@@ -54,6 +55,7 @@ public class NoteAddFragment extends Fragment {
     public Bundle bundle;
     public String[] dateComment;
     public LinearLayout addChoice,save;
+    public AppBarLayout appBarLayout;
 
     public NoteAddFragment() {
         // Required empty public constructor
@@ -74,17 +76,15 @@ public class NoteAddFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_note_add, container, false);
+
+        appBarLayout.setExpanded(true, true);
+
         textTool = (TextView) getActivity().findViewById(R.id.textTool);
-        if(state.equals("add"))
-            title = "เพิ่มบันทึกสุขภาพ";
-        else if (state.equals("edit"))
-            title = "แก้ไขบันทึกสุขภาพ";
-            textTool.setText(title);
 
         // calendat input
         String myFormat = "dd/MM/yyyy";
         sdf = new SimpleDateFormat(myFormat, Locale.US);
-        editDate = (EditText) view.findViewById(R.id.date);
+        editDate = (TextView) view.findViewById(R.id.date);
 
 
         date = new DatePickerDialog.OnDateSetListener() {
@@ -96,10 +96,12 @@ public class NoteAddFragment extends Fragment {
             }
         };
 
-        editDate.setOnClickListener(new View.OnClickListener() {
+        LinearLayout linearDate = (LinearLayout) view.findViewById(R.id.linear_date);
+        linearDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
+                Log.i("ggggg","gggg");
                 new DatePickerDialog(getActivity(), R.style.datepicker,date,
                         year, month,
                         day).show();
@@ -119,10 +121,6 @@ public class NoteAddFragment extends Fragment {
             public void onClick(View v) {
                 NoteAddChoiceFragment fragmentChild = NoteAddChoiceFragment.newInstance(list);
                 fragmentChild.setTargetFragment(NoteAddFragment.this, FRAGMENT_CODE);
-//                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-//                transaction.replace(R.id.linear_choice, fragmentChild);
-//                transaction.addToBackStack(title);
-//                transaction.commit();
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container_fragment, fragmentChild)
                         .addToBackStack(title)
@@ -272,6 +270,7 @@ public class NoteAddFragment extends Fragment {
             year = Integer.parseInt(dateComment[2]);
             comment = dateComment[3];
         }
+        appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
     }
 
     public void setupUI(View view) {
@@ -298,7 +297,20 @@ public class NoteAddFragment extends Fragment {
     public void hideSoftKeyboard(Fragment activity) {
         InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+    }
 
+    public void onResume() {
+        super.onResume();
+        if(state.equals("add"))
+            title = "เพิ่มบันทึกสุขภาพ";
+        else if (state.equals("edit"))
+            title = "แก้ไขบันทึกสุขภาพ";
+        textTool.setText(title);
+    }
+
+    public void onPause() {
+        super.onPause();
+        hideSoftKeyboard(NoteAddFragment.this);
     }
 
 }

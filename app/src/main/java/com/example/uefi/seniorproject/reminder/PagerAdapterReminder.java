@@ -44,4 +44,6 @@ public class PagerAdapterReminder extends FragmentStatePagerAdapter {
     public int getItemPosition(Object object) {
         return POSITION_NONE;
     }
+
+
 }

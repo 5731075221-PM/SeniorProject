@@ -54,7 +54,6 @@ public class FirstaidTypeFragment extends Fragment {
         appBarLayout.setExpanded(true, true);
 
         textTool = (TextView) getActivity().findViewById(R.id.textTool);
-        textTool.setText(indicator);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_firstaid);
         mLayoutManager = new LinearLayoutManager( getActivity());
@@ -87,4 +86,9 @@ public class FirstaidTypeFragment extends Fragment {
         appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
     }
 
+    public void onResume() {
+        super.onResume();
+        textTool.setText(toolbar);
+        textTool.setText(indicator);
+    }
 }

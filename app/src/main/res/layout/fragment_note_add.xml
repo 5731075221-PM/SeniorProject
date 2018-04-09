@@ -22,6 +22,7 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/linear_date"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:orientation="horizontal"
@@ -33,9 +34,10 @@
                     android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:src="@drawable/calendar" />
+                    android:src="@drawable/calendar"
+                    android:clickable="false" />
 
-                <EditText
+                <TextView
                     android:id="@+id/date"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -43,11 +45,12 @@
                     android:layout_weight="3"
                     android:background="@android:color/transparent"
                     android:backgroundTint="@color/nav_bar"
-                    android:clickable="true"
+                    android:clickable="false"
                     android:editable="false"
                     android:focusable="false"
                     android:textColor="@color/cardview_dark_background"
-                    android:textColorLink="@color/nav_bar" />
+                    android:textColorLink="@color/nav_bar"
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout

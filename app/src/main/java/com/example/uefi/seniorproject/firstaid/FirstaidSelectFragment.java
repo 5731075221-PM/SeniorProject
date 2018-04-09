@@ -49,6 +49,7 @@ public class FirstaidSelectFragment extends Fragment {
 
         appBarLayout.setExpanded(true, true);
 
+        textTool = (TextView) getActivity().findViewById(R.id.textTool);
         RecyclerView rcv = (RecyclerView) view.findViewById(R.id.recycler_firstaid);
         mLayoutManager = new LinearLayoutManager( getActivity());
         rcv.setLayoutManager(mLayoutManager);
@@ -62,8 +63,6 @@ public class FirstaidSelectFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
         toolbar = bundle.getString("toolbar");
-        textTool = (TextView) getActivity().findViewById(R.id.textTool);
-        textTool.setText(toolbar);
 
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());
         dbHelperDAO.open();
@@ -71,5 +70,10 @@ public class FirstaidSelectFragment extends Fragment {
         items = dbHelperDAO.getFirstaidDetail(id);
 
         appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
+    }
+
+    public void onResume() {
+        super.onResume();
+        textTool.setText(toolbar);
     }
 }

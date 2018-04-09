@@ -1,0 +1,234 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linear_choice"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cardview_light_background"
+    android:clickable="true"
+    tools:context="com.example.uefi.seniorproject.reminder.ReminderFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/add"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:src="@drawable/medicine" />
+
+            <EditText
+                android:id="@+id/editTextMedicine"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="3"
+                android:background="@drawable/textbox"
+                android:hint="ชื่อยา"
+                android:textColor="@color/cardview_dark_background"
+                android:textColorLink="@color/cardview_dark_background"
+                android:textCursorDrawable="@null" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/drug" />
+
+            <EditText
+                android:id="@+id/editTextQuantity"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1.5"
+                android:background="@drawable/textbox"
+                android:inputType="number"
+                android:text="1"
+                android:textColor="@color/cardview_dark_background"
+                android:textColorLink="@color/cardview_dark_background"
+                android:textCursorDrawable="@null" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1.5"
+                android:text="เม็ด"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal"
+            android:paddingBottom="12.5dp"
+            android:paddingTop="12.5dp"
+            android:weightSum="4">
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_gravity="top"
+                android:layout_weight="1"
+                android:src="@drawable/cutlery" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:layout_weight="1.5"
+                android:orientation="vertical">
+
+                <CheckBox
+                    android:id="@+id/breakfast"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:buttonTint="@color/nav_bar"
+                    android:text="เช้า"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textColorLink="@color/nav_bar"
+                    android:textSize="18sp" />
+
+                <CheckBox
+                    android:id="@+id/lunch"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:buttonTint="@color/nav_bar"
+                    android:text="กลางวัน"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textColorLink="@color/nav_bar"
+                    android:textSize="18sp" />
+
+                <CheckBox
+                    android:id="@+id/dinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:buttonTint="@color/nav_bar"
+                    android:text="เย็น"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textColorLink="@color/nav_bar"
+                    android:textSize="18sp" />
+
+                <CheckBox
+                    android:id="@+id/bed"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:buttonTint="@color/nav_bar"
+                    android:text="ก่อนนอน"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textColorLink="@color/nav_bar"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:layout_weight="1.5"
+                android:orientation="vertical">
+
+                <CheckBox
+                    android:id="@+id/before"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:buttonTint="@color/nav_bar"
+                    android:text="ก่อนอาหาร"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textColorLink="@color/nav_bar"
+                    android:textSize="18sp" />
+
+                <CheckBox
+                    android:id="@+id/after"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:buttonTint="@color/nav_bar"
+                    android:text="หลังอาหาร"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textColorLink="@color/nav_bar"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:src="@drawable/clock" />
+
+            <Switch
+                android:id="@+id/switchAlert"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="3"
+                android:paddingRight="25dp"
+                android:text="แจ้งเตือน"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/add"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/second_bar"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/kanit_light"
+            android:gravity="center"
+            android:text="บันทึก"
+            android:textColor="@color/cardview_light_background"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>
