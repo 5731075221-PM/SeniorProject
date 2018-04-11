@@ -44,7 +44,13 @@ dependencies {
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.10'
     compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
     compile 'com.layer-net:thai-datetimepicker:1.0.3'
+    compile 'com.squareup.picasso:picasso:2.3.2'
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.daimajia.slider:library:1.1.5@aar'
+    compile 'org.jsoup:jsoup:1.11.2'
+    compile 'com.github.JakeWharton:ViewPagerIndicator:2.4.1'
 }
+
 
 
 

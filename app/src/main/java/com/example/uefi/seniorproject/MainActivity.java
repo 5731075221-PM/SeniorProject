@@ -69,8 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         textTool.setTypeface(font);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -93,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
-
+            System.out.println("IN1");
 //            getSupportActionBar().setTitle(R.string.app_name);
             textTool.setText(R.string.app_name);
 //            Log.d("CASE1 = ",getSupportFragmentManager().getBackStackEntryCount()+"");
@@ -104,8 +103,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             // Remove the/any drawer toggle listener
             toggle.setToolbarNavigationClickListener(null);
             mToolBarNavigationListenerIsRegistered = false;
+            toggle.syncState();
         }else if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
-
+            System.out.println("IN2");
             Fragment fragment = getSupportFragmentManager().findFragmentByTag("Title");
 //            if (fragment instanceof FirstaidFragment) {
 //                textTool.setText("การปฐมพยาบาล");

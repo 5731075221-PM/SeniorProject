@@ -86,6 +86,9 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
         @Override
         protected Void doInBackground(Void... voids) {
             try {
+                diseaseNameDefault = dbHelperDAO.getDiseaseName();
+                mainSymptoms = dbHelperDAO.getMainSymptoms();
+                addSearchList();
                 allSymptoms = dbHelperDAO.getAllSymptoms();
                 vectordata = dbHelperDAO.getVectorData();
                 docLength = dbHelperDAO.getDocLength();
@@ -124,7 +127,7 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
         searchView.setQueryHint("ค้นหา");
         searchView.setOnQueryTextListener(this);
 
-        String dataArray[] = new String[531];
+        String dataArray[] = new String[data.size()];
         data.toArray(dataArray);
         adapterAuto = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, dataArray);
         mSearchAutoComplete = (SearchView.SearchAutoComplete) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
@@ -169,10 +172,10 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
 
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());
         dbHelperDAO.open();
-        diseaseNameDefault = dbHelperDAO.getDiseaseName();
+//        diseaseNameDefault = dbHelperDAO.getDiseaseName();
         diseaseName = new ArrayList<>();
-        mainSymptoms = dbHelperDAO.getMainSymptoms();
-        addSearchList();
+//        mainSymptoms = dbHelperDAO.getMainSymptoms();
+//        addSearchList();
         new createTokenizer().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
