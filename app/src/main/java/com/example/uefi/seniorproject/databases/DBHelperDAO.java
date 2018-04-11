@@ -87,6 +87,55 @@ public class DBHelperDAO {
      *
      * @return a List of quotes
      */
+
+    public boolean checkExistItem(String type, String name){
+        Cursor cursor = database.rawQuery("SELECT * FROM favoriteItems WHERE id='"+type+"' AND name='"+name+"'", null);
+        return cursor.getCount() == 0 ? false : true;
+    }
+
+    public void addFavHospitalItem(String id, String name, String address, String location, String phone, String website, String type){
+        if(id.equals("hospital"))database.execSQL("INSERT INTO favoriteItems (id, name, address, location, phone, website, type) VALUES ('"+id+"','"+name+"','"+address+"','"+location+"','"+phone+"','"+website+"','"+type+"')");
+    }
+
+    public void addFavDiseaseItem(String id, String name, String type/*, String cause, String symptom, String treat, String protect*/){
+//        database.execSQL("INSERT INTO favoriteItems (id, name, cause, symptom, treat, protect) VALUES ('"+id+"','"+name+"','"+cause+"','"+symptom+"','"+treat+"','"+protect+"')");
+        database.execSQL("INSERT INTO favoriteItems (id, name, type) VALUES ('"+id+"','"+name+"','"+type+"')");
+
+    }
+
+    public void removeFavItem(String id, String name){
+        database.execSQL("DELETE FROM favoriteItems WHERE id='"+id+"' AND name='"+name+"'");
+    }
+
+    public ArrayList<Object> getAllFavList(){
+        ArrayList<Object> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT * FROM favoriteItems ORDER BY type ASC", null);
+        cursor.moveToFirst();
+        if(cursor.getCount() != 0){
+            while (!cursor.isAfterLast()) {
+                if(cursor.getString(cursor.getColumnIndex("id")).equals("hospital")){
+                    String[] tmp = (cursor.getString(cursor.getColumnIndex("location"))).split(", ");
+                    list.add(new Hospital(cursor.getString(cursor.getColumnIndex("name")),
+                                    Double.parseDouble(tmp[0]), Double.parseDouble(tmp[1]),
+                                    cursor.getString(cursor.getColumnIndex("address")),
+                                    cursor.getString(cursor.getColumnIndex("phone")),
+                                    cursor.getString(cursor.getColumnIndex("website")),
+                                    null,
+                                    null,
+                                    cursor.getString(cursor.getColumnIndex("type"))
+                            )
+                    );
+                }else{
+                    list.add(new Disease(cursor.getString(cursor.getColumnIndex("name")),
+                            cursor.getString(cursor.getColumnIndex("type"))));
+                }
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
+        return list;
+    }
+
     public ArrayList<Hospital> getHospital() {
         ArrayList<Hospital> list = new ArrayList<>();
         Cursor cursor = database.rawQuery(tables, null);
@@ -332,8 +381,8 @@ public class DBHelperDAO {
 
     public ArrayList<String> checkKeyword(String[] w) {
         System.out.println("Setdatabase = " + w.toString());
-        Set<String> set = new LinkedHashSet<>();
-        ArrayList<String> list;
+//        Set<String> set = new LinkedHashSet<>();
+        ArrayList<String> list,set = new ArrayList<>();
         String parent = "", synonym = "";
         String[] tmp;
         for (int i = 0; i < w.length; i++) {

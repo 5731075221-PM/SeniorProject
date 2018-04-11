@@ -31,4 +31,15 @@
 
     <color name="colorMainGreen">#429f46</color>
 
+    <color name="grid1">#93d6c3</color>
+    <color name="grid2">#b0e2ff</color>
+    <color name="grid3">#df6b6a</color>
+    <color name="grid4">#71bcc2</color>
+    <color name="grid5">#b8b6b9</color>
+    <color name="grid6">#f5c286</color>
+    <color name="grid7">#caac91</color>
+    <color name="grid8">#9cbdc4</color>
+    <color name="grid9">#4177a1</color>
+    <color name="grid10">#e1a9c2</color>
+<!---->
 </resources>

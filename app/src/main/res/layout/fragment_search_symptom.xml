@@ -14,7 +14,7 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
 
-        <SearchView
+        <android.support.v7.widget.SearchView
             android:id="@+id/searchSymptom"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
@@ -27,7 +27,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.015" />
+            app:layout_constraintVertical_bias="0.015"
+            app:queryBackground="@android:color/transparent"/>
 
         <!--<android.support.v7.widget.RecyclerView-->
             <!--android:id="@+id/searchSymptomList"-->
@@ -64,9 +65,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical|center_horizontal"
-            android:textSize="20dp"
-            android:text="ค้นหาโดยการพิมพ์ ชื่อโรค อาการของโรค หากมีหลายคำค้นหากรุณาเว้นวรรค"
+            android:textSize="17dp"
+            android:text="เริ่มต้นการค้นหาโดยการพิมพ์ ชื่อโรค อาการของโรค หากมีหลายคำค้นหากรุณาเว้นวรรค เช่น ปวดท้อง ท้องเสีย"
             android:visibility="visible"
+            android:paddingTop="15dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:fontFamily="@font/kanit_light"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

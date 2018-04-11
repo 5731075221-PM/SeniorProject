@@ -1,25 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:id="@+id/gridview_layout"-->
+    <!--android:layout_width="160dp"-->
+    <!--android:layout_height="150dp"-->
+    <!--android:layout_margin="5dp"-->
+    <!--android:elevation="1dp"-->
+    <!--android:background="@drawable/ic_disease_background_select"-->
+    <!--android:gravity="center_horizontal|center_vertical|center"-->
+    <!--android:clickable="true"-->
+    <!--android:addStatesFromChildren="true"-->
+    <!--android:orientation="vertical">-->
+    <!--&lt;!&ndash;android:background="?android:attr/selectableItemBackground"&ndash;&gt;-->
+
+    <!--<ImageView-->
+        <!--android:id="@+id/diseae_grid_image"-->
+        <!--android:layout_width="60dp"-->
+        <!--android:layout_height="60dp" />-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/diseae_grid_text"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:textColor="@drawable/ic_disease_text_select"-->
+        <!--android:textSize="22sp"/>-->
+<!--</LinearLayout>-->
+<android.support.v7.widget.CardView
     android:id="@+id/gridview_layout"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:background="@drawable/ic_disease_background_select"
-    android:gravity="center_horizontal|center_vertical"
+    android:layout_height="170dp"
+    android:layout_margin="5dp"
     android:clickable="true"
-    android:addStatesFromChildren="true"
-    android:orientation="vertical">
-    <!--android:background="?android:attr/selectableItemBackground"-->
+    android:foreground="?android:attr/selectableItemBackground"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ImageView
-        android:id="@+id/diseae_grid_image"
-        android:layout_width="60dp"
-        android:layout_height="60dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/diseae_grid_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:textColor="@drawable/ic_disease_text_select"
-        android:textSize="22sp"/>
-</LinearLayout>
+        <ImageView
+            android:id="@+id/diseae_grid_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:padding="10dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/grey" />
+
+        <TextView
+            android:id="@+id/diseae_grid_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="22dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

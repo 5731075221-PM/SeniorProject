@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="@color/colorMacawBlueGreen">
-    <item android:id="@android:id/mask">
-        <color android:color="@android:color/white" />
+    android:color="@color/nav_bar">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/second_bar" />
+        </shape>
     </item>
 </ripple>

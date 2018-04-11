@@ -1,6 +1,7 @@
 package com.example.uefi.seniorproject.fragment;
 
 import android.annotation.SuppressLint;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 @SuppressLint("ValidFragment")
 public class CausePageFragment extends Fragment {
     String cause = "";
-    TextView causeTextView;
+    TextView causeTextView, headCause;
 
     public CausePageFragment(String cause) {
         this.cause = cause;
@@ -33,8 +34,12 @@ public class CausePageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cause_page, container, false);
+        Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
         causeTextView = (TextView)view.findViewById(R.id.pageTextview);
         causeTextView.setText(cause);
+        causeTextView.setTypeface(tf);
+        headCause = (TextView)view.findViewById(R.id.headCause);
+        headCause.setTypeface(tf);
         return view;
     }
 }

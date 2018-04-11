@@ -39,17 +39,18 @@ public class DiseaseListFragment extends Fragment{
     private ArrayList<Integer> mSectionPositions;
     private List<Disease> mDataArray;
     AppBarLayout appBarLayout;
+    String[] gridViewString;
 
-    String[] gridViewString = {"ระบบกระดูกและข้อ", "ระบบทางเดินปัสสาวะ", "ระบบทางเดินอาหาร", "ระบบศีรษะและลำคอ", "ระบบทางเดินหายใจ",
-            "ระบบหูคอจมูก", "ระบบตา", "ระบบหัวใจและหลอดเลือด", "ระบบโรคไต", "ระบบโรคผิวหนัง", "ระบบอวัยวะสืบพันธุ์", "ระบบต่อมไร้ท่อ",
-            "ระบบประสาทวิทยา", "ระบบโรคติดเชื้อ", "ระบบมะเร็งวิทยา", "ระบบจิตเวช", "ระบบน้ำเหลือง", "ระบบกล้ามเนื้อและกระดูก", "ระบบภูมิคุ้มกัน", "อื่นๆ"
-    };
+//    String[] gridViewString = {"ระบบกระดูกและข้อ", "ระบบทางเดินปัสสาวะ", "ระบบทางเดินอาหาร", "ระบบศีรษะและลำคอ", "ระบบทางเดินหายใจ",
+//            "ระบบหูคอจมูก", "ระบบตา", "ระบบหัวใจและหลอดเลือด", "ระบบโรคไต", "ระบบโรคผิวหนัง", "ระบบอวัยวะสืบพันธุ์", "ระบบต่อมไร้ท่อ",
+//            "ระบบประสาทวิทยา", "ระบบโรคติดเชื้อ", "ระบบมะเร็งวิทยา", "ระบบจิตเวช", "ระบบน้ำเหลือง", "ระบบกล้ามเนื้อและกระดูก", "ระบบภูมิคุ้มกัน", "อื่นๆ"
+//    };
 
     int[] gridViewImageId = {
-            R.drawable.ic_disease1_select, R.drawable.ic_disease2_select, R.drawable.ic_disease3_select, R.drawable.ic_disease4_select, R.drawable.ic_disease5_select,
-            R.drawable.ic_disease6_select, R.drawable.ic_disease7_select, R.drawable.ic_disease8_select, R.drawable.ic_disease9_select, R.drawable.ic_disease10_select,
-            R.drawable.ic_disease11_select, R.drawable.ic_disease12_select, R.drawable.ic_disease13_select, R.drawable.ic_disease14_select, R.drawable.ic_disease15_select,
-            R.drawable.ic_disease16_select, R.drawable.ic_disease17_select, R.drawable.ic_disease18_select, R.drawable.ic_disease19_select, R.drawable.ic_disease20_select
+            R.drawable.selector_grid1, R.drawable.selector_grid2, R.drawable.selector_grid3, R.drawable.selector_grid4, R.drawable.selector_grid5,
+            R.drawable.selector_grid6, R.drawable.selector_grid7, R.drawable.selector_grid8, R.drawable.selector_grid9, R.drawable.selector_grid10,
+            R.drawable.selector_grid11, R.drawable.selector_grid12, R.drawable.selector_grid13, R.drawable.selector_grid14, R.drawable.selector_grid15,
+            R.drawable.selector_grid16, R.drawable.selector_grid17, R.drawable.selector_grid18, R.drawable.selector_grid19, R.drawable.selector_grid20
     };
 
     @Nullable
@@ -57,7 +58,7 @@ public class DiseaseListFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_disease_list, container, false);
 
-        appBarLayout.setExpanded(true, true);
+        if(appBarLayout != null) appBarLayout.setExpanded(true, true);
 
         recyclerView = (IndexFastScrollRecyclerView) view.findViewById(R.id.diseaseList);
         recyclerView.setAdapter(adapter);
@@ -73,7 +74,8 @@ public class DiseaseListFragment extends Fragment{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
+        if(appBarLayout != null) appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
+        gridViewString = getResources().getStringArray(R.array.gridString);
 
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());
         dbHelperDAO.open();
@@ -160,14 +162,14 @@ public class DiseaseListFragment extends Fragment{
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
             if(holder instanceof ViewHolder){
-                Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
                 ViewHolder viewHolder = (ViewHolder) holder;
                 viewHolder.name.setText(diseaseName.get(position).getName());
                 viewHolder.name.setTypeface(tf);
                 viewHolder.type.setText(diseaseName.get(position).getType());
                 viewHolder.type.setTypeface(tf);
-                viewHolder.img.setImageResource(gridViewImageId[Arrays.asList(gridViewString).indexOf(diseaseName.get(position).getType().split(",")[0])]);
+                viewHolder.img.setBackgroundResource(gridViewImageId[Arrays.asList(gridViewString).indexOf(diseaseName.get(position).getType().split(",")[0])]);
                 viewHolder.setOnClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick, MotionEvent motionEvent) {
@@ -175,6 +177,7 @@ public class DiseaseListFragment extends Fragment{
                             SelectItemFragment fragment = new SelectItemFragment();
                             Bundle bundle = new Bundle();
                             bundle.putString("name",diseaseName.get(position).getName());
+                            bundle.putString("type",diseaseName.get(position).getType());
                             fragment.setArguments(bundle);
 
                             getParentFragment().getFragmentManager().beginTransaction()
@@ -188,6 +191,7 @@ public class DiseaseListFragment extends Fragment{
             }else if(holder instanceof  HeaderViewHolder){
                 HeaderViewHolder headerHolder = (HeaderViewHolder)holder;
                 headerHolder.name.setText(diseaseName.get(position).getName());
+                headerHolder.name.setTypeface(tf);
             }
         }
 

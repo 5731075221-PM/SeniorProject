@@ -20,6 +20,8 @@ import android.widget.TextView;
 
 import com.example.uefi.seniorproject.databases.DBHelperDAO;
 import com.example.uefi.seniorproject.fragment.DiseaseNavFragment;
+import com.example.uefi.seniorproject.fragment.FavoriteItemFragment;
+import com.example.uefi.seniorproject.fragment.HospitalNavFragment;
 import com.example.uefi.seniorproject.fragment.HospitalNearbyFragment;
 import com.example.uefi.seniorproject.fragment.MainFragment;
 import com.example.uefi.seniorproject.firstaid.FirstaidFragment;
@@ -44,10 +46,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dbHelperDAO = DBHelperDAO.getInstance(this);
-        dbHelperDAO.open();
+//        dbHelperDAO = DBHelperDAO.getInstance(this);
+//        dbHelperDAO.open();
 //        dictList = dbHelperDAO.getLexitron();
 //        stopwordList = dbHelperDAO.getStopword();
+
+        Singleton single = Singleton.getInstance();
+//        if(single.getDict().size() != 0){
+//            System.out.println("size = "+single.getDict().size());
+//            System.out.println("size = "+single.getStopword().size());
+//        }
+
+        dictList = single.getDict();
+        stopwordList = single.getStopword();
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -59,8 +70,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         textTool.setTypeface(font);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -83,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
-
+            System.out.println("IN1");
 //            getSupportActionBar().setTitle(R.string.app_name);
             textTool.setText(R.string.app_name);
 //            Log.d("CASE1 = ",getSupportFragmentManager().getBackStackEntryCount()+"");
@@ -94,8 +104,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             // Remove the/any drawer toggle listener
             toggle.setToolbarNavigationClickListener(null);
             mToolBarNavigationListenerIsRegistered = false;
+            toggle.syncState();
         }else if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
 
+            System.out.println("IN2");
+            Fragment fragment = getSupportFragmentManager().findFragmentByTag("Title");
+//            if (fragment instanceof FirstaidFragment) {
+//                textTool.setText("การปฐมพยาบาล");
+//            }else if (fragment instanceof ReminderFragment) {
+//                textTool.setText("สุขภาพของฉัน");
+//            }
 //            String title = fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount()-2).getName();
 //            textTool.setText(title);
 
@@ -123,9 +141,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
 //        getMenuInflater().inflate(R.menu.main, menu);
-
-
-
         return true;
     }
 
@@ -167,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Bundle args = new Bundle();
             args.putStringArrayList("dict",dictList);
             args.putStringArrayList("stop",stopwordList);
-            DiseaseNavFragment fragment = new DiseaseNavFragment();//new SearchSymptomFragment();
+            DiseaseNavFragment fragment = new DiseaseNavFragment();
             fragment.setArguments(args);
             fragmentManager.beginTransaction()
                     .replace(R.id.container_fragment, fragment)
@@ -206,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 mToolBarNavigationListenerIsRegistered = true;
             }
             fragmentManager.beginTransaction()
-                    .replace(R.id.container_fragment, new HospitalNearbyFragment())
+                    .replace(R.id.container_fragment, new HospitalNavFragment())
                     .addToBackStack(null)
                     .commit();
         } else if (id == R.id.nav_reminder) {
@@ -229,6 +244,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .commit();
         } else if (id == R.id.nav_food) {
 
+        }else if(id == R.id.nav_fav){
+            toggle.setDrawerIndicatorEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            if(!mToolBarNavigationListenerIsRegistered) {
+                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Doesn't have to be onBackPressed
+                        onBackPressed();
+                    }
+                });
+
+                mToolBarNavigationListenerIsRegistered = true;
+            }
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container_fragment, new FavoriteItemFragment())
+                    .addToBackStack(null)
+                    .commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

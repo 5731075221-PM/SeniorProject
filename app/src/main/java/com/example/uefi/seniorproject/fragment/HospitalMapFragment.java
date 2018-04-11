@@ -83,15 +83,15 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
         mapFragment = (SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.hospitalMap);
         mapFragment.getMapAsync(this);
 
-        Bundle extraBundle = getArguments();
-        if (!extraBundle.isEmpty()) {
+//        Bundle extraBundle = getArguments();
+//        if (!extraBundle.isEmpty()) {
             dbHelperDAO = DBHelperDAO.getInstance(getActivity());
             dbHelperDAO.open();
 
-            if (extraBundle.getString("type") == "0") {
+//            if (extraBundle.getString("type") == "0") {
                 hospitalList = dbHelperDAO.getHospital();
-            }
-        }
+//            }
+//        }
         return view;
     }
 
@@ -181,7 +181,7 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-
+ 
         if (!hospitalList.isEmpty()) {
             for (int i = 0; i < hospitalList.size(); i++) {
 //                avgLat += hospitalList.get(i).getLat();
@@ -222,6 +222,7 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
                 bundle.putString("address", hospitalList.get(Integer.parseInt(marker.getSnippet())).getAddress());
                 bundle.putString("phone", hospitalList.get(Integer.parseInt(marker.getSnippet())).getPhone());
                 bundle.putString("website", hospitalList.get(Integer.parseInt(marker.getSnippet())).getWebsite());
+                bundle.putString("type", hospitalList.get(Integer.parseInt(marker.getSnippet())).getType());
                 fragment.setArguments(bundle);
                 getFragmentManager().beginTransaction()
                         .replace(R.id.container_fragment, fragment)
