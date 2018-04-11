@@ -3,6 +3,7 @@ package com.example.uefi.seniorproject.fragment;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
@@ -24,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
@@ -33,6 +35,7 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.example.uefi.seniorproject.MainActivity;
 import com.example.uefi.seniorproject.R;
+import com.example.uefi.seniorproject.databases.DBHelperDAO;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 import com.viewpagerindicator.CirclePageIndicator;
@@ -57,19 +60,43 @@ import java.util.TimerTask;
  */
 
 public class MainFragment extends Fragment /*implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener*/{
+    DBHelperDAO dbHelperDAO;
     AppBarLayout appBarLayout;
     ViewPager mPager;
     PagerAdapterSlider adapter;
-    int currentPage = 0;
-    int NUM_PAGES = 0;
-    ArrayList<String> imageList = new ArrayList<>(), titleList = new ArrayList<>(), detailList = new ArrayList<>(), linkList = new ArrayList<>() ;
+    int currentPage = 0, NUM_PAGES = 0;
+    String d = "";
+    ArrayList<String> imageList = new ArrayList<>(), titleList = new ArrayList<>(), detailList = new ArrayList<>(),
+            linkList = new ArrayList<>(), content = new ArrayList<>();
     SliderLayout mDemoSlider;
     LocationManager locationManager;
     ConnectivityManager connectionManager;
     boolean isNetwork;
-    ActionBarDrawerToggle toggle;
 
     public class FetchData extends AsyncTask<Void,Void,Void> {
+
+        public void getData(String attr){
+            try {
+                Document doc = Jsoup.connect(attr + "").get();
+                d = "";
+                boolean found = false;
+                for (Element div : doc.select("div.show_catlist")) {
+                    Elements text = div.select("p");
+                    System.out.println("size = " + text.size());
+                    for (Element i : text.subList(0, text.size()-1)) {
+                        if (i.text().contains("แฟ้มภาพ")) found = true;
+                        else if(found){
+                            d += "\t"+i.text();
+                            d += "\n\n";
+                            System.out.println("DET " + i.text());
+                        }
+                    }
+                }
+                content.add(d);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         @Override
         protected Void doInBackground(Void... voids) {
@@ -89,12 +116,15 @@ public class MainFragment extends Fragment /*implements BaseSliderView.OnSliderC
                     img = div.select("a.images_big");
                     System.out.println("TEst "+img.attr("abs:href"));
                     linkList.add(img.attr("abs:href"));
+                    getData(img.attr("abs:href"));
 
                     Elements header = div.select("div.des_r_top");
+                    Elements date = div.select("span.date_start");
                     for(Element h : header){
                         System.out.println("AAA "+h.select("a").attr("title"));
                         System.out.println("AAA "+h.select("span").text());
-                        titleList.add(h.select("a").attr("title"));
+                        titleList.add(h.select("a").attr("title")+"&"+date.text());
+                        System.out.println("AAA "+h.select("a").attr("title")+"&"+date.text());
                         detailList.add(h.select("span").text());
                     }
                 }
@@ -108,26 +138,17 @@ public class MainFragment extends Fragment /*implements BaseSliderView.OnSliderC
                             imageList.add(f.absUrl("src"));
                         }
                         e = d.select("li > a");
-                        System.out.println("CCC "+e.attr("title"));
-                        titleList.add(e.attr("title"));
+                        Elements m = d.select("span.date_sub_content");
+                        System.out.println("CCC "+e.attr("title")+"&"+m.text());
+                        titleList.add(e.attr("title")+"&"+m.text());
                         e = d.select("li > p");
                         System.out.println("DDD "+e.text());
                         detailList.add(e.text());
                         e = d.select("a.text_content");
                         System.out.println("DDD "+e.attr("abs:href"));
                         linkList.add(e.attr("abs:href"));
-//                        for(Element f : e){
-//                            System.out.println("CCC "+f.attr("title"));
-////                            titleList.add(f.text());
-//                        }
-//                        imageList.add(image.absUrl("src"));
+                        getData(e.attr("abs:href"));
                     }
-//                    Elements header = div.select("div.des_r_top");
-//                    for(Element h : header){
-//                        System.out.println("AAA "+h.select("a").attr("title"));
-//                        System.out.println("AAA "+h.select("span").text());
-////                        titleList.add(h.select("a").attr("title"));
-//                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -185,6 +206,10 @@ public class MainFragment extends Fragment /*implements BaseSliderView.OnSliderC
 
                 }
             });
+            System.out.println("SSS = "+titleList.size()+" "+content.size()+" "+detailList.size()+" "+linkList.size());
+            for(int i = 0; i<titleList.size();i++){
+                dbHelperDAO.storeNews(i,titleList.get(i),content.get(i),detailList.get(i),linkList.get(i));
+            }
         }
     }
 
@@ -395,8 +420,8 @@ public class MainFragment extends Fragment /*implements BaseSliderView.OnSliderC
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
-
-//        new FetchData().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        dbHelperDAO = DBHelperDAO.getInstance(getActivity());
+        dbHelperDAO.open();
 
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         connectionManager = (ConnectivityManager) getActivity().getSystemService(getActivity().getBaseContext().CONNECTIVITY_SERVICE);
@@ -409,16 +434,24 @@ public class MainFragment extends Fragment /*implements BaseSliderView.OnSliderC
 
         if(isNetwork) new FetchData().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         else {
-            imageList.add("http://static2.hypable.com/wp-content/uploads/2013/12/hannibal-season-2-release-date.jpg");
-            imageList.add("http://cdn3.nflximg.net/images/3093/2043093.jpg");
-            imageList.add("http://cdn3.nflximg.net/images/3093/2043093.jpg");
-            imageList.add("http://static2.hypable.com/wp-content/uploads/2013/12/hannibal-season-2-release-date.jpg");
-            imageList.add("http://static2.hypable.com/wp-content/uploads/2013/12/hannibal-season-2-release-date.jpg");
-            titleList.add("");
-            titleList.add("");
-            titleList.add("");
-            titleList.add("");
-            titleList.add("");
+            titleList = dbHelperDAO.getHeaderNews();
+            detailList = dbHelperDAO.getDetailNews();
+            linkList = dbHelperDAO.getLinkNews();
+            imageList.add("@color/grey");
+            imageList.add("@color/grey");
+            imageList.add("@color/grey");
+            imageList.add("@color/grey");
+            imageList.add("@color/grey");
+//            imageList.add("http://static2.hypable.com/wp-content/uploads/2013/12/hannibal-season-2-release-date.jpg");
+//            imageList.add("http://cdn3.nflximg.net/images/3093/2043093.jpg");
+//            imageList.add("http://cdn3.nflximg.net/images/3093/2043093.jpg");
+//            imageList.add("http://static2.hypable.com/wp-content/uploads/2013/12/hannibal-season-2-release-date.jpg");
+//            imageList.add("http://static2.hypable.com/wp-content/uploads/2013/12/hannibal-season-2-release-date.jpg");
+//            titleList.add("");
+//            titleList.add("");
+//            titleList.add("");
+//            titleList.add("");
+//            titleList.add("");
         }
     }
 
