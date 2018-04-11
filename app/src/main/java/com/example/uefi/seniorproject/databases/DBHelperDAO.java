@@ -44,6 +44,7 @@ public class DBHelperDAO {
             "SELECT * FROM hospitalNorthEast UNION ALL " +
             "SELECT * FROM hospitalSouth UNION ALL " +
             "SELECT * FROM hospitalWest ORDER BY province ASC";
+
     /**
      * Private constructor to aboid object creation from outside classes.
      *
@@ -88,32 +89,79 @@ public class DBHelperDAO {
      * @return a List of quotes
      */
 
-    public boolean checkExistItem(String type, String name){
-        Cursor cursor = database.rawQuery("SELECT * FROM favoriteItems WHERE id='"+type+"' AND name='"+name+"'", null);
+    public boolean checkExistItem(String type, String name) {
+        Cursor cursor = database.rawQuery("SELECT * FROM favoriteItems WHERE id='" + type + "' AND name='" + name + "'", null);
         return cursor.getCount() == 0 ? false : true;
     }
 
-    public void addFavHospitalItem(String id, String name, String address, String location, String phone, String website, String type){
-        if(id.equals("hospital"))database.execSQL("INSERT INTO favoriteItems (id, name, address, location, phone, website, type) VALUES ('"+id+"','"+name+"','"+address+"','"+location+"','"+phone+"','"+website+"','"+type+"')");
+    public void addFavHospitalItem(String id, String name, String address, String location, String phone, String website, String type) {
+        if (id.equals("hospital"))
+            database.execSQL("INSERT INTO favoriteItems (id, name, address, location, phone, website, type) VALUES ('" + id + "','" + name + "','" + address + "','" + location + "','" + phone + "','" + website + "','" + type + "')");
     }
 
-    public void addFavDiseaseItem(String id, String name, String type/*, String cause, String symptom, String treat, String protect*/){
+    public void addFavDiseaseItem(String id, String name, String type/*, String cause, String symptom, String treat, String protect*/) {
 //        database.execSQL("INSERT INTO favoriteItems (id, name, cause, symptom, treat, protect) VALUES ('"+id+"','"+name+"','"+cause+"','"+symptom+"','"+treat+"','"+protect+"')");
-        database.execSQL("INSERT INTO favoriteItems (id, name, type) VALUES ('"+id+"','"+name+"','"+type+"')");
+        database.execSQL("INSERT INTO favoriteItems (id, name, type) VALUES ('" + id + "','" + name + "','" + type + "')");
 
     }
 
-    public void removeFavItem(String id, String name){
-        database.execSQL("DELETE FROM favoriteItems WHERE id='"+id+"' AND name='"+name+"'");
+    public void removeFavItem(String id, String name) {
+        database.execSQL("DELETE FROM favoriteItems WHERE id='" + id + "' AND name='" + name + "'");
     }
 
-    public ArrayList<Object> getAllFavList(){
+    public void storeNews(int id, String header, String content, String detail,String link) {
+        database.execSQL("UPDATE news SET header='" + header + "', content='" + content + "', detail='"+detail+"', link='"+link+"' WHERE id='" + id + "'");
+    }
+
+    public ArrayList<String> getHeaderNews() {
+        ArrayList<String> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT header FROM news", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            list.add(cursor.getString(cursor.getColumnIndex("header")));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
+
+    public ArrayList<String> getDetailNews() {
+        ArrayList<String> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT detail FROM news", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            list.add(cursor.getString(cursor.getColumnIndex("detail")));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
+
+    public String getContentNews(String h) {
+        Cursor cursor = database.rawQuery("SELECT content FROM news WHERE header like '%" + h + "%'", null);
+        cursor.moveToFirst();
+         return cursor.getString(cursor.getColumnIndex("content"));
+    }
+
+    public ArrayList<String> getLinkNews() {
+        ArrayList<String> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT link FROM news", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            list.add(cursor.getString(cursor.getColumnIndex("link")));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
+
+    public ArrayList<Object> getAllFavList() {
         ArrayList<Object> list = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT * FROM favoriteItems ORDER BY type ASC", null);
         cursor.moveToFirst();
-        if(cursor.getCount() != 0){
+        if (cursor.getCount() != 0) {
             while (!cursor.isAfterLast()) {
-                if(cursor.getString(cursor.getColumnIndex("id")).equals("hospital")){
+                if (cursor.getString(cursor.getColumnIndex("id")).equals("hospital")) {
                     String[] tmp = (cursor.getString(cursor.getColumnIndex("location"))).split(", ");
                     list.add(new Hospital(cursor.getString(cursor.getColumnIndex("name")),
                                     Double.parseDouble(tmp[0]), Double.parseDouble(tmp[1]),
@@ -125,7 +173,7 @@ public class DBHelperDAO {
                                     cursor.getString(cursor.getColumnIndex("type"))
                             )
                     );
-                }else{
+                } else {
                     list.add(new Disease(cursor.getString(cursor.getColumnIndex("name")),
                             cursor.getString(cursor.getColumnIndex("type"))));
                 }
@@ -193,7 +241,7 @@ public class DBHelperDAO {
                             "SELECT * FROM hospitalSouth WHERE province='" + p + "' and zone='" + z + "'UNION ALL " +
                             "SELECT * FROM hospitalWest WHERE province='" + p + "' and zone='" + z + "' ORDER BY province ASC"
                     , null);
-        }else if (p == "" && z != "") {
+        } else if (p == "" && z != "") {
             cursor = database.rawQuery(
                     "SELECT * FROM hospitalBangkok WHERE zone='" + z + "'UNION ALL " +
                             "SELECT * FROM hospitalCentral WHERE zone='" + z + "'UNION ALL " +
@@ -203,7 +251,7 @@ public class DBHelperDAO {
                             "SELECT * FROM hospitalSouth WHERE zone='" + z + "'UNION ALL " +
                             "SELECT * FROM hospitalWest WHERE zone='" + z + "' ORDER BY province ASC"
                     , null);
-        }else if (p != "" && z == "") {
+        } else if (p != "" && z == "") {
             cursor = database.rawQuery(
                     "SELECT * FROM hospitalBangkok WHERE province='" + p + "'UNION ALL " +
                             "SELECT * FROM hospitalCentral WHERE province='" + p + "'UNION ALL " +
@@ -365,7 +413,7 @@ public class DBHelperDAO {
     }
 
     public String getDiseaseType(String name) {
-        Cursor cursor = database.rawQuery("SELECT * FROM diseasesandsymptoms WHERE name='"+name+"'", null);
+        Cursor cursor = database.rawQuery("SELECT * FROM diseasesandsymptoms WHERE name='" + name + "'", null);
         cursor.moveToFirst();
         return cursor.getString(cursor.getColumnIndex("type"));
     }
@@ -382,7 +430,7 @@ public class DBHelperDAO {
     public ArrayList<String> checkKeyword(String[] w) {
         System.out.println("Setdatabase = " + w.toString());
 //        Set<String> set = new LinkedHashSet<>();
-        ArrayList<String> list,set = new ArrayList<>();
+        ArrayList<String> list, set = new ArrayList<>();
         String parent = "", synonym = "";
         String[] tmp;
         for (int i = 0; i < w.length; i++) {
@@ -395,19 +443,19 @@ public class DBHelperDAO {
                 System.out.println("Setdatabase = " + parent);
                 if (parent != null && parent != "") {
                     tmp = parent.split(",");
-                    for(int j = 0; j < tmp.length; j++) {
-                        System.out.println("Tmp = "+tmp[j].trim());
+                    for (int j = 0; j < tmp.length; j++) {
+                        System.out.println("Tmp = " + tmp[j].trim());
                         set.add(tmp[j].trim());
                     }
                 } else {
-                    System.out.println("Tmp2 = "+cursor.getString(cursor.getColumnIndex("word")));
+                    System.out.println("Tmp2 = " + cursor.getString(cursor.getColumnIndex("word")));
                     set.add(cursor.getString(cursor.getColumnIndex("word")));
                 }
 
-                if(synonym != null && synonym != ""){
+                if (synonym != null && synonym != "") {
                     System.out.println("Syn = ");
                     tmp = synonym.split(",");
-                    for(int j = 0; j < tmp.length; j++) set.add(tmp[j].trim());
+                    for (int j = 0; j < tmp.length; j++) set.add(tmp[j].trim());
                 }
                 cursor.moveToNext();
             }
@@ -419,20 +467,20 @@ public class DBHelperDAO {
     public ArrayList<Integer> getIndexSymptom(ArrayList<String> arr) {
         ArrayList list = new ArrayList();
         for (int i = 0; i < arr.size(); i++)
-            System.out.println("Word = "+arr.get(i));
+            System.out.println("Word = " + arr.get(i));
         for (int i = 0; i < arr.size(); i++) {
-            System.out.println("Word = "+arr.get(i));
+            System.out.println("Word = " + arr.get(i));
             Cursor cursor = database.rawQuery("SELECT * FROM mainsymptoms WHERE word='" + arr.get(i) + "' ORDER BY word ASC", null);
             cursor.moveToFirst();
             list.add(cursor.getInt(cursor.getColumnIndex("id")));
-            System.out.println("Word = "+cursor.getInt(cursor.getColumnIndex("id")));
+            System.out.println("Word = " + cursor.getInt(cursor.getColumnIndex("id")));
         }
         return list;
     }
 
     public ArrayList<Disease> getDiseaseFromType(String type) {
         ArrayList<Disease> list = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT * FROM diseasesandsymptoms WHERE type like '%"+type+"%'", null);
+        Cursor cursor = database.rawQuery("SELECT * FROM diseasesandsymptoms WHERE type like '%" + type + "%'", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             list.add(new Disease(
@@ -445,9 +493,9 @@ public class DBHelperDAO {
         return list;
     }
 
-    public ArrayList<String> getFirstaidList(String indicator){
+    public ArrayList<String> getFirstaidList(String indicator) {
         ArrayList<String> list = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT * FROM firstaid WHERE type='"+indicator+"' ORDER BY title ASC", null);
+        Cursor cursor = database.rawQuery("SELECT * FROM firstaid WHERE type='" + indicator + "' ORDER BY title ASC", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             list.add(cursor.getString(cursor.getColumnIndex("title")));
@@ -457,34 +505,34 @@ public class DBHelperDAO {
         return list;
     }
 
-    public int getFirstaidId(String indicator){
+    public int getFirstaidId(String indicator) {
         int id = -1;
-        Cursor cursor = database.rawQuery("SELECT * FROM firstaid WHERE title='"+indicator+"'", null);
+        Cursor cursor = database.rawQuery("SELECT * FROM firstaid WHERE title='" + indicator + "'", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            id=cursor.getInt(cursor.getColumnIndex("id"));
+            id = cursor.getInt(cursor.getColumnIndex("id"));
             cursor.moveToNext();
         }
         cursor.close();
         return id;
     }
 
-    public ArrayList getFirstaidDetail(int indicator){
+    public ArrayList getFirstaidDetail(int indicator) {
         ArrayList list = new ArrayList();
-        Cursor cursor = database.rawQuery("SELECT * FROM subject WHERE id='"+indicator+"'", null);
+        Cursor cursor = database.rawQuery("SELECT * FROM subject WHERE id='" + indicator + "'", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            if(cursor.getString(cursor.getColumnIndex("subject_title")).equals("ข้อควรระวัง")){
+            if (cursor.getString(cursor.getColumnIndex("subject_title")).equals("ข้อควรระวัง")) {
                 list.add(new SubjectRedItem(cursor.getString(cursor.getColumnIndex("subject_title"))));
-            }else{
+            } else {
                 list.add(new SubjectItem(cursor.getString(cursor.getColumnIndex("subject_title"))));
             }
 
-            String[] check = {"2.","3.","4.","5.","6.","7.","8.","9.","10.","11."};
+            String[] check = {"2.", "3.", "4.", "5.", "6.", "7.", "8.", "9.", "10.", "11."};
             String temp = cursor.getString(cursor.getColumnIndex("subject_detail"));
             String add = "";
-            for(int i =0;i<check.length;i++){
-                if(temp.toLowerCase().contains(check[i].toLowerCase())){
+            for (int i = 0; i < check.length; i++) {
+                if (temp.toLowerCase().contains(check[i].toLowerCase())) {
 
                     int index = temp.indexOf(check[i], 0);
 
@@ -494,18 +542,18 @@ public class DBHelperDAO {
 
                 }
             }
-            list.add(new DetailItem(temp+"\n"));
+            list.add(new DetailItem(temp + "\n"));
 //            list.add(new DetailItem(cursor.getString(cursor.getColumnIndex("subject_detail"))));
 //            list.add(new DetailItem(cursor.getString(cursor.getColumnIndex("subject_detail"))));
 
             int subject_id = cursor.getInt(cursor.getColumnIndex("subject_id"));
-            Cursor cursorPic = database.rawQuery("SELECT * FROM picture WHERE subject_id='"+subject_id+"'", null);
+            Cursor cursorPic = database.rawQuery("SELECT * FROM picture WHERE subject_id='" + subject_id + "'", null);
             cursorPic.moveToFirst();
             while (!cursorPic.isAfterLast()) {
-                if(!cursorPic.isNull(1)) {
+                if (!cursorPic.isNull(1)) {
                     list.add(new PicItem(cursorPic.getBlob(1)));
                 }
-                if(!cursorPic.isNull(2)) {
+                if (!cursorPic.isNull(2)) {
                     list.add(new PicDetailItem(cursorPic.getString(cursorPic.getColumnIndex("description"))));
                 }
                 cursorPic.moveToNext();
@@ -518,13 +566,13 @@ public class DBHelperDAO {
         return list;
     }
 
-    public ArrayList<ChoiceItem> getSymptomsChoice(){
+    public ArrayList<ChoiceItem> getSymptomsChoice() {
         ArrayList<ChoiceItem> list = new ArrayList();
         Cursor cursor = database.rawQuery("SELECT * FROM symptoms_choice ORDER BY word ASC", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
 //            list.add(cursor.getString(cursor.getColumnIndex("word")));
-            list.add(new ChoiceItem(cursor.getString(cursor.getColumnIndex("word")),false));
+            list.add(new ChoiceItem(cursor.getString(cursor.getColumnIndex("word")), false));
             cursor.moveToNext();
         }
         cursor.close();

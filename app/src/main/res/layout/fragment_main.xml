@@ -15,12 +15,27 @@
         <!--android:paddingRight="@dimen/activity_horizontal_margin"-->
         <!--android:paddingTop="@dimen/activity_vertical_margin"-->
         <!--tools:context="com.exampledemo.parsaniahardik.imagesliderdemonuts.MainActivity">-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <RelativeLayout
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:fontFamily="@font/kanit"
+        android:textSize="25dp"
+        android:text="ข่าวสุขภาพ" />
+
+    <RelativeLayout
             android:layout_width="match_parent"
+            android:background="@color/grey"
             android:layout_height="250dp" >
 
-            <android.support.v4.view.ViewPager
+
+        <android.support.v4.view.ViewPager
                 android:id="@+id/pagerSlider"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -35,11 +50,13 @@
                 android:gravity="bottom"
                 android:padding="10dip"
                 app:centered="true"
+                app:strokeColor="@color/mdtp_dark_gray"
                 app:fillColor="@color/white"
                 app:pageColor="@color/grey"
                 app:snap="false" />
         <!--</RelativeLayout>-->
     </RelativeLayout>
+    </LinearLayout>
 
     <!--<com.daimajia.slider.library.SliderLayout-->
         <!--android:id="@+id/slider"-->
@@ -52,18 +69,18 @@
         <!--android:layout_height="wrap_content"-->
         <!--android:gravity="center"-->
         <!--/>-->
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_weight="1"
-        android:text="Mobile App"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!--<TextView-->
+        <!--android:id="@+id/textView2"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:text="Mobile App"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent" />-->
 </android.support.constraint.ConstraintLayout>
