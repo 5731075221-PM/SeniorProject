@@ -20,14 +20,14 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:orientation="horizontal"
-            android:weightSum="4">
+            android:weightSum="2.5">
 
             <ImageView
                 android:id="@+id/imageView4"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
                 android:clickable="false"
                 android:src="@drawable/medicine" />
 
@@ -36,7 +36,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_weight="3"
+                android:layout_weight="2"
                 android:background="@drawable/textbox"
                 android:hint="ชื่อยา"
                 android:textColor="@color/cardview_dark_background"
@@ -48,14 +48,14 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:orientation="horizontal"
-            android:weightSum="4">
+            android:weightSum="2.5">
 
             <ImageView
                 android:id="@+id/imageView6"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
                 android:src="@drawable/drug" />
 
             <EditText
@@ -63,7 +63,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_weight="1.5"
+                android:layout_weight="1"
                 android:background="@drawable/textbox"
                 android:inputType="number"
                 android:text="1"
@@ -76,7 +76,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="1.5"
+                android:layout_weight="1"
                 android:text="เม็ด"
                 android:textColor="@color/cardview_dark_background"
                 android:textSize="18sp" />
@@ -90,21 +90,21 @@
             android:orientation="horizontal"
             android:paddingBottom="12.5dp"
             android:paddingTop="12.5dp"
-            android:weightSum="4">
+            android:weightSum="2.5">
 
             <ImageView
                 android:id="@+id/imageView5"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
                 android:layout_gravity="top"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
                 android:src="@drawable/cutlery" />
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
-                android:layout_weight="1.5"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <CheckBox
@@ -153,7 +153,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
-                android:layout_weight="1.5"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <CheckBox
@@ -184,14 +184,14 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:orientation="horizontal"
-            android:weightSum="4">
+            android:weightSum="2.5">
 
             <ImageView
                 android:id="@+id/imageView7"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
                 android:clickable="false"
                 android:src="@drawable/clock" />
 
@@ -200,7 +200,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_weight="3"
+                android:layout_weight="2"
                 android:paddingRight="25dp"
                 android:text="แจ้งเตือน"
                 android:textColor="@color/cardview_dark_background"

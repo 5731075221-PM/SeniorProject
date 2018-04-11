@@ -1,10 +1,19 @@
 package com.example.uefi.seniorproject.alert;
 
 
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -24,6 +33,10 @@ import com.example.uefi.seniorproject.R;
 import com.example.uefi.seniorproject.databases.InternalDatabaseHelper;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+
+import static android.content.Context.ALARM_SERVICE;
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,6 +54,7 @@ public class AlertAddFragment extends Fragment {
     public Switch alert;
     public InternalDatabaseHelper internalDatabaseHelper;
     public ArrayList listFromDB;
+    public Toast toast;
 
     public AlertAddFragment() {
         // Required empty public constructor
@@ -59,7 +73,7 @@ public class AlertAddFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_alert_add, container, false);
+        final View view = inflater.inflate(R.layout.fragment_alert_add, container, false);
 
         appBarLayout.setExpanded(true, true);
         textTool = (TextView) getActivity().findViewById(R.id.textTool);
@@ -144,22 +158,35 @@ public class AlertAddFragment extends Fragment {
                 if(!breakfastCheckbox.isChecked() &&
                         !lunchCheckbox.isChecked() &&
                         !dinnerCheckbox.isChecked()){
-//                    breakfastCheckbox.setChecked(true);
-//                    lunchCheckbox.setChecked(true);
-//                    dinnerCheckbox.setChecked(true);
-                    Toast.makeText(getActivity(), "กรุณาเลือกช่วงเวลาที่ต้องรับประทานยา",
-                            Toast.LENGTH_SHORT ).show();
+                    if(toast ==null) {
+
+                    }else {
+                        toast.cancel();
+                    }
+                    toast = Toast.makeText(getActivity(), "กรุณาเลือกช่วงเวลาที่ต้องรับประทานยา",
+                            Toast.LENGTH_SHORT);
+                    toast.show();
+
                 }else {
 
                     if (state.equals("add")) {
-                        internalDatabaseHelper.createAlert(medicineName, medicineNum,
-                                breakfastCheckbox.isChecked() ? 1 : 0,
-                                lunchCheckbox.isChecked() ? 1 : 0,
-                                dinnerCheckbox.isChecked() ? 1 : 0,
-                                bedCheckbox.isChecked() ? 1 : 0,
-                                beforeCheckbox.isChecked() ? 1 : 0,
-                                afterCheckbox.isChecked() ? 1 : 0,
-                                alert.isChecked() ? 1 : 0);
+                        int id = internalDatabaseHelper.createAlert(medicineName, medicineNum,
+                                    breakfastCheckbox.isChecked() ? 1 : 0,
+                                    lunchCheckbox.isChecked() ? 1 : 0,
+                                    dinnerCheckbox.isChecked() ? 1 : 0,
+                                    bedCheckbox.isChecked() ? 1 : 0,
+                                    beforeCheckbox.isChecked() ? 1 : 0,
+                                    afterCheckbox.isChecked() ? 1 : 0,
+                                    alert.isChecked() ? 1 : 0);
+
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.set(Calendar.HOUR_OF_DAY,14);
+                        calendar.set(Calendar.MINUTE,56);
+                        Intent intent = new Intent(getActivity(),AlarmReceiver.class);
+                        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(),100,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+                        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+                        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),alarmManager.INTERVAL_DAY,pendingIntent);
+
                     } else if (state.equals("edit")) {
                         internalDatabaseHelper.updateAlert(alert_id, medicineName, medicineNum,
                                 breakfastCheckbox.isChecked() ? 1 : 0,

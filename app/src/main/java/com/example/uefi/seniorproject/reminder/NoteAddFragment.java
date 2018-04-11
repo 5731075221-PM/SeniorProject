@@ -236,9 +236,9 @@ public class NoteAddFragment extends Fragment {
             }
         }
         if(set==""){
-            arrow.setImageResource(R.drawable.right_arrow);
+            arrow.setImageResource(R.drawable.ic_action_keyboard_arrow_right);
         }else{
-            arrow.setImageResource(R.drawable.down_arrow);
+            arrow.setImageResource(R.drawable.ic_action_keyboard_arrow_down);
         }
         selectChoice.setText(set);
     }

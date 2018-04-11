@@ -96,7 +96,6 @@ public class InternalDatabaseHelper extends SQLiteOpenHelper {
                 "bed_minute INTEGER " +
                 ")";
         sqLiteDatabase.execSQL(sql_settings);
-//        createSetting();
 
         ContentValues values = new ContentValues();
         values.put("id_setting", 1);
@@ -341,7 +340,7 @@ public class InternalDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void createAlert(String name,int num,int breakfast,int lunch,int dinner,int bed,int before, int after,int isAlert) {
+    public int createAlert(String name,int num,int breakfast,int lunch,int dinner,int bed,int before, int after,int isAlert) {
         ContentValues values = new ContentValues();
         values.put("medicine_name", name);
         values.put("medicine_num", num);
@@ -355,6 +354,7 @@ public class InternalDatabaseHelper extends SQLiteOpenHelper {
 
         // insert row
         long alert_id = database.insert("alerts", null, values);
+        return (int) alert_id;
     }
 
     public ArrayList readAllAlert(){

@@ -81,7 +81,6 @@ public class AlertSettingFragment extends Fragment {
                 mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-
                         dateBreakfast.setText(setTextDate(selectedHour,selectedMinute));
                         breakfast_hour = selectedHour;
                         breakfast_minute = selectedMinute;
@@ -100,7 +99,6 @@ public class AlertSettingFragment extends Fragment {
                 mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-
                         dateLunch.setText(setTextDate(selectedHour,selectedMinute));
                         lunch_hour = selectedHour;
                         lunch_minute = selectedMinute;
@@ -119,7 +117,6 @@ public class AlertSettingFragment extends Fragment {
                 mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-
                         dateDinner.setText(setTextDate(selectedHour,selectedMinute));
                         dinner_hour = selectedHour;
                         dinner_minute = selectedMinute;
@@ -138,7 +135,6 @@ public class AlertSettingFragment extends Fragment {
                 mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-
                         dateBed.setText(setTextDate(selectedHour,selectedMinute));
                         bed_hour = selectedHour;
                         bed_minute = selectedMinute;
@@ -151,16 +147,16 @@ public class AlertSettingFragment extends Fragment {
 
 
         //save
-        save = (LinearLayout) view.findViewById(R.id.add);
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                internalDatabaseHelper.updateSetting(
-                        breakfast_hour,breakfast_minute,lunch_hour,lunch_minute,dinner_hour,dinner_minute,bed_hour,bed_minute
-                );
-                getFragmentManager().popBackStack();
-            }
-        });
+//        save = (LinearLayout) view.findViewById(R.id.add);
+//        save.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                internalDatabaseHelper.updateSetting(
+//                        breakfast_hour,breakfast_minute,lunch_hour,lunch_minute,dinner_hour,dinner_minute,bed_hour,bed_minute
+//                );
+//                getFragmentManager().popBackStack();
+//            }
+//        });
 
         return view;
     }
@@ -204,11 +200,15 @@ public class AlertSettingFragment extends Fragment {
 
     public void onResume() {
         super.onResume();
-        textTool.setText("ตั้งค่าเวลา");
+        textTool.setText("ตั้งค่า");
     }
 
-    public void onDestroy() {
-        super.onDestroy();
+    public void onPause() {
+        super.onPause();
+        internalDatabaseHelper.updateSetting(
+                breakfast_hour,breakfast_minute,lunch_hour,lunch_minute,dinner_hour,dinner_minute,bed_hour,bed_minute
+        );
+//        getFragmentManager().popBackStack();
     }
 
 

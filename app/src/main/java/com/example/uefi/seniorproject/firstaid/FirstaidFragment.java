@@ -2,15 +2,23 @@ package com.example.uefi.seniorproject.firstaid;
 
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.example.uefi.seniorproject.R;
@@ -54,6 +62,32 @@ public class FirstaidFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 toolbar = "ตา หู คอ";
+
+
+                Bitmap bitmap = BitmapFactory.decodeResource(getActivity().getResources(),
+                        R.drawable.ic_clock);
+
+                Notification notification =
+                        new NotificationCompat.Builder(getActivity())
+                                .setSmallIcon(R.drawable.clock)
+                                .setLargeIcon(bitmap)
+                                .setContentTitle("Mymor")
+                                .setContentText("Good night.")
+                                .setAutoCancel(false)
+                                .setColor(getResources().getColor(R.color.nav_bar))
+                                .setVibrate(new long[] { 500, 1000, 500 })
+                                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC )
+                                .setPriority(NotificationCompat.PRIORITY_MAX)
+                                .build();
+
+
+                NotificationManager notificationManager =
+                        (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+                notificationManager.notify(1000, notification);
+
+
+
+
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container_fragment, FirstaidTypeFragment.newInstance(toolbar))
                         .addToBackStack(toolbar)
