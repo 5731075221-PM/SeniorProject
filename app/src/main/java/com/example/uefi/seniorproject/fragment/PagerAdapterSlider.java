@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.uefi.seniorproject.MainActivity;
 import com.example.uefi.seniorproject.R;
 import com.squareup.picasso.Picasso;
 
@@ -38,7 +40,8 @@ public class PagerAdapterSlider extends PagerAdapter {
     private LayoutInflater inflater;
     private Context context;
     FragmentManager manager;
-
+    ActionBarDrawerToggle toggle;
+    private boolean mToolBarNavigationListenerIsRegistered = false;
 
     public PagerAdapterSlider(Context context, FragmentManager manager, ArrayList<String> IMAGES, ArrayList<String> TITLES, ArrayList<String> DETAIL, ArrayList<String> LINKS) {
         this.context = context;
@@ -72,6 +75,7 @@ public class PagerAdapterSlider extends PagerAdapter {
         imageLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 System.out.println("pos = "+pos);
                 Bundle args = new Bundle();
                 args.putString("link", LINKS.get(pos));

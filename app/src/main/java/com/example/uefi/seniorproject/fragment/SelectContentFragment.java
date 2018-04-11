@@ -38,6 +38,9 @@ public class SelectContentFragment extends Fragment{
     String url, h, d;
     Toolbar toolbar;
 
+    ActionBarDrawerToggle toggle;
+    private boolean mToolBarNavigationListenerIsRegistered = false;
+
     public class FetchData extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -83,8 +86,32 @@ public class SelectContentFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_select_content, container, false);
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar = getActivity().findViewById(R.id.toolbar);
+
+
+
+        DrawerLayout drawer = (DrawerLayout) (getActivity()).findViewById(R.id.drawer_layout);
+
+        toggle = new ActionBarDrawerToggle( getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        toggle.setDrawerIndicatorEnabled(false);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(!mToolBarNavigationListenerIsRegistered) {
+            toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Doesn't have to be onBackPressed
+                   getFragmentManager().popBackStack();
+                    ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                    toggle.setDrawerIndicatorEnabled(true);
+
+                }
+            });
+            mToolBarNavigationListenerIsRegistered = true;
+        }
 
 
 //        toolbar.setNavigationOnClickListener(new View.OnClickListener() {

@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ActionBarDrawerToggle toggle;
     FragmentManager fragmentManager;
     private boolean mToolBarNavigationListenerIsRegistered = false;
+    DrawerLayout drawer;
 
 //    @Override
 //    protected void attachBaseContext(Context newBase) {
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Kanit-Regular.ttf");
         textTool.setTypeface(font);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
