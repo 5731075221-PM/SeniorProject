@@ -93,7 +93,9 @@ public class InternalDatabaseHelper extends SQLiteOpenHelper {
                 "dinner_hour INTEGER, "+
                 "dinner_minute INTEGER, "+
                 "bed_hour INTEGER, "+
-                "bed_minute INTEGER " +
+                "bed_minute INTEGER, " +
+                "vibrate INTEGER, " +
+                "sound INTEGER " +
                 ")";
         sqLiteDatabase.execSQL(sql_settings);
 
@@ -107,6 +109,8 @@ public class InternalDatabaseHelper extends SQLiteOpenHelper {
         values.put("dinner_minute",00);
         values.put("bed_hour",22);
         values.put("bed_minute",00);
+        values.put("vibrate",1);
+        values.put("sound",1);
 
         // insert row
         long alert_id = sqLiteDatabase.insert("settings", null, values);
@@ -118,7 +122,7 @@ public class InternalDatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS notes");
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS symptom_notes");
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS alerts");
-
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS settings");
         // create new tables
         onCreate(sqLiteDatabase);
     }
@@ -432,6 +436,72 @@ public class InternalDatabaseHelper extends SQLiteOpenHelper {
         return times;
     }
 
+    public ArrayList readAllAlertByIFAlertBefore(String column){
+        ArrayList times = new ArrayList();
+        String sql = "SELECT * FROM alerts "+"WHERE "+ column + " = 1" +
+                " AND is_alert ='"+1+"'"+ " AND before ='"+1+"'" +" ORDER BY medicine_name";
+        Cursor cursor = database.rawQuery(sql,null);
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+
+            times.add(new NoteItem(
+                    cursor.getString(cursor.getColumnIndex("medicine_name")),
+                    cursor.getInt(cursor.getColumnIndex("id_alert")),
+                    cursor.getInt(cursor.getColumnIndex("medicine_num")),
+                    column
+            ));
+
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return times;
+    }
+
+    public ArrayList readAllAlertByIFAlertAfter(String column){
+        ArrayList times = new ArrayList();
+        String sql = "SELECT * FROM alerts "+"WHERE "+ column + " = 1" +
+                " AND is_alert ='"+1+"'"+ " AND after ='"+1+"'" +" ORDER BY medicine_name";
+        Cursor cursor = database.rawQuery(sql,null);
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+
+            times.add(new NoteItem(
+                    cursor.getString(cursor.getColumnIndex("medicine_name")),
+                    cursor.getInt(cursor.getColumnIndex("id_alert")),
+                    cursor.getInt(cursor.getColumnIndex("medicine_num")),
+                    column
+            ));
+
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return times;
+    }
+
+    public ArrayList readAllAlertByIFAlert(String column){
+        ArrayList times = new ArrayList();
+        String sql = "SELECT * FROM alerts "+"WHERE "+ column + " = 1" +
+                " AND is_alert ='"+1+"'" +" ORDER BY medicine_name";
+        Cursor cursor = database.rawQuery(sql,null);
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+
+            times.add(new NoteItem(
+                    cursor.getString(cursor.getColumnIndex("medicine_name")),
+                    cursor.getInt(cursor.getColumnIndex("id_alert")),
+                    cursor.getInt(cursor.getColumnIndex("medicine_num")),
+                    column
+            ));
+
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return times;
+    }
+
     public ArrayList readAlert(int id_alert){
 
         ArrayList  alert = new ArrayList();
@@ -493,7 +563,7 @@ public class InternalDatabaseHelper extends SQLiteOpenHelper {
         long alert_id = database.insert("settings", null, values);
     }
 
-    public void updateSetting(int breakfast_hour,int breakfast_minute,int lunch_hour,int lunch_minute,int dinner_hour,int dinner_minute, int bed_hour,int bed_minute){
+    public void updateSetting(int breakfast_hour,int breakfast_minute,int lunch_hour,int lunch_minute,int dinner_hour,int dinner_minute, int bed_hour,int bed_minute,int vibrate,int sound){
         ContentValues values = new ContentValues();
         values.put("breakfast_hour", breakfast_hour);
         values.put("breakfast_minute", breakfast_minute);
@@ -503,6 +573,8 @@ public class InternalDatabaseHelper extends SQLiteOpenHelper {
         values.put("dinner_minute",dinner_minute);
         values.put("bed_hour",bed_hour);
         values.put("bed_minute",bed_minute);
+        values.put("vibrate",vibrate);
+        values.put("sound",sound);
         database.update("settings", values, "id_setting="+1, null);
     }
 
@@ -524,6 +596,9 @@ public class InternalDatabaseHelper extends SQLiteOpenHelper {
             setting.add(cursor.getInt(cursor.getColumnIndex("dinner_minute")));
             setting.add(cursor.getInt(cursor.getColumnIndex("bed_hour")));
             setting.add(cursor.getInt(cursor.getColumnIndex("bed_minute")));
+            setting.add(cursor.getInt(cursor.getColumnIndex("vibrate")));
+            setting.add(cursor.getInt(cursor.getColumnIndex("sound")));
+
             cursor.moveToNext();
         }
         cursor.close();

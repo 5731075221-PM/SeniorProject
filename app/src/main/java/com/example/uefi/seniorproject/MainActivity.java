@@ -52,14 +52,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        dictList = dbHelperDAO.getLexitron();
 //        stopwordList = dbHelperDAO.getStopword();
 
-        Singleton single = Singleton.getInstance();
+//        Singleton single = Singleton.getInstance();
 //        if(single.getDict().size() != 0){
 //            System.out.println("size = "+single.getDict().size());
 //            System.out.println("size = "+single.getStopword().size());
 //        }
 
-        dictList = single.getDict();
-        stopwordList = single.getStopword();
+//        dictList = single.getDict();
+//        stopwordList = single.getStopword();
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
