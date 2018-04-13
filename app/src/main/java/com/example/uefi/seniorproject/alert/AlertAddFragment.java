@@ -94,13 +94,13 @@ public class AlertAddFragment extends Fragment {
             beforeCheckbox.setChecked(true);
             alert.setChecked(true);
         }else if (state.equals("edit")){
-            breakfastCheckbox.setChecked(Integer.parseInt(listFromDB.get(2).toString()) == 1 ? true : false);
-            lunchCheckbox.setChecked(Integer.parseInt(listFromDB.get(3).toString()) == 1 ? true : false);
-            dinnerCheckbox.setChecked(Integer.parseInt(listFromDB.get(4).toString()) == 1 ? true : false);
-            bedCheckbox.setChecked(Integer.parseInt(listFromDB.get(5).toString()) == 1 ? true : false);
-            beforeCheckbox.setChecked(Integer.parseInt(listFromDB.get(6).toString()) == 1 ? true : false);
-            afterCheckbox.setChecked(Integer.parseInt(listFromDB.get(7).toString()) == 1 ? true : false);
-            alert.setChecked(Integer.parseInt(listFromDB.get(8).toString()) == 1 ? true : false);
+            breakfastCheckbox.setChecked(Integer.parseInt(listFromDB.get(2).toString()) == 1);
+            lunchCheckbox.setChecked(Integer.parseInt(listFromDB.get(3).toString()) == 1);
+            dinnerCheckbox.setChecked(Integer.parseInt(listFromDB.get(4).toString()) == 1);
+            bedCheckbox.setChecked(Integer.parseInt(listFromDB.get(5).toString()) == 1);
+            beforeCheckbox.setChecked(Integer.parseInt(listFromDB.get(6).toString()) == 1);
+            afterCheckbox.setChecked(Integer.parseInt(listFromDB.get(7).toString()) == 1);
+            alert.setChecked(Integer.parseInt(listFromDB.get(8).toString()) == 1);
         }
 
         beforeCheckbox.setOnClickListener(new View.OnClickListener() {

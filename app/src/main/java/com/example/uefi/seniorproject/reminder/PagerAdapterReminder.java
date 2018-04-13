@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.example.uefi.seniorproject.alert.AlertFragment;
+import com.example.uefi.seniorproject.alert.AppointmentFragment;
 import com.example.uefi.seniorproject.firstaid.FirstaidFragment;
 
 /**
@@ -28,8 +29,11 @@ public class PagerAdapterReminder extends FragmentStatePagerAdapter {
                 NotesFragment tab1 = new NotesFragment();
                 return tab1;
             case 1:
-                AlertFragment tab2 = new AlertFragment();
+                AppointmentFragment tab2 = new AppointmentFragment();
                 return tab2;
+            case 2:
+                AlertFragment tab3 = new AlertFragment();
+                return tab3;
             default:
                 return null;
         }

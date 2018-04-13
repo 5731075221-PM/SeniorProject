@@ -36,8 +36,6 @@ public class AlarmReceiver extends BroadcastReceiver {
         ArrayList<Integer> setting = internalDatabaseHelper.readSetting();
 
         int code= intent.getIntExtra("requestCode", 1);
-        ArrayList<String> list = intent.getStringArrayListExtra("list");
-        ArrayList<Integer> quantity = intent.getIntegerArrayListExtra("quantity");
 
         NotificationCompat.InboxStyle inboxStyle =
                 new NotificationCompat.InboxStyle();
@@ -54,12 +52,34 @@ public class AlarmReceiver extends BroadcastReceiver {
             inboxStyle.setBigContentTitle("อย่าลืมรับประทาน ยาก่อนอาหารเย็น");
         }else if (code== 6){
             inboxStyle.setBigContentTitle("อย่าลืมรับประทาน ยาหลังอาหารเย็น");
-        }else{
+        }else if(code==7){
             inboxStyle.setBigContentTitle("อย่าลืมรับประทาน ยาก่อนนอน");
+        }else if(code==9){
+            inboxStyle.setBigContentTitle("พรุ่งนี้มีนัดพบแพทย์");
         }
 
-        for(int i=0;i<list.size();i++){
-            inboxStyle.addLine(list.get(i) +" จำนวน " + quantity.get(i)+ " เม็ด");
+        if(code<9) {
+            ArrayList<String> list = intent.getStringArrayListExtra("list");
+            ArrayList<Integer> quantity = intent.getIntegerArrayListExtra("quantity");
+            for (int i = 0; i < list.size(); i++) {
+                inboxStyle.addLine(list.get(i) + " จำนวน " + quantity.get(i) + " เม็ด");
+            }
+        }else{
+            ArrayList<String> list = intent.getStringArrayListExtra("list");
+            int hour = intent.getIntExtra("hour",1);
+            int minute = intent.getIntExtra("minute",1);
+            String hospital = intent.getStringExtra("hospital");
+            String selectHour = hour+"";
+            String selectMinute = minute + "";
+            if(hour<9){
+                selectHour = "0"+selectHour;
+            }
+            if(minute<9){
+                selectMinute = "0" +selectMinute;
+            }
+            String time = (selectHour + ":" + selectMinute + " น.");
+            inboxStyle.addLine("ที่โรงพยาบาล "+ hospital+ " เวลา " + time);
+            inboxStyle.addLine("อย่าลืมนำใบนัดพบแพทย์ไปด้วย");
         }
 
         Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
@@ -96,8 +116,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                         .setColor(context.getResources().getColor(R.color.nav_bar))
                         .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                         .setPriority(NotificationCompat.PRIORITY_MAX)
-                        .setOngoing(true)
-                        .addAction(R.drawable.ic_action_check, "รับประทานยาแล้ว", dismissIntent);
+                        .setOngoing(true);
 
         if(setting.get(8) ==1){
             builder.setVibrate(new long[] { 500, 1000, 500 });
@@ -105,12 +124,15 @@ public class AlarmReceiver extends BroadcastReceiver {
         if(setting.get(9) ==1){
             builder.setSound(soundUri);
         }
+        if(code==9){
+            builder.addAction(R.drawable.ic_action_check, "ตกลง", dismissIntent);
 
+        }else{
+            builder.addAction(R.drawable.ic_action_check, "รับประทานยาแล้ว", dismissIntent);
+        }
 
 
         Notification notification = builder.build();
-
-//        notification.audioStreamType = AudioManager.STREAM_NOTIFICATION;
 
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

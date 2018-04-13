@@ -30,7 +30,6 @@ import java.util.ArrayList;
  */
 public class AlertFragment extends Fragment {
     public TextView add;
-    public DBHelperDAO dbHelperDAO;
     public InternalDatabaseHelper internalDatabaseHelper;
     public ArrayList<ChoiceItem> listAlert;
     public RecyclerView.LayoutManager mLayoutManager;
@@ -141,8 +140,6 @@ public class AlertFragment extends Fragment {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dbHelperDAO = DBHelperDAO.getInstance(getActivity());
-        dbHelperDAO.open();
 
         internalDatabaseHelper = InternalDatabaseHelper.getInstance(getActivity());
         internalDatabaseHelper.open();

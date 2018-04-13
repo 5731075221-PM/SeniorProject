@@ -39,7 +39,7 @@ import static android.content.Context.ALARM_SERVICE;
  */
 public class AlertSettingFragment extends Fragment {
 
-    public LinearLayout breakfast,lunch,dinner,bed,save;
+    public LinearLayout breakfast,lunch,dinner,bed;
     public TextView textTool,dateBreakfast,dateLunch,dateDinner,dateBed;
     public AppBarLayout appBarLayout;
     public InternalDatabaseHelper internalDatabaseHelper;
@@ -175,18 +175,6 @@ public class AlertSettingFragment extends Fragment {
 
             }
         });
-
-        //save
-//        save = (LinearLayout) view.findViewById(R.id.add);
-//        save.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                internalDatabaseHelper.updateSetting(
-//                        breakfast_hour,breakfast_minute,lunch_hour,lunch_minute,dinner_hour,dinner_minute,bed_hour,bed_minute
-//                );
-//                getFragmentManager().popBackStack();
-//            }
-//        });
 
         return view;
     }
