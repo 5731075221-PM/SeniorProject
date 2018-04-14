@@ -7,6 +7,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -92,6 +95,29 @@ public class AppointmentFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.alert, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.action_setting:
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container_fragment, AlertSettingFragment.newInstance())
+                        .addToBackStack("เพิ่มรายการยา")
+                        .commit();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -100,6 +126,16 @@ public class AppointmentFragment extends Fragment {
 
         appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
 //        setHasOptionsMenu(true);
+    }
+
+    public void onResume() {
+        super.onResume();
+        setHasOptionsMenu(true);
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
+        setHasOptionsMenu(false);
     }
 
 }

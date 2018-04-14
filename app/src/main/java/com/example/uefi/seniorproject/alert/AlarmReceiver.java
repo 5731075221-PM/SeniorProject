@@ -54,11 +54,11 @@ public class AlarmReceiver extends BroadcastReceiver {
             inboxStyle.setBigContentTitle("อย่าลืมรับประทาน ยาหลังอาหารเย็น");
         }else if(code==7){
             inboxStyle.setBigContentTitle("อย่าลืมรับประทาน ยาก่อนนอน");
-        }else if(code==9){
+        }else if(code==8){
             inboxStyle.setBigContentTitle("พรุ่งนี้มีนัดพบแพทย์");
         }
 
-        if(code<9) {
+        if(code<8) {
             ArrayList<String> list = intent.getStringArrayListExtra("list");
             ArrayList<Integer> quantity = intent.getIntegerArrayListExtra("quantity");
             for (int i = 0; i < list.size(); i++) {
@@ -124,7 +124,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         if(setting.get(9) ==1){
             builder.setSound(soundUri);
         }
-        if(code==9){
+        if(code==8){
             builder.addAction(R.drawable.ic_action_check, "ตกลง", dismissIntent);
 
         }else{

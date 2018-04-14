@@ -211,10 +211,10 @@ public class AlertAddFragment extends Fragment {
 //
 
 //                    Intent intent = new Intent(getActivity(), AlarmReceiver.class);
-//                    intent.putExtra("requestCode", 8);
+//                    intent.putExtra("requestCode", 9);
 //                    intent.putStringArrayListExtra("list", breakfast);
 //                    intent.putIntegerArrayListExtra("quantity", quantity);
-//                    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 8, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//                    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 9, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 //                    AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
 //                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), alarmManager.INTERVAL_DAY, pendingIntent);
 

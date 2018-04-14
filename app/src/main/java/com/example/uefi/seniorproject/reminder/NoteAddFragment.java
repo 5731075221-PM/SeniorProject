@@ -10,11 +10,16 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -56,6 +61,9 @@ public class NoteAddFragment extends Fragment {
     public String[] dateComment;
     public LinearLayout addChoice,save;
     public AppBarLayout appBarLayout;
+    private boolean mToolBarNavigationListenerIsRegistered = false;
+    ActionBarDrawerToggle toggle;
+    DrawerLayout drawer;
 
     public NoteAddFragment() {
         // Required empty public constructor
@@ -271,6 +279,42 @@ public class NoteAddFragment extends Fragment {
             comment = dateComment[3];
         }
         appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
+
+        drawer = (DrawerLayout) (getActivity()).findViewById(R.id.drawer_layout);
+
+
+        Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
+        toggle = new ActionBarDrawerToggle( getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.setDrawerIndicatorEnabled(false);
+        toggle.syncState();
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if(!mToolBarNavigationListenerIsRegistered) {
+            toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Doesn't have to be onBackPressed
+//                    getFragmentManager().popBackStack();
+//                    if(getActivity().getSupportFragmentManager().getBackStackEntryCount() == 0)
+//                        drawer.openDrawer(Gravity.START);
+//
+                    if(getActivity().getSupportFragmentManager().getBackStackEntryCount() == 1) {
+                        toggle.setDrawerIndicatorEnabled(true);
+                        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                        toggle.syncState();
+                        getFragmentManager().popBackStack();
+                    }
+                    else
+                        ((AppCompatActivity) getActivity()).onBackPressed();
+//                    ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+//                    toggle.setDrawerIndicatorEnabled(true);
+                }
+            });
+            mToolBarNavigationListenerIsRegistered = true;
+        }
+
     }
 
     public void setupUI(View view) {

@@ -15,6 +15,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -162,9 +163,9 @@ public class AppointmentAddFragment extends Fragment {
                 if (listIFAlert.size() == 0) {
                     Log.i("appointment add", "size==0");
                     Intent intent = new Intent(getActivity(), AlarmReceiver.class);
-                    intent.putExtra("requestCode", 9);
+                    intent.putExtra("requestCode", 8);
 //                    intent.putStringArrayListExtra("list", new ArrayList<String>());
-                    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 9, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 8, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                     pendingIntent.cancel();
                     AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
                     alarmManager.cancel(pendingIntent);
@@ -173,11 +174,11 @@ public class AppointmentAddFragment extends Fragment {
                     calendar.set(year, month, day-1, 18, 0);
 
                     Intent intent = new Intent(getActivity(), AlarmReceiver.class);
-                    intent.putExtra("requestCode", 9);
+                    intent.putExtra("requestCode", 8);
                     intent.putExtra("hour",hour);
                     intent.putExtra("minute",minute);
                     intent.putExtra("hospital",hospitalEdittext.getText().toString());
-                    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 9, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 8, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                     AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
                     alarmManager.set(AlarmManager.RTC_WAKEUP,  calendar.getTimeInMillis(), pendingIntent);
                 }
@@ -331,6 +332,11 @@ public class AppointmentAddFragment extends Fragment {
             minute = Integer.parseInt(listFromDB.get(4).toString());
             hospitalName = listFromDB.get(5).toString();
         }
+        setHasOptionsMenu(true);
     }
 
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        menu.clear();
+    }
 }

@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
@@ -68,6 +69,7 @@ public class MainFragment extends Fragment /*implements BaseSliderView.OnSliderC
     ConnectivityManager connectionManager;
     boolean isNetwork;
     ActionBarDrawerToggle toggle;
+    public TextView textTool;
 
     public class FetchData extends AsyncTask<Void,Void,Void> {
 
@@ -193,6 +195,7 @@ public class MainFragment extends Fragment /*implements BaseSliderView.OnSliderC
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         appBarLayout.setExpanded(true, true);
+        textTool = (TextView) getActivity().findViewById(R.id.textTool);
 
 //        if(imageList.size() == 5 && detailList.size() == 5 && imageList.size() == 5 && linkList.size() == 5){
 //            adapter = new PagerAdapterSlider(getActivity(),getActivity().getSupportFragmentManager(),imageList, titleList, detailList, linkList);
@@ -339,6 +342,8 @@ public class MainFragment extends Fragment /*implements BaseSliderView.OnSliderC
     @Override
     public void onResume() {
         super.onResume();
+        textTool.setText("Mymor");
+
         if(titleList.size() != 0) {
             adapter = new PagerAdapterSlider(getActivity(),getActivity().getSupportFragmentManager(),imageList, titleList, detailList, linkList);
             mPager = (ViewPager) getActivity().findViewById(R.id.pagerSlider);
