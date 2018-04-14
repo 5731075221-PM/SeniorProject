@@ -4,41 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <item
-        android:id="@+id/nav_disease"
-        android:icon="@drawable/ic_cause_unselected"
-        android:title="โรคหรืออาการ"
-        android:visible="true"
-        app:showAsAction="always"/>
-    <item
-        android:id="@+id/nav_firstaid"
-        android:icon="@drawable/icon_firstaid"
-        android:title="ปฐมพยาบาล"
-        android:visible="true"
-        app:showAsAction="always"/>
-    <item
-        android:id="@+id/nav_hospital"
-        android:icon="@drawable/ic_hospital_cross"
-        android:title="หาหมอ"
-        android:visible="true"
-        app:showAsAction="always"/>
-    <item
-        android:id="@+id/nav_reminder"
-        android:icon="@drawable/icon_reminder"
-        android:title="สุขภาพของฉัน"
-        android:visible="true"
-        app:showAsAction="always"/>
-    <item
-        android:id="@+id/nav_food"
-        android:icon="@drawable/icon_food"
-        android:title="เมนูของฉัน"
-        android:visible="true"
-        app:showAsAction="always" />
-    <item
-        android:id="@+id/nav-fav"
-        android:icon="@drawable/ic_star_unselected"
-        android:title="รายการลัด"
-        android:visible="true"
-        app:showAsAction="always" />
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_cause_unselected"
+            android:title="หน้าหลัก"
+            android:visible="true"
+            app:showAsAction="always"/>
 
+        <item
+            android:id="@+id/nav_disease"
+            android:icon="@drawable/ic_cause_unselected"
+            android:title="โรคหรืออาการ"
+            android:visible="true"
+            app:showAsAction="always"/>
+        <item
+            android:id="@+id/nav_firstaid"
+            android:icon="@drawable/icon_firstaid"
+            android:title="ปฐมพยาบาล"
+            android:visible="true"
+            app:showAsAction="always"/>
+        <item
+            android:id="@+id/nav_hospital"
+            android:icon="@drawable/ic_hospital_cross"
+            android:title="หาหมอ"
+            android:visible="true"
+            app:showAsAction="always"/>
+        <item
+            android:id="@+id/nav_reminder"
+            android:icon="@drawable/icon_reminder"
+            android:title="สุขภาพของฉัน"
+            android:visible="true"
+            app:showAsAction="always"/>
+        <item
+            android:id="@+id/nav_food"
+            android:icon="@drawable/icon_food"
+            android:title="เมนูของฉัน"
+            android:visible="true"
+            app:showAsAction="always" />
+        <item
+            android:id="@+id/nav-fav"
+            android:icon="@drawable/ic_star_unselected"
+            android:title="รายการลัด"
+            android:visible="true"
+        app:showAsAction="always" />
+    </group>
 </menu>

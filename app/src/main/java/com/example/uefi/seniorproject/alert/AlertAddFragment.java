@@ -16,6 +16,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MotionEvent;
@@ -31,6 +32,8 @@ import android.widget.Toast;
 
 import com.example.uefi.seniorproject.R;
 import com.example.uefi.seniorproject.databases.InternalDatabaseHelper;
+import com.example.uefi.seniorproject.reminder.ChoiceItem;
+import com.example.uefi.seniorproject.reminder.NoteItem;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -91,13 +94,13 @@ public class AlertAddFragment extends Fragment {
             beforeCheckbox.setChecked(true);
             alert.setChecked(true);
         }else if (state.equals("edit")){
-            breakfastCheckbox.setChecked(Integer.parseInt(listFromDB.get(2).toString()) == 1 ? true : false);
-            lunchCheckbox.setChecked(Integer.parseInt(listFromDB.get(3).toString()) == 1 ? true : false);
-            dinnerCheckbox.setChecked(Integer.parseInt(listFromDB.get(4).toString()) == 1 ? true : false);
-            bedCheckbox.setChecked(Integer.parseInt(listFromDB.get(5).toString()) == 1 ? true : false);
-            beforeCheckbox.setChecked(Integer.parseInt(listFromDB.get(6).toString()) == 1 ? true : false);
-            afterCheckbox.setChecked(Integer.parseInt(listFromDB.get(7).toString()) == 1 ? true : false);
-            alert.setChecked(Integer.parseInt(listFromDB.get(8).toString()) == 1 ? true : false);
+            breakfastCheckbox.setChecked(Integer.parseInt(listFromDB.get(2).toString()) == 1);
+            lunchCheckbox.setChecked(Integer.parseInt(listFromDB.get(3).toString()) == 1);
+            dinnerCheckbox.setChecked(Integer.parseInt(listFromDB.get(4).toString()) == 1);
+            bedCheckbox.setChecked(Integer.parseInt(listFromDB.get(5).toString()) == 1);
+            beforeCheckbox.setChecked(Integer.parseInt(listFromDB.get(6).toString()) == 1);
+            afterCheckbox.setChecked(Integer.parseInt(listFromDB.get(7).toString()) == 1);
+            alert.setChecked(Integer.parseInt(listFromDB.get(8).toString()) == 1);
         }
 
         beforeCheckbox.setOnClickListener(new View.OnClickListener() {
@@ -157,7 +160,8 @@ public class AlertAddFragment extends Fragment {
 
                 if(!breakfastCheckbox.isChecked() &&
                         !lunchCheckbox.isChecked() &&
-                        !dinnerCheckbox.isChecked()){
+                        !dinnerCheckbox.isChecked() &&
+                        !bedCheckbox.isChecked()){
                     if(toast ==null) {
 
                     }else {
@@ -178,15 +182,6 @@ public class AlertAddFragment extends Fragment {
                                     beforeCheckbox.isChecked() ? 1 : 0,
                                     afterCheckbox.isChecked() ? 1 : 0,
                                     alert.isChecked() ? 1 : 0);
-
-                        Calendar calendar = Calendar.getInstance();
-                        calendar.set(Calendar.HOUR_OF_DAY,14);
-                        calendar.set(Calendar.MINUTE,56);
-                        Intent intent = new Intent(getActivity(),AlarmReceiver.class);
-                        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(),100,intent,PendingIntent.FLAG_UPDATE_CURRENT);
-                        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
-                        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),alarmManager.INTERVAL_DAY,pendingIntent);
-
                     } else if (state.equals("edit")) {
                         internalDatabaseHelper.updateAlert(alert_id, medicineName, medicineNum,
                                 breakfastCheckbox.isChecked() ? 1 : 0,
@@ -197,6 +192,51 @@ public class AlertAddFragment extends Fragment {
                                 afterCheckbox.isChecked() ? 1 : 0,
                                 alert.isChecked() ? 1 : 0);
                     }
+
+//                    ArrayList <NoteItem> breakfast_before1= internalDatabaseHelper.readAllAlertByIFAlertBefore("breakfast");
+//                    ArrayList<String> breakfast = new ArrayList<>();
+//                    ArrayList<Integer> quantity = new ArrayList<>();
+//
+//                    for(int i =0;i<breakfast_before1.size();i++){
+//                        breakfast.add(breakfast_before1.get(i).getText());
+//                        quantity.add(breakfast_before1.get(i).getNumber());
+//                    }
+//
+//                    int hour = 2;
+//                    int minute = 8;
+//                    Calendar calendar = Calendar.getInstance();
+//                    calendar.set(Calendar.HOUR_OF_DAY,hour);
+//                    calendar.set(Calendar.MINUTE,minute);
+//                    calendar.set(Calendar.SECOND, 00);
+//
+
+//                    Intent intent = new Intent(getActivity(), AlarmReceiver.class);
+//                    intent.putExtra("requestCode", 9);
+//                    intent.putStringArrayListExtra("list", breakfast);
+//                    intent.putIntegerArrayListExtra("quantity", quantity);
+//                    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 9, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//                    AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+//                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), alarmManager.INTERVAL_DAY, pendingIntent);
+
+
+
+
+                    ArrayList<NoteItem> breakfast_before = internalDatabaseHelper.readAllAlertByIFAlertBefore("breakfast");
+                    ArrayList<NoteItem> breakfast_after =  internalDatabaseHelper.readAllAlertByIFAlertAfter("breakfast");
+                    ArrayList<NoteItem> lunch_before =  internalDatabaseHelper.readAllAlertByIFAlertBefore("lunch");
+                    ArrayList<NoteItem> lunch_after = internalDatabaseHelper.readAllAlertByIFAlertAfter("lunch");
+                    ArrayList<NoteItem> dinner_before =  internalDatabaseHelper.readAllAlertByIFAlertBefore("dinner");
+                    ArrayList<NoteItem> dinner_after =  internalDatabaseHelper.readAllAlertByIFAlertAfter("dinner");
+                    ArrayList<NoteItem> bed =  internalDatabaseHelper.readAllAlertByIFAlert("bed");
+
+                    createAlarm(1,breakfast_before);
+                    createAlarm(2,breakfast_after);
+                    createAlarm(3,lunch_before);
+                    createAlarm(4,lunch_after);
+                    createAlarm(5,dinner_before);
+                    createAlarm(6,dinner_after);
+                    createAlarm(7,bed);
+
                     getFragmentManager().popBackStack();
                 }
             }
@@ -218,6 +258,85 @@ public class AlertAddFragment extends Fragment {
 
         setupUI(view.findViewById(R.id.linear_choice));
         return view;
+    }
+
+    private void createAlarm(int request_code, ArrayList<NoteItem> noteItems){
+        if(noteItems.size()==0){
+            Log.i("alert add","size==0");
+                Intent intent = new Intent(getActivity(), AlarmReceiver.class);
+                intent.putExtra("requestCode", request_code);
+                intent.putStringArrayListExtra("list", new ArrayList<String>());
+                intent.putIntegerArrayListExtra("quantity", new ArrayList<Integer>());
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(),request_code,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+                pendingIntent.cancel();
+                AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+                alarmManager.cancel(pendingIntent);
+        }else {
+            ArrayList<String> list = new ArrayList<>();
+            ArrayList<Integer> quantity = new ArrayList<>();
+            Log.i("alert add","size>0");
+            for(int i =0;i<noteItems.size();i++){
+                list.add(noteItems.get(i).getText());
+                quantity.add(noteItems.get(i).getNumber());
+            }
+
+            ArrayList<Integer> setting = internalDatabaseHelper.readSetting();
+
+            int hour = 0, minute=0;
+            if(request_code ==1){
+                hour = setting.get(0);
+                minute = setting.get(1) -45;
+            }else if(request_code ==2){
+                hour = setting.get(0);
+                minute = setting.get(1) +30;
+            }else if(request_code ==3){
+                hour = setting.get(2);
+                minute = setting.get(3) -45;
+            }else if(request_code ==4){
+                hour = setting.get(2);
+                minute = setting.get(3) +30;
+            }else if(request_code ==5){
+                hour = setting.get(4);
+                minute = setting.get(5) -45;
+            }else if(request_code ==6){
+                hour = setting.get(4);
+                minute = setting.get(5) +30;
+            }else if(request_code ==7){
+                hour = setting.get(6);
+                minute = setting.get(7) -30;
+            }
+
+            if(minute<0){
+                hour = hour-1;
+                minute = minute+60;
+            } else if (minute > 60) {
+                hour = hour+1;
+                minute = minute -60;
+            }
+            if(hour<0){
+                hour=23;
+            }else if(hour>23){
+                hour=0;
+            }
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.HOUR_OF_DAY, hour);
+            calendar.set(Calendar.MINUTE, minute);
+
+            if(calendar.before(Calendar.getInstance())) {
+                calendar.add(Calendar.DATE, 1);
+            }
+
+            Log.i("alert add before sent",request_code+" " + list.size() +" " +quantity.size());
+
+            Intent intent = new Intent(getActivity(), AlarmReceiver.class);
+            intent.putExtra("requestCode", request_code);
+            intent.putStringArrayListExtra("list", list);
+            intent.putIntegerArrayListExtra("quantity", quantity);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), request_code, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), alarmManager.INTERVAL_DAY, pendingIntent);
+        }
     }
 
     private void showSave(){

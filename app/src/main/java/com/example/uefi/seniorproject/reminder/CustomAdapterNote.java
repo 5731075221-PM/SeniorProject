@@ -1,5 +1,6 @@
 package com.example.uefi.seniorproject.reminder;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,6 +16,9 @@ import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 import com.example.uefi.seniorproject.R;
 import com.example.uefi.seniorproject.alert.AlertAddFragment;
 import com.example.uefi.seniorproject.alert.AlertFragment;
+import com.example.uefi.seniorproject.alert.AppointmentAddFragment;
+import com.example.uefi.seniorproject.alert.AppointmentFragment;
+import com.example.uefi.seniorproject.alert.AppointmentItem;
 import com.example.uefi.seniorproject.databases.InternalDatabaseHelper;
 
 import java.util.ArrayList;
@@ -48,6 +52,8 @@ public class CustomAdapterNote  extends RecyclerSwipeAdapter<RecyclerView.ViewHo
             return NOTE_ITEM;
         }else if (mItems.get(position) instanceof EmptyItem){
             return EMPTY_ITEM;
+        }else if (mItems.get(position) instanceof AppointmentItem){
+            return NOTE_ITEM;
         }
         return -1;
     }
@@ -64,6 +70,8 @@ public class CustomAdapterNote  extends RecyclerSwipeAdapter<RecyclerView.ViewHo
             final NoteHolder vHolder = new NoteHolder(v);
             if(fragment instanceof AlertFragment){
                 vHolder.imageView2.setImageResource(R.drawable.icons_pill);
+            }else if(fragment instanceof AppointmentFragment){
+                vHolder.imageView2.setImageResource(R.drawable.icons_calendar);
             }
             return vHolder;
         }else if(viewType == EMPTY_ITEM){
@@ -87,8 +95,18 @@ public class CustomAdapterNote  extends RecyclerSwipeAdapter<RecyclerView.ViewHo
             detailHolder.name.setText(item.text);
             detailHolder.note_id = item.note_id;
             if(item.getNumber() == 0){
-
-            }else{
+                if(item.getDay()!=0){
+                    String hour = item.getHour()+"";
+                    String minute = item.getMinute()+"";
+                    if(item.getHour()<9){
+                        hour = "0"+hour;
+                    }
+                    if(item.getMinute()<9){
+                        minute = "0" +minute;
+                    }
+                    detailHolder.medicine_num.setText(hour+":"+ minute +" น.");
+                }
+            }else if( item.getNumber() >0){
                 detailHolder.medicine_num.setText(item.getNumber()+" เม็ด");
             }
 
@@ -136,10 +154,15 @@ public class CustomAdapterNote  extends RecyclerSwipeAdapter<RecyclerView.ViewHo
                                 .replace(R.id.container_fragment, NoteAddFragment.newInstance("edit", item.note_id))
                                 .addToBackStack("แก้ไขบันทึกสุขภาพ")
                                 .commit();
-                    }else{
+                    }else if(fragment instanceof  AlertFragment){
                         fm.beginTransaction()
                                 .replace(R.id.container_fragment, AlertAddFragment.newInstance("edit", item.note_id))
                                 .addToBackStack("แก้ไขรายการยา")
+                                .commit();
+                    }else if(fragment instanceof AppointmentFragment){
+                        fm.beginTransaction()
+                                .replace(R.id.container_fragment, AppointmentAddFragment.newInstance("edit", item.note_id))
+                                .addToBackStack("แก้ไขรายการนัดคุณหมอ")
                                 .commit();
                     }
                 }
@@ -154,27 +177,7 @@ public class CustomAdapterNote  extends RecyclerSwipeAdapter<RecyclerView.ViewHo
 
                     int prepType = getItemViewType(position-1);
 
-                    if(fragment instanceof NotesFragment) {
-                        if (prepType == NOTE_DAY_ITEM) {
-                            if (position == getItemCount() - 1) {
-                                deleteDayItem(position - 1); // day
-                                deleteDayItem(position - 1); // note
-                            } else {
-                                int nextType = getItemViewType(position + 1);
-                                if (nextType == NOTE_DAY_ITEM) {
-                                    deleteDayItem(position - 1); // day
-                                    deleteDayItem(position - 1); // note
-                                } else {
-                                    deleteDayItem(position); // note
-                                }
-                            }
-                        } else {
-                            deleteDayItem(position); // note
-                        }
-
-                        ((NotesFragment) fragment).showPic();
-                        internalDatabaseHelper.deleteNote(detailHolder.note_id);
-                    }else{
+                    if(fragment instanceof AlertFragment){
                         //alert
                         deleteDayItem(position);
                         ArrayList old = internalDatabaseHelper.readAlert(detailHolder.note_id);
@@ -200,9 +203,33 @@ public class CustomAdapterNote  extends RecyclerSwipeAdapter<RecyclerView.ViewHo
                                 Integer.parseInt(old.get(8).toString())
                                 );
                         ((AlertFragment)fragment).setupRecy();
+                    }else {
+                        if (prepType == NOTE_DAY_ITEM) {
+                            if (position == getItemCount() - 1) {
+                                deleteDayItem(position - 1); // day
+                                deleteDayItem(position - 1); // note
+                            } else {
+                                int nextType = getItemViewType(position + 1);
+                                if (nextType == NOTE_DAY_ITEM) {
+                                    deleteDayItem(position - 1); // day
+                                    deleteDayItem(position - 1); // note
+                                } else {
+                                    deleteDayItem(position); // note
+                                }
+                            }
+                        } else {
+                            deleteDayItem(position); // note
+                        }
+                        if(fragment instanceof NotesFragment) {
+                            ((NotesFragment) fragment).showPic();
+                            internalDatabaseHelper.deleteNote(detailHolder.note_id);
+                        } else if(fragment instanceof AppointmentFragment) {
+                            ((AppointmentFragment) fragment).showPic();
+                            internalDatabaseHelper.deleteAppointment(detailHolder.note_id);
+                        }
                     }
 
-                    mItemManger.closeAllItems();
+                        mItemManger.closeAllItems();
                     notifyDataSetChanged();
 
                 }

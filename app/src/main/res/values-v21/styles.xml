@@ -1,5 +1,5 @@
 <resources>
-    <style name="LinearProgress" parent="Theme.AppCompat.Light">
+    <style name="LinearProgress" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:progressBackgroundTint">@color/white</item>
     </style>
 </resources>

@@ -19,7 +19,7 @@
         android:src="@drawable/notes" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_note"
+        android:id="@+id/recycler_appointment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/add" />

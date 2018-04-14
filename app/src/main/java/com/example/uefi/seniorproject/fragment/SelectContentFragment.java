@@ -42,6 +42,7 @@ public class SelectContentFragment extends Fragment {
     ImageView image;
     String url, h, d = "",dy = "";
     Toolbar toolbar;
+    DrawerLayout drawer;
     ActionBarDrawerToggle toggle;
     private boolean mToolBarNavigationListenerIsRegistered = false;
     LocationManager locationManager;
@@ -103,23 +104,32 @@ public class SelectContentFragment extends Fragment {
         toolbar = getActivity().findViewById(R.id.toolbar);
 
 
-        DrawerLayout drawer = (DrawerLayout) (getActivity()).findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) (getActivity()).findViewById(R.id.drawer_layout);
 
-        toggle = new ActionBarDrawerToggle(getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
+        Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
+        toggle = new ActionBarDrawerToggle( getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
+        toggle.setDrawerIndicatorEnabled(false);
         toggle.syncState();
 
-        toggle.setDrawerIndicatorEnabled(false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (!mToolBarNavigationListenerIsRegistered) {
             toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     // Doesn't have to be onBackPressed
-                    getFragmentManager().popBackStack();
-                    ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-                    toggle.setDrawerIndicatorEnabled(true);
-
+//                   getFragmentManager().popBackStack();
+//                    ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+//                    toggle.setDrawerIndicatorEnabled(true);
+                    if(getActivity().getSupportFragmentManager().getBackStackEntryCount() == 1) {
+                        toggle.setDrawerIndicatorEnabled(true);
+                        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                        toggle.syncState();
+                        getFragmentManager().popBackStack();
+                    }
+                    else
+                        ((AppCompatActivity) getActivity()).onBackPressed();
                 }
             });
             mToolBarNavigationListenerIsRegistered = true;

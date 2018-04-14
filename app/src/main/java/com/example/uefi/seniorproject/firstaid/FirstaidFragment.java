@@ -2,11 +2,16 @@ package com.example.uefi.seniorproject.firstaid;
 
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -22,6 +27,11 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.example.uefi.seniorproject.R;
+import com.example.uefi.seniorproject.alert.AlarmReceiver;
+
+import java.util.Calendar;
+
+import static android.content.Context.ALARM_SERVICE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -63,29 +73,46 @@ public class FirstaidFragment extends Fragment {
             public void onClick(View v) {
                 toolbar = "ตา หู คอ";
 
+                Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
 
                 Bitmap bitmap = BitmapFactory.decodeResource(getActivity().getResources(),
                         R.drawable.ic_clock);
 
-                Notification notification =
-                        new NotificationCompat.Builder(getActivity())
-                                .setSmallIcon(R.drawable.clock)
-                                .setLargeIcon(bitmap)
-                                .setContentTitle("Mymor")
-                                .setContentText("Good night.")
-                                .setAutoCancel(false)
-                                .setColor(getResources().getColor(R.color.nav_bar))
-                                .setVibrate(new long[] { 500, 1000, 500 })
-                                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC )
-                                .setPriority(NotificationCompat.PRIORITY_MAX)
-                                .build();
+//                Intent intent = new Intent(getActivity(), FirstaidFragment.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 0, intent, 0);
 
 
-                NotificationManager notificationManager =
-                        (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
-                notificationManager.notify(1000, notification);
+//                Notification notification =
+//                        new NotificationCompat.Builder(getActivity())
+//                                .setSmallIcon(R.drawable.clock)
+//                                .setLargeIcon(bitmap)
+//                                .setContentTitle("Mymor")
+//                                .setContentText("Good night.")
+//                                .setAutoCancel(true)
+//                                .setColor(getResources().getColor(R.color.nav_bar))
+//                                .setVibrate(new long[] { 500, 1000, 500 })
+//                                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC )
+//                                .setPriority(NotificationCompat.PRIORITY_MAX)
+//                                .setSound(soundUri)
+////                                .addAction(action)
+//                                .setContentIntent(pendingIntent)
+//                                .build();
+//
+//
+//                NotificationManager notificationManager =
+//                        (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+//                notificationManager.notify(1000, notification);
 
 
+//                    Calendar calendar = Calendar.getInstance();
+//                    calendar.set(Calendar.HOUR_OF_DAY,0);
+//                    calendar.set(Calendar.MINUTE,48);
+//
+//                    Intent intent = new Intent(getActivity(),AlarmReceiver.class);
+//                    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(),100,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+//                    AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+//                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),alarmManager.INTERVAL_DAY,pendingIntent);
 
 
                 getActivity().getSupportFragmentManager().beginTransaction()

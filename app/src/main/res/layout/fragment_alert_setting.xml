@@ -19,16 +19,30 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView6"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/grey"
-                android:paddingBottom="5dp"
-                android:paddingLeft="20dp"
-                android:paddingTop="5dp"
-                android:text="ตั้งค่าเวลา"
-                android:textColor="@color/colorPrimaryDark" />
+                android:background="@color/grey">
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="5dp"
+                    android:text="ตั้งค่าเวลารับประทานยา"
+                    android:textColor="@color/colorPrimaryDark" />
+
+                <ImageView
+                    android:id="@+id/info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/textView6"
+                    android:src="@drawable/ic_action_info_outline" />
+            </RelativeLayout>
 
             <LinearLayout
                 android:id="@+id/breakfast"
@@ -243,7 +257,6 @@
                 android:layout_height="55dp"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:paddingLeft="20dp"
                 android:weightSum="2">
 
                 <Switch
@@ -252,6 +265,8 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_weight="2"
+                    android:checked="true"
+                    android:paddingLeft="20dp"
                     android:paddingRight="25dp"
                     android:text="เสียง"
                     android:textColor="@color/cardview_dark_background"
@@ -264,7 +279,6 @@
                 android:layout_height="55dp"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:paddingLeft="20dp"
                 android:weightSum="2">
 
                 <Switch
@@ -274,45 +288,13 @@
                     android:layout_gravity="center"
                     android:layout_weight="2"
                     android:checked="true"
+                    android:paddingLeft="20dp"
                     android:paddingRight="25dp"
                     android:text="สั่น"
                     android:textColor="@color/cardview_dark_background"
                     android:textSize="18sp" />
 
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingLeft="20dp"
-                android:weightSum="2">
-
-                <Switch
-                    android:id="@+id/switchMessage"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_weight="2"
-                    android:checked="true"
-                    android:paddingRight="25dp"
-                    android:text="ข้อความ"
-                    android:textColor="@color/cardview_dark_background"
-                    android:textSize="18sp" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:lineSpacingExtra="8sp"
-                android:paddingLeft="10dp"
-                android:text="แจ้งเตือนก่อนรับประทาน 45 นาที \nแจ้งเตือนหลังรับประทาน 30 นาที \nแจ้งเตือนก่อนเข้านอน 30 นาที"
-                android:textColor="@color/cardview_dark_background"
-                android:textSize="16sp" />
 
 
         </LinearLayout>
