@@ -25,9 +25,9 @@ public class SplashScreen extends AppCompatActivity {
         dbHelperDAO = DBHelperDAO.getInstance(this);
         dbHelperDAO.open();
 
-//        Singleton single = Singleton.getInstance();
-//        single.setDict(dbHelperDAO.getLexitron());
-//        single.setStopword(dbHelperDAO.getStopword());
+        Singleton single = Singleton.getInstance();
+        single.setDict(dbHelperDAO.getLexitron());
+        single.setStopword(dbHelperDAO.getStopword());
 
         new Handler().postDelayed(new Runnable() {
             @Override
