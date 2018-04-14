@@ -7,6 +7,8 @@ import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -47,6 +49,10 @@ public class SelectContentFragment extends Fragment {
     LocationManager locationManager;
     ConnectivityManager connectionManager;
     boolean isNetwork;
+    AppBarLayout appBarLayout;
+    ImageView imageToolbar;
+    TextView title;
+    CollapsingToolbarLayout collapsingToolbarLayout;
 
     public class FetchData extends AsyncTask<Void, Void, Void> {
 
@@ -90,7 +96,10 @@ public class SelectContentFragment extends Fragment {
             header.setText(h);
             detail.setText(d);
             date.setText(dy);
-            Picasso.with(getActivity()).load(url).into(image);
+            collapsingToolbarLayout.setTitle(h);
+            title.setText(h);
+//            Picasso.with(getActivity()).load(url).into(image);
+            Picasso.with(getActivity()).load(url).into(imageToolbar);
         }
     }
 
@@ -103,48 +112,39 @@ public class SelectContentFragment extends Fragment {
         toolbar = getActivity().findViewById(R.id.toolbar);
 
 
-        DrawerLayout drawer = (DrawerLayout) (getActivity()).findViewById(R.id.drawer_layout);
-
-        toggle = new ActionBarDrawerToggle(getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        toggle.setDrawerIndicatorEnabled(false);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        if (!mToolBarNavigationListenerIsRegistered) {
-            toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Doesn't have to be onBackPressed
-                    getFragmentManager().popBackStack();
-                    ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-                    toggle.setDrawerIndicatorEnabled(true);
-
-                }
-            });
-            mToolBarNavigationListenerIsRegistered = true;
-        }
-
-
-//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                getActivity().onBackPressed();
-//            }
-//        });
-
+//        DrawerLayout drawer = (DrawerLayout) (getActivity()).findViewById(R.id.drawer_layout);
+////
+//        toggle = new ActionBarDrawerToggle(getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.addDrawerListener(toggle);
+//        toggle.syncState();
+////
+//        toggle.setDrawerIndicatorEnabled(false);
+//        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        if (!mToolBarNavigationListenerIsRegistered) {
+//            toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    // Doesn't have to be onBackPressed
+//                    getActivity().onBackPressed();
+//                    ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+//                    toggle.setDrawerIndicatorEnabled(true);
+//
+//                }
+//            });
+//            mToolBarNavigationListenerIsRegistered = true;
+//        }
 
         Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
         header = view.findViewById(R.id.headerNews);
         detail = view.findViewById(R.id.detailNews);
         detail.setTypeface(tf);
-        image = view.findViewById(R.id.imageNews);
+//        image = view.findViewById(R.id.imageNews);
         date = view.findViewById(R.id.dateNews);
         date.setTypeface(tf);
 
         header.setText(h);
         detail.setText(d);
-        image.setBackgroundResource(R.color.grey);
+//        image.setBackgroundResource(R.color.grey);
 
         return view;
     }
@@ -155,10 +155,18 @@ public class SelectContentFragment extends Fragment {
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());
         dbHelperDAO.open();
 
+        title = getActivity().findViewById(R.id.textTool);
+
+        collapsingToolbarLayout = (CollapsingToolbarLayout)getActivity().findViewById(R.id.toolbar_layout);
+
+        appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
+        appBarLayout.setExpanded(true, false);
+
         header = (TextView) getActivity().findViewById(R.id.headerNews);
         detail = (TextView) getActivity().findViewById(R.id.detailNews);
-        image = (ImageView) getActivity().findViewById(R.id.imageNews);
+//        image = (ImageView) getActivity().findViewById(R.id.imageNews);
         date = (TextView) getActivity().findViewById(R.id.dateNews);
+        imageToolbar = (ImageView) getActivity().findViewById(R.id.imageToolbar);
 
         h = getArguments().getString("header").split("&")[0];
         dy = getArguments().getString("header").split("&")[1];
@@ -181,4 +189,17 @@ public class SelectContentFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        title.setVisibility(View.VISIBLE);
+        imageToolbar.setImageResource(R.color.nav_bar);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        title.setVisibility(View.VISIBLE);
+        imageToolbar.setImageResource(R.color.nav_bar);
+    }
 }

@@ -5,9 +5,11 @@ import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.icu.util.ValueIterator;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -58,6 +60,7 @@ public class SearchHospitalByName extends Fragment implements SearchView.OnQuery
     DBHelperDAO dbHelperDAO;
     private ArrayList<Integer> mSectionPositions;
     private List<Hospital> mDataArray;
+    AppBarLayout appBarLayout;
     int[] rid = {R.array.ZoneKrabi, R.array.ZoneBangkok, R.array.ZoneKanchanaburi, R.array.ZoneKalasin, R.array.ZoneKamphaengphet,
     R.array.ZoneKhonkaen, R.array.ZoneChanthaburi, R.array.ZoneChachoengsao, R.array.ZoneChonburi, R.array.ZoneChainat, R.array.ZoneChaiyaphum,
     R.array.ZoneChumphon, R.array.ZoneChiangrai, R.array.ZoneChiangmai, R.array.ZoneTrang, R.array.ZoneTrat, R.array.ZoneTak, R.array.ZoneNakhonnayok,
@@ -76,6 +79,8 @@ public class SearchHospitalByName extends Fragment implements SearchView.OnQuery
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_hospital, container, false);
+
+        appBarLayout.setExpanded(false, false);
 
         layout = (LinearLayout)view.findViewById(R.id.hideLayout);
         arrow = (ImageView) view.findViewById(R.id.arrowDrop);
@@ -99,6 +104,7 @@ public class SearchHospitalByName extends Fragment implements SearchView.OnQuery
         recyclerView.setIndexBarTextColor("#4d4d4d");
         recyclerView.setIndexBarHighLateTextVisibility(true);
         recyclerView.setIndexbarHighLateTextColor("#4cd29f");
+        ViewCompat.setNestedScrollingEnabled(recyclerView, false);
 
         searchView = (SearchView) view.findViewById(R.id.searchHospital);
         searchView.setBackgroundResource(R.drawable.search_view);
@@ -134,6 +140,8 @@ public class SearchHospitalByName extends Fragment implements SearchView.OnQuery
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+        appBarLayout = getActivity().findViewById(R.id.appbarlayout);
 
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());
         dbHelperDAO.open();

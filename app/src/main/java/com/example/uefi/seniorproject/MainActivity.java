@@ -2,6 +2,8 @@ package com.example.uefi.seniorproject;
 
 //import android.app.Fragment;
 import android.os.Handler;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
@@ -69,6 +71,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         textTool = (TextView) findViewById(R.id.textTool);
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Kanit-Regular.ttf");
         textTool.setTypeface(font);
+
+//        CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.toolbar_layout);
+//        AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) collapsingToolbarLayout.getLayoutParams();
+//        params.setScrollFlags(0);
+//        collapsingToolbarLayout.setLayoutParams(params);
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

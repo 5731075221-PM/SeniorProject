@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -18,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.example.uefi.seniorproject.R;
 import com.example.uefi.seniorproject.databases.DBHelperDAO;
@@ -33,13 +35,19 @@ public class SelectItemFragment extends Fragment{
     TabLayout tabLayout;
     ViewPager viewPager;
     AppBarLayout appBarLayout;
+    Toolbar toolbar;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_select_item, container, false);
 
-        appBarLayout.setExpanded(true, true);
+        appBarLayout.setExpanded(false, true);
+
+//        CollapsingToolbarLayout ctl = (CollapsingToolbarLayout) view.findViewById(R.id.toolbar_layout);
+//        ctl.setTitle("Best Coupons Deals");
+//        ctl.setCollapsedTitleTextAppearance(R.style.coll_toolbar_title);
+//        ctl.setExpandedTitleTextAppearance(R.style.exp_toolbar_title);
 
         title = getActivity().findViewById(R.id.textTool);
         title.setText(name);

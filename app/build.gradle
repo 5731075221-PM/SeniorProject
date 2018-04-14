@@ -50,6 +50,7 @@ dependencies {
     compile 'com.daimajia.slider:library:1.1.5@aar'
     compile 'org.jsoup:jsoup:1.11.2'
     compile 'com.github.JakeWharton:ViewPagerIndicator:2.4.1'
+    compile  'org.apache.commons:commons-lang3:3.0'
 }
 
 
