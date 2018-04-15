@@ -5,8 +5,10 @@ import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -45,6 +47,8 @@ public class HospitalNavFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_hospital_nav, container, false);
+
+        appBarLayout.setExpanded(false, false);
 
         viewPager = (ViewPager) view.findViewById(R.id.viewpagerhospital);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -117,6 +121,16 @@ public class HospitalNavFragment extends Fragment {
         setHasOptionsMenu(true);
 
         appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
+
+        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams();
+        params.setBehavior(new AppBarLayout.Behavior());
+        AppBarLayout.Behavior behavior = (AppBarLayout.Behavior) params.getBehavior();
+        behavior.setDragCallback(new AppBarLayout.Behavior.DragCallback() {
+            @Override
+            public boolean canDrag(@NonNull AppBarLayout appBarLayout) {
+                return false;
+            }
+        });
 
         title = getActivity().findViewById(R.id.textTool);
         title.setText("ค้นหาโรงพยาบาลใกล้เคียง");

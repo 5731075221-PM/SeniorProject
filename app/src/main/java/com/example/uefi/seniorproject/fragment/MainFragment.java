@@ -1,5 +1,6 @@
 package com.example.uefi.seniorproject.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,8 +12,11 @@ import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -66,14 +70,18 @@ public class MainFragment extends Fragment /*implements BaseSliderView.OnSliderC
     PagerAdapterSlider adapter;
     int currentPage = 0, NUM_PAGES = 0;
     String d = "";
-    ArrayList<String> imageList = new ArrayList<>(), titleList = new ArrayList<>(), detailList = new ArrayList<>(),
-            linkList = new ArrayList<>(), content = new ArrayList<>();
+    ArrayList<String> imageList = new ArrayList<>(), titleList = new ArrayList<>(), detailList = new ArrayList<>(), linkList = new ArrayList<>(), content = new ArrayList<>();
     SliderLayout mDemoSlider;
     LocationManager locationManager;
     ConnectivityManager connectionManager;
     boolean isNetwork;
     ActionBarDrawerToggle toggle;
     public TextView textTool;
+    ProgressDialog progressBar;
+    DrawerLayout drawer;
+    Toolbar toolbar;
+    ActionBarDrawerToggle toggle;
+    TextView title;
 
     public class FetchData extends AsyncTask<Void,Void,Void> {
 
@@ -98,6 +106,16 @@ public class MainFragment extends Fragment /*implements BaseSliderView.OnSliderC
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+
+        @Override
+        protected void onPreExecute() {
+            progressBar = new ProgressDialog(getContext());
+            progressBar.setMessage("กรุณารอสักครู่...");
+            progressBar.setIndeterminate(false);
+            progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressBar.setCancelable(false);
+            progressBar.show();
         }
 
         @Override
@@ -212,6 +230,7 @@ public class MainFragment extends Fragment /*implements BaseSliderView.OnSliderC
             for(int i = 0; i<titleList.size();i++){
                 dbHelperDAO.storeNews(i,titleList.get(i),content.get(i),detailList.get(i),linkList.get(i));
             }
+            progressBar.dismiss();
         }
     }
 
@@ -219,8 +238,10 @@ public class MainFragment extends Fragment /*implements BaseSliderView.OnSliderC
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        appBarLayout.setExpanded(true, true);
-        textTool = (TextView) getActivity().findViewById(R.id.textTool);
+
+//        appBarLayout.setExpanded(true, true);
+//        textTool = (TextView) getActivity().findViewById(R.id.textTool);
+
 
 //        if(imageList.size() == 5 && detailList.size() == 5 && imageList.size() == 5 && linkList.size() == 5){
 //            adapter = new PagerAdapterSlider(getActivity(),getActivity().getSupportFragmentManager(),imageList, titleList, detailList, linkList);
@@ -367,7 +388,21 @@ public class MainFragment extends Fragment /*implements BaseSliderView.OnSliderC
     @Override
     public void onResume() {
         super.onResume();
-        textTool.setText("Mymor");
+
+//        textTool.setText("Mymor");
+
+        title.setText("Mymor");
+
+        appBarLayout.setExpanded(false, false);
+        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams();
+        params.setBehavior(new AppBarLayout.Behavior());
+        AppBarLayout.Behavior behavior = (AppBarLayout.Behavior) params.getBehavior();
+        behavior.setDragCallback(new AppBarLayout.Behavior.DragCallback() {
+            @Override
+            public boolean canDrag(@NonNull AppBarLayout appBarLayout) {
+                return false;
+            }
+        });
 
         if(titleList.size() != 0) {
             adapter = new PagerAdapterSlider(getActivity(),getActivity().getSupportFragmentManager(),imageList, titleList, detailList, linkList);
@@ -391,32 +426,32 @@ public class MainFragment extends Fragment /*implements BaseSliderView.OnSliderC
                     mPager.setCurrentItem(currentPage++, true);
                 }
             };
-            Timer swipeTimer = new Timer();
-            swipeTimer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    handler.post(Update);
-                }
-            }, 3000, 3000);
-
-            // Pager listener over indicator
-            indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-                @Override
-                public void onPageSelected(int position) {
-                    currentPage = position;
-                }
-
-                @Override
-                public void onPageScrolled(int pos, float arg1, int arg2) {
-
-                }
-
-                @Override
-                public void onPageScrollStateChanged(int pos) {
-
-                }
-            });
+//            Timer swipeTimer = new Timer();
+//            swipeTimer.schedule(new TimerTask() {
+//                @Override
+//                public void run() {
+//                    handler.post(Update);
+//                }
+//            }, 3000, 3000);
+//
+//            // Pager listener over indicator
+//            indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//
+//                @Override
+//                public void onPageSelected(int position) {
+//                    currentPage = position;
+//                }
+//
+//                @Override
+//                public void onPageScrolled(int pos, float arg1, int arg2) {
+//
+//                }
+//
+//                @Override
+//                public void onPageScrollStateChanged(int pos) {
+//
+//                }
+//            });
         }
     }
 
@@ -424,7 +459,24 @@ public class MainFragment extends Fragment /*implements BaseSliderView.OnSliderC
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+        title = getActivity().findViewById(R.id.textTool);
+        title.setText("Mymor");
+
         appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
+        appBarLayout.setExpanded(false, false);
+
+        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams();
+        params.setBehavior(new AppBarLayout.Behavior());
+        AppBarLayout.Behavior behavior = (AppBarLayout.Behavior) params.getBehavior();
+        behavior.setDragCallback(new AppBarLayout.Behavior.DragCallback() {
+            @Override
+            public boolean canDrag(@NonNull AppBarLayout appBarLayout) {
+                return false;
+            }
+        });
+
+
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());
         dbHelperDAO.open();
 
@@ -460,30 +512,5 @@ public class MainFragment extends Fragment /*implements BaseSliderView.OnSliderC
         }
     }
 
-    //    @Override
-//    public void onSliderClick(BaseSliderView slider) {
-//        Toast.makeText(getActivity(),slider.getBundle().get("extra") + "",Toast.LENGTH_SHORT).show();
-//    }
-//
-//    @Override
-//    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//
-//    }
-//
-//    @Override
-//    public void onPageSelected(int position) {
-//        Toast.makeText(getActivity(),"Page Changed: " + position + "",Toast.LENGTH_SHORT).show();
-//    }
-//
-//    @Override
-//    public void onPageScrollStateChanged(int state) {
-//
-//    }
-//
-//    @Override
-//    public void onStop() {
-//        mDemoSlider.stopAutoCycle();
-//        super.onStop();
-//    }
 }
 

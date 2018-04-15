@@ -51,6 +51,7 @@ dependencies {
     compile 'org.jsoup:jsoup:1.11.2'
     compile 'com.github.JakeWharton:ViewPagerIndicator:2.4.1'
     compile 'com.github.vihtarb:tooltip:0.1.9'
+    compile  'org.apache.commons:commons-lang3:3.0'
 }
 
 

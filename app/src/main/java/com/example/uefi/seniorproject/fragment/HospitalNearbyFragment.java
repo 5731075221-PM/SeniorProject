@@ -17,15 +17,22 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -170,7 +177,7 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_hospital_nearby, container, false);
 
-        appBarLayout.setExpanded(true, true);
+        appBarLayout.setExpanded(false, false);
 
 //        searchView = (SearchView) view.findViewById(R.id.searchNearbyHospital);
 //        searchView.setIconifiedByDefault(false);
@@ -186,6 +193,8 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
         adapter = new RecyclerViewAdapter(hosList);
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
+
+        ViewCompat.setNestedScrollingEnabled(recyclerView, false);
 
         adapter.setOnLoadMoreListener(new LoadMore() {
             @Override
