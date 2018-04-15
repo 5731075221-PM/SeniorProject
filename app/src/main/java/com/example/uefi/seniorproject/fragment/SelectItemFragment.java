@@ -37,10 +37,6 @@ public class SelectItemFragment extends Fragment{
     TabLayout tabLayout;
     ViewPager viewPager;
     AppBarLayout appBarLayout;
-    Toolbar toolbar;
-    DrawerLayout drawer;
-    ActionBarDrawerToggle toggle;
-    private boolean mToolBarNavigationListenerIsRegistered = false;
 
     @Nullable
     @Override
@@ -99,36 +95,6 @@ public class SelectItemFragment extends Fragment{
         treat = dbHelperDAO.getContent(name, "treat");
         protect = dbHelperDAO.getContent(name, "protect");
         type = getArguments().getString("type");
-
-        drawer = (DrawerLayout) (getActivity()).findViewById(R.id.drawer_layout);
-
-        Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
-        toggle = new ActionBarDrawerToggle( getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.setDrawerIndicatorEnabled(false);
-        toggle.syncState();
-
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        if(!mToolBarNavigationListenerIsRegistered) {
-            toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Doesn't have to be onBackPressed
-//                   getFragmentManager().popBackStack();
-//                    ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-//                    toggle.setDrawerIndicatorEnabled(true);
-                    if(getActivity().getSupportFragmentManager().getBackStackEntryCount() == 1) {
-                        toggle.setDrawerIndicatorEnabled(true);
-                        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-                        toggle.syncState();
-                        getFragmentManager().popBackStack();
-                    }
-                    else
-                        ((AppCompatActivity) getActivity()).onBackPressed();
-                }
-            });
-            mToolBarNavigationListenerIsRegistered = true;
-        }
     }
 
     @Override
