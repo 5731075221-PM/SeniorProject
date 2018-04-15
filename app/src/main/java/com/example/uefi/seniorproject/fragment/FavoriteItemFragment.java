@@ -4,12 +4,8 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -37,7 +33,6 @@ public class FavoriteItemFragment extends Fragment {
     ArrayList<Object> list;
     RecyclerView recyclerView;
     TextView empty;
-    AppBarLayout appBarLayout;
     private RecyclerViewAdapter adapter;
 
     String[] gridViewString = {"ระบบกระดูกและข้อ", "ระบบทางเดินปัสสาวะ", "ระบบทางเดินอาหาร", "ระบบศีรษะและลำคอ", "ระบบทางเดินหายใจ",
@@ -57,8 +52,6 @@ public class FavoriteItemFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorite_item, container, false);
 
-        appBarLayout.setExpanded(false, false);
-
         empty = (TextView) view.findViewById(R.id.textEmptyFav) ;
         if(list.isEmpty()) empty.setVisibility(View.VISIBLE);
         else empty.setVisibility(View.INVISIBLE);
@@ -68,7 +61,6 @@ public class FavoriteItemFragment extends Fragment {
         adapter = new RecyclerViewAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
-        ViewCompat.setNestedScrollingEnabled(recyclerView, false);
 
         return view;
     }
@@ -76,19 +68,6 @@ public class FavoriteItemFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
-
-        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams();
-        params.setBehavior(new AppBarLayout.Behavior());
-        AppBarLayout.Behavior behavior = (AppBarLayout.Behavior) params.getBehavior();
-        behavior.setDragCallback(new AppBarLayout.Behavior.DragCallback() {
-            @Override
-            public boolean canDrag(@NonNull AppBarLayout appBarLayout) {
-                return false;
-            }
-        });
-
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());
         dbHelperDAO.open();
         list = dbHelperDAO.getAllFavList();

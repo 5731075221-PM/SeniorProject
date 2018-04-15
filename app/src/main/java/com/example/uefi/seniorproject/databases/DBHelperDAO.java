@@ -305,18 +305,6 @@ public class DBHelperDAO {
         return list;
     }
 
-    public ArrayList<String> getIndexWord(){
-        ArrayList<String> list = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT name,symptoms FROM diseasesandsymptoms", null);
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            list.add(cursor.getString(cursor.getColumnIndex("symptoms"))+", "+cursor.getString(cursor.getColumnIndex("name")));
-            cursor.moveToNext();
-        }
-        cursor.close();
-        return list;
-    }
-
     public ArrayList<Symptom> getAllSymptoms() {
         ArrayList<Symptom> list = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT * FROM allsymptoms", null);
@@ -482,11 +470,10 @@ public class DBHelperDAO {
             System.out.println("Word = " + arr.get(i));
         for (int i = 0; i < arr.size(); i++) {
             System.out.println("Word = " + arr.get(i));
-            Cursor cursor = database.rawQuery("SELECT * FROM mainsymptoms WHERE word='" + arr.get(i).trim() + "' ORDER BY word ASC", null);
+            Cursor cursor = database.rawQuery("SELECT * FROM mainsymptoms WHERE word='" + arr.get(i) + "' ORDER BY word ASC", null);
             cursor.moveToFirst();
             list.add(cursor.getInt(cursor.getColumnIndex("id")));
             System.out.println("Word = " + cursor.getInt(cursor.getColumnIndex("id")));
-            cursor.close();
         }
         return list;
     }
