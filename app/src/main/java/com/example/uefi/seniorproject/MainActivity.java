@@ -257,19 +257,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_food) {
 
         }else if(id == R.id.nav_fav){
-            toggle.setDrawerIndicatorEnabled(false);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            if(!mToolBarNavigationListenerIsRegistered) {
-                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // Doesn't have to be onBackPressed
-                        onBackPressed();
-                    }
-                });
-
-                mToolBarNavigationListenerIsRegistered = true;
-            }
+//            toggle.setDrawerIndicatorEnabled(false);
+//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//            if(!mToolBarNavigationListenerIsRegistered) {
+//                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        // Doesn't have to be onBackPressed
+//                        onBackPressed();
+//                    }
+//                });
+//
+//                mToolBarNavigationListenerIsRegistered = true;
+//            }
             fragmentManager.beginTransaction()
                     .replace(R.id.container_fragment, new FavoriteItemFragment())
                     .addToBackStack(null)

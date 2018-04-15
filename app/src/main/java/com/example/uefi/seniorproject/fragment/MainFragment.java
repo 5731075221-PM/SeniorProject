@@ -1,5 +1,6 @@
 package com.example.uefi.seniorproject.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -74,8 +75,19 @@ public class MainFragment extends Fragment /*implements BaseSliderView.OnSliderC
     boolean isNetwork;
     ActionBarDrawerToggle toggle;
     public TextView textTool;
+    ProgressDialog progressBar;
 
     public class FetchData extends AsyncTask<Void,Void,Void> {
+
+        @Override
+        protected void onPreExecute() {
+            progressBar = new ProgressDialog(getContext());
+            progressBar.setMessage("กรุณารอสักครู่...");
+            progressBar.setIndeterminate(false);
+            progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressBar.setCancelable(false);
+            progressBar.show();
+        }
 
         public void getData(String attr){
             try {
@@ -212,6 +224,7 @@ public class MainFragment extends Fragment /*implements BaseSliderView.OnSliderC
             for(int i = 0; i<titleList.size();i++){
                 dbHelperDAO.storeNews(i,titleList.get(i),content.get(i),detailList.get(i),linkList.get(i));
             }
+            progressBar.dismiss();
         }
     }
 

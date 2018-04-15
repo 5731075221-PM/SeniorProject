@@ -181,6 +181,7 @@ public class DiseaseGridSelectFragment extends Fragment {
                         Bundle bundle = new Bundle();
                         bundle.putString("name", diseaseName.get(position).getName());
                         bundle.putString("type", diseaseName.get(position).getType());
+                        bundle.putInt("val", 0);
                         fragment.setArguments(bundle);
                         getActivity().getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.container_fragment, fragment)

@@ -178,8 +178,8 @@ public class DiseaseListFragment extends Fragment{
                             Bundle bundle = new Bundle();
                             bundle.putString("name",diseaseName.get(position).getName());
                             bundle.putString("type",diseaseName.get(position).getType());
+                            bundle.putInt("val",1);
                             fragment.setArguments(bundle);
-
                             getParentFragment().getFragmentManager().beginTransaction()
                                     .replace(R.id.container_fragment, fragment)
                                     .addToBackStack(null)

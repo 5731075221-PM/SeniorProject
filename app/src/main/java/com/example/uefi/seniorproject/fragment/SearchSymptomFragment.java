@@ -390,6 +390,7 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
                         Bundle bundle = new Bundle();
                         bundle.putString("name", diseaseName.get(position));
                         bundle.putString("type", type);
+                        bundle.putInt("val",1);
                         fragment.setArguments(bundle);
 //                        getFragmentManager().beginTransaction()
                         getParentFragment().getFragmentManager().beginTransaction()

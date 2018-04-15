@@ -59,12 +59,15 @@ public class DiseaseNavFragment extends Fragment{
                 if(position == 0){
                     title = getActivity().findViewById(R.id.textTool);
                     title.setText("หมวดหมู่ของโรค");
+                    currentFrag = 0;
                 }else if(position == 1){
                     title = getActivity().findViewById(R.id.textTool);
                     title.setText("ค้นหาโรคจากอาการ");
+                    currentFrag = 1;
                 }else{
                     title = getActivity().findViewById(R.id.textTool);
                     title.setText("ค้นหาโรคจากชื่อ");
+                    currentFrag = 2;
                 }
             }
 
