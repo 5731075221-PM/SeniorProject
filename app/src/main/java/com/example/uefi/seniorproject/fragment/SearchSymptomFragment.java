@@ -198,6 +198,102 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
         recyclerView.setAdapter(adapter);
     }
 
+//    public void calculateWeigth() {
+//        ArrayList<String> tmp;
+//        freq = new Integer[mainSymptoms.size()];
+//        lengthDoc = new Double[diseaseNameDefault.size()];
+//        for(int i = 0; i<diseaseNameDefault.size();i++){
+//            for(int j = 0; j<mainSymptoms.size();j++){
+//                countword.add(new ArrayList<Double>());
+//                countword.get(i).add(0.0);
+//            }
+//        }
+//
+//        for (int i = 0; i < diseaseNameDefault.size(); i++) {
+//            String[] word = symptoms.get(i).split(",");
+//            tmp = new ArrayList<>(Arrays.asList(word));
+//            for(int w = 0; w<word.length;w++) System.out.println("Taew1 = "+i+" "+word[w]);
+//
+//            ArrayList<Integer> index = dbHelperDAO.getIndexSymptom(tmp);
+//            for (int j = 0; j < index.size(); j++) {
+//                freq[index.get(j)] = freq[index.get(j)] == null ? 1 : freq[index.get(j)]+1;
+//                countword.get(i).set(index.get(j), countword.get(i).get(index.get(j))+1);
+////                System.out.println("index.get(j) = " +index.get(j));
+//            }
+//        }
+//
+//        for (int i = 0; i < diseaseNameDefault.size(); i++) {
+//            for (int j = 0; j < mainSymptoms.size(); j++) {
+////                System.out.println("Taew2 = i="+i+" j="+j+" "+ countword.get(i).get(j));
+//                countword.get(i).set(j,(countword.get(i).get(j)) * (Math.log10(diseaseNameDefault.size()/freq[i])));
+//                lengthDoc[i] = lengthDoc[i] == null ? Math.pow(countword.get(i).get(j), 2) : lengthDoc[i]+Math.pow(countword.get(i).get(j), 2);;
+////                System.out.print("i="+i+" j="+j+" "+ countword.get(i).get(j)+" ");
+//            }
+//            lengthDoc[i] = Math.sqrt(lengthDoc[i]);
+////            System.out.println();
+//        }
+//    }
+//
+//    public void calculateQuery(String newText){
+//        try {
+//            String output = tokenizer.genOutput(newText.trim(), tokenizer);
+//            if (!(output.equals(null) || output.equals(""))) {
+//                empty.setVisibility(View.INVISIBLE);
+//                System.out.println("output = " + output);
+//                String[] keyword = output.split("-");
+//
+//                initialQueryVector();
+//
+//                ArrayList<Integer> indexList = new ArrayList<>();
+//                queryLength = 0.0;
+//                double calvar = 0.0;
+//                indexList = dbHelperDAO.getIndexSymptom(dbHelperDAO.checkKeyword(keyword));
+//                System.out.println("indexList = " +indexList.size());
+//                for (int i = 0; i < indexList.size(); i++)
+//                    keywordSymptom.set(indexList.get(i), keywordSymptom.get(indexList.get(i)) + 1);
+//                System.out.println("indexList.get(i) = " +indexList.get(0));
+//                System.out.println("keywordSymptom.get(indexList.get(i)) = " +keywordSymptom.get(indexList.get(0)));
+//                for (int j = 0; j < indexList.size(); j++) {
+//                    calvar = keywordSymptom.get(indexList.get(j)) * (Math.log10(diseaseNameDefault.size()/freq[indexList.get(j)]));
+//                    System.out.println("calvar = " +calvar);
+//                    keywordSymptom.set(indexList.get(j), calvar);
+//                    queryLength += Math.pow(calvar, 2);
+//                    System.out.println("queryLength = " +queryLength);
+//                }
+//                queryLength = Math.sqrt(queryLength);
+//                queryDotDoc = new ArrayList<>();
+//                simDoc = new ArrayList<>();
+//
+//                for (int i = 0; i < diseaseNameDefault.size(); i++) {
+//                    sum = 0.0;
+//                    for (int j = 0; j < indexList.size(); j++) {
+//                        sum += countword.get(i).get(j) * keywordSymptom.get(indexList.get(j));
+//                    }
+//                    double var = sum / (queryLength * lengthDoc[i]);
+//                    if (var > 0.0)
+//                        simDoc.add(new Pair<Double, String>(var, diseaseNameDefault.get(i)));
+//                }
+//                Collections.sort(simDoc, new Comparator<Pair<Double, String>>() {
+//                    @Override
+//                    public int compare(Pair<Double, String> t0, Pair<Double, String> t1) {
+//                        if (t0.first < t1.first) return 1;
+//                        else if (t0.first > t1.first) return -1;
+//                        else return 0;
+//                    }
+//                });
+//
+//                for (int i = 0; i < simDoc.size(); i++) {
+//                    filteredValues.add(simDoc.get(i).second);
+//                    System.out.println("Name = "+simDoc.get(i).second);
+//                }
+//                diseaseName = filteredValues;
+//            } else resetSearch();
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
     @Override
     public boolean onQueryTextSubmit(String query) {
         return false;
