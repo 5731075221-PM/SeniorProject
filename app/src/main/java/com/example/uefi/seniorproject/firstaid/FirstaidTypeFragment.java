@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -66,6 +67,7 @@ public class FirstaidTypeFragment extends Fragment {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_firstaid);
         mLayoutManager = new LinearLayoutManager( getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         mAdapter = new CustomAdapterFirstaid(getActivity(),list);
         mAdapter.setItemClickListener(new CustomAdapterFirstaid.OnItemClickListener() {
             @Override

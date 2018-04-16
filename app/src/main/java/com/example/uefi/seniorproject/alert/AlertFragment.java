@@ -4,6 +4,7 @@ package com.example.uefi.seniorproject.alert;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -135,6 +136,7 @@ public class AlertFragment extends Fragment {
                 }
             }
         });
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         mAdapter.notifyDataSetChanged();
     }
 

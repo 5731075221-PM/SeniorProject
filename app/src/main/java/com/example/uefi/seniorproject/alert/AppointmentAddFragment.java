@@ -179,16 +179,20 @@ public class AppointmentAddFragment extends Fragment {
                     alarmManager.cancel(pendingIntent);
                 } else {
                     Calendar calendar = Calendar.getInstance();
-                    calendar.set(year, month, day-1, 18, 0);
+                    calendar.set(year, month, day - 1, 18, 0);
 
-                    Intent intent = new Intent(getActivity(), AlarmReceiver.class);
-                    intent.putExtra("requestCode", 8);
-                    intent.putExtra("hour",hour);
-                    intent.putExtra("minute",minute);
-                    intent.putExtra("hospital",hospitalEdittext.getText().toString());
-                    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 8, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                    AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
-                    alarmManager.set(AlarmManager.RTC_WAKEUP,  calendar.getTimeInMillis(), pendingIntent);
+                    if (calendar.before(Calendar.getInstance())) {
+//                        calendar.add(Calendar.DATE, 1);
+                    } else {
+                        Intent intent = new Intent(getActivity(), AlarmReceiver.class);
+                        intent.putExtra("requestCode", 8);
+                        intent.putExtra("hour", hour);
+                        intent.putExtra("minute", minute);
+                        intent.putExtra("hospital", hospitalEdittext.getText().toString());
+                        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 8, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+                        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+                    }
                 }
                 getFragmentManager().popBackStack();
             }
