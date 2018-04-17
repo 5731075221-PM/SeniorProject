@@ -213,7 +213,7 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
                         }
                     }, 5000);
                 } else {
-                    Toast.makeText(getActivity(), "Loading data completed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "โหลดข้อมูลเสร็จสมบูรณ์", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -690,6 +690,7 @@ public class HospitalNearbyFragment extends Fragment implements SearchView.OnQue
                             bundle.putString("phone", hosList.get(position).getPhone());
                             bundle.putString("website", hosList.get(position).getWebsite());
                             bundle.putString("type", hosList.get(position).getType());
+                            bundle.putInt("val",1);
                             fragment.setArguments(bundle);
                             getActivity().getSupportFragmentManager().beginTransaction()
                                     .replace(R.id.container_fragment, fragment)

@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -35,6 +36,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView;
+
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 /**
  * Created by UEFI on 27/12/2560.
@@ -251,6 +254,7 @@ public class SearchHospitalByName extends Fragment implements SearchView.OnQuery
     }
 
     public void resetSearch() {
+        search = "";
         hospitalList = defaultList;
         sortList();
         adapter = new RecyclerViewAdapter();
@@ -275,13 +279,13 @@ public class SearchHospitalByName extends Fragment implements SearchView.OnQuery
             if (adapterView.getId() == province.getId()) {
                 if(i==0) {
                     selectProvince = "";
+                    selectZone = "";
                     adapterZone = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, arrayZoneAll);
                     arrayZone = arrayZoneAll;
                     zone.setAdapter(adapterZone);
                 }else {
                     selectProvince = arrayProvince[i];
-                    adapterZone = new ArrayAdapter<String>(getActivity(),
-                            android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(rid[i-1]));
+                    adapterZone = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(rid[i-1]));
                     arrayZone = getResources().getStringArray(rid[i-1]);
                     zone.setAdapter(adapterZone);
                 }
@@ -332,6 +336,11 @@ public class SearchHospitalByName extends Fragment implements SearchView.OnQuery
             sortList();
             adapter = new RecyclerViewAdapter();
             recyclerView.setAdapter(adapter);
+
+            if(getActivity().getCurrentFocus() != null){
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+            }
         }
     }
 
@@ -441,6 +450,7 @@ public class SearchHospitalByName extends Fragment implements SearchView.OnQuery
                             bundle.putString("phone", hospitalList.get(position).getPhone());
                             bundle.putString("website", hospitalList.get(position).getWebsite());
                             bundle.putString("type", hospitalList.get(position).getType());
+                            bundle.putInt("val",1);
                             fragment.setArguments(bundle);
                             getActivity().getSupportFragmentManager().beginTransaction()
                                     .replace(R.id.container_fragment, fragment)

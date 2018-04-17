@@ -14,9 +14,11 @@
             android:id="@+id/sliding_tabs"
             android:layout_width="match_parent"
             android:layout_height="72dp"
-            app:tabBackground="@android:color/white"
-            app:tabIndicatorColor="@color/second_bar"
+            android:background="@color/nav_bar"
+            app:tabBackground="@drawable/tab_color_select"
+            app:tabIndicatorColor="@color/white"
             app:tabMode="fixed"
+            app:tabIndicatorHeight="4dp"
             style="@style/TabLayout"
             app:tabSelectedTextColor="@color/second_bar"
             app:tabTextColor="@color/colorAccent" />

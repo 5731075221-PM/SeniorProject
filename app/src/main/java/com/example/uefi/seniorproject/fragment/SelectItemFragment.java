@@ -177,7 +177,7 @@ public class SelectItemFragment extends Fragment{
         image = getActivity().getResources().getDrawable(R.drawable.image4_tab_select);
         image.setBounds(25, 25, 25, 25);
         tabLayout.getTabAt(3).setIcon(image);
-        tabLayout.setTabTextColors(Color.GRAY,getResources().getColor(R.color.second_bar));
+        tabLayout.setTabTextColors(Color.WHITE,getResources().getColor(R.color.cardview_light_background));
 
         ViewGroup childTabLayout = (ViewGroup) tabLayout.getChildAt(0);
         for (int i = 0; i < childTabLayout.getChildCount(); i++) {

@@ -208,10 +208,10 @@ public class DiseaseNavFragment extends Fragment{
         appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
 
 //        selectedFragment = fragment1;
-        Bundle args = new Bundle();
-        args.putStringArrayList("dict",getArguments().getStringArrayList("dict"));
-        args.putStringArrayList("stop",getArguments().getStringArrayList("stop"));
-        fragment2.setArguments(args);
+//        Bundle args = new Bundle();
+//        args.putStringArrayList("dict",getArguments().getStringArrayList("dict"));
+//        args.putStringArrayList("stop",getArguments().getStringArrayList("stop"));
+//        fragment2.setArguments(args);
 //        getChildFragmentManager().beginTransaction().add(R.id.frame_bottom_nav,fragment1,"1").commit();
 //        getActivity().getSupportFragmentManager().beginTransaction()
 //                .replace(R.id.frame_bottom_nav,fragment1).commit();

@@ -56,23 +56,29 @@ public class SelectContentFragment extends Fragment {
             try {
                 Document doc = Jsoup.connect(getArguments().getString("link") + "").get();
 //                System.out.println(doc.toString());
-                for (Element div : doc.select("div.show_catlist > h1")) {
-                    Elements img = div.getElementsByTag("img");
-                    for (Element i : img) {
-                        System.out.println("AAA " + i.absUrl("src"));
-                        url = i.absUrl("src");
-                    }
-                }
+//                for (Element div : doc.select("div.show_catlist > h1")) {
+//                    Elements img = div.getElementsByTag("img");
+//                    for (Element i : img) {
+//                        System.out.println("AAA " + i.absUrl("src"));
+//                        url = i.absUrl("src");
+//                    }
+//                }
 
                 System.out.println(doc.select("div.show_catlist"));
 
                 boolean found = false;
                 for (Element div : doc.select("div.show_catlist")) {
                     Elements text = div.select("p");
-                    System.out.println("size = " + text.size());
                     for (Element i : text.subList(0, text.size()-1)) {
-                        if (i.text().contains("แฟ้มภาพ")) found = true;
+                        if (i.text().contains("แฟ้มภาพ")) {
+                            found = true;
+                            d = "";
+                        }
                         else if(found){
+                            d += "\t"+i.text();
+                            d += "\n\n";
+                            System.out.println("DET " + i.text());
+                        }else{
                             d += "\t"+i.text();
                             d += "\n\n";
                             System.out.println("DET " + i.text());
@@ -91,7 +97,7 @@ public class SelectContentFragment extends Fragment {
             header.setText(h);
             detail.setText(d);
             date.setText(dy);
-            Picasso.with(getActivity()).load(url).into(image);
+            Picasso.with(getActivity()).load(getArguments().getString("image")).into(image);
         }
     }
 

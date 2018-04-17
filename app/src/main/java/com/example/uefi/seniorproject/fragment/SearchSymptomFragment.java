@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.uefi.seniorproject.R;
+import com.example.uefi.seniorproject.Singleton;
 import com.example.uefi.seniorproject.breakiterator.LongLexTo;
 import com.example.uefi.seniorproject.databases.DBHelperDAO;
 
@@ -75,11 +76,29 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
             R.drawable.selector_grid16, R.drawable.selector_grid17, R.drawable.selector_grid18, R.drawable.selector_grid19, R.drawable.selector_grid20
     };
 
+    class token extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                tokenizer = new LongLexTo(dictList, stopwordList);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            calculateWeigth();
+        }
+    }
 
     class createTokenizer extends AsyncTask<Void, Integer, Void> {
         @Override
         protected void onPreExecute() {
-            progressBar = new ProgressDialog(getContext());
+            progressBar = new ProgressDialog(getActivity());
             progressBar.setMessage("กรุณารอสักครู่...");
             progressBar.setIndeterminate(false);
             progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -90,15 +109,17 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                diseaseNameDefault = dbHelperDAO.getDiseaseName();
-                mainSymptoms = dbHelperDAO.getMainSymptoms();
+                Singleton single = Singleton.getInstance();
+                diseaseNameDefault = single.getDiseaseNameDefault();//dbHelperDAO.getDiseaseName();
+                mainSymptoms = single.getMainSymptoms();//dbHelperDAO.getMainSymptoms();
                 addSearchList();
-                allSymptoms = dbHelperDAO.getAllSymptoms();
-                vectordata = dbHelperDAO.getVectorData();
-                docLength = dbHelperDAO.getDocLength();
-                idfDoc = dbHelperDAO.getFreq();
-                dictList = getArguments().getStringArrayList("dict");
-                stopwordList = getArguments().getStringArrayList("stop");
+                allSymptoms = single.getAllSymptoms();//dbHelperDAO.getAllSymptoms();
+//                vectordata = dbHelperDAO.getVectorData();
+//                docLength = dbHelperDAO.getDocLength();
+//                idfDoc = dbHelperDAO.getFreq();
+                dictList = single.getDict();//getArguments().getStringArrayList("dict");
+                stopwordList = single.getStopword();//getArguments().getStringArrayList("stop");
+//            new token().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 tokenizer = new LongLexTo(dictList, stopwordList);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -108,6 +129,8 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
 
         @Override
         protected void onPostExecute(Void aVoid) {
+//            calculateWeigth();
+            new token().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             progressBar.dismiss();
         }
     }
@@ -176,7 +199,8 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
 
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());
         dbHelperDAO.open();
-//        symptoms = dbHelperDAO.getIndexWord();
+        symptoms = dbHelperDAO.getIndexWord();
+        System.out.println("AAA"+symptoms.size());
 //        diseaseNameDefault = dbHelperDAO.getDiseaseName();
         diseaseName = new ArrayList<>();
 //        mainSymptoms = dbHelperDAO.getMainSymptoms();
@@ -237,6 +261,10 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
             lengthDoc[i] = Math.sqrt(lengthDoc[i]);
 //            System.out.println();
         }
+
+        for(int i = 0; i<mainSymptoms.size();i++){
+            System.out.println("i = "+i+" "+countword.get(0).get(i));
+        }
     }
 
     public void calculateQuery(String newText){
@@ -253,11 +281,12 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
                 queryLength = 0.0;
                 double calvar = 0.0;
                 indexList = dbHelperDAO.getIndexSymptom(dbHelperDAO.checkKeyword(keyword));
-                System.out.println("indexList = " +indexList.size());
-                for (int i = 0; i < indexList.size(); i++)
+                System.out.println("indexListSize = " +indexList.size());
+                for (int i = 0; i < indexList.size(); i++) {
                     keywordSymptom.set(indexList.get(i), keywordSymptom.get(indexList.get(i)) + 1);
-                System.out.println("indexList.get(i) = " +indexList.get(0));
-                System.out.println("keywordSymptom.get(indexList.get(i)) = " +keywordSymptom.get(indexList.get(0)));
+//                    System.out.println("indexList.get(i) = " + indexList.get(0));
+//                    System.out.println("keywordSymptom.get(indexList.get(i)) = " + keywordSymptom.get(indexList.get(0)));
+                }
                 for (int j = 0; j < indexList.size(); j++) {
                     calvar = keywordSymptom.get(indexList.get(j)) * (Math.log10(diseaseNameDefault.size()/freq[indexList.get(j)]));
                     System.out.println("calvar = " +calvar);
@@ -269,13 +298,19 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
                 queryDotDoc = new ArrayList<>();
                 simDoc = new ArrayList<>();
 
+                for(int i = 0; i<mainSymptoms.size();i++){
+                    System.out.println("i = "+i+" "+keywordSymptom.get(i));
+                }
+
                 for (int i = 0; i < diseaseNameDefault.size(); i++) {
                     sum = 0.0;
                     for (int j = 0; j < indexList.size(); j++) {
-                        sum += countword.get(i).get(j) * keywordSymptom.get(indexList.get(j));
+//                        System.out.println("indexList ="+indexList.size()+" "+indexList.get(j));
+//                        System.out.println("coutnword = i="+i+" "+countword.get(i).get(j));
+                        sum += countword.get(i).get(indexList.get(j)) * keywordSymptom.get(indexList.get(j));
                     }
                     double var = sum / (queryLength * lengthDoc[i]);
-                    if (var > 0.0)
+                    if (var > 0.0 )
                         simDoc.add(new Pair<Double, String>(var, diseaseNameDefault.get(i)));
                 }
                 Collections.sort(simDoc, new Comparator<Pair<Double, String>>() {
@@ -292,6 +327,7 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
                     System.out.println("Name = "+simDoc.get(i).second);
                 }
                 diseaseName = filteredValues;
+                System.out.println("Sizeee = "+diseaseName.size());
             } else resetSearch();
 
         } catch (IOException e) {
@@ -483,7 +519,7 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
             viewHolder.name.setTypeface(tf);
             viewHolder.type.setText(type);
             viewHolder.type.setTypeface(tf);
-            viewHolder.img.setBackgroundResource(gridViewImageId[Arrays.asList(gridViewString).indexOf(type.split(",")[0])]);
+            viewHolder.img.setBackgroundResource(gridViewImageId[Arrays.asList(gridViewString).indexOf(type.split(",")[0].trim())]);
             viewHolder.setOnClickListener(new ItemClickListener() {
                 @Override
                 public void onClick(View view, int position, boolean isLongClick, MotionEvent motionEvent) {
