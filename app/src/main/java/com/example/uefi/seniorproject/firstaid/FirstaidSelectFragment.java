@@ -4,8 +4,12 @@ package com.example.uefi.seniorproject.firstaid;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,11 +27,15 @@ public class FirstaidSelectFragment extends Fragment {
 
     public DBHelperDAO dbHelperDAO;
     public TextView textTool;
-    public String toolbar;
+    public String toolbarText;
     private RecyclerView.LayoutManager mLayoutManager;
     private int id;
     private ArrayList items;
     public AppBarLayout appBarLayout;
+    Toolbar toolbar;
+    DrawerLayout drawer;
+    ActionBarDrawerToggle toggle;
+    private boolean mToolBarNavigationListenerIsRegistered = false;
 
     public FirstaidSelectFragment() {
         // Required empty public constructor
@@ -62,18 +70,47 @@ public class FirstaidSelectFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
-        toolbar = bundle.getString("toolbar");
+        toolbarText = bundle.getString("toolbar");
 
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());
         dbHelperDAO.open();
-        id = dbHelperDAO.getFirstaidId(toolbar);
+        id = dbHelperDAO.getFirstaidId(toolbarText);
         items = dbHelperDAO.getFirstaidDetail(id);
 
         appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
+
+
+
+//        drawer = (DrawerLayout) (getActivity()).findViewById(R.id.drawer_layout);
+//
+//        Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
+//        toggle = new ActionBarDrawerToggle( getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.addDrawerListener(toggle);
+//        toggle.setDrawerIndicatorEnabled(false);
+//        toggle.syncState();
+//
+//        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        if(!mToolBarNavigationListenerIsRegistered) {
+//            toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    // Doesn't have to be onBackPressed
+//                    if(getActivity().getSupportFragmentManager().getBackStackEntryCount() == 1) {
+//                        toggle.setDrawerIndicatorEnabled(true);
+//                        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+//                        toggle.syncState();
+//                        getFragmentManager().popBackStack();
+//                    }
+//                    else
+//                        ((AppCompatActivity) getActivity()).onBackPressed();
+//                }
+//            });
+//            mToolBarNavigationListenerIsRegistered = true;
+//        }
     }
 
     public void onResume() {
         super.onResume();
-        textTool.setText(toolbar);
+        textTool.setText(toolbarText);
     }
 }
