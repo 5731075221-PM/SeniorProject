@@ -7,10 +7,10 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_cause_unselected"
+            android:icon="@drawable/ic_action_home"
             android:title="หน้าหลัก"
             android:visible="true"
-            app:showAsAction="always"/>
+            app:showAsAction="always" />
 
         <item
             android:id="@+id/nav_disease"
@@ -38,7 +38,7 @@
             app:showAsAction="always"/>
         <item
             android:id="@+id/nav_food"
-            android:icon="@drawable/icon_food"
+            android:icon="@drawable/icons_lunch"
             android:title="เมนูของฉัน"
             android:visible="true"
             app:showAsAction="always" />

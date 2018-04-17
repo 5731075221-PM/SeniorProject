@@ -10,8 +10,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 public class DBHelper extends SQLiteAssetHelper {
-    private static final String DATABASE_NAME = "seniorproject";
-//    private static final String DATABASE_NAME = "daly.db";
+//    private static final String DATABASE_NAME = "seniorproject";
+    private static final String DATABASE_NAME = "daly.db";
     private static final int DATABASE_VERSION = 1;
 
     public DBHelper(Context context) {
