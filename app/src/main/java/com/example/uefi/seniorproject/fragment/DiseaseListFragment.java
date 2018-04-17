@@ -58,6 +58,11 @@ public class DiseaseListFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_disease_list, container, false);
 
+        if(getActivity().getCurrentFocus() != null){
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+        }
+
         if(appBarLayout != null) appBarLayout.setExpanded(true, true);
 
         recyclerView = (IndexFastScrollRecyclerView) view.findViewById(R.id.diseaseList);
@@ -85,12 +90,12 @@ public class DiseaseListFragment extends Fragment{
 
     public void sortList(){
         String letters = "[ก-ฮ]";
-        List<String> sect = new ArrayList<>(44);
+        List<String> sect = new ArrayList<>(45);
         ArrayList<Disease> temp = new ArrayList<>();
         for (int i = 0; i < diseaseName.size(); i++) {
             String section = String.valueOf(diseaseName.get(i).getName().charAt(0)).toUpperCase();
             if(!section.matches(letters)){
-                section = String.valueOf(diseaseName.get(i).getName().charAt(1)).toUpperCase();
+                section = "#";//String.valueOf(diseaseName.get(i).getName().charAt(1)).toUpperCase();
             }
             if (!sect.contains(section)) {
                 sect.add(section);
@@ -169,7 +174,8 @@ public class DiseaseListFragment extends Fragment{
                 viewHolder.name.setTypeface(tf);
                 viewHolder.type.setText(diseaseName.get(position).getType());
                 viewHolder.type.setTypeface(tf);
-                viewHolder.img.setBackgroundResource(gridViewImageId[Arrays.asList(gridViewString).indexOf(diseaseName.get(position).getType().split(",")[0])]);
+                System.out.println(diseaseName.get(position).getName()+" "+diseaseName.get(position).getType());
+                viewHolder.img.setBackgroundResource(gridViewImageId[Arrays.asList(gridViewString).indexOf(diseaseName.get(position).getType().split(",")[0].trim())]);
                 viewHolder.setOnClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick, MotionEvent motionEvent) {
@@ -178,8 +184,8 @@ public class DiseaseListFragment extends Fragment{
                             Bundle bundle = new Bundle();
                             bundle.putString("name",diseaseName.get(position).getName());
                             bundle.putString("type",diseaseName.get(position).getType());
+                            bundle.putInt("val",1);
                             fragment.setArguments(bundle);
-
                             getParentFragment().getFragmentManager().beginTransaction()
                                     .replace(R.id.container_fragment, fragment)
                                     .addToBackStack(null)
@@ -209,12 +215,12 @@ public class DiseaseListFragment extends Fragment{
         public Object[] getSections() {
             String letters = "[ก-ฮ]";
             mDataArray = diseaseName;
-            List<String> sections = new ArrayList<>(44);
-            mSectionPositions = new ArrayList<>(44);
+            List<String> sections = new ArrayList<>(45);
+            mSectionPositions = new ArrayList<>(45);
             for (int i = 0, size = mDataArray.size(); i < size; i++) {
                 String section = String.valueOf(mDataArray.get(i).getName().charAt(0)).toUpperCase();
                 if(!section.matches(letters)){
-                    section = String.valueOf(mDataArray.get(i).getName().charAt(1)).toUpperCase();
+                    section = "#";//String.valueOf(mDataArray.get(i).getName().charAt(1)).toUpperCase();
                 }
                 if (!sections.contains(section)) {
                     sections.add(section);

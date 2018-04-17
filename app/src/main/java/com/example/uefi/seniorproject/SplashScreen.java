@@ -15,7 +15,7 @@ import java.util.Arrays;
 
 public class SplashScreen extends AppCompatActivity {
     DBHelperDAO dbHelperDAO;
-    private static int SPLASH_TIME_OUT = 3000;
+    private static int SPLASH_TIME_OUT = 5000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +25,13 @@ public class SplashScreen extends AppCompatActivity {
         dbHelperDAO = DBHelperDAO.getInstance(this);
         dbHelperDAO.open();
 
-//        Singleton single = Singleton.getInstance();
-//        single.setDict(dbHelperDAO.getLexitron());
-//        single.setStopword(dbHelperDAO.getStopword());
+        Singleton single = Singleton.getInstance();
+        single.setDict(dbHelperDAO.getLexitron());
+        single.setStopword(dbHelperDAO.getStopword());
+        single.setAllSymptoms(dbHelperDAO.getAllSymptoms());
+        single.setMainSymptoms(dbHelperDAO.getMainSymptoms());
+        single.setDiseaseNameDefault(dbHelperDAO.getDiseaseName());
+//        Toast.makeText(this, "GridView Item: ", Toast.LENGTH_LONG).show();
 
         new Handler().postDelayed(new Runnable() {
             @Override

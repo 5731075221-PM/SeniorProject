@@ -193,11 +193,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //
 //                mToolBarNavigationListenerIsRegistered = true;
 //            }
-            Bundle args = new Bundle();
-            args.putStringArrayList("dict",dictList);
-            args.putStringArrayList("stop",stopwordList);
+//            Bundle args = new Bundle();
+//            args.putStringArrayList("dict",dictList);
+//            args.putStringArrayList("stop",stopwordList);
             DiseaseNavFragment fragment = new DiseaseNavFragment();
-            fragment.setArguments(args);
+//            fragment.setArguments(args);
             fragmentManager.beginTransaction()
                     .replace(R.id.container_fragment, fragment)
 //                    .addToBackStack(null)
@@ -262,19 +262,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                    .addToBackStack(null)
                     .commit();
         }else if(id == R.id.nav_fav){
-            toggle.setDrawerIndicatorEnabled(false);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            if(!mToolBarNavigationListenerIsRegistered) {
-                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // Doesn't have to be onBackPressed
-                        onBackPressed();
-                    }
-                });
-
-                mToolBarNavigationListenerIsRegistered = true;
-            }
+//            toggle.setDrawerIndicatorEnabled(false);
+//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//            if(!mToolBarNavigationListenerIsRegistered) {
+//                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        // Doesn't have to be onBackPressed
+//                        onBackPressed();
+//                    }
+//                });
+//
+//                mToolBarNavigationListenerIsRegistered = true;
+//            }
             fragmentManager.beginTransaction()
                     .replace(R.id.container_fragment, new FavoriteItemFragment())
                     .addToBackStack(null)

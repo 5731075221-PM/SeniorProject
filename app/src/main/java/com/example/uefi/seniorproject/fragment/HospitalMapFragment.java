@@ -73,19 +73,37 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_hospital_map, container, false);
 
         if (mMap != null) {
             if (mMarker != null)
                 mMarker.remove();
 
+            mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                @Override
+                public View getInfoWindow(Marker arg0) {
+                    return null;
+                }
+
+                @Override
+                public View getInfoContents(Marker marker) {
+                    View infoWindow = inflater.inflate(R.layout.custom_info_contents, null);
+
+                    TextView title = ((TextView) infoWindow.findViewById(R.id.textViewName));
+                    title.setText(marker.getTitle());
+
+                    return infoWindow;
+                }
+            });
+
             mMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)));
             mMarker.setIcon(BitmapDescriptorFactory.fromBitmap(icon));
             mMarker.setTitle("คุณอยู่ที่นี่");
+            mMarker.showInfoWindow();
             mMarker.setSnippet("-1");
 //                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(coordinate, 12));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 15));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 13));
         }
 
         mapFragment = (SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.hospitalMap);
@@ -93,11 +111,11 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
 
 //        Bundle extraBundle = getArguments();
 //        if (!extraBundle.isEmpty()) {
-            dbHelperDAO = DBHelperDAO.getInstance(getActivity());
-            dbHelperDAO.open();
+        dbHelperDAO = DBHelperDAO.getInstance(getActivity());
+        dbHelperDAO.open();
 
 //            if (extraBundle.getString("type") == "0") {
-                hospitalList = dbHelperDAO.getHospital();
+        hospitalList = dbHelperDAO.getHospital();
 //            }
 //        }
         return view;
@@ -109,13 +127,13 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
         drawer = (DrawerLayout) (getActivity()).findViewById(R.id.drawer_layout);
 
         Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
-        toggle = new ActionBarDrawerToggle( getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        toggle = new ActionBarDrawerToggle(getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.setDrawerIndicatorEnabled(false);
         toggle.syncState();
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        if(!mToolBarNavigationListenerIsRegistered) {
+        if (!mToolBarNavigationListenerIsRegistered) {
             toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -123,13 +141,12 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
 //                   getFragmentManager().popBackStack();
 //                    ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 //                    toggle.setDrawerIndicatorEnabled(true);
-                    if(getActivity().getSupportFragmentManager().getBackStackEntryCount() == 1) {
+                    if (getActivity().getSupportFragmentManager().getBackStackEntryCount() == 1) {
                         toggle.setDrawerIndicatorEnabled(true);
                         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                         toggle.syncState();
                         getFragmentManager().popBackStack();
-                    }
-                    else
+                    } else
                         ((AppCompatActivity) getActivity()).onBackPressed();
                 }
             });
@@ -137,7 +154,7 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
         }
 
         Drawable drawable = getResources().getDrawable(R.drawable.ic_map_pin);
-        icon = Bitmap.createBitmap(drawable.getIntrinsicWidth()+50, drawable.getIntrinsicHeight()+50, Bitmap.Config.ARGB_8888);
+        icon = Bitmap.createBitmap(drawable.getIntrinsicWidth() + 50, drawable.getIntrinsicHeight() + 50, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(icon);
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         drawable.draw(canvas);
@@ -197,15 +214,14 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
 
     protected void buildAlertMessageNoGps() {
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("Please Turn ON your GPS Connection")
-                .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme);
+        builder.setMessage("กรุณาเปิดใช้งาน GPS")
+                .setPositiveButton("ใช่", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
                         startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton("ไม่", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
                         dialog.cancel();
                     }
@@ -218,27 +234,17 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
- 
+
         if (!hospitalList.isEmpty()) {
             for (int i = 0; i < hospitalList.size(); i++) {
-//                avgLat += hospitalList.get(i).getLat();
-//                avgLng += hospitalList.get(i).getLng();
-
                 Drawable drawable = getResources().getDrawable(R.drawable.ic_hospital_cross);
                 Bitmap icon = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
                 Canvas canvas = new Canvas(icon);
                 drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
                 drawable.draw(canvas);
 
-//                Bitmap icon = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.ic_local_hospital_white).copy(Bitmap.Config.ARGB_8888, true);
-//                Paint paint = new Paint();
-//                ColorFilter filter = new PorterDuffColorFilter(ContextCompat.getColor(getActivity(), R.color.colorMacawBlueGreen), PorterDuff.Mode.SRC_IN);
-//                paint.setColorFilter(filter);
-//                Canvas canvas = new Canvas(icon);
-//                canvas.drawBitmap(icon, 0, 0, paint);
-
                 mMap.addMarker(new MarkerOptions().position(new LatLng(hospitalList.get(i).getLat(), hospitalList.get(i).getLng()))
-                        .title(hospitalList.get(i).getName()).snippet(i + "")).setIcon(BitmapDescriptorFactory.fromBitmap(icon));
+                        .title(hospitalList.get(i).getName()).snippet(i +"")).setIcon(BitmapDescriptorFactory.fromBitmap(icon));
             }
 //            avgLat = avgLat / hospitalList.size();
 //            avgLng = avgLng / hospitalList.size();
@@ -250,7 +256,7 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                if(Integer.parseInt(marker.getSnippet()) == -1) return;
+                if (Integer.parseInt(marker.getSnippet()) == -1) return;
                 HospitalItemFragment fragment = new HospitalItemFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString("name", hospitalList.get(Integer.parseInt(marker.getSnippet())).getName());
@@ -260,6 +266,7 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
                 bundle.putString("phone", hospitalList.get(Integer.parseInt(marker.getSnippet())).getPhone());
                 bundle.putString("website", hospitalList.get(Integer.parseInt(marker.getSnippet())).getWebsite());
                 bundle.putString("type", hospitalList.get(Integer.parseInt(marker.getSnippet())).getType());
+                bundle.putInt("val", 0);
                 fragment.setArguments(bundle);
                 getFragmentManager().beginTransaction()
                         .replace(R.id.container_fragment, fragment)
@@ -276,12 +283,15 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
 
             @Override
             public View getInfoContents(Marker marker) {
-                View infoWindow = getLayoutInflater().inflate(R.layout.custom_info_contents, null);
+                if(getActivity()!=null) {
+                    View infoWindow = getLayoutInflater().inflate(R.layout.custom_info_contents, null);
 
-                TextView title = ((TextView) infoWindow.findViewById(R.id.textViewName));
-                title.setText(marker.getTitle());
+                    TextView title = ((TextView) infoWindow.findViewById(R.id.textViewName));
+                    title.setText(marker.getTitle());
 
-                return infoWindow;
+                    return infoWindow;
+                }
+                return null;
             }
         });
     }
@@ -301,9 +311,10 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
             mMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)));
             mMarker.setIcon(BitmapDescriptorFactory.fromBitmap(icon));
             mMarker.setTitle("คุณอยู่ที่นี่");
+            mMarker.showInfoWindow();
             mMarker.setSnippet("-1");
 //                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(coordinate, 12));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 12));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 13));
         }
     }
 

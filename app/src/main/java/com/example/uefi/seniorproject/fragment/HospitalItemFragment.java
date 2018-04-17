@@ -120,7 +120,7 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
                 @Override
                 public void onClick(View view) {
                     final String[] tmp = phone.getText().toString().split("-");//textPhone.getText().toString().split("-");
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme);
                     builder.setTitle("ยืนยันการโทรออก?");
                     if(tmp.length > 1) builder.setMessage("ติดต่อ " + tmp[0] + tmp[1] + tmp[2]);
                     else builder.setMessage("ติดต่อ " + tmp[0]);
@@ -169,12 +169,12 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
         buttonPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme);
                 builder.setItems(phonenum, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         selected = phonenum[which];
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme);
                         builder.setTitle("ยืนยันการโทรออก");
                         builder.setMessage("ติดต่อ " + selected);
                         builder.setPositiveButton("ยืนยัน", new DialogInterface.OnClickListener() {
@@ -252,15 +252,14 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
 
     protected void buildAlertMessageNoGps() {
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("Please Turn ON your GPS Connection")
-                .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme);
+        builder.setMessage("กรุณาเปิดใช้งาน GPS")
+                .setPositiveButton("ใช่", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
                         startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton("ไม่", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
                         dialog.cancel();
                     }
@@ -337,34 +336,35 @@ public class HospitalItemFragment extends Fragment implements OnMapReadyCallback
         dbHelperDAO.open();
         appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
 
-        drawer = (DrawerLayout) (getActivity()).findViewById(R.id.drawer_layout);
+        if(getArguments().getInt("val") != 0) {
+            drawer = (DrawerLayout) (getActivity()).findViewById(R.id.drawer_layout);
 
-        Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
-        toggle = new ActionBarDrawerToggle( getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.setDrawerIndicatorEnabled(false);
-        toggle.syncState();
+            Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
+            toggle = new ActionBarDrawerToggle(getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            drawer.addDrawerListener(toggle);
+            toggle.setDrawerIndicatorEnabled(false);
+            toggle.syncState();
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        if(!mToolBarNavigationListenerIsRegistered) {
-            toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Doesn't have to be onBackPressed
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            if (!mToolBarNavigationListenerIsRegistered) {
+                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Doesn't have to be onBackPressed
 //                   getFragmentManager().popBackStack();
 //                    ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 //                    toggle.setDrawerIndicatorEnabled(true);
-                    if(getActivity().getSupportFragmentManager().getBackStackEntryCount() == 1) {
-                        toggle.setDrawerIndicatorEnabled(true);
-                        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-                        toggle.syncState();
-                        getFragmentManager().popBackStack();
+                        if (getActivity().getSupportFragmentManager().getBackStackEntryCount() == 1) {
+                            toggle.setDrawerIndicatorEnabled(true);
+                            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                            toggle.syncState();
+                            getFragmentManager().popBackStack();
+                        } else
+                            ((AppCompatActivity) getActivity()).onBackPressed();
                     }
-                    else
-                        ((AppCompatActivity) getActivity()).onBackPressed();
-                }
-            });
-            mToolBarNavigationListenerIsRegistered = true;
+                });
+                mToolBarNavigationListenerIsRegistered = true;
+            }
         }
 
         Bundle extraBundle = getArguments();

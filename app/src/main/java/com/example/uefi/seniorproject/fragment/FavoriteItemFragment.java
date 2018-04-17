@@ -32,7 +32,7 @@ public class FavoriteItemFragment extends Fragment {
     DBHelperDAO dbHelperDAO;
     ArrayList<Object> list;
     RecyclerView recyclerView;
-    TextView empty;
+    TextView empty, title;
     private RecyclerViewAdapter adapter;
 
     String[] gridViewString = {"ระบบกระดูกและข้อ", "ระบบทางเดินปัสสาวะ", "ระบบทางเดินอาหาร", "ระบบศีรษะและลำคอ", "ระบบทางเดินหายใจ",
@@ -52,6 +52,7 @@ public class FavoriteItemFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorite_item, container, false);
 
+        title.setText("รายการลัด");
         empty = (TextView) view.findViewById(R.id.textEmptyFav) ;
         if(list.isEmpty()) empty.setVisibility(View.VISIBLE);
         else empty.setVisibility(View.INVISIBLE);
@@ -70,6 +71,7 @@ public class FavoriteItemFragment extends Fragment {
         super.onCreate(savedInstanceState);
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());
         dbHelperDAO.open();
+        title = getActivity().findViewById(R.id.textTool);
         list = dbHelperDAO.getAllFavList();
         addHeader();
         System.out.println("list.size " + list.size());

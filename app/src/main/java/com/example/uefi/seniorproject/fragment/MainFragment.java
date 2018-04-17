@@ -1,5 +1,6 @@
 package com.example.uefi.seniorproject.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -74,8 +75,22 @@ public class MainFragment extends Fragment /*implements BaseSliderView.OnSliderC
     boolean isNetwork;
     ActionBarDrawerToggle toggle;
     public TextView textTool;
+    ProgressDialog progressBar;
+    Handler handler = new Handler();
+    Runnable Update;
+    Timer swipeTimer = new Timer();
 
     public class FetchData extends AsyncTask<Void,Void,Void> {
+
+        @Override
+        protected void onPreExecute() {
+            progressBar = new ProgressDialog(getContext());
+            progressBar.setMessage("กรุณารอสักครู่...");
+            progressBar.setIndeterminate(false);
+            progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressBar.setCancelable(false);
+            progressBar.show();
+        }
 
         public void getData(String attr){
             try {
@@ -86,8 +101,15 @@ public class MainFragment extends Fragment /*implements BaseSliderView.OnSliderC
                     Elements text = div.select("p");
                     System.out.println("size = " + text.size());
                     for (Element i : text.subList(0, text.size()-1)) {
-                        if (i.text().contains("แฟ้มภาพ")) found = true;
+                        if (i.text().contains("แฟ้มภาพ")) {
+                            found = true;
+                            d = "";
+                        }
                         else if(found){
+                            d += "\t"+i.text();
+                            d += "\n\n";
+                            System.out.println("DET " + i.text());
+                        }else{
                             d += "\t"+i.text();
                             d += "\n\n";
                             System.out.println("DET " + i.text());
@@ -173,8 +195,8 @@ public class MainFragment extends Fragment /*implements BaseSliderView.OnSliderC
             NUM_PAGES = imageList.size();
 
             // Auto start of viewpager
-            final Handler handler = new Handler();
-            final Runnable Update = new Runnable() {
+//            final Handler handler = new Handler();
+            Update = new Runnable() {
                 public void run() {
                     if (currentPage == NUM_PAGES) {
                         currentPage = 0;
@@ -182,7 +204,7 @@ public class MainFragment extends Fragment /*implements BaseSliderView.OnSliderC
                     mPager.setCurrentItem(currentPage++, true);
                 }
             };
-            Timer swipeTimer = new Timer();
+//            Timer swipeTimer = new Timer();
             swipeTimer.schedule(new TimerTask() {
                 @Override
                 public void run() {
@@ -212,6 +234,7 @@ public class MainFragment extends Fragment /*implements BaseSliderView.OnSliderC
             for(int i = 0; i<titleList.size();i++){
                 dbHelperDAO.storeNews(i,titleList.get(i),content.get(i),detailList.get(i),linkList.get(i));
             }
+            progressBar.dismiss();
         }
     }
 
@@ -369,55 +392,67 @@ public class MainFragment extends Fragment /*implements BaseSliderView.OnSliderC
         super.onResume();
         textTool.setText("Mymor");
 
-        if(titleList.size() != 0) {
+//        if(titleList.size() != 0) {
             adapter = new PagerAdapterSlider(getActivity(),getActivity().getSupportFragmentManager(),imageList, titleList, detailList, linkList);
             mPager = (ViewPager) getActivity().findViewById(R.id.pagerSlider);
             mPager.setAdapter(adapter);
-
+//
             CirclePageIndicator indicator = (CirclePageIndicator) getActivity().findViewById(R.id.indicator);
             indicator.setViewPager(mPager);
-
+//
             final float density = getResources().getDisplayMetrics().density;
             indicator.setRadius(5 * density);
             NUM_PAGES = imageList.size();
+//
+//            // Auto start of viewpager
+////            Handler handler = new Handler();
+//            Update = new Runnable() {
+//                public void run() {
+//                    if (currentPage == NUM_PAGES) {
+//                        currentPage = 0;
+//                    }
+//                    mPager.setCurrentItem(currentPage++, true);
+//                }
+//            };
+////            Timer swipeTimer = new Timer();
+//            swipeTimer.schedule(new TimerTask() {
+//                @Override
+//                public void run() {
+//                    handler.post(Update);
+//                }
+//            }, 3000, 3000);
+//
+//            // Pager listener over indicator
+//            indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//
+//                @Override
+//                public void onPageSelected(int position) {
+//                    currentPage = position;
+//                }
+//
+//                @Override
+//                public void onPageScrolled(int pos, float arg1, int arg2) {
+//
+//                }
+//
+//                @Override
+//                public void onPageScrollStateChanged(int pos) {
+//
+//                }
+//            });
+//        }
+    }
 
-            // Auto start of viewpager
-            final Handler handler = new Handler();
-            final Runnable Update = new Runnable() {
-                public void run() {
-                    if (currentPage == NUM_PAGES) {
-                        currentPage = 0;
-                    }
-                    mPager.setCurrentItem(currentPage++, true);
-                }
-            };
-            Timer swipeTimer = new Timer();
-            swipeTimer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    handler.post(Update);
-                }
-            }, 3000, 3000);
+    @Override
+    public void onStop() {
+        super.onStop();
+        handler.removeCallbacks(Update);
+    }
 
-            // Pager listener over indicator
-            indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-                @Override
-                public void onPageSelected(int position) {
-                    currentPage = position;
-                }
-
-                @Override
-                public void onPageScrolled(int pos, float arg1, int arg2) {
-
-                }
-
-                @Override
-                public void onPageScrollStateChanged(int pos) {
-
-                }
-            });
-        }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacks(Update);
     }
 
     @Override

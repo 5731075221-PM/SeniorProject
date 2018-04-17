@@ -57,9 +57,11 @@ public class HospitalNavFragment extends Fragment {
                 if(position == 0){
                     title = getActivity().findViewById(R.id.textTool);
                     title.setText("ค้นหาโรงพยาบาลใกล้เคียง");
+                    currentFrag = 0;
                 }else if(position == 1){
                     title = getActivity().findViewById(R.id.textTool);
                     title.setText("ค้นหาโรงพยาบาลจากชื่อ");
+                    currentFrag = 1;
                 }
             }
 
@@ -151,7 +153,7 @@ public class HospitalNavFragment extends Fragment {
             title.setText("ค้นหาโรงพยาบาลใกล้เคียง");
         }else if(currentFrag == 1){
             title = getActivity().findViewById(R.id.textTool);
-            title.setText("้นหาโรงพยาบาลจากชื่อ");
+            title.setText("ค้นหาโรงพยาบาลจากชื่อ");
         }
     }
 

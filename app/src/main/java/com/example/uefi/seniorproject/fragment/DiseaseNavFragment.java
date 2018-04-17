@@ -59,12 +59,15 @@ public class DiseaseNavFragment extends Fragment{
                 if(position == 0){
                     title = getActivity().findViewById(R.id.textTool);
                     title.setText("หมวดหมู่ของโรค");
+                    currentFrag = 0;
                 }else if(position == 1){
                     title = getActivity().findViewById(R.id.textTool);
                     title.setText("ค้นหาโรคจากอาการ");
+                    currentFrag = 1;
                 }else{
                     title = getActivity().findViewById(R.id.textTool);
                     title.setText("ค้นหาโรคจากชื่อ");
+                    currentFrag = 2;
                 }
             }
 
@@ -205,10 +208,10 @@ public class DiseaseNavFragment extends Fragment{
         appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
 
 //        selectedFragment = fragment1;
-        Bundle args = new Bundle();
-        args.putStringArrayList("dict",getArguments().getStringArrayList("dict"));
-        args.putStringArrayList("stop",getArguments().getStringArrayList("stop"));
-        fragment2.setArguments(args);
+//        Bundle args = new Bundle();
+//        args.putStringArrayList("dict",getArguments().getStringArrayList("dict"));
+//        args.putStringArrayList("stop",getArguments().getStringArrayList("stop"));
+//        fragment2.setArguments(args);
 //        getChildFragmentManager().beginTransaction().add(R.id.frame_bottom_nav,fragment1,"1").commit();
 //        getActivity().getSupportFragmentManager().beginTransaction()
 //                .replace(R.id.frame_bottom_nav,fragment1).commit();

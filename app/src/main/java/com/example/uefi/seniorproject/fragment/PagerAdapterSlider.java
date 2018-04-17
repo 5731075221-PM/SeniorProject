@@ -81,6 +81,7 @@ public class PagerAdapterSlider extends PagerAdapter {
                 Bundle args = new Bundle();
                 args.putString("link", LINKS.get(pos));
                 args.putString("header",TITLES.get(pos));
+                args.putString("image",IMAGES.get(pos));
                 SelectContentFragment fragment = new SelectContentFragment();
                 fragment.setArguments(args);
                 manager.beginTransaction()
