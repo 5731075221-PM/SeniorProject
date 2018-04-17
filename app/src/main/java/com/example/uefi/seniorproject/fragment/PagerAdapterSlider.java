@@ -2,6 +2,7 @@ package com.example.uefi.seniorproject.fragment;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -90,12 +91,14 @@ public class PagerAdapterSlider extends PagerAdapter {
         });
 
         assert imageLayout != null;
+        Typeface tf = Typeface.createFromAsset(context.getAssets(), "fonts/THSarabunNew.ttf");
         final ImageView imageView = (ImageView) imageLayout.findViewById(R.id.imageViewSlider);
         final TextView title = (TextView) imageLayout.findViewById(R.id.titleSlider);
         final TextView detail = (TextView) imageLayout.findViewById(R.id.detailSlider);
         Picasso.with(context).load(IMAGES.get(position)).into(imageView);
-        title.setText(TITLES.get(position));
+        title.setText(TITLES.get(position).split("&")[0]);
         detail.setText(DETAIL.get(position));
+        detail.setTypeface(tf);
 //        URL url = null;
 //        try {
 //            url = new URL(IMAGES.get(position));

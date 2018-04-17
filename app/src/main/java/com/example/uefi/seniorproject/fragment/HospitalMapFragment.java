@@ -25,7 +25,11 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,6 +66,10 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
     Paint paint = new Paint();
     ColorFilter filter;
     Canvas canvas;
+    Toolbar toolbar;
+    DrawerLayout drawer;
+    ActionBarDrawerToggle toggle;
+    private boolean mToolBarNavigationListenerIsRegistered = false;
 
     @Nullable
     @Override
@@ -98,6 +106,35 @@ public class HospitalMapFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        drawer = (DrawerLayout) (getActivity()).findViewById(R.id.drawer_layout);
+
+        Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
+        toggle = new ActionBarDrawerToggle( getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.setDrawerIndicatorEnabled(false);
+        toggle.syncState();
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(!mToolBarNavigationListenerIsRegistered) {
+            toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Doesn't have to be onBackPressed
+//                   getFragmentManager().popBackStack();
+//                    ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+//                    toggle.setDrawerIndicatorEnabled(true);
+                    if(getActivity().getSupportFragmentManager().getBackStackEntryCount() == 1) {
+                        toggle.setDrawerIndicatorEnabled(true);
+                        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                        toggle.syncState();
+                        getFragmentManager().popBackStack();
+                    }
+                    else
+                        ((AppCompatActivity) getActivity()).onBackPressed();
+                }
+            });
+            mToolBarNavigationListenerIsRegistered = true;
+        }
 
         Drawable drawable = getResources().getDrawable(R.drawable.ic_map_pin);
         icon = Bitmap.createBitmap(drawable.getIntrinsicWidth()+50, drawable.getIntrinsicHeight()+50, Bitmap.Config.ARGB_8888);
