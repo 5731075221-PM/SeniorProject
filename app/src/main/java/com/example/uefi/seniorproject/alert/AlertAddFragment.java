@@ -454,4 +454,12 @@ public class AlertAddFragment extends Fragment {
         super.onPause();
         hideSoftKeyboard(AlertAddFragment.this);
     }
+
+    public void onDestroy() {
+        super.onDestroy();
+        toggle.setDrawerIndicatorEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        toggle.syncState();
+    }
+
 }

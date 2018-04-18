@@ -382,4 +382,11 @@ public class AppointmentAddFragment extends Fragment {
     public void onPrepareOptionsMenu(Menu menu) {
         menu.clear();
     }
+
+    public void onDestroy() {
+        super.onDestroy();
+        toggle.setDrawerIndicatorEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        toggle.syncState();
+    }
 }

@@ -32,6 +32,10 @@
 
     <color name="colorMainGreen">#429f46</color>
 
+    <color name="colorFoodRed">#E74C3C</color>
+    <color name="colorFoodGreen">#52be80</color>
+    <color name="colorFoodYellow">#f4d03f</color>
+
     <color name="grid1">#93d6c3</color>
     <color name="grid2">#b0e2ff</color>
     <color name="grid3">#df6b6a</color>

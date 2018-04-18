@@ -21,4 +21,48 @@ public class FoodItem {
         this.vitC = vitC;
         this.label = label;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getLabel() {
+        return label;
+    }
+
+    public String getThai() {
+        return thai;
+    }
+
+    public String getEnergy() {
+        return energy;
+    }
+
+    public String getProtein() {
+        return protein;
+    }
+
+    public String getFat() {
+        return fat;
+    }
+
+    public String getCarbohydrate() {
+        return carbohydrate;
+    }
+
+    public String getFibre() {
+        return fibre;
+    }
+
+    public String getVitE() {
+        return vitE;
+    }
+
+    public String getThiamine() {
+        return thiamine;
+    }
+
+    public String getVitC() {
+        return vitC;
+    }
 }
