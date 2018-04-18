@@ -20,10 +20,10 @@
             app:showAsAction="always"/>
         <item
             android:id="@+id/nav_firstaid"
-            android:icon="@drawable/icon_firstaid"
+            android:icon="@drawable/firstaid"
             android:title="ปฐมพยาบาล"
             android:visible="true"
-            app:showAsAction="always"/>
+            app:showAsAction="always" />
         <item
             android:id="@+id/nav_hospital"
             android:icon="@drawable/ic_hospital_cross"
@@ -32,13 +32,13 @@
             app:showAsAction="always"/>
         <item
             android:id="@+id/nav_reminder"
-            android:icon="@drawable/icon_reminder"
+            android:icon="@drawable/note"
             android:title="สุขภาพของฉัน"
             android:visible="true"
-            app:showAsAction="always"/>
+            app:showAsAction="always" />
         <item
             android:id="@+id/nav_food"
-            android:icon="@drawable/icons_lunch"
+            android:icon="@drawable/food"
             android:title="เมนูของฉัน"
             android:visible="true"
             app:showAsAction="always" />

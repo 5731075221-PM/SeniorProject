@@ -239,6 +239,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                    .addToBackStack(null)
                     .commit();
         } else if (id == R.id.nav_reminder) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container_fragment, new ReminderFragment())
+                    .commit();
+        } else if (id == R.id.nav_food) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container_fragment, new FoodFragment())
+                    .commit();
+        }else if(id == R.id.nav_fav){
 //            toggle.setDrawerIndicatorEnabled(false);
 //            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //            if(!mToolBarNavigationListenerIsRegistered) {
@@ -253,31 +261,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                mToolBarNavigationListenerIsRegistered = true;
 //            }
             fragmentManager.beginTransaction()
-                    .replace(R.id.container_fragment, new ReminderFragment())
-//                    .addToBackStack(null)
-                    .commit();
-        } else if (id == R.id.nav_food) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container_fragment, new FoodFragment())
-//                    .addToBackStack(null)
-                    .commit();
-        }else if(id == R.id.nav_fav){
-            toggle.setDrawerIndicatorEnabled(false);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            if(!mToolBarNavigationListenerIsRegistered) {
-                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // Doesn't have to be onBackPressed
-                        onBackPressed();
-                    }
-                });
-
-                mToolBarNavigationListenerIsRegistered = true;
-            }
-            fragmentManager.beginTransaction()
                     .replace(R.id.container_fragment, new FavoriteItemFragment())
-                    .addToBackStack(null)
+//                    .addToBackStack(null)
                     .commit();
         }
 
