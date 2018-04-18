@@ -53,14 +53,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        dictList = dbHelperDAO.getLexitron();
 //        stopwordList = dbHelperDAO.getStopword();
 
-//        Singleton single = Singleton.getInstance();
-//        if(single.getDict().size() != 0){
-//            System.out.println("size = "+single.getDict().size());
-//            System.out.println("size = "+single.getStopword().size());
-//        }
-//
-//        dictList = single.getDict();
-//        stopwordList = single.getStopword();
+        Singleton single = Singleton.getInstance();
+        if(single.getDict().size() != 0){
+            System.out.println("size = "+single.getDict().size());
+            System.out.println("size = "+single.getStopword().size());
+        }
+
+        dictList = single.getDict();
+        stopwordList = single.getStopword();
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -239,6 +239,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                    .addToBackStack(null)
                     .commit();
         } else if (id == R.id.nav_reminder) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container_fragment, new ReminderFragment())
+                    .commit();
+        } else if (id == R.id.nav_food) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container_fragment, new FoodFragment())
+                    .commit();
+        }else if(id == R.id.nav_fav){
 //            toggle.setDrawerIndicatorEnabled(false);
 //            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //            if(!mToolBarNavigationListenerIsRegistered) {
@@ -277,7 +285,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            }
             fragmentManager.beginTransaction()
                     .replace(R.id.container_fragment, new FavoriteItemFragment())
-                    .addToBackStack(null)
+//                    .addToBackStack(null)
                     .commit();
         }
 

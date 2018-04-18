@@ -22,6 +22,7 @@
     <!--button effect selector-->
     <color name="white">#fff</color>
     <color name="grey">#e8e8e8</color>
+    <color name="greytran">#b0e8e8e8</color>
 
     <color name="pink">#ed7263</color>
     <color name="red">#ee4c41</color>

@@ -12,9 +12,12 @@ import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -22,10 +25,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +41,11 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.example.uefi.seniorproject.MainActivity;
 import com.example.uefi.seniorproject.R;
+import com.example.uefi.seniorproject.Singleton;
 import com.example.uefi.seniorproject.databases.DBHelperDAO;
+import com.example.uefi.seniorproject.firstaid.FirstaidFragment;
+import com.example.uefi.seniorproject.food.FoodFragment;
+import com.example.uefi.seniorproject.reminder.ReminderFragment;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 import com.viewpagerindicator.CirclePageIndicator;
@@ -60,7 +69,7 @@ import java.util.TimerTask;
  * Created by UEFI on 27/12/2560.
  */
 
-public class MainFragment extends Fragment /*implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener*/{
+public class MainFragment extends Fragment  implements NavigationView.OnNavigationItemSelectedListener/*implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener*/{
     DBHelperDAO dbHelperDAO;
     AppBarLayout appBarLayout;
     ViewPager mPager;
@@ -79,6 +88,111 @@ public class MainFragment extends Fragment /*implements BaseSliderView.OnSliderC
     Handler handler = new Handler();
     Runnable Update;
     Timer swipeTimer = new Timer();
+    NavigationView navigationView;
+    ArrayList<String> dictList, stopwordList;
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if(id == R.id.nav_home) {
+//            fragmentManager.beginTransaction()
+//                    .add(R.id.container_fragment, new MainFragment())
+//                    .commit();
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container_fragment, new MainFragment())
+//                    .addToBackStack("")
+                    .commit();
+        }else if (id == R.id.nav_disease) {
+//            toggle.setDrawerIndicatorEnabled(false);
+//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//            if(!mToolBarNavigationListenerIsRegistered) {
+//                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        // Doesn't have to be onBackPressed
+//                        onBackPressed();
+//                    }
+//                });
+//
+//                mToolBarNavigationListenerIsRegistered = true;
+//            }
+            Bundle args = new Bundle();
+            args.putStringArrayList("dict",dictList);
+            args.putStringArrayList("stop",stopwordList);
+            DiseaseNavFragment fragment = new DiseaseNavFragment();
+            fragment.setArguments(args);
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container_fragment, fragment)
+//                    .addToBackStack(null)
+                    .commit();
+        } else if (id == R.id.nav_firstaid) {
+//            toggle.setDrawerIndicatorEnabled(false);
+//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//            if(!mToolBarNavigationListenerIsRegistered) {
+//                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        // Doesn't have to be onBackPressed
+//                        onBackPressed();
+//                    }
+//                });
+//
+//                mToolBarNavigationListenerIsRegistered = true;
+//            }
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container_fragment, new FirstaidFragment())
+//                    .addToBackStack("การปฐมพยาบาล")
+                    .commit();
+        } else if (id == R.id.nav_hospital) {
+//            toggle.setDrawerIndicatorEnabled(false);
+//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//            if(!mToolBarNavigationListenerIsRegistered) {
+//                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        // Doesn't have to be onBackPressed
+//                        onBackPressed();
+//                    }
+//                });
+//
+//                mToolBarNavigationListenerIsRegistered = true;
+//            }
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container_fragment, new HospitalNavFragment())
+//                    .addToBackStack(null)
+                    .commit();
+        } else if (id == R.id.nav_reminder) {
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container_fragment, new ReminderFragment())
+                    .commit();
+        } else if (id == R.id.nav_food) {
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container_fragment, new FoodFragment())
+                    .commit();
+        }else if(id == R.id.nav_fav){
+//            toggle.setDrawerIndicatorEnabled(false);
+//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//            if(!mToolBarNavigationListenerIsRegistered) {
+//                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        // Doesn't have to be onBackPressed
+//                        onBackPressed();
+//                    }
+//                });
+//
+//                mToolBarNavigationListenerIsRegistered = true;
+//            }
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container_fragment, new FavoriteItemFragment())
+//                    .addToBackStack(null)
+                    .commit();
+        }
+
+        DrawerLayout drawer = (DrawerLayout) getActivity().findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;    }
 
     public class FetchData extends AsyncTask<Void,Void,Void> {
 
@@ -244,6 +358,50 @@ public class MainFragment extends Fragment /*implements BaseSliderView.OnSliderC
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         appBarLayout.setExpanded(true, true);
         textTool = (TextView) getActivity().findViewById(R.id.textTool);
+
+        RelativeLayout relaDisease = (RelativeLayout) view.findViewById(R.id.relaDisease);
+        RelativeLayout relaFirstaid = (RelativeLayout) view.findViewById(R.id.relaFirstaid);
+        RelativeLayout relaHamor = (RelativeLayout) view.findViewById(R.id.relaHamor);
+        RelativeLayout relaRemind = (RelativeLayout) view.findViewById(R.id.relaRemind);
+        RelativeLayout relaFood = (RelativeLayout) view.findViewById(R.id.relaFood);
+
+        navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
+
+        relaDisease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigationView.setCheckedItem(R.id.nav_disease);
+                onNavigationItemSelected(navigationView.getMenu().getItem(1));
+            }
+        });
+        relaFirstaid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigationView.setCheckedItem(R.id.nav_firstaid);
+                onNavigationItemSelected(navigationView.getMenu().getItem(2));
+            }
+        });
+        relaHamor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigationView.setCheckedItem(R.id.nav_hospital);
+                onNavigationItemSelected(navigationView.getMenu().getItem(3));
+            }
+        });
+        relaRemind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigationView.setCheckedItem(R.id.nav_reminder);
+                onNavigationItemSelected(navigationView.getMenu().getItem(4));
+            }
+        });
+        relaFood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigationView.setCheckedItem(R.id.nav_food);
+                onNavigationItemSelected(navigationView.getMenu().getItem(5));
+            }
+        });
 
 //        if(imageList.size() == 5 && detailList.size() == 5 && imageList.size() == 5 && linkList.size() == 5){
 //            adapter = new PagerAdapterSlider(getActivity(),getActivity().getSupportFragmentManager(),imageList, titleList, detailList, linkList);
@@ -492,6 +650,16 @@ public class MainFragment extends Fragment /*implements BaseSliderView.OnSliderC
 //            titleList.add("");
 //            titleList.add("");
 //            titleList.add("");
+
+            Singleton single = Singleton.getInstance();
+            if(single.getDict().size() != 0){
+                System.out.println("size = "+single.getDict().size());
+                System.out.println("size = "+single.getStopword().size());
+            }
+
+            dictList = single.getDict();
+            stopwordList = single.getStopword();
+
         }
     }
 

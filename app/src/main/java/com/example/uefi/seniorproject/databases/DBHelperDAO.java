@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Pair;
 
+import com.example.uefi.seniorproject.food.FoodItem;
 import com.example.uefi.seniorproject.fragment.Disease;
 import com.example.uefi.seniorproject.firstaid.DetailItem;
 import com.example.uefi.seniorproject.firstaid.PicDetailItem;
@@ -590,6 +591,30 @@ public class DBHelperDAO {
 //            list.add(cursor.getString(cursor.getColumnIndex("word")));
             list.add(new ChoiceItem(cursor.getString(cursor.getColumnIndex("word")), false));
             cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
+
+    public ArrayList<FoodItem> getFood(){
+        ArrayList<FoodItem> list = new ArrayList();
+        Cursor cursor = database.rawQuery("SELECT * FROM thaifood ORDER BY Thai ASC", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            list.add(new FoodItem(
+                    cursor.getInt(cursor.getColumnIndex("id")),
+                    cursor.getString(cursor.getColumnIndex("Thai")),
+                    cursor.getString(cursor.getColumnIndex("energy")),
+                    cursor.getString(cursor.getColumnIndex("protein")),
+                    cursor.getString(cursor.getColumnIndex("fat")),
+                    cursor.getString(cursor.getColumnIndex("carbohydrate")),
+                    cursor.getString(cursor.getColumnIndex("fibre")),
+                    cursor.getString(cursor.getColumnIndex("vitE")),
+                    cursor.getString(cursor.getColumnIndex("thiamine")),
+                    cursor.getString(cursor.getColumnIndex("vitC")),
+                    cursor.getInt(cursor.getColumnIndex("label"))
+                            ));
+                    cursor.moveToNext();
         }
         cursor.close();
         return list;
