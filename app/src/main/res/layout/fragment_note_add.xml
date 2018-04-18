@@ -25,6 +25,7 @@
                 android:id="@+id/linear_date"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
+                android:background="?android:attr/selectableItemBackground"
                 android:orientation="horizontal"
                 android:weightSum="2.5">
 
@@ -57,6 +58,7 @@
                 android:id="@+id/choice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -107,6 +109,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
                 android:focusableInTouchMode="true"
                 android:orientation="horizontal"
                 android:paddingBottom="15dp"

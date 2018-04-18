@@ -48,6 +48,7 @@
                 android:id="@+id/breakfast"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
+                android:background="?android:attr/selectableItemBackground"
                 android:orientation="horizontal"
                 android:paddingLeft="20dp"
                 android:weightSum="2">
@@ -96,6 +97,7 @@
                 android:id="@+id/lunch"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
+                android:background="?android:attr/selectableItemBackground"
                 android:orientation="horizontal"
                 android:paddingLeft="20dp"
                 android:weightSum="2">
@@ -145,6 +147,7 @@
                 android:id="@+id/dinner"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
+                android:background="?android:attr/selectableItemBackground"
                 android:orientation="horizontal"
                 android:paddingLeft="20dp"
                 android:weightSum="2">
@@ -194,6 +197,7 @@
                 android:id="@+id/bed"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
+                android:background="?android:attr/selectableItemBackground"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingLeft="20dp"

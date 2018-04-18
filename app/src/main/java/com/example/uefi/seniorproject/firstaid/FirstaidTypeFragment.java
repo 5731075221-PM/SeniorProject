@@ -73,7 +73,7 @@ public class FirstaidTypeFragment extends Fragment {
             @Override
             public void onItemClick(View item, int position) {
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container_fragment, FirstaidSelectFragment.newInstance(list.get(position)))
+                        .replace(R.id.container_fragment, FirstaidSelectFragment.newInstance(list.get(position),1))
                         .addToBackStack("การปฐมพยาบาล")
                         .commit();
             }

@@ -29,7 +29,7 @@ public class FirstaidSelectFragment extends Fragment {
     public TextView textTool;
     public String toolbarText;
     private RecyclerView.LayoutManager mLayoutManager;
-    private int id;
+    private int id,isArrowYet;
     private ArrayList items;
     public AppBarLayout appBarLayout;
     Toolbar toolbar;
@@ -41,10 +41,11 @@ public class FirstaidSelectFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static FirstaidSelectFragment newInstance(String test) {
+    public static FirstaidSelectFragment newInstance(String test,int isArrowYet) {
         FirstaidSelectFragment fragment = new FirstaidSelectFragment();
         Bundle bundle = new Bundle();
         bundle.putString("toolbar",test);
+        bundle.putInt("isArrowYet",isArrowYet);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -79,34 +80,35 @@ public class FirstaidSelectFragment extends Fragment {
 
         appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbarlayout);
 
+        isArrowYet = bundle.getInt("isArrowYet");
 
+        if(isArrowYet==0) {
+            drawer = (DrawerLayout) (getActivity()).findViewById(R.id.drawer_layout);
 
-//        drawer = (DrawerLayout) (getActivity()).findViewById(R.id.drawer_layout);
-//
-//        Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
-//        toggle = new ActionBarDrawerToggle( getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-//        drawer.addDrawerListener(toggle);
-//        toggle.setDrawerIndicatorEnabled(false);
-//        toggle.syncState();
-//
-//        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        if(!mToolBarNavigationListenerIsRegistered) {
-//            toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    // Doesn't have to be onBackPressed
-//                    if(getActivity().getSupportFragmentManager().getBackStackEntryCount() == 1) {
-//                        toggle.setDrawerIndicatorEnabled(true);
-//                        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-//                        toggle.syncState();
-//                        getFragmentManager().popBackStack();
-//                    }
-//                    else
-//                        ((AppCompatActivity) getActivity()).onBackPressed();
-//                }
-//            });
-//            mToolBarNavigationListenerIsRegistered = true;
-//        }
+            Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
+            toggle = new ActionBarDrawerToggle(getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            drawer.addDrawerListener(toggle);
+            toggle.setDrawerIndicatorEnabled(false);
+            toggle.syncState();
+
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            if (!mToolBarNavigationListenerIsRegistered) {
+                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Doesn't have to be onBackPressed
+                        if (getActivity().getSupportFragmentManager().getBackStackEntryCount() == 1) {
+                            toggle.setDrawerIndicatorEnabled(true);
+                            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                            toggle.syncState();
+                            getFragmentManager().popBackStack();
+                        } else
+                            ((AppCompatActivity) getActivity()).onBackPressed();
+                    }
+                });
+                mToolBarNavigationListenerIsRegistered = true;
+            }
+        }
     }
 
     public void onResume() {

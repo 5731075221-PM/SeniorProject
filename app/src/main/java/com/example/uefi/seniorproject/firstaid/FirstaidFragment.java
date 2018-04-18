@@ -166,7 +166,7 @@ public class FirstaidFragment extends Fragment {
             public void onClick(View v) {
                 toolbar = "การช่วยฟื้นคืนชีพขั้นพื้นฐาน";
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container_fragment, FirstaidSelectFragment.newInstance(toolbar))
+                        .replace(R.id.container_fragment, FirstaidSelectFragment.newInstance(toolbar,0))
                         .addToBackStack(toolbar)
                         .commit();
 
@@ -177,7 +177,7 @@ public class FirstaidFragment extends Fragment {
             public void onClick(View v) {
                 toolbar = "การยกและเคลื่อนย้ายผู้ป่วย";
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container_fragment, FirstaidSelectFragment.newInstance(toolbar))
+                        .replace(R.id.container_fragment, FirstaidSelectFragment.newInstance(toolbar,0))
                         .addToBackStack(toolbar)
                         .commit();
             }

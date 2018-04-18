@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
     android:id="@+id/swipe"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:orientation="vertical"
     app:leftEdgeSwipeOffset="0dp"
-    app:rightEdgeSwipeOffset="0dp"
-    android:layout_height="80dp">
+    app:rightEdgeSwipeOffset="0dp">
 
     <!-- TODO: Update blank fragment layout -->
     <!-- Button View For Right to Left -->
@@ -37,6 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_gravity="center_vertical"
+        android:background="?android:attr/selectableItemBackground"
         android:foregroundGravity="center_vertical"
         android:gravity="center_vertical">
 
@@ -86,7 +87,6 @@
         </LinearLayout>
 
     </RelativeLayout>
-
 
 
 </com.daimajia.swipe.SwipeLayout>

@@ -17,10 +17,10 @@
 <!--card_view:cardCornerRadius="8dp"-->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:autofit="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="72dp"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:autofit="http://schemas.android.com/apk/res-auto"
     android:background="?android:attr/selectableItemBackground"
     android:clickable="true"
     android:gravity="center_vertical"
@@ -56,10 +56,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:textColor="@drawable/ic_disease_text_select"
-            android:textStyle="bold"
             android:maxLines="1"
+            android:textColor="@drawable/ic_disease_text_select"
             android:textSize="24sp"
+            android:textStyle="bold"
             autofit:minTextSize="20sp" />
 
         <me.grantland.widget.AutofitTextView
