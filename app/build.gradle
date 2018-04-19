@@ -20,7 +20,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'com.google.firebase:firebase-database:11.8.0'
@@ -43,7 +43,7 @@ dependencies {
     implementation 'com.android.support:cardview-v7:26.1.0'
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.10'
     compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
-    compile "com.daimajia.swipelayout:library:1.2.0@aar"
+    compile 'com.daimajia.swipelayout:library:1.2.0@aar'
     compile 'com.layer-net:thai-datetimepicker:1.0.3'
     compile 'com.squareup.picasso:picasso:2.3.2'
     compile 'com.nineoldandroids:library:2.4.0'
@@ -51,6 +51,7 @@ dependencies {
     compile 'org.jsoup:jsoup:1.11.2'
     compile 'com.github.JakeWharton:ViewPagerIndicator:2.4.1'
     compile 'com.github.vihtarb:tooltip:0.1.9'
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
 }
 
 
