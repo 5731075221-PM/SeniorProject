@@ -52,6 +52,12 @@ public class DiseaseGridSelectFragment extends Fragment {
             R.drawable.selector_grid16, R.drawable.selector_grid17, R.drawable.selector_grid18, R.drawable.selector_grid19, R.drawable.selector_grid20
     };
 
+    int[] gridViewImageId2 = {
+            R.drawable.ic_disease1_selected, R.drawable.ic_disease2_selected, R.drawable.ic_disease3_selected, R.drawable.ic_disease4_selected, R.drawable.ic_disease5_selected,
+            R.drawable.ic_disease6_selected, R.drawable.ic_disease7_selected, R.drawable.ic_disease8_selected, R.drawable.ic_disease9_selected, R.drawable.ic_disease10_selected,
+            R.drawable.ic_disease11_selected, R.drawable.ic_disease12_selected, R.drawable.ic_disease13_selected, R.drawable.ic_disease14_selected, R.drawable.ic_disease15_selected,
+            R.drawable.ic_disease16_selected, R.drawable.ic_disease17_selected, R.drawable.ic_disease18_selected, R.drawable.ic_disease19_selected, R.drawable.ic_disease20_selected};
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -173,6 +179,7 @@ public class DiseaseGridSelectFragment extends Fragment {
             viewHolder.type.setText(type);
             viewHolder.type.setTypeface(tf);
             viewHolder.img.setBackgroundResource(gridViewImageId[Arrays.asList(gridViewString).indexOf(type.split(",")[0].trim())]);
+            viewHolder.img.setImageResource(gridViewImageId[Arrays.asList(gridViewString).indexOf(type.split(",")[0].trim())]);
             viewHolder.setOnClickListener(new ItemClickListener() {
                 @Override
                 public void onClick(View view, int position, boolean isLongClick, MotionEvent motionEvent) {

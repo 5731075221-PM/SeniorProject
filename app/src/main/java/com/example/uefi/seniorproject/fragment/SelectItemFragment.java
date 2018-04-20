@@ -30,9 +30,9 @@ import com.example.uefi.seniorproject.databases.DBHelperDAO;
  * Created by UEFI on 5/2/2561.
  */
 
-public class SelectItemFragment extends Fragment{
+public class SelectItemFragment extends Fragment {
     DBHelperDAO dbHelperDAO;
-    String name = "",cause,symptom,treat,protect,type;
+    String name = "", cause, symptom, treat, protect, type;
     TextView title;
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -49,15 +49,15 @@ public class SelectItemFragment extends Fragment{
 
         appBarLayout.setExpanded(true, true);
 
-        drawer = (DrawerLayout) (getActivity()).findViewById(R.id.drawer_layout);
+        if (getArguments().getInt("val") == 1) {
+            drawer = (DrawerLayout) (getActivity()).findViewById(R.id.drawer_layout);
 
-        Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
-        toggle = new ActionBarDrawerToggle( getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.setDrawerIndicatorEnabled(false);
-        toggle.syncState();
+            Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
+            toggle = new ActionBarDrawerToggle(getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            drawer.addDrawerListener(toggle);
+            toggle.setDrawerIndicatorEnabled(false);
+            toggle.syncState();
 
-        if(getArguments().getInt("val") == 1) {
             ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             if (!mToolBarNavigationListenerIsRegistered) {
                 toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
@@ -125,7 +125,7 @@ public class SelectItemFragment extends Fragment{
         dbHelperDAO = DBHelperDAO.getInstance(getActivity());
         dbHelperDAO.open();
         name = getArguments().getString("name");
-        cause = dbHelperDAO.getContent(name,"cause");
+        cause = dbHelperDAO.getContent(name, "cause");
         symptom = dbHelperDAO.getContent(name, "symptom");
         treat = dbHelperDAO.getContent(name, "treat");
         protect = dbHelperDAO.getContent(name, "protect");
@@ -139,19 +139,21 @@ public class SelectItemFragment extends Fragment{
 
         MenuItem item = menu.findItem(R.id.item_star);
         Drawable drawable = item.getIcon();
-        if(dbHelperDAO.checkExistItem("disease", name)) drawable.setColorFilter(getResources().getColor(R.color.yellow), PorterDuff.Mode.SRC_ATOP);
-        else drawable.setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
+        if (dbHelperDAO.checkExistItem("disease", name))
+            drawable.setColorFilter(getResources().getColor(R.color.yellow), PorterDuff.Mode.SRC_ATOP);
+        else
+            drawable.setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.item_star:
                 Drawable drawable = item.getIcon();
-                if(dbHelperDAO.checkExistItem("disease", name)){
+                if (dbHelperDAO.checkExistItem("disease", name)) {
                     drawable.setColorFilter(getResources().getColor(R.color.grey), PorterDuff.Mode.SRC_ATOP);
                     dbHelperDAO.removeFavItem("disease", name);
-                }else{
+                } else {
                     drawable.setColorFilter(getResources().getColor(R.color.yellow), PorterDuff.Mode.SRC_ATOP);
                     dbHelperDAO.addFavDiseaseItem("disease", name, type);
                 }
@@ -177,7 +179,7 @@ public class SelectItemFragment extends Fragment{
         image = getActivity().getResources().getDrawable(R.drawable.image4_tab_select);
         image.setBounds(25, 25, 25, 25);
         tabLayout.getTabAt(3).setIcon(image);
-        tabLayout.setTabTextColors(Color.WHITE,getResources().getColor(R.color.cardview_light_background));
+        tabLayout.setTabTextColors(Color.WHITE, getResources().getColor(R.color.cardview_light_background));
 
         ViewGroup childTabLayout = (ViewGroup) tabLayout.getChildAt(0);
         for (int i = 0; i < childTabLayout.getChildCount(); i++) {

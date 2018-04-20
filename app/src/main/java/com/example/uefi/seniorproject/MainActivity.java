@@ -277,7 +277,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            }
             fragmentManager.beginTransaction()
                     .replace(R.id.container_fragment, new FavoriteItemFragment())
-                    .addToBackStack(null)
+//                    .addToBackStack(null)
                     .commit();
         }
 
