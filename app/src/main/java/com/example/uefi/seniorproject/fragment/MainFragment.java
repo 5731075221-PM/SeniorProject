@@ -214,19 +214,20 @@ public class MainFragment extends Fragment  implements NavigationView.OnNavigati
                 for (Element div : doc.select("div.show_catlist")) {
                     Elements text = div.select("p");
                     System.out.println("size = " + text.size());
-                    for (Element i : text.subList(0, text.size()-1)) {
-                        if (i.text().contains("แฟ้มภาพ")) {
-                            found = true;
-                            d = "";
-                        }
-                        else if(found){
-                            d += "\t"+i.text();
-                            d += "\n\n";
-                            System.out.println("DET " + i.text());
-                        }else{
-                            d += "\t"+i.text();
-                            d += "\n\n";
-                            System.out.println("DET " + i.text());
+                    if(!text.isEmpty()) {
+                        for (Element i : text.subList(0, text.size() - 1)) {
+                            if (i.text().contains("แฟ้มภาพ")) {
+                                found = true;
+                                d = "";
+                            } else if (found) {
+                                d += "\t" + i.text();
+                                d += "\n\n";
+                                System.out.println("DET " + i.text());
+                            } else {
+                                d += "\t" + i.text();
+                                d += "\n\n";
+                                System.out.println("DET " + i.text());
+                            }
                         }
                     }
                 }
@@ -261,7 +262,7 @@ public class MainFragment extends Fragment  implements NavigationView.OnNavigati
                     for(Element h : header){
                         System.out.println("AAA "+h.select("a").attr("title"));
                         System.out.println("AAA "+h.select("span").text());
-                        titleList.add(h.select("a").attr("title")+"&"+date.text());
+                        titleList.add(h.select("a").attr("title").replace("'","")+"&"+date.text());
                         System.out.println("AAA "+h.select("a").attr("title")+"&"+date.text());
                         detailList.add(h.select("span").text());
                     }
@@ -278,7 +279,7 @@ public class MainFragment extends Fragment  implements NavigationView.OnNavigati
                         e = d.select("li > a");
                         Elements m = d.select("span.date_sub_content");
                         System.out.println("CCC "+e.attr("title")+"&"+m.text());
-                        titleList.add(e.attr("title")+"&"+m.text());
+                        titleList.add(e.attr("title").replace("\\'","")+"&"+m.text());
                         e = d.select("li > p");
                         System.out.println("DDD "+e.text());
                         detailList.add(e.text());
@@ -345,9 +346,9 @@ public class MainFragment extends Fragment  implements NavigationView.OnNavigati
                 }
             });
             System.out.println("SSS = "+titleList.size()+" "+content.size()+" "+detailList.size()+" "+linkList.size());
-            for(int i = 0; i<titleList.size();i++){
-                dbHelperDAO.storeNews(i,titleList.get(i),content.get(i),detailList.get(i),linkList.get(i));
-            }
+//            for(int i = 0; i<titleList.size();i++){
+//                dbHelperDAO.storeNews(i,titleList.get(i),content.get(i),detailList.get(i),linkList.get(i));
+//            }
             progressBar.dismiss();
         }
     }
@@ -550,7 +551,7 @@ public class MainFragment extends Fragment  implements NavigationView.OnNavigati
         super.onResume();
         textTool.setText("Mymor");
 
-//        if(titleList.size() != 0) {
+        if(titleList.size() != 0) {
             adapter = new PagerAdapterSlider(getActivity(),getActivity().getSupportFragmentManager(),imageList, titleList, detailList, linkList);
             mPager = (ViewPager) getActivity().findViewById(R.id.pagerSlider);
             mPager.setAdapter(adapter);
@@ -598,7 +599,7 @@ public class MainFragment extends Fragment  implements NavigationView.OnNavigati
 //
 //                }
 //            });
-//        }
+        }
     }
 
     @Override

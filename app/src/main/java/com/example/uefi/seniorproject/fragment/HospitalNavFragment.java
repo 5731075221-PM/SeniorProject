@@ -134,6 +134,7 @@ public class HospitalNavFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_map:
+                title.setText("แผนที่โรงพยาบาล");
                 HospitalMapFragment fragment = new HospitalMapFragment();
                 getFragmentManager().beginTransaction()
                         .replace(R.id.container_fragment, fragment)

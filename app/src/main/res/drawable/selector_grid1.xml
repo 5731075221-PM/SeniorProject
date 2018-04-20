@@ -10,10 +10,10 @@
         </shape>
     </item>
 
-    <item
-        android:height="70dp"
-        android:width="70dp"
-        android:gravity="center"
-        android:drawable="@drawable/ic_disease1_selected">
-    </item>
+    <!--<item-->
+        <!--android:height="70dp"-->
+        <!--android:width="70dp"-->
+        <!--android:gravity="center"-->
+        <!--android:drawable="@drawable/ic_disease1_selected">-->
+    <!--</item>-->
 </layer-list>

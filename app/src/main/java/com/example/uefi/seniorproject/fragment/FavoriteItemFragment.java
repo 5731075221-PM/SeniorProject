@@ -47,6 +47,12 @@ public class FavoriteItemFragment extends Fragment {
             R.drawable.selector_grid16, R.drawable.selector_grid17, R.drawable.selector_grid18, R.drawable.selector_grid19, R.drawable.selector_grid20
     };
 
+    int[] gridViewImageId2 = {
+            R.drawable.ic_disease1_selected, R.drawable.ic_disease2_selected, R.drawable.ic_disease3_selected, R.drawable.ic_disease4_selected, R.drawable.ic_disease5_selected,
+            R.drawable.ic_disease6_selected, R.drawable.ic_disease7_selected, R.drawable.ic_disease8_selected, R.drawable.ic_disease9_selected, R.drawable.ic_disease10_selected,
+            R.drawable.ic_disease11_selected, R.drawable.ic_disease12_selected, R.drawable.ic_disease13_selected, R.drawable.ic_disease14_selected, R.drawable.ic_disease15_selected,
+            R.drawable.ic_disease16_selected, R.drawable.ic_disease17_selected, R.drawable.ic_disease18_selected, R.drawable.ic_disease19_selected, R.drawable.ic_disease20_selected};
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -90,9 +96,11 @@ public class FavoriteItemFragment extends Fragment {
                 tmp.add(list.get(i));
             }
             else {
-                tmp.add("โรค");
-                tmp.addAll(list.subList(i,list.size()));
-                break;
+                if(!dis){
+                    tmp.add("โรค");
+                    dis = true;
+                }
+                tmp.add(list.get(i));
             }
         }
         list = tmp;
@@ -239,6 +247,7 @@ public class FavoriteItemFragment extends Fragment {
                             bundle.putString("phone", ((Hospital)list.get(position)).getPhone());
                             bundle.putString("website", ((Hospital)list.get(position)).getWebsite());
                             bundle.putString("type",((Hospital)list.get(position)).getType());
+                            bundle.putInt("val",1);
                             fragment.setArguments(bundle);
                             getFragmentManager().beginTransaction()
                                     .replace(R.id.container_fragment, fragment)
@@ -253,7 +262,8 @@ public class FavoriteItemFragment extends Fragment {
                 viewHolder.name.setTypeface(tf);
                 viewHolder.type.setText(((Disease)list.get(position)).getType());
                 viewHolder.type.setTypeface(tf);
-                viewHolder.img.setImageResource(gridViewImageId[Arrays.asList(gridViewString).indexOf(((Disease)list.get(position)).getType().split(",")[0])]);
+                viewHolder.img.setBackgroundResource(gridViewImageId[Arrays.asList(gridViewString).indexOf(((Disease)list.get(position)).getType().split(",")[0])]);
+                viewHolder.img.setImageResource(gridViewImageId2[Arrays.asList(gridViewString).indexOf(((Disease)list.get(position)).getType().split(",")[0])]);
                 viewHolder.setOnClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick, MotionEvent motionEvent) {
@@ -262,6 +272,7 @@ public class FavoriteItemFragment extends Fragment {
                             Bundle bundle = new Bundle();
                             bundle.putString("name",((Disease)list.get(position)).getName());
                             bundle.putString("type",((Disease)list.get(position)).getType());
+                            bundle.putInt("val",1);
                             fragment.setArguments(bundle);
 
                             getFragmentManager().beginTransaction()
