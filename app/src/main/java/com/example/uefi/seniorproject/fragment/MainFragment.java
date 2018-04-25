@@ -320,6 +320,7 @@ public class MainFragment extends Fragment  implements NavigationView.OnNavigati
                 }
             };
 //            Timer swipeTimer = new Timer();
+            swipeTimer = new Timer();
             swipeTimer.schedule(new TimerTask() {
                 @Override
                 public void run() {

@@ -37,7 +37,7 @@
                     android:lineSpacingExtra="5dp"
                     android:maxLines="2"
                     android:text="สาเหตุของโรค"
-                    android:textSize="35dp"
+                    android:textSize="26dp"
                     autofit:minTextSize="16sp" />
 
                 <View
@@ -57,7 +57,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_weight="1"
                     android:lineSpacingExtra="5dp"
-                    android:textSize="20dp"/>
+                    android:textSize="24dp"/>
 
             </LinearLayout>
 
