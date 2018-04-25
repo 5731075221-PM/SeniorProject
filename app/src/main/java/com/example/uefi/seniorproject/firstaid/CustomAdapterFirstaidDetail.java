@@ -34,7 +34,6 @@ public class CustomAdapterFirstaidDetail  extends RecyclerView.Adapter{
     private final int DETAIL_PIC_ITEM = 2;
     private final int SUBJECT_ITEM = 3;
     private final int SUBJECT_RED_ITEM = 4;
-    private final int VIDEO_ITEM = 5;
 
     public CustomAdapterFirstaidDetail(Context context,ArrayList dataset) {
         mContext = context;
@@ -53,8 +52,6 @@ public class CustomAdapterFirstaidDetail  extends RecyclerView.Adapter{
             return SUBJECT_ITEM;
         }else if (mItems.get(position) instanceof SubjectRedItem){
             return SUBJECT_RED_ITEM;
-        }else if (mItems.get(position) instanceof VideoItem){
-            return VIDEO_ITEM;
         }
         return -1;
     }
@@ -83,10 +80,6 @@ public class CustomAdapterFirstaidDetail  extends RecyclerView.Adapter{
             final View v = inflater.inflate(R.layout.singlerow_subject_red_firstaid,parent,false);
             vHolder = new SubjectRedHolder(v);
             return vHolder;
-        }else if(viewType == VIDEO_ITEM){
-            final View v = inflater.inflate(R.layout.singlerow_subject_video,parent,false);
-            vHolder = new VideoHolder(v);
-            return vHolder;
         }
         return null;
     }
@@ -114,10 +107,6 @@ public class CustomAdapterFirstaidDetail  extends RecyclerView.Adapter{
         }else if(type == SUBJECT_RED_ITEM){
             SubjectRedItem item = (SubjectRedItem) mItems.get(position);
             SubjectRedHolder detailHolder = (SubjectRedHolder) holder;
-            detailHolder.name.setText(item.text);
-        }else if(type == VIDEO_ITEM){
-            VideoItem item = (VideoItem) mItems.get(position);
-            VideoHolder detailHolder = (VideoHolder) holder;
             detailHolder.name.setText(item.text);
         }
 
@@ -205,18 +194,4 @@ public class CustomAdapterFirstaidDetail  extends RecyclerView.Adapter{
 
     }
 
-    private class VideoHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private TextView name;
-
-        public VideoHolder (View itemView){
-            super(itemView);
-            name = (TextView) itemView.findViewById(R.id.textViewSubject);
-
-        }
-
-        public void onClick(View view){
-
-        }
-
-    }
 }

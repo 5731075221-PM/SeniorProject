@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -66,7 +67,15 @@ public class FirstaidFragment extends Fragment {
         cpr = (TextView) view.findViewById(R.id.cpr);
         transport = (TextView) view.findViewById(R.id.transport);
         textTool = (TextView) getActivity().findViewById(R.id.textTool);
-//        textTool.setText("การปฐมพยาบาล");
+
+        Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
+        head.setTypeface(tf);
+        body.setTypeface(tf);
+        fire.setTypeface(tf);
+        poison.setTypeface(tf);
+        normal.setTypeface(tf);
+        cpr.setTypeface(tf);
+        transport.setTypeface(tf);
 
         head.setOnClickListener(new View.OnClickListener() {
             @Override

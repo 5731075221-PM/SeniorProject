@@ -5,6 +5,7 @@ package com.example.uefi.seniorproject.firstaid;
  */
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -89,9 +90,12 @@ public class CustomAdapterFirstaid extends RecyclerView.Adapter{
 
         public ListViewHolder (View itemView){
             super(itemView);
+            Typeface tf = Typeface.createFromAsset(mContext.getAssets(), "fonts/THSarabunNew.ttf");
+
             name = (TextView) itemView.findViewById(R.id.firstaid_subject_item);
             charac = (ImageView) itemView.findViewById(R.id.charac);
             itemView.setOnClickListener(this);
+            name.setTypeface(tf);
 
         }
 

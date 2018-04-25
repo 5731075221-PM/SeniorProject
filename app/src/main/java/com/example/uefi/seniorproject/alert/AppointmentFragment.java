@@ -1,6 +1,7 @@
 package com.example.uefi.seniorproject.alert;
 
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
@@ -49,11 +50,11 @@ public class AppointmentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_appointment, container, false);
+        View view = inflater.inflate(R.layout.fragment_notes, container, false);
         appBarLayout.setExpanded(true, true);
 
         listAppointment = internalDatabaseHelper.readAppointment();
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_appointment);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_note);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new CustomAdapterNote(getActivity(),listAppointment,getActivity().getSupportFragmentManager(),AppointmentFragment.this);
@@ -71,7 +72,9 @@ public class AppointmentFragment extends Fragment {
         mAdapter.notifyDataSetChanged();
 
         // add
+        Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
         add = (TextView) view.findViewById(R.id.textView3);
+        add.setTypeface(tf);
         add.setText("เพิ่มรายการนัดคุณหมอ");
         LinearLayout addNote = (LinearLayout) view.findViewById(R.id.add);
         addNote.setOnClickListener(new View.OnClickListener() {

@@ -2,6 +2,7 @@ package com.example.uefi.seniorproject.reminder;
 
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.uefi.seniorproject.R;
 import com.example.uefi.seniorproject.databases.DBHelperDAO;
@@ -36,6 +38,7 @@ public class NotesFragment extends Fragment {
     public CustomAdapterNote mAdapter;
     public ImageView notePic;
     public AppBarLayout appBarLayout;
+    public TextView addTextview;
 
     public NotesFragment() {
         // Required empty public constructor
@@ -70,6 +73,10 @@ public class NotesFragment extends Fragment {
         });
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         mAdapter.notifyDataSetChanged();
+
+        addTextview = (TextView) view.findViewById(R.id.textView3);
+        Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
+        addTextview.setTypeface(tf);
 
 
         LinearLayout addNote = (LinearLayout) view.findViewById(R.id.add);

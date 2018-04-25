@@ -553,13 +553,13 @@ public class DBHelperDAO {
 
                     int index = temp.indexOf(check[i], 0);
 
-                    add = temp.substring(0, index); //include \n at index-1
+                    add = temp.substring(0, index-1); //include \n at index-1
                     temp = temp.substring(index);
                     list.add(new DetailItem(add)); // new DetailItemKa
 
                 }
             }
-            list.add(new DetailItem(temp + "\n"));
+            list.add(new DetailItem(temp));
 //            list.add(new DetailItem(cursor.getString(cursor.getColumnIndex("subject_detail"))));
 //            list.add(new DetailItem(cursor.getString(cursor.getColumnIndex("subject_detail"))));
 

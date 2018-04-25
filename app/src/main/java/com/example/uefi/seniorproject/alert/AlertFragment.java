@@ -1,6 +1,7 @@
 package com.example.uefi.seniorproject.alert;
 
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
@@ -77,7 +78,10 @@ public class AlertFragment extends Fragment {
         setupRecy();
 
         // add
+        Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
+
         add = (TextView) view.findViewById(R.id.textView3);
+        add.setTypeface(tf);
         add.setText("เพิ่มรายการยา");
         LinearLayout addNote = (LinearLayout) view.findViewById(R.id.add);
         addNote.setOnClickListener(new View.OnClickListener() {

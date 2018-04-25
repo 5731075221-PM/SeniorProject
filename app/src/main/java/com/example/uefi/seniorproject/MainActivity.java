@@ -172,71 +172,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if(id == R.id.nav_home) {
-//            fragmentManager.beginTransaction()
-//                    .add(R.id.container_fragment, new MainFragment())
-//                    .commit();
             fragmentManager.beginTransaction()
                     .replace(R.id.container_fragment, new MainFragment())
-//                    .addToBackStack("")
                     .commit();
         }else if (id == R.id.nav_disease) {
-//            toggle.setDrawerIndicatorEnabled(false);
-//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//            if(!mToolBarNavigationListenerIsRegistered) {
-//                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        // Doesn't have to be onBackPressed
-//                        onBackPressed();
-//                    }
-//                });
-//
-//                mToolBarNavigationListenerIsRegistered = true;
-//            }
-//            Bundle args = new Bundle();
-//            args.putStringArrayList("dict",dictList);
-//            args.putStringArrayList("stop",stopwordList);
             DiseaseNavFragment fragment = new DiseaseNavFragment();
-//            fragment.setArguments(args);
             fragmentManager.beginTransaction()
                     .replace(R.id.container_fragment, fragment)
-//                    .addToBackStack(null)
                     .commit();
         } else if (id == R.id.nav_firstaid) {
-//            toggle.setDrawerIndicatorEnabled(false);
-//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//            if(!mToolBarNavigationListenerIsRegistered) {
-//                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        // Doesn't have to be onBackPressed
-//                        onBackPressed();
-//                    }
-//                });
-//
-//                mToolBarNavigationListenerIsRegistered = true;
-//            }
             fragmentManager.beginTransaction()
                     .replace(R.id.container_fragment, new FirstaidFragment())
-//                    .addToBackStack("การปฐมพยาบาล")
                     .commit();
         } else if (id == R.id.nav_hospital) {
-//            toggle.setDrawerIndicatorEnabled(false);
-//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//            if(!mToolBarNavigationListenerIsRegistered) {
-//                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        // Doesn't have to be onBackPressed
-//                        onBackPressed();
-//                    }
-//                });
-//
-//                mToolBarNavigationListenerIsRegistered = true;
-//            }
             fragmentManager.beginTransaction()
                     .replace(R.id.container_fragment, new HospitalNavFragment())
-//                    .addToBackStack(null)
                     .commit();
         } else if (id == R.id.nav_reminder) {
             fragmentManager.beginTransaction()
@@ -247,48 +197,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .replace(R.id.container_fragment, new FoodFragment())
                     .commit();
         }else if(id == R.id.nav_fav){
-//            toggle.setDrawerIndicatorEnabled(false);
-//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//            if(!mToolBarNavigationListenerIsRegistered) {
-//                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        // Doesn't have to be onBackPressed
-//                        onBackPressed();
-//                    }
-//                });
-//
-//                mToolBarNavigationListenerIsRegistered = true;
-//            }
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container_fragment, new ReminderFragment())
-//                    .addToBackStack(null)
-                    .commit();
-        } else if (id == R.id.nav_food) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container_fragment, new FoodFragment())
-//                    .addToBackStack(null)
-                    .commit();
-        }else if(id == R.id.nav_fav){
-//            toggle.setDrawerIndicatorEnabled(false);
-//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//            if(!mToolBarNavigationListenerIsRegistered) {
-//                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        // Doesn't have to be onBackPressed
-//                        onBackPressed();
-//                    }
-//                });
-//
-//                mToolBarNavigationListenerIsRegistered = true;
-//            }
             fragmentManager.beginTransaction()
                     .replace(R.id.container_fragment, new FavoriteItemFragment())
-//                    .addToBackStack(null)
                     .commit();
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

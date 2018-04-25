@@ -89,78 +89,27 @@ public class MainFragment extends Fragment  implements NavigationView.OnNavigati
     Runnable Update;
     Timer swipeTimer = new Timer();
     NavigationView navigationView;
-    ArrayList<String> dictList, stopwordList;
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
         if(id == R.id.nav_home) {
-//            fragmentManager.beginTransaction()
-//                    .add(R.id.container_fragment, new MainFragment())
-//                    .commit();
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container_fragment, new MainFragment())
-//                    .addToBackStack("")
                     .commit();
         }else if (id == R.id.nav_disease) {
-//            toggle.setDrawerIndicatorEnabled(false);
-//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//            if(!mToolBarNavigationListenerIsRegistered) {
-//                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        // Doesn't have to be onBackPressed
-//                        onBackPressed();
-//                    }
-//                });
-//
-//                mToolBarNavigationListenerIsRegistered = true;
-//            }
-            Bundle args = new Bundle();
-            args.putStringArrayList("dict",dictList);
-            args.putStringArrayList("stop",stopwordList);
             DiseaseNavFragment fragment = new DiseaseNavFragment();
-            fragment.setArguments(args);
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container_fragment, fragment)
-//                    .addToBackStack(null)
                     .commit();
         } else if (id == R.id.nav_firstaid) {
-//            toggle.setDrawerIndicatorEnabled(false);
-//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//            if(!mToolBarNavigationListenerIsRegistered) {
-//                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        // Doesn't have to be onBackPressed
-//                        onBackPressed();
-//                    }
-//                });
-//
-//                mToolBarNavigationListenerIsRegistered = true;
-//            }
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container_fragment, new FirstaidFragment())
-//                    .addToBackStack("การปฐมพยาบาล")
                     .commit();
         } else if (id == R.id.nav_hospital) {
-//            toggle.setDrawerIndicatorEnabled(false);
-//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//            if(!mToolBarNavigationListenerIsRegistered) {
-//                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        // Doesn't have to be onBackPressed
-//                        onBackPressed();
-//                    }
-//                });
-//
-//                mToolBarNavigationListenerIsRegistered = true;
-//            }
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container_fragment, new HospitalNavFragment())
-//                    .addToBackStack(null)
                     .commit();
         } else if (id == R.id.nav_reminder) {
             getActivity().getSupportFragmentManager().beginTransaction()
@@ -171,22 +120,8 @@ public class MainFragment extends Fragment  implements NavigationView.OnNavigati
                     .replace(R.id.container_fragment, new FoodFragment())
                     .commit();
         }else if(id == R.id.nav_fav){
-//            toggle.setDrawerIndicatorEnabled(false);
-//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//            if(!mToolBarNavigationListenerIsRegistered) {
-//                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        // Doesn't have to be onBackPressed
-//                        onBackPressed();
-//                    }
-//                });
-//
-//                mToolBarNavigationListenerIsRegistered = true;
-//            }
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container_fragment, new FavoriteItemFragment())
-//                    .addToBackStack(null)
                     .commit();
         }
 
@@ -652,15 +587,6 @@ public class MainFragment extends Fragment  implements NavigationView.OnNavigati
 //            titleList.add("");
 //            titleList.add("");
 //            titleList.add("");
-
-            Singleton single = Singleton.getInstance();
-            if(single.getDict().size() != 0){
-                System.out.println("size = "+single.getDict().size());
-                System.out.println("size = "+single.getStopword().size());
-            }
-
-            dictList = single.getDict();
-            stopwordList = single.getStopword();
 
         }
     }

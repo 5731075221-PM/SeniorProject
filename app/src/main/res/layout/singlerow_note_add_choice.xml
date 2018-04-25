@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relativeChoiceCheck"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="56dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
     android:background="@drawable/selector_recycler"
     tools:context="com.example.uefi.seniorproject.firstaid.FirstaidFragment">
 
@@ -13,13 +15,13 @@
     <TextView
         android:id="@+id/choice"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@+id/firstaid_item"
         android:layout_centerVertical="true"
-        android:layout_gravity="center"
-        android:layout_marginLeft="40dp"
+        android:layout_marginLeft="15dp"
+        android:gravity="center_vertical"
         android:text="TextView"
-        android:textSize="18sp" />
+        android:textSize="24sp" />
 
     <CheckBox
         android:id="@+id/checkBox"
@@ -27,7 +29,6 @@
         android:layout_height="50dp"
         android:layout_alignParentRight="true"
         android:layout_gravity="center"
-        android:layout_marginRight="20dp"
         android:buttonTint="@color/nav_bar"
         android:textColorLink="@color/nav_bar" />
 

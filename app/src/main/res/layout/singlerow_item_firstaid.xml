@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="56dp"
     android:background="?android:attr/selectableItemBackground"
     tools:context="com.example.uefi.seniorproject.firstaid.FirstaidFragment">
 
@@ -11,27 +11,27 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp">
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/charac"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp" />
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center" />
 
         <TextView
             android:id="@+id/firstaid_subject_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_below="@+id/firstaid_item"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="16dp"
+            android:gravity="center_vertical"
             android:text="TextView"
-            android:textSize="18sp" />
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

@@ -42,10 +42,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_weight="2"
-            android:fontFamily="@font/kanit_light"
             android:text="เพิ่มบันทึกสุขภาพ"
             android:textColor="@color/cardview_light_background"
-            android:textSize="18sp" />
+            android:textSize="26sp" />
 
         <ImageView
             android:id="@+id/imageView3"
