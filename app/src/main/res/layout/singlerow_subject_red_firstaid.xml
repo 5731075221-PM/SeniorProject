@@ -22,7 +22,7 @@
             android:paddingLeft="20dp"
             android:text="TextView"
             android:textColor="@color/colorRubyRed"
-            android:textSize="18sp" />
+            android:textSize="26sp" />
 
     </LinearLayout>
 

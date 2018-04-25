@@ -30,6 +30,7 @@
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
         android:background="@color/second_bar"
+        android:elevation="3dp"
         android:foregroundGravity="bottom"
         android:gravity="center"
         android:orientation="horizontal"

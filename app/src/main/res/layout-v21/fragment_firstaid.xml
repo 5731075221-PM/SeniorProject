@@ -57,12 +57,12 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_effect_up"
                     android:elevation="3dp"
-                    android:fontFamily="@font/kanit"
+                    android:fontFamily="@font/roboto_thin"
                     android:gravity="center"
                     android:padding="7dp"
                     android:text="ตา หู คอ"
                     android:textColor="@color/firstaid"
-                    android:textSize="17sp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/body"
@@ -71,12 +71,12 @@
                     android:layout_marginTop="5dp"
                     android:background="@drawable/button_effect_between"
                     android:elevation="3dp"
-                    android:fontFamily="@font/kanit"
+                    android:fontFamily="@font/roboto_thin"
                     android:gravity="center"
                     android:padding="7dp"
                     android:text="กล้ามเนื้อ กระดูก ลำไส้"
                     android:textColor="@color/firstaid"
-                    android:textSize="17sp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/fire"
@@ -90,7 +90,7 @@
                     android:padding="7dp"
                     android:text="แผลไหม้ น้ำร้อนลวก"
                     android:textColor="@color/firstaid"
-                    android:textSize="17sp" />
+                    android:textSize="15sp" />
 
 
                 <TextView
@@ -105,7 +105,7 @@
                     android:padding="7dp"
                     android:text="พิษ สารพิษ"
                     android:textColor="@color/firstaid"
-                    android:textSize="17sp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/normal"
@@ -119,7 +119,7 @@
                     android:padding="7dp"
                     android:text="เบ็ดเตล็ด"
                     android:textColor="@color/firstaid"
-                    android:textSize="17sp" />
+                    android:textSize="15sp" />
 
             </LinearLayout>
         </LinearLayout>
@@ -144,7 +144,7 @@
                 android:padding="7dp"
                 android:text="การช่วยฟื้นคืนชีพขั้นพื้นฐาน"
                 android:textColor="@color/cardview_light_background"
-                android:textSize="17sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/transport"
@@ -158,7 +158,7 @@
                 android:padding="7dp"
                 android:text="การยกและเคลื่อนย้ายผู้ป่วย"
                 android:textColor="@color/cardview_light_background"
-                android:textSize="17sp" />
+                android:textSize="15sp" />
         </LinearLayout>
 
     </LinearLayout>

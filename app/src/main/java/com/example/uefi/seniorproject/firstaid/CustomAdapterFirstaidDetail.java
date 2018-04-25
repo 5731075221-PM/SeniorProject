@@ -3,6 +3,7 @@ package com.example.uefi.seniorproject.firstaid;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -132,8 +133,9 @@ public class CustomAdapterFirstaidDetail  extends RecyclerView.Adapter{
 
         public DetailHolder (View itemView){
             super(itemView);
+            Typeface tf = Typeface.createFromAsset(mContext.getAssets(), "fonts/THSarabunNew.ttf");
             name = (TextView) itemView.findViewById(R.id.textViewDetail);
-
+            name.setTypeface(tf);
         }
 
         public void onClick(View view){
@@ -146,8 +148,9 @@ public class CustomAdapterFirstaidDetail  extends RecyclerView.Adapter{
 
         public DetailPicHolder (View itemView){
             super(itemView);
+            Typeface tf = Typeface.createFromAsset(mContext.getAssets(), "fonts/THSarabunNew.ttf");
             name = (TextView) itemView.findViewById(R.id.textViewDetailPic);
-
+            name.setTypeface(tf);
         }
 
         public void onClick(View view){
@@ -162,7 +165,6 @@ public class CustomAdapterFirstaidDetail  extends RecyclerView.Adapter{
         public PicHolder (View itemView){
             super(itemView);
             charac = (ImageView) itemView.findViewById(R.id.pic);
-
         }
 
         public void onClick(View view){
@@ -176,8 +178,9 @@ public class CustomAdapterFirstaidDetail  extends RecyclerView.Adapter{
 
         public SubjectHolder (View itemView){
             super(itemView);
+            Typeface tf = Typeface.createFromAsset(mContext.getAssets(), "fonts/THSarabunNew.ttf");
             name = (TextView) itemView.findViewById(R.id.textViewSubject);
-
+            name.setTypeface(tf);
         }
 
         public void onClick(View view){
@@ -191,8 +194,9 @@ public class CustomAdapterFirstaidDetail  extends RecyclerView.Adapter{
 
         public SubjectRedHolder (View itemView){
             super(itemView);
+            Typeface tf = Typeface.createFromAsset(mContext.getAssets(), "fonts/THSarabunNew.ttf");
             name = (TextView) itemView.findViewById(R.id.textViewSubject);
-
+            name.setTypeface(tf);
         }
 
         public void onClick(View view){
