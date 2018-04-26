@@ -177,7 +177,7 @@ public class SelectContentFragment extends Fragment {
         date = (TextView) getActivity().findViewById(R.id.dateNews);
 
         h = getArguments().getString("header").split("&")[0];
-        dy = getArguments().getString("header").split("&")[1];
+        if(getArguments().getString("header").length() > 1) dy = getArguments().getString("header").split("&")[1];
 
         System.out.println("PRint "+h+" "+dy);
 
@@ -191,10 +191,10 @@ public class SelectContentFragment extends Fragment {
         } else isNetwork = false;
 
         if(isNetwork) new FetchData().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-        else {
-            d = dbHelperDAO.getContentNews(h);
-            System.out.println("PRint "+d);
-        }
+//        else {
+//            d = dbHelperDAO.getContentNews(h);
+//            System.out.println("PRint "+d);
+//        }
     }
 
 }

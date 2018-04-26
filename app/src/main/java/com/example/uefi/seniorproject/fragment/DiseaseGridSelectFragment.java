@@ -179,7 +179,7 @@ public class DiseaseGridSelectFragment extends Fragment {
             viewHolder.type.setText(type);
             viewHolder.type.setTypeface(tf);
             viewHolder.img.setBackgroundResource(gridViewImageId[Arrays.asList(gridViewString).indexOf(type.split(",")[0].trim())]);
-            viewHolder.img.setImageResource(gridViewImageId[Arrays.asList(gridViewString).indexOf(type.split(",")[0].trim())]);
+            viewHolder.img.setImageResource(gridViewImageId2[Arrays.asList(gridViewString).indexOf(type.split(",")[0].trim())]);
             viewHolder.setOnClickListener(new ItemClickListener() {
                 @Override
                 public void onClick(View view, int position, boolean isLongClick, MotionEvent motionEvent) {

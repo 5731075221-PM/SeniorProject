@@ -61,6 +61,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -569,14 +570,13 @@ public class MainFragment extends Fragment  implements NavigationView.OnNavigati
 
         if(isNetwork) new FetchData().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         else {
-            titleList = dbHelperDAO.getHeaderNews();
-            detailList = dbHelperDAO.getDetailNews();
-            linkList = dbHelperDAO.getLinkNews();
-            imageList.add("@color/grey");
-            imageList.add("@color/grey");
-            imageList.add("@color/grey");
-            imageList.add("@color/grey");
-            imageList.add("@color/grey");
+//            titleList = dbHelperDAO.getHeaderNews();
+//            detailList = dbHelperDAO.getDetailNews();
+//            linkList = dbHelperDAO.getLinkNews();
+            titleList = new ArrayList<>(Arrays.asList("","","","",""));
+            detailList = new ArrayList<>(Arrays.asList("","","","",""));
+            linkList = new ArrayList<>(Arrays.asList("","","","",""));
+            imageList  = new ArrayList<>(Arrays.asList("@color/grey","@color/grey","@color/grey","@color/grey","@color/grey"));
 //            imageList.add("http://static2.hypable.com/wp-content/uploads/2013/12/hannibal-season-2-release-date.jpg");
 //            imageList.add("http://cdn3.nflximg.net/images/3093/2043093.jpg");
 //            imageList.add("http://cdn3.nflximg.net/images/3093/2043093.jpg");
