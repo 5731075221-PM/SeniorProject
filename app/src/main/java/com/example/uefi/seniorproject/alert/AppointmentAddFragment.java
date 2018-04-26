@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
@@ -50,7 +51,7 @@ import static android.content.Context.ALARM_SERVICE;
  * A simple {@link Fragment} subclass.
  */
 public class AppointmentAddFragment extends Fragment {
-    public TextView textTool,editDate,dateBed;
+    public TextView textTool,editDate,dateBed,add,textView6,textView7,textView3;
     public AppBarLayout appBarLayout;
     public String state,title,hospitalName;
     public Bundle bundle;
@@ -90,6 +91,7 @@ public class AppointmentAddFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_appointment_add, container, false);
+        Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
 
         appBarLayout.setExpanded(true, true);
         textTool = (TextView) getActivity().findViewById(R.id.textTool);
@@ -101,13 +103,19 @@ public class AppointmentAddFragment extends Fragment {
             alert.setChecked(Integer.parseInt(listFromDB.get(6).toString()) == 1);
         }
 
-
+        //textview
+        textView6 = (TextView) view.findViewById(R.id.textView6);
+        textView6.setTypeface(tf);
+        textView7 = (TextView) view.findViewById(R.id.textView7);
+        textView7.setTypeface(tf);
+        textView3 = (TextView) view.findViewById(R.id.textView3);
+        textView3.setTypeface(tf);
 
         // calendat input
         String myFormat = "dd/MM/yyyy";
         sdf = new SimpleDateFormat(myFormat, Locale.US);
         editDate = (TextView) view.findViewById(R.id.date);
-
+        editDate.setTypeface(tf);
 
         date = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -134,6 +142,7 @@ public class AppointmentAddFragment extends Fragment {
         //time
         time = (LinearLayout) view.findViewById(R.id.time);
         dateBed = (TextView) view.findViewById(R.id.dateBed);
+        dateBed.setTypeface(tf);
         dateBed.setText(setTextDate(hour,minute));
         time.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -215,6 +224,7 @@ public class AppointmentAddFragment extends Fragment {
 
         //hospital name
         hospitalEdittext = (EditText) view.findViewById(R.id.editTextHospital);
+        hospitalEdittext.setTypeface(tf);
         hospitalEdittext.setText(hospitalName, TextView.BufferType.EDITABLE);
         hospitalEdittext.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {

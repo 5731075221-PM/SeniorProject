@@ -51,7 +51,7 @@
                     android:focusable="false"
                     android:textColor="@color/cardview_dark_background"
                     android:textColorLink="@color/nav_bar"
-                    android:textSize="18sp" />
+                    android:textSize="24sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -84,7 +84,7 @@
                         android:layout_weight="1.75"
                         android:text="รู้สึกอย่างไรบ้าง"
                         android:textColor="@color/cardview_dark_background"
-                        android:textSize="18sp" />
+                        android:textSize="24sp" />
 
                     <ImageView
                         android:id="@+id/imageView7"
@@ -135,7 +135,8 @@
                     android:paddingRight="25dp"
                     android:textColor="@color/cardview_dark_background"
                     android:textColorLink="@color/cardview_dark_background"
-                    android:textCursorDrawable="@null" />
+                    android:textCursorDrawable="@null"
+                    android:textSize="24sp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -155,11 +156,10 @@
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/kanit_light"
             android:gravity="center"
             android:text="บันทึก"
             android:textColor="@color/cardview_light_background"
-            android:textSize="18sp" />
+            android:textSize="26sp" />
 
     </LinearLayout>
 

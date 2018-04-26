@@ -5,6 +5,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
@@ -44,7 +45,7 @@ import static android.content.Context.ALARM_SERVICE;
 public class AlertSettingFragment extends Fragment {
 
     public LinearLayout breakfast,lunch,dinner,bed;
-    public TextView textTool,dateBreakfast,dateLunch,dateDinner,dateBed;
+    public TextView textTool,dateBreakfast,dateLunch,dateDinner,dateBed,textView6,textView1,textView5,textView2,textView3,textView8;
     public AppBarLayout appBarLayout;
     public InternalDatabaseHelper internalDatabaseHelper;
     public int breakfast_hour,breakfast_minute,lunch_hour,lunch_minute,dinner_hour,dinner_minute,bed_hour,bed_minute,vibrate,sound;
@@ -73,6 +74,7 @@ public class AlertSettingFragment extends Fragment {
 
         appBarLayout.setExpanded(true, true);
         textTool = (TextView) getActivity().findViewById(R.id.textTool);
+        Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
 
 
         switchSound = (Switch) view.findViewById(R.id.switchSound);
@@ -80,11 +82,18 @@ public class AlertSettingFragment extends Fragment {
         switchVibrate.setChecked(vibrate == 1);
         switchSound.setChecked(sound == 1);
 
+        switchSound.setTypeface(tf);
+        switchVibrate.setTypeface(tf);
+
         dateBreakfast = (TextView) view.findViewById(R.id.dateBreakfast);
         dateLunch = (TextView) view.findViewById(R.id.dateLunch);
         dateDinner = (TextView) view.findViewById(R.id.dateDinner);
         dateBed = (TextView) view.findViewById(R.id.dateBed);
 
+        dateBreakfast.setTypeface(tf);
+        dateLunch.setTypeface(tf);
+        dateDinner.setTypeface(tf);
+        dateBed.setTypeface(tf);
 
         breakfast = (LinearLayout) view.findViewById(R.id.breakfast);
         lunch = (LinearLayout) view.findViewById(R.id.lunch);
@@ -95,6 +104,20 @@ public class AlertSettingFragment extends Fragment {
         dateLunch.setText(setTextDate(lunch_hour,lunch_minute));
         dateDinner.setText(setTextDate(dinner_hour,dinner_minute));
         dateBed.setText(setTextDate(bed_hour,bed_minute));
+
+        textView6 = (TextView) view.findViewById(R.id.textView6);
+        textView1 = (TextView) view.findViewById(R.id.textView1);
+        textView5 = (TextView) view.findViewById(R.id.textView5);
+        textView2 = (TextView) view.findViewById(R.id.textView2);
+        textView3 = (TextView) view.findViewById(R.id.textView3);
+        textView8 = (TextView) view.findViewById(R.id.textView8);
+
+        textView6.setTypeface(tf);
+        textView1.setTypeface(tf);
+        textView5.setTypeface(tf);
+        textView2.setTypeface(tf);
+        textView3.setTypeface(tf);
+        textView8.setTypeface(tf);
 
         breakfast.setOnClickListener(new View.OnClickListener() {
             @Override

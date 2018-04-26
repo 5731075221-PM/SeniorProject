@@ -3,6 +3,7 @@ package com.example.uefi.seniorproject.food;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
@@ -53,6 +54,8 @@ public class FoodFragment extends Fragment {
 
         appBarLayout.setExpanded(true, true);
 
+        Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
+
         textTool = (TextView) getActivity().findViewById(R.id.textTool);
         energy = (TextView) view.findViewById(R.id.energy);
         protein = (TextView) view.findViewById(R.id.protein);
@@ -65,6 +68,17 @@ public class FoodFragment extends Fragment {
         can = (TextView) view.findViewById(R.id.can);
         foodPic = (ImageView) view.findViewById(R.id.foodPic);
         relaFood = (RelativeLayout) view.findViewById(R.id.relafood);
+
+        energy.setTypeface(tf);
+        protein.setTypeface(tf);
+        fat.setTypeface(tf);
+        carbohydrate.setTypeface(tf);
+        fibre.setTypeface(tf);
+        vitE.setTypeface(tf);
+        thiamine.setTypeface(tf);
+        vitC.setTypeface(tf);
+        can.setTypeface(tf);
+
         setVisibleRela(false);
 
         searchView = (SearchView) view.findViewById(R.id.searchFood);

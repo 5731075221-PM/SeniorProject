@@ -28,11 +28,10 @@
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/kanit_light"
             android:gravity="center"
             android:text="บันทึก"
             android:textColor="@color/cardview_light_background"
-            android:textSize="18sp" />
+            android:textSize="26sp" />
 
     </LinearLayout>
 

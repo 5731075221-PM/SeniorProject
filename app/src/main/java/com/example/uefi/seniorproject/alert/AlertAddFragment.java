@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.Snackbar;
@@ -50,7 +51,7 @@ import static android.content.Context.NOTIFICATION_SERVICE;
  */
 public class AlertAddFragment extends Fragment {
 
-    public TextView textTool;
+    public TextView textTool,add,med;
     public AppBarLayout appBarLayout;
     public String state,title,medicineName;
     public Bundle bundle;
@@ -87,6 +88,9 @@ public class AlertAddFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_alert_add, container, false);
 
         appBarLayout.setExpanded(true, true);
+
+        Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
+
         textTool = (TextView) getActivity().findViewById(R.id.textTool);
 
         //checkbox
@@ -97,6 +101,14 @@ public class AlertAddFragment extends Fragment {
         beforeCheckbox = (CheckBox) view.findViewById(R.id.before);
         afterCheckbox = (CheckBox) view.findViewById(R.id.after);
         alert = (Switch) view.findViewById(R.id.switchAlert);
+
+        breakfastCheckbox.setTypeface(tf);
+        lunchCheckbox.setTypeface(tf);
+        dinnerCheckbox.setTypeface(tf);
+        bedCheckbox.setTypeface(tf);
+        beforeCheckbox.setTypeface(tf);
+        afterCheckbox.setTypeface(tf);
+        alert.setTypeface(tf);
 
         if(state.equals("add")) {
             beforeCheckbox.setChecked(true);
@@ -135,7 +147,11 @@ public class AlertAddFragment extends Fragment {
         });
 
         //num
+        med = (TextView) view.findViewById(R.id.textView4);
+        med.setTypeface(tf);
+
         medicineNumEdittext = (EditText) view.findViewById(R.id.editTextQuantity);
+        medicineNumEdittext.setTypeface(tf);
         medicineNumEdittext.setText(medicineNum+"");
 //        medicineNumEdittext.setTransformationMethod(new NumericKeyBoardTransformationMethod());
         medicineNumEdittext.addTextChangedListener(new TextWatcher() {
@@ -252,6 +268,7 @@ public class AlertAddFragment extends Fragment {
 
         //name
         medicineNameEdittext = (EditText) view.findViewById(R.id.editTextMedicine);
+        medicineNameEdittext.setTypeface(tf);
         medicineNameEdittext.setText(medicineName, TextView.BufferType.EDITABLE);
         medicineNameEdittext.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
@@ -265,6 +282,10 @@ public class AlertAddFragment extends Fragment {
         showSave();
 
         setupUI(view.findViewById(R.id.linear_choice));
+
+        add = (TextView) view.findViewById(R.id.textView3);
+        add.setTypeface(tf);
+
         return view;
     }
 

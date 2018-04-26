@@ -3,6 +3,7 @@ package com.example.uefi.seniorproject.reminder;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
@@ -32,6 +33,7 @@ public class NoteAddChoiceFragment extends Fragment {
     public Bundle bundle;
     int isSave;
     public AppBarLayout appBarLayout;
+    public TextView add;
 
     public NoteAddChoiceFragment() {
         // Required empty public constructor
@@ -96,6 +98,10 @@ public class NoteAddChoiceFragment extends Fragment {
 
             }
         });
+        Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
+
+        add = (TextView) view.findViewById(R.id.textView3);
+        add.setTypeface(tf);
 
         return view;
     }

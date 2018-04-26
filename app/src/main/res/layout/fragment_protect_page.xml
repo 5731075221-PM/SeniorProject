@@ -5,61 +5,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.CardView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:cardCornerRadius="4dp">
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <android.support.v4.widget.NestedScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <me.grantland.widget.AutofitTextView
+                android:id="@+id/headProtect"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="18dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:lineSpacingExtra="5dp"
+                android:maxLines="2"
+                android:text="วิธีป้องกันโรค"
+                android:textSize="26dp" />
 
-                <me.grantland.widget.AutofitTextView
-                    android:id="@+id/headProtect"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="18dp"
-                    android:layout_marginStart="18dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_weight="1"
-                    android:lineSpacingExtra="5dp"
-                    android:maxLines="2"
-                    android:text="วิธีป้องกันโรค"
-                    android:textSize="26dp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:background="@android:color/darker_gray" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:background="@android:color/darker_gray" />
+            <me.grantland.widget.AutofitTextView
+                android:id="@+id/pageTextview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="18dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:lineSpacingExtra="5dp"
+                android:textSize="24dp" />
 
-                <me.grantland.widget.AutofitTextView
-                    android:id="@+id/pageTextview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="18dp"
-                    android:layout_marginStart="18dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_weight="1"
-                    android:lineSpacingExtra="5dp"
-                    android:textSize="24dp" />
+        </LinearLayout>
 
-            </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 
-        </android.support.v4.widget.NestedScrollView>
-    </android.support.v7.widget.CardView>
 </android.support.design.widget.CoordinatorLayout>

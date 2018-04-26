@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -45,7 +46,7 @@ import java.util.Locale;
  * A simple {@link Fragment} subclass.
  */
 public class NoteAddFragment extends Fragment {
-    public TextView textTool,selectChoice,editDate;
+    public TextView textTool,selectChoice,editDate,feel,add;
     public Calendar myCalendar;
     public DatePickerDialog.OnDateSetListener date;
     public EditText commentEditText;
@@ -89,11 +90,13 @@ public class NoteAddFragment extends Fragment {
 
         textTool = (TextView) getActivity().findViewById(R.id.textTool);
 
+        Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
+
         // calendat input
         String myFormat = "dd/MM/yyyy";
         sdf = new SimpleDateFormat(myFormat, Locale.US);
         editDate = (TextView) view.findViewById(R.id.date);
-
+        editDate.setTypeface(tf);
 
         date = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -118,6 +121,9 @@ public class NoteAddFragment extends Fragment {
         firstSetEditDate();
 
         //choice input
+        feel = (TextView) view.findViewById(R.id.textView5);
+        feel.setTypeface(tf);
+
         arrow = (ImageView) view.findViewById(R.id.imageView7);
 
         selectChoice = (TextView) view.findViewById(R.id.selectChoice);
@@ -159,6 +165,7 @@ public class NoteAddFragment extends Fragment {
 
         //comment
         commentEditText = (EditText) view.findViewById(R.id.editText);
+        commentEditText.setTypeface(tf);
         commentEditText.setText(comment, TextView.BufferType.EDITABLE);
         commentEditText.addTextChangedListener(new TextWatcher() {
 
@@ -175,6 +182,11 @@ public class NoteAddFragment extends Fragment {
         showSave();
         //hide soft keyboard
         setupUI(view.findViewById(R.id.linear_choice));
+
+
+        add = (TextView) view.findViewById(R.id.textView3);
+        add.setTypeface(tf);
+
 
         return view;
     }
