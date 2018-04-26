@@ -8,22 +8,27 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-
-    <LinearLayout
+    <me.grantland.widget.AutofitTextView
+        android:id="@+id/textViewSubject"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:lineSpacingExtra="5dp"
+        android:maxLines="2"
+        android:text="test"
+        android:textColor="@color/colorFoodRed"
+        android:textSize="26dp" />
 
-        <TextView
-            android:id="@+id/textViewSubject"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:text="TextView"
-            android:textColor="@color/colorRubyRed"
-            android:textSize="26sp" />
-
-    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/textViewSubject"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@android:color/darker_gray" />
 
 </RelativeLayout>

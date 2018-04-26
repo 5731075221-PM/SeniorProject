@@ -12,7 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="ไม่มีรายการยาที่ต้องรับประทาน" />
+        android:text="ไม่มีรายการยาที่ต้องรับประทาน"
+        android:textSize="22sp" />
 
 </RelativeLayout>
 

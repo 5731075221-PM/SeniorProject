@@ -2,6 +2,7 @@ package com.example.uefi.seniorproject.reminder;
 
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -82,6 +84,19 @@ public class ReminderFragment extends Fragment {
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
+
+        ViewGroup childTabLayout = (ViewGroup) tabLayout.getChildAt(0);
+        for (int i = 0; i < childTabLayout.getChildCount(); i++) {
+            ViewGroup viewTab = (ViewGroup) childTabLayout.getChildAt(i);
+            for (int j = 0; j < viewTab.getChildCount(); j++) {
+                View tabTextView = viewTab.getChildAt(j);
+                if (tabTextView instanceof TextView) {
+                    Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/THSarabunNew.ttf");
+                    ((TextView) tabTextView).setTypeface(typeface);
+                    ((TextView) tabTextView).setTextSize(TypedValue.COMPLEX_UNIT_DIP, 50);
+                }
+            }
+        }
 
         return view;
     }
