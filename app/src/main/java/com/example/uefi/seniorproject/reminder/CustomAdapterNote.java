@@ -2,6 +2,7 @@ package com.example.uefi.seniorproject.reminder;
 
 import android.app.PendingIntent;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
@@ -262,8 +263,9 @@ public class CustomAdapterNote  extends RecyclerSwipeAdapter<RecyclerView.ViewHo
 
         public DayHolder(View itemView){
             super(itemView);
+            Typeface tf = Typeface.createFromAsset(mContext.getAssets(), "fonts/THSarabunNew.ttf");
             name = (TextView) itemView.findViewById(R.id.day);
-
+            name.setTypeface(tf);
         }
 
         public void onClick(View view){
@@ -281,11 +283,16 @@ public class CustomAdapterNote  extends RecyclerSwipeAdapter<RecyclerView.ViewHo
 
         public NoteHolder (View itemView){
             super(itemView);
+            Typeface tf = Typeface.createFromAsset(mContext.getAssets(), "fonts/THSarabunNew.ttf");
             name = (TextView) itemView.findViewById(R.id.note);
             swipeLayout = (SwipeLayout) itemView.findViewById(R.id.swipe);
             tvDelete = (TextView) itemView.findViewById(R.id.tvDelete);
             imageView2 = (ImageView) itemView.findViewById(R.id.imageView2);
             medicine_num = (TextView) itemView.findViewById(R.id.medicine_num);
+
+            name.setTypeface(tf);
+            tvDelete.setTypeface(tf);
+            medicine_num.setTypeface(tf);
         }
         public void onClick(View view){
         }
@@ -293,10 +300,13 @@ public class CustomAdapterNote  extends RecyclerSwipeAdapter<RecyclerView.ViewHo
     }
 
     private class EmptyHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        private TextView name;
 
         public EmptyHolder(View itemView){
             super(itemView);
-
+            Typeface tf = Typeface.createFromAsset(mContext.getAssets(), "fonts/THSarabunNew.ttf");
+            name = (TextView) itemView.findViewById(R.id.textView);
+            name.setTypeface(tf);
         }
 
         public void onClick(View view){

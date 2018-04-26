@@ -1,6 +1,7 @@
 package com.example.uefi.seniorproject.reminder;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -112,9 +113,13 @@ public class CustomAdapterNoteAddChoice extends RecyclerView.Adapter{
 
         public ListViewHolder (View itemView){
             super(itemView);
+            Typeface tf = Typeface.createFromAsset(mContext.getAssets(), "fonts/THSarabunNew.ttf");
+
             choice = (TextView) itemView.findViewById(R.id.choice);
             checkBox = (CheckBox) itemView.findViewById(R.id.checkBox);
             itemView.setOnClickListener(this);
+            choice.setTypeface(tf);
+
 
         }
 
