@@ -108,7 +108,7 @@ public class SearchHospitalByName extends Fragment implements SearchView.OnQuery
         searchView.setIconifiedByDefault(false);
         searchView.setIconified(false);
         searchView.clearFocus();
-        searchView.setQueryHint("ค้นหา");
+        searchView.setQueryHint("ค้นหาโรงพยาบาล");
         searchView.setOnQueryTextListener(this);
 
         province = (SearchableSpinner) view.findViewById(R.id.spinnerProvince);

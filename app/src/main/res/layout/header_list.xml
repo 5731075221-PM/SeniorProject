@@ -5,7 +5,7 @@
             android:id="@+id/headerItem"
             android:gravity="left|center_vertical"
             android:textColor="@android:color/darker_gray"
-            android:textSize="30dp"
+            android:textSize="26dp"
             android:background="@android:color/transparent"
             android:layout_width="match_parent"
             android:paddingLeft="20dp"

@@ -26,6 +26,7 @@
                 android:layout_weight="1"
                 android:lineSpacingExtra="5dp"
                 android:maxLines="2"
+                android:textColor="@drawable/ic_disease_text_select"
                 android:text="สาเหตุของโรค"
                 android:textSize="26dp"
                 autofit:minTextSize="16sp" />
@@ -47,7 +48,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_weight="1"
                 android:lineSpacingExtra="5dp"
-                android:textSize="24dp" />
+                android:textSize="22dp" />
 
         </LinearLayout>
 
