@@ -128,6 +128,7 @@ public class NoteAddFragment extends Fragment {
 
         selectChoice = (TextView) view.findViewById(R.id.selectChoice);
         setSelectChoiceText(list);
+        selectChoice.setTypeface(tf);
 
         addChoice = (LinearLayout) view.findViewById(R.id.choice);
         addChoice.setOnClickListener(new View.OnClickListener() {

@@ -21,6 +21,7 @@
         android:lineSpacingExtra="5dp"
         android:maxLines="2"
         android:text="test"
+        android:textColor="@drawable/ic_disease_text_select"
         android:textSize="26dp" />
 
     <View
