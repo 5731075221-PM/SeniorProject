@@ -106,6 +106,13 @@ public class FavoriteItemFragment extends Fragment {
         list = tmp;
     }
 
+    @Override
+    public void onResume() {
+        list = dbHelperDAO.getAllFavList();
+        addHeader();
+        super.onResume();
+    }
+
     public class HeaderViewHolder extends RecyclerView.ViewHolder {
         TextView name;
         public HeaderViewHolder(View itemView) {

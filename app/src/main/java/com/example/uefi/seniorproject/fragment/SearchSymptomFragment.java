@@ -157,7 +157,7 @@ public class SearchSymptomFragment extends Fragment implements SearchView.OnQuer
         searchView.setIconifiedByDefault(false);
         searchView.setIconified(false);
         searchView.clearFocus();
-        searchView.setQueryHint("ค้นหา");
+        searchView.setQueryHint("ค้นหาอาการหรือชื่อโรค");
         searchView.setOnQueryTextListener(this);
 
         String dataArray[] = new String[data.size()];

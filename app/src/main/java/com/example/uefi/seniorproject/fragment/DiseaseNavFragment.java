@@ -56,6 +56,10 @@ public class DiseaseNavFragment extends Fragment{
 
             @Override
             public void onPageSelected(int position) {
+                if (getActivity().getCurrentFocus() != null) {
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+                }
                 if(position == 0){
                     title = getActivity().findViewById(R.id.textTool);
                     title.setText("หมวดหมู่ของโรค");
