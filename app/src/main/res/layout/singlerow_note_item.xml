@@ -25,7 +25,8 @@
             android:background="#e74c3c"
             android:gravity="center"
             android:text="ลบ"
-            android:textColor="#fff" />
+            android:textColor="#fff"
+            android:textSize="22sp" />
 
     </LinearLayout>
 
@@ -74,7 +75,7 @@
                 android:maxLines="3"
                 android:text="TextView + \n + @string/common_google_play_services"
                 android:textColor="@color/cardview_dark_background"
-                android:textSize="24sp" />
+                android:textSize="22sp" />
 
             <TextView
                 android:id="@+id/medicine_num"
@@ -84,7 +85,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:textSize="24sp" />
+                android:textSize="22sp" />
         </LinearLayout>
 
     </RelativeLayout>

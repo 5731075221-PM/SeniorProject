@@ -42,7 +42,7 @@
                 android:textColor="@color/cardview_dark_background"
                 android:textColorLink="@color/cardview_dark_background"
                 android:textCursorDrawable="@null"
-                android:textSize="24sp" />
+                android:textSize="22sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -71,7 +71,7 @@
                 android:textColor="@color/cardview_dark_background"
                 android:textColorLink="@color/cardview_dark_background"
                 android:textCursorDrawable="@null"
-                android:textSize="24sp" />
+                android:textSize="22sp" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -81,7 +81,7 @@
                 android:layout_weight="1"
                 android:text="เม็ด"
                 android:textColor="@color/cardview_dark_background"
-                android:textSize="24sp" />
+                android:textSize="22sp" />
 
         </LinearLayout>
 
@@ -117,7 +117,7 @@
                     android:text="เช้า"
                     android:textColor="@color/cardview_dark_background"
                     android:textColorLink="@color/nav_bar"
-                    android:textSize="24sp" />
+                    android:textSize="22sp" />
 
                 <CheckBox
                     android:id="@+id/lunch"
@@ -127,7 +127,7 @@
                     android:text="กลางวัน"
                     android:textColor="@color/cardview_dark_background"
                     android:textColorLink="@color/nav_bar"
-                    android:textSize="24sp" />
+                    android:textSize="22sp" />
 
                 <CheckBox
                     android:id="@+id/dinner"
@@ -137,7 +137,7 @@
                     android:text="เย็น"
                     android:textColor="@color/cardview_dark_background"
                     android:textColorLink="@color/nav_bar"
-                    android:textSize="24sp" />
+                    android:textSize="22sp" />
 
                 <CheckBox
                     android:id="@+id/bed"
@@ -147,7 +147,7 @@
                     android:text="ก่อนนอน"
                     android:textColor="@color/cardview_dark_background"
                     android:textColorLink="@color/nav_bar"
-                    android:textSize="24sp" />
+                    android:textSize="22sp" />
 
             </LinearLayout>
 
@@ -166,7 +166,7 @@
                     android:text="ก่อนอาหาร"
                     android:textColor="@color/cardview_dark_background"
                     android:textColorLink="@color/nav_bar"
-                    android:textSize="24sp" />
+                    android:textSize="22sp" />
 
                 <CheckBox
                     android:id="@+id/after"
@@ -176,7 +176,7 @@
                     android:text="หลังอาหาร"
                     android:textColor="@color/cardview_dark_background"
                     android:textColorLink="@color/nav_bar"
-                    android:textSize="24sp" />
+                    android:textSize="22sp" />
 
             </LinearLayout>
 
@@ -206,7 +206,7 @@
                 android:paddingRight="25dp"
                 android:text="แจ้งเตือน"
                 android:textColor="@color/cardview_dark_background"
-                android:textSize="24sp" />
+                android:textSize="22sp" />
 
         </LinearLayout>
 

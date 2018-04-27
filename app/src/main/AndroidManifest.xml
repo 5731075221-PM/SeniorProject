@@ -78,6 +78,13 @@
             android:excludeFromRecents="true">
         </activity>
 
+        <receiver android:name=".alert.SetAlarmAfterBoot">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name=".hospital.MapsActivity"
             android:label="@string/title_activity_maps"/>

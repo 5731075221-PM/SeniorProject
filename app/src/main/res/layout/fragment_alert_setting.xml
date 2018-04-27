@@ -65,7 +65,7 @@
                     android:text="อาหารเช้า"
                     android:textColor="@color/cardview_dark_background"
                     android:textColorLink="@color/nav_bar"
-                    android:textSize="24sp" />
+                    android:textSize="22sp" />
 
                 <TextView
                     android:id="@+id/dateBreakfast"
@@ -82,7 +82,7 @@
                     android:text="07:00 น."
                     android:textColor="@color/cardview_dark_background"
                     android:textColorLink="@color/nav_bar"
-                    android:textSize="24sp" />
+                    android:textSize="22sp" />
 
                 <ImageView
                     android:id="@+id/imageView"
@@ -114,7 +114,7 @@
                     android:text="อาหารกลางวัน"
                     android:textColor="@color/cardview_dark_background"
                     android:textColorLink="@color/nav_bar"
-                    android:textSize="24sp" />
+                    android:textSize="22sp" />
 
                 <TextView
                     android:id="@+id/dateLunch"
@@ -131,7 +131,7 @@
                     android:text="12:00 น."
                     android:textColor="@color/cardview_dark_background"
                     android:textColorLink="@color/nav_bar"
-                    android:textSize="24sp" />
+                    android:textSize="22sp" />
 
                 <ImageView
                     android:id="@+id/imageView10"
@@ -164,7 +164,7 @@
                     android:text="อาหารเย็น"
                     android:textColor="@color/cardview_dark_background"
                     android:textColorLink="@color/nav_bar"
-                    android:textSize="24sp" />
+                    android:textSize="22sp" />
 
                 <TextView
                     android:id="@+id/dateDinner"
@@ -181,7 +181,7 @@
                     android:text="17:00 น."
                     android:textColor="@color/cardview_dark_background"
                     android:textColorLink="@color/nav_bar"
-                    android:textSize="24sp" />
+                    android:textSize="22sp" />
 
                 <ImageView
                     android:id="@+id/imageView8"
@@ -215,7 +215,7 @@
                     android:text="ก่อนนอน"
                     android:textColor="@color/cardview_dark_background"
                     android:textColorLink="@color/nav_bar"
-                    android:textSize="24sp" />
+                    android:textSize="22sp" />
 
                 <TextView
                     android:id="@+id/dateBed"
@@ -232,7 +232,7 @@
                     android:text="22:00 น."
                     android:textColor="@color/cardview_dark_background"
                     android:textColorLink="@color/nav_bar"
-                    android:textSize="24sp" />
+                    android:textSize="22sp" />
 
                 <ImageView
                     android:id="@+id/imageView9"
@@ -276,7 +276,7 @@
                     android:paddingRight="25dp"
                     android:text="เสียง"
                     android:textColor="@color/cardview_dark_background"
-                    android:textSize="24sp" />
+                    android:textSize="22sp" />
 
             </LinearLayout>
 
@@ -298,7 +298,7 @@
                     android:paddingRight="25dp"
                     android:text="สั่น"
                     android:textColor="@color/cardview_dark_background"
-                    android:textSize="24sp" />
+                    android:textSize="22sp" />
 
             </LinearLayout>
 
